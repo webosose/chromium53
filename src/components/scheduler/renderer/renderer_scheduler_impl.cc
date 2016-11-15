@@ -554,6 +554,16 @@ void RendererSchedulerImpl::UpdateForInputEventOnCompositorThread(
         // meaningful touchstart response and should not impact task priority.
         break;
 
+      case blink::WebInputEvent::MouseWheel:
+        AnyThread().last_gesture_was_compositor_driven =
+            input_event_state == InputEventState::EVENT_CONSUMED_BY_COMPOSITOR;
+        AnyThread().awaiting_touch_start_response = false;
+        // If the event was sent to the main thread, assume the default gesture is
+        // prevented until we see evidence otherwise.
+        AnyThread().default_gesture_prevented =
+            !AnyThread().last_gesture_was_compositor_driven;
+        break;
+
       default:
         AnyThread().awaiting_touch_start_response = false;
         break;
