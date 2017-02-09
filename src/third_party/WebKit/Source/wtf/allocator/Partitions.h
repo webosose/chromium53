@@ -48,6 +48,12 @@ public:
 
     static void initialize(ReportPartitionAllocSizeFunction);
     static void shutdown();
+    ALWAYS_INLINE static PartitionRootGeneric* arrayBufferPartition()
+    {
+        ASSERT(s_initialized);
+        return m_arrayBufferAllocator.root();
+    }
+
     ALWAYS_INLINE static PartitionRootGeneric* bufferPartition()
     {
         ASSERT(s_initialized);
@@ -82,6 +88,7 @@ public:
     {
         size_t totalSize = 0;
         totalSize += m_fastMallocAllocator.root()->totalSizeOfCommittedPages;
+        totalSize += m_arrayBufferAllocator.root()->totalSizeOfCommittedPages;
         totalSize += m_bufferAllocator.root()->totalSizeOfCommittedPages;
         totalSize += m_layoutAllocator.root()->totalSizeOfCommittedPages;
         return totalSize;
@@ -137,12 +144,14 @@ private:
     //     is for performance: As LayoutObjects are guaranteed to only be used
     //     by the main thread, we can bypass acquiring a lock. Also we can
     //     improve memory locality by putting LayoutObjects together.
-    //   - Buffer partition: A partition to allocate objects that have a strong
-    //     risk where the length and/or the contents are exploited from user
-    //     scripts. Vectors, HashTables, ArrayBufferContents and Strings are
-    //     allocated in the buffer partition.
+    //   - ArrayBuffer partition: A partition to allocate array buffers.
+    //   - Buffer partition: A partition to allocate other buffers that have
+    //     a strong risk where the length and/or the contents are exploited from
+    //     user scripts. Vectors, HashTables and Strings are allocated in the
+    //      buffer partition.
     //   - Fast malloc partition: A partition to allocate all other objects.
     static PartitionAllocatorGeneric m_fastMallocAllocator;
+    static PartitionAllocatorGeneric m_arrayBufferAllocator;
     static PartitionAllocatorGeneric m_bufferAllocator;
     static SizeSpecificPartitionAllocator<1024> m_layoutAllocator;
     static ReportPartitionAllocSizeFunction m_reportSizeFunction;

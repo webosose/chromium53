@@ -57,6 +57,7 @@ const char* const kAllocatorDumpNameWhitelist[] = {
     "malloc/metadata_fragmentation_caches",
     "partition_alloc/allocated_objects",
     "partition_alloc/partitions",
+    "partition_alloc/partitions/array_buffer",
     "partition_alloc/partitions/buffer",
     "partition_alloc/partitions/fast_malloc",
     "partition_alloc/partitions/layout",
