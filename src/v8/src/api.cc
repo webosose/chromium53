@@ -8092,6 +8092,7 @@ void Isolate::ReportExternalAllocationLimitReached() {
 
 void Isolate::CheckMemoryPressure() {
   i::Heap* heap = reinterpret_cast<i::Isolate*>(this)->heap();
+  if (heap->gc_state() != i::Heap::NOT_IN_GC) return;
   heap->CheckMemoryPressure();
 }
 
