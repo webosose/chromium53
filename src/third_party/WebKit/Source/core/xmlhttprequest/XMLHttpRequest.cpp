@@ -189,8 +189,9 @@ XMLHttpRequest* XMLHttpRequest::create(ScriptState* scriptState)
 {
     ExecutionContext* context = scriptState->getExecutionContext();
     DOMWrapperWorld& world = scriptState->world();
+    v8::Isolate* isolate = scriptState->isolate();
     RefPtr<SecurityOrigin> isolatedWorldSecurityOrigin = world.isIsolatedWorld() ? world.isolatedWorldSecurityOrigin() : nullptr;
-    XMLHttpRequest* xmlHttpRequest = new XMLHttpRequest(context, isolatedWorldSecurityOrigin);
+    XMLHttpRequest* xmlHttpRequest = new XMLHttpRequest(context, isolate, isolatedWorldSecurityOrigin);
     xmlHttpRequest->suspendIfNeeded();
 
     return xmlHttpRequest;
@@ -198,13 +199,16 @@ XMLHttpRequest* XMLHttpRequest::create(ScriptState* scriptState)
 
 XMLHttpRequest* XMLHttpRequest::create(ExecutionContext* context)
 {
-    XMLHttpRequest* xmlHttpRequest = new XMLHttpRequest(context, nullptr);
+    v8::Isolate* isolate = toIsolate(context);
+    CHECK(isolate);
+
+    XMLHttpRequest* xmlHttpRequest = new XMLHttpRequest(context, isolate, nullptr);
     xmlHttpRequest->suspendIfNeeded();
 
     return xmlHttpRequest;
 }
 
-XMLHttpRequest::XMLHttpRequest(ExecutionContext* context, PassRefPtr<SecurityOrigin> isolatedWorldSecurityOrigin)
+XMLHttpRequest::XMLHttpRequest(ExecutionContext* context, v8::Isolate* isolate, PassRefPtr<SecurityOrigin> isolatedWorldSecurityOrigin)
     : ActiveScriptWrappable(this)
     , ActiveDOMObject(context)
     , m_timeoutMilliseconds(0)
@@ -214,6 +218,7 @@ XMLHttpRequest::XMLHttpRequest(ExecutionContext* context, PassRefPtr<SecurityOri
     , m_exceptionCode(0)
     , m_progressEventThrottle(XMLHttpRequestProgressEventThrottle::create(this))
     , m_responseTypeCode(ResponseTypeDefault)
+    , m_isolate(isolate)
     , m_isolatedWorldSecurityOrigin(isolatedWorldSecurityOrigin)
     , m_eventDispatchRecursionLevel(0)
     , m_async(true)
@@ -230,6 +235,9 @@ XMLHttpRequest::XMLHttpRequest(ExecutionContext* context, PassRefPtr<SecurityOri
 
 XMLHttpRequest::~XMLHttpRequest()
 {
+    m_binaryResponseBuilder.clear();
+    m_lengthDownloadedToFile = 0;
+    ReportMemoryUsageToV8();
 }
 
 Document* XMLHttpRequest::document() const
@@ -342,6 +350,7 @@ Blob* XMLHttpRequest::responseBlob()
                 blobData->appendBytes(m_binaryResponseBuilder->data(), size);
                 blobData->setContentType(finalResponseMIMETypeWithFallback().lower());
                 m_binaryResponseBuilder.clear();
+                ReportMemoryUsageToV8();
             }
             m_responseBlob = Blob::create(BlobDataHandle::create(std::move(blobData), size));
         }
@@ -368,6 +377,7 @@ DOMArrayBuffer* XMLHttpRequest::responseArrayBuffer()
             }
             m_responseArrayBuffer = buffer;
             m_binaryResponseBuilder.clear();
+            ReportMemoryUsageToV8();
         } else {
             m_responseArrayBuffer = DOMArrayBuffer::create(nullptr, 0);
         }
@@ -1061,6 +1071,8 @@ void XMLHttpRequest::clearResponse()
     // this only when we clear the response holder variables above.
     m_binaryResponseBuilder.clear();
     m_responseArrayBuffer.clear();
+
+    ReportMemoryUsageToV8();
 }
 
 void XMLHttpRequest::clearRequest()
@@ -1603,6 +1615,7 @@ void XMLHttpRequest::didReceiveData(const char* data, unsigned len)
         if (!m_binaryResponseBuilder)
             m_binaryResponseBuilder = SharedBuffer::create();
         m_binaryResponseBuilder->append(data, len);
+        ReportMemoryUsageToV8();
     } else if (m_responseTypeCode == ResponseTypeLegacyStream) {
         if (!m_responseLegacyStream)
             m_responseLegacyStream = Stream::create(getExecutionContext(), responseType());
@@ -1637,6 +1650,7 @@ void XMLHttpRequest::didDownloadData(int dataLength)
         return;
 
     m_lengthDownloadedToFile += dataLength;
+    ReportMemoryUsageToV8();
 
     trackProgress(dataLength);
 }
@@ -1699,6 +1713,23 @@ const AtomicString& XMLHttpRequest::interfaceName() const
 ExecutionContext* XMLHttpRequest::getExecutionContext() const
 {
     return ActiveDOMObject::getExecutionContext();
+}
+
+void XMLHttpRequest::ReportMemoryUsageToV8() {
+    // m_binaryResponseBuilder
+    size_t size = m_binaryResponseBuilder ? m_binaryResponseBuilder->size() : 0;
+    int64_t diff =
+        static_cast<int64_t>(size) -
+        static_cast<int64_t>(m_binaryResponseBuilderLastReportedSize);
+    m_binaryResponseBuilderLastReportedSize = size;
+
+    // Blob (m_downloadingToFile, m_lengthDownloadedToFile)
+    diff += static_cast<int64_t>(m_lengthDownloadedToFile) -
+            static_cast<int64_t>(m_lengthDownloadedToFileLastReported);
+    m_lengthDownloadedToFileLastReported = m_lengthDownloadedToFile;
+
+    if (diff)
+        m_isolate->AdjustAmountOfExternalAllocatedMemory(diff);
 }
 
 DEFINE_TRACE(XMLHttpRequest)

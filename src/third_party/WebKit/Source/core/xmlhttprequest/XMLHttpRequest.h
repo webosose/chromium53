@@ -150,7 +150,7 @@ public:
 
 private:
     class BlobLoader;
-    XMLHttpRequest(ExecutionContext*, PassRefPtr<SecurityOrigin>);
+    XMLHttpRequest(ExecutionContext*, v8::Isolate*, PassRefPtr<SecurityOrigin>);
 
     Document* document() const;
     SecurityOrigin* getSecurityOrigin() const;
@@ -252,6 +252,17 @@ private:
 
     XMLHttpRequestProgressEventThrottle& progressEventThrottle();
 
+    // Report the memory usage associated with this object to V8 so that V8 can
+    // schedule GC accordingly. This function should be called whenever the
+    // internal memory usage changes except for the following members.
+    // - m_responseText of type ScriptString
+    //   ScriptString internally creates and holds a v8::String, so V8 is aware of
+    //   its memory usage.
+    // - m_responseArrayBuffer of type DOMArrayBuffer
+    //   DOMArrayBuffer supports the memory usage reporting system on their own,
+    //   so there is no need.
+    void ReportMemoryUsageToV8();
+
     Member<XMLHttpRequestUpload> m_upload;
 
     KURL m_url;
@@ -277,7 +288,9 @@ private:
     Member<DocumentParser> m_responseDocumentParser;
 
     RefPtr<SharedBuffer> m_binaryResponseBuilder;
+    size_t m_binaryResponseBuilderLastReportedSize = 0;
     long long m_lengthDownloadedToFile;
+    long long m_lengthDownloadedToFileLastReported = 0;
 
     Member<DOMArrayBuffer> m_responseArrayBuffer;
 
@@ -293,6 +306,7 @@ private:
 
     // An enum corresponding to the allowed string values for the responseType attribute.
     ResponseTypeCode m_responseTypeCode;
+    v8::Isolate* const m_isolate;
     RefPtr<SecurityOrigin> m_isolatedWorldSecurityOrigin;
 
     // This blob loader will be used if |m_downloadingToFile| is true and
