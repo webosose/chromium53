@@ -36,6 +36,8 @@
 #include "net/url_request/url_request_context.h"
 #include "third_party/skia/include/core/SkColor.h"
 #include "ui/base/ime/input_method.h"
+#include "ui/display/display.h"
+#include "ui/display/screen.h"
 #include "ui/events/event.h"
 #include "ui/events/event_constants.h"
 #include "ui/events/event_utils.h"
@@ -77,7 +79,19 @@ WebView::WebView(int width, int height)
       arriving_meaningful_paint_(0.),
       load_visually_committed_(false),
 #endif
-      ssl_cert_error_policy_(SSL_CERT_ERROR_POLICY_DEFAULT) {}
+      ssl_cert_error_policy_(SSL_CERT_ERROR_POLICY_DEFAULT) {
+
+  if (display::Screen::GetScreen()->GetNumDisplays() > 0) {
+    // WebView constructor width and height params have default values in
+    // webview.h. If screen is rotated then initial size might be different
+    // and default values may lead to incorrectly scaled view for the first
+    // rendered frame.
+    gfx::Size displaySize =
+        display::Screen::GetScreen()->GetPrimaryDisplay().bounds().size();
+    m_width = displaySize.width();
+    m_height = displaySize.height();
+  }
+}
 
 WebView::~WebView() {
   profile_->FlushCookieStore();
