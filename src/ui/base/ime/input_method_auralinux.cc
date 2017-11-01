@@ -116,8 +116,11 @@ void InputMethodAuraLinux::DispatchKeyEvent(ui::KeyEvent* event) {
   bool filtered = false;
   {
     base::AutoReset<bool> flipper(&is_sync_mode_, true);
-    if (text_input_type_ != TEXT_INPUT_TYPE_NONE &&
-        text_input_type_ != TEXT_INPUT_TYPE_PASSWORD) {
+    if (text_input_type_ != TEXT_INPUT_TYPE_NONE
+#if !defined(OS_WEBOS)
+        && text_input_type_ != TEXT_INPUT_TYPE_PASSWORD
+#endif
+        ) {
       filtered = context_->DispatchKeyEvent(*event);
     } else {
       filtered = context_simple_->DispatchKeyEvent(*event);
