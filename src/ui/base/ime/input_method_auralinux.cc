@@ -591,11 +591,7 @@ bool InputMethodAuraLinux::NeedInsertChar() const {
 
 ui::EventDispatchDetails InputMethodAuraLinux::SendFakeProcessKeyEvent(
     ui::KeyEvent* event) const {
-#if defined(OS_WEBOS)
-  KeyEvent key_event(ui::ET_KEY_RELEASED, ui::VKEY_PROCESSKEY, event->flags());
-#else
   KeyEvent key_event(ui::ET_KEY_PRESSED, ui::VKEY_PROCESSKEY, event->flags());
-#endif
   ui::EventDispatchDetails details = DispatchKeyEventPostIME(&key_event);
   if (key_event.stopped_propagation())
     event->StopPropagation();
