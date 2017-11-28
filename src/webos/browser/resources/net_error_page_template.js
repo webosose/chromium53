@@ -229,33 +229,6 @@ function setOutFocus(no) {
   lastfocus = -1;
 }
 
-window.onkeydown = function checkMoveFocus(e) {
-  var key = e.which || e.keyCode || 0;
-
-  // Detect left or right keys only
-  if(key != leftkey && key != rightkey) return;
-
-  // If there is no focused button, focus on first button
-  if(lastfocus == -1) {
-    setOnFocus(0);
-    return;
-  }
-
-  // Ignore input key if next button is not exist
-  if(((key==leftkey) && (lastfocus-1 < 0)) ||
-      (key==rightkey) && (lastfocus+1 > g_numButtons-1))
-    return;
-
-  // Move focus to next buttn
-  if(key === leftkey)
-    lastfocus -= 1;
-  else
-    lastfocus += 1;
-
-  setOnFocus(lastfocus);
-}
-
-
 function getCurrentTime() {
   var now = new Date();
   var currentTime = "";
@@ -337,6 +310,8 @@ function createButtonOnPage(str_name, str_id, b_dir, func) {
 }
 
 var onRetryApp = function () {
+  if (errorCode == -106) // No point retrying if network not connected
+    return;
   window.location = err_info.url_to_reload;
 }
 
