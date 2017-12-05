@@ -447,21 +447,29 @@ Resource* ResourceFetcher::requestResource(FetchRequest& request, const Resource
         }
     }
 
-    bool isStaticData = request.resourceRequest().url().protocolIsData() || substituteData.isValid() || m_archive;
+    bool isDataUrl = request.resourceRequest().url().protocolIsData();
+    bool isStaticData = isDataUrl || substituteData.isValid() || m_archive;
     Resource* resource(nullptr);
+    RevalidationPolicy policy = Load;
+
     if (isStaticData) {
         resource = resourceForStaticData(request, factory, substituteData);
-        // Abort the request if the archive doesn't contain the resource.
-        if (!resource && m_archive)
+        if (resource) {
+            policy = determineRevalidationPolicy(factory.type(), request, resource, true);
+        } else if (!isDataUrl && m_archive) {
+            // Abort the request if the archive doesn't contain the resource, except
+            // in the case of data URLs which might have resources such as fonts that
+            // need to be decoded only on demand. These data URLs are allowed to be
+            // processed using the normal ResourceFetcher machinery.
             return nullptr;
+        }
     }
-    if (!resource)
+
+    if (!resource && isMainThread()) {
         resource = memoryCache()->resourceForURL(request.url(), getCacheIdentifier());
-
-    // See if we can use an existing resource from the cache. If so, we need to move it to be load blocking.
-    moveCachedNonBlockingResourceToBlocking(resource, request);
-
-    const RevalidationPolicy policy = determineRevalidationPolicy(factory.type(), request, resource, isStaticData);
+        if (resource)
+            policy = determineRevalidationPolicy(factory.type(), request, resource, isStaticData);
+    }
 
     updateMemoryCacheStats(resource, policy, request, factory, isStaticData);
 
@@ -1018,8 +1026,16 @@ void ResourceFetcher::removeResourceLoader(ResourceLoader* loader)
 
 void ResourceFetcher::stopFetching()
 {
-    m_nonBlockingLoaders.cancelAll();
-    m_loaders.cancelAll();
+    HeapVector<Member<ResourceLoader>> loadersToCancel;
+    for (const auto& loader : m_nonBlockingLoaders)
+        loadersToCancel.append(loader);
+    for (const auto& loader : m_loaders)
+        loadersToCancel.append(loader);
+
+    for (const auto& loader : loadersToCancel) {
+        if (m_loaders.contains(loader) || m_nonBlockingLoaders.contains(loader))
+            loader->cancel();
+    }
 }
 
 bool ResourceFetcher::isFetching() const
@@ -1029,8 +1045,10 @@ bool ResourceFetcher::isFetching() const
 
 void ResourceFetcher::setDefersLoading(bool defers)
 {
-    m_loaders.setAllDefersLoading(defers);
-    m_nonBlockingLoaders.setAllDefersLoading(defers);
+    for (const auto& loader : m_nonBlockingLoaders)
+        loader->setDefersLoading(defers);
+    for (const auto& loader : m_loaders)
+        loader->setDefersLoading(defers);
 }
 
 bool ResourceFetcher::defersLoading() const

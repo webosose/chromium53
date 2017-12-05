@@ -202,8 +202,8 @@ private:
 
     Vector<std::unique_ptr<ResourceTimingInfo>> m_scheduledResourceTimingReports;
 
-    ResourceLoaderSet m_loaders;
-    ResourceLoaderSet m_nonBlockingLoaders;
+    HeapHashSet<Member<ResourceLoader>> m_loaders;
+    HeapHashSet<Member<ResourceLoader>> m_nonBlockingLoaders;
 
     // Used in hit rate histograms.
     class DeadResourceStatsRecorder {
