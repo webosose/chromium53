@@ -215,8 +215,10 @@ int SystemHostResolverCall(const std::string& host,
     }
   }
   if (err) {
-    RAW_PMLOG_INFO("Network", "getaddrinfo(host:%s) error(code:%d, str:%s)", host.c_str(), err, gai_strerror(err));
-    RAW_PMLOG_INFO("Network", "system error(code:%d, str:%s)", errno, strerror(errno));
+    RAW_PMLOG_DEBUG("Network", "getaddrinfo(host:%s) error(code:%d, str:%s)",
+                    host.c_str(), err, gai_strerror(err));
+    RAW_PMLOG_DEBUG("Network", "system error(code:%d, str:%s)", errno,
+                    strerror(errno));
     should_retry = true;
   }
   if (should_retry) {
@@ -228,8 +230,11 @@ int SystemHostResolverCall(const std::string& host,
   }
 
   if (err) {
-    RAW_PMLOG_INFO("Network", "retry getaddrinfo(host:%s) error(code:%d, str:%s)", host.c_str(), err, gai_strerror(err));
-    RAW_PMLOG_INFO("Network", "retry system error(code:%d, str:%s)", errno, strerror(errno));
+    RAW_PMLOG_DEBUG("Network",
+                    "retry getaddrinfo(host:%s) error(code:%d, str:%s)",
+                    host.c_str(), err, gai_strerror(err));
+    RAW_PMLOG_DEBUG("Network", "retry system error(code:%d, str:%s)", errno,
+                    strerror(errno));
 #if defined(OS_WIN)
     err = WSAGetLastError();
 #endif
