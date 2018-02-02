@@ -111,6 +111,14 @@ private:
     String composingText() const;
     void selectComposition() const;
     bool setSelectionOffsets(const PlainTextRange&, FrameSelection::SetSelectionOptions = FrameSelection::CloseTyping);
+
+    PlainTextRange createSelectionRangeForSetComposition(int selectionStart,
+                                                       int selectionEnd,
+                                                       size_t textLength) const;
+    void setCompositionWithIncrementalText(const String&,
+                                         const Vector<CompositionUnderline>&,
+                                         int selectionStart,
+                                         int selectionEnd);
 };
 
 } // namespace blink
