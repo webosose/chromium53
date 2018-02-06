@@ -66,14 +66,6 @@ LinuxInputMethodContext* InputMethodAuraLinux::GetContextForTesting(
 }
 
 // Overriden from InputMethod.
-void InputMethodAuraLinux::OnFocus() {
-  InputMethodBase::OnFocus();
-  TextInputClient* client = GetTextInputClient();
-  if (client && client->IsImeRestorable() &&
-      text_input_type_ != TEXT_INPUT_TYPE_NONE)
-    ShowImeIfNeeded();
-}
-
 void InputMethodAuraLinux::DetachTextInputClient(TextInputClient* client) {
   if (IsVisible())
     OnHideIme(IME_RESTORE);

@@ -23,6 +23,7 @@
 #if defined(OS_WEBOS)
 #include "ozone/ui/desktop_aura/desktop_window_tree_host_ozone.h"
 #include "ui/base/ime/input_method.h"
+#include "ui/base/ime/text_input_client.h"
 #include "ui/views/widget/desktop_aura/desktop_native_widget_aura.h"
 #include "webos/common/webos_native_event_delegate.h"
 
@@ -607,9 +608,7 @@ void WindowManagerWayland::NotifyAxis(float x,
 void WindowManagerWayland::NotifyPointerEnter(unsigned handle,
                                                  float x,
                                                  float y) {
-#if !defined(OS_WEBOS)
   OnWindowEnter(handle);
-#endif
 
   gfx::Point position(x, y);
   MouseEvent mouseev(ET_MOUSE_ENTERED,
@@ -827,6 +826,18 @@ void WindowManagerWayland::NotifyKeyboardEnter(unsigned handle) {
 
   if (webos_native_event_delegate)
     webos_native_event_delegate->KeyboardEnter();
+
+  views::DesktopWindowTreeHostOzone* host =
+      views::DesktopWindowTreeHostOzone::GetHostForAcceleratedWidget(handle);
+  if (host) {
+    ui::InputMethod* input_method = host->GetInputMethod();
+    if (input_method) {
+      TextInputClient* client = input_method->GetTextInputClient();
+      if (client && client->IsImeRestorable() &&
+          input_method->GetTextInputType() != TEXT_INPUT_TYPE_NONE)
+        input_method->ShowImeIfNeeded();
+    }
+  }
 }
 
 void WindowManagerWayland::NotifyKeyboardLeave(unsigned handle) {

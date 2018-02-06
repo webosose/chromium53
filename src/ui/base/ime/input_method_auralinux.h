@@ -35,7 +35,6 @@ class UI_BASE_IME_EXPORT InputMethodAuraLinux
   LinuxInputMethodContext* GetContextForTesting(bool is_simple);
 
   // Overriden from InputMethod.
-  void OnFocus() override;
   void DetachTextInputClient(TextInputClient* client) override;
   bool OnUntranslatedIMEMessage(const base::NativeEvent& event,
                                 NativeEventResult* result) override;
