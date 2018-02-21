@@ -261,6 +261,8 @@ void WebosDragDropClientWayland::Drop(
 
   DCHECK(target == drag_window_);
 
+  drag_drop_tracker_.reset();
+
   if ((delegate = aura::client::GetDragDropDelegate(target))) {
     ui::DropTargetEvent e(
         *drag_data_, event.location(), event.root_location(), drag_operation_);
