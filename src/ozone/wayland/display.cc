@@ -900,7 +900,6 @@ void WaylandDisplay::DisplayHandleGlobal(void *data,
     disp->text_model_factory_ = static_cast<text_model_factory*>(
         wl_registry_bind(registry, name, &text_model_factory_interface, 1));
   } else if (strcmp(interface, "wl_webos_input_manager") == 0) {
-    disp->Dispatch(new WaylandDisplay_InputMethodSupportNotified());
     disp->webos_input_manager_ = static_cast<wl_webos_input_manager*>(
         wl_registry_bind(registry, name, &wl_webos_input_manager_interface, 1));
 

@@ -33,7 +33,6 @@ InputMethodAuraLinux::InputMethodAuraLinux(
       composition_changed_(false),
       suppress_next_result_(false),
       is_ime_enabled_(true),
-      is_ime_supported_(false),
       weak_ptr_factory_(this) {
   SetDelegate(delegate);
   context_ = CreateInputMethodContext(widget, false);
@@ -300,7 +299,7 @@ void InputMethodAuraLinux::UpdateContextFocusState() {
 
 void InputMethodAuraLinux::OnTextInputTypeChanged(
     const TextInputClient* client) {
-  if (CanShowIme())
+  if (is_ime_enabled_)
     context_->OnTextInputTypeChanged(client->GetTextInputType(),
                                      client->GetTextInputFlags());
   UpdateContextFocusState();
@@ -542,7 +541,7 @@ void InputMethodAuraLinux::OnDidChangeFocusedClient(
     TextInputClient* focused_before,
     TextInputClient* focused) {
 #if defined(OS_WEBOS)
-  if (focused && CanShowIme()) {
+  if (focused && is_ime_enabled_) {
     context_->OnTextInputTypeChanged(focused->GetTextInputType(),
                                      focused->GetTextInputFlags());
   }
@@ -560,7 +559,7 @@ void InputMethodAuraLinux::OnDidChangeFocusedClient(
 
 void InputMethodAuraLinux::ShowImeIfNeeded() {
   TextInputClient* client = GetTextInputClient();
-  if (CanShowIme() && client) {
+  if (is_ime_enabled_ && client) {
     context_->OnTextInputTypeChanged(GetTextInputType(),
                                      GetTextInputFlags());
     context_->ChangeVKBVisibility(true);
@@ -569,7 +568,7 @@ void InputMethodAuraLinux::ShowImeIfNeeded() {
 }
 
 void InputMethodAuraLinux::HideIme(ui::ImeHiddenType hidden_type) {
-  if (CanShowIme() && IsVisible()) {
+  if (is_ime_enabled_ && IsVisible()) {
     context_->ChangeVKBVisibility(false);
     OnHideIme(hidden_type);
   }
@@ -614,14 +613,6 @@ void InputMethodAuraLinux::ConfirmCompositionText() {
 
 void InputMethodAuraLinux::SetImeEnabled(bool enable) {
   is_ime_enabled_ = enable;
-}
-
-void InputMethodAuraLinux::SetImeSupported(bool enable) {
-  is_ime_supported_ = enable;
-}
-
-bool InputMethodAuraLinux::CanShowIme() {
-  return is_ime_enabled_ && is_ime_supported_;
 }
 
 gfx::Rect InputMethodAuraLinux::GetInputPanelRect() const {

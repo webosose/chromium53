@@ -358,5 +358,4 @@ IPC_MESSAGE_CONTROL3(WaylandDisplay_WebOSXInputInvokeAction,
                      unsigned /*key_sym*/,
                      ui::WebOSXInputSpecialKeySymbolType /*symbol_type*/,
                      ui::WebOSXInputEventType /*event_type*/)
-IPC_MESSAGE_CONTROL0(WaylandDisplay_InputMethodSupportNotified)
 #endif

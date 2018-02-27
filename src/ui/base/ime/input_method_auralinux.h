@@ -57,7 +57,6 @@ class UI_BASE_IME_EXPORT InputMethodAuraLinux
   void OnDeleteRange(int32_t index, uint32_t length) override;
   void OnHideIme(ui::ImeHiddenType hidden_type) override;
   void SetImeEnabled(bool enable) override;
-  void SetImeSupported(bool enable) override;
   gfx::Rect GetInputPanelRect() const override;
   gfx::Rect GetCaretBounds() const override;
   bool IsVisible() const override;
@@ -77,7 +76,6 @@ class UI_BASE_IME_EXPORT InputMethodAuraLinux
   void ConfirmCompositionText();
   void UpdateContextFocusState();
   void ResetContext();
-  bool CanShowIme();
 
   // Processes the key event after the event is processed by the system IME or
   // the extension.
@@ -117,7 +115,6 @@ class UI_BASE_IME_EXPORT InputMethodAuraLinux
   // event will be discarded.
   bool suppress_next_result_;
   bool is_ime_enabled_;
-  bool is_ime_supported_;
 
   // Used for making callbacks.
   base::WeakPtrFactory<InputMethodAuraLinux> weak_ptr_factory_;

@@ -50,7 +50,6 @@ WindowManagerWayland::WindowManagerWayland(OzoneGpuPlatformSupportHost* proxy)
                            base::Unretained(this))),
       platform_screen_(NULL),
       dragging_(false),
-      input_method_support_enabled_(false),
       weak_ptr_factory_(this) {
   proxy_->RegisterHandler(this);
 #if defined(OS_WEBOS)
@@ -314,8 +313,6 @@ bool WindowManagerWayland::OnMessageReceived(const IPC::Message& message) {
   IPC_MESSAGE_HANDLER(WaylandInput_DragDrop, DragDrop)
 #if defined(OS_WEBOS)
   IPC_MESSAGE_HANDLER(Compositor_BuffersSwapped, CompositorBuffersSwapped)
-  IPC_MESSAGE_HANDLER(WaylandDisplay_InputMethodSupportNotified,
-                      InputMethodSupportNotified)
   IPC_MESSAGE_HANDLER(WaylandInput_CursorVisibilityChange, CursorVisibilityChange)
   IPC_MESSAGE_HANDLER(WaylandInput_KeyboardEnter, KeyboardEnter)
   IPC_MESSAGE_HANDLER(WaylandInput_KeyboardLeave, KeyboardLeave)
@@ -727,10 +724,6 @@ void WindowManagerWayland::CompositorBuffersSwapped(unsigned windowhandle) {
           weak_ptr_factory_.GetWeakPtr(), windowhandle));
 }
 
-void WindowManagerWayland::InputMethodSupportNotified() {
-  input_method_support_enabled_ = true;
-}
-
 void WindowManagerWayland::CursorVisibilityChange(bool visible) {
   base::ThreadTaskRunnerHandle::Get()->PostTask(
       FROM_HERE, base::Bind(&WindowManagerWayland::NotifyCursorVisibilityChange,
@@ -834,14 +827,6 @@ void WindowManagerWayland::NotifyKeyboardEnter(unsigned handle) {
 
   if (webos_native_event_delegate)
     webos_native_event_delegate->KeyboardEnter();
-
-  views::DesktopWindowTreeHostOzone* host =
-      views::DesktopWindowTreeHostOzone::GetHostForAcceleratedWidget(handle);
-  if (host) {
-    ui::InputMethod* input_method = host->GetInputMethod();
-    if (input_method)
-      input_method->SetImeSupported(input_method_support_enabled_);
-  }
 }
 
 void WindowManagerWayland::NotifyKeyboardLeave(unsigned handle) {

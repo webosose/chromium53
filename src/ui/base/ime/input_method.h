@@ -162,7 +162,6 @@ class InputMethod {
   virtual void HideIme(ui::ImeHiddenType hidden_type) {}
 
   virtual void SetImeEnabled(bool enable) {}
-  virtual void SetImeSupported(bool enable) {}
   virtual gfx::Rect GetInputPanelRect() const = 0;
   virtual gfx::Rect GetCaretBounds() const = 0;
   virtual bool IsVisible() const = 0;

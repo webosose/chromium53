@@ -180,7 +180,6 @@ class WindowManagerWayland
 #if defined(OS_WEBOS)
   void CompositorBuffersSwapped(unsigned handle);
   void CursorVisibilityChange(bool visible);
-  void InputMethodSupportNotified();
   void KeyboardEnter(unsigned handle);
   void KeyboardLeave(unsigned handle);
   void KeyboardModifier(uint32_t mods_depressed, uint32_t mods_locked);
@@ -214,7 +213,6 @@ class WindowManagerWayland
   ozonewayland::OzoneWaylandScreen* platform_screen_;
   PlatformCursor platform_cursor_;
   bool dragging_;
-  bool input_method_support_enabled_;
   // Support weak pointers for attach & detach callbacks.
   base::WeakPtrFactory<WindowManagerWayland> weak_ptr_factory_;
   DISALLOW_COPY_AND_ASSIGN(WindowManagerWayland);
