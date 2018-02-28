@@ -289,7 +289,8 @@ void WaylandTextInput::OnModifiersMap(void* data,
                                       struct wl_array* map) {
 }
 
-uint32_t WaylandTextInput::KeyNumberFromKeySymCode(uint32_t key_sym) {
+uint32_t WaylandTextInput::KeyNumberFromKeySymCode(uint32_t key_sym,
+                                                   uint32_t modifiers) {
   switch (key_sym) {
     case XKB_KEY_Escape: return KEY_ESC;
     case XKB_KEY_F1: return KEY_F1;
@@ -342,17 +343,20 @@ uint32_t WaylandTextInput::KeyNumberFromKeySymCode(uint32_t key_sym) {
     case 0x2e:   return KEY_KPDOT;
     case 0x2b:   return KEY_KPPLUS;
     case 0x43:
-    case 0x63:   return KEY_C;
+    case 0x63:
+      return modifiers & kIMEModifierFlagCtrl ? KEY_C : KEY_UNKNOWN;
     case 0x56:
-    case 0x76:   return KEY_V;
+    case 0x76:
+      return modifiers & kIMEModifierFlagCtrl ? KEY_V : KEY_UNKNOWN;
     case 0x58:
-    case 0x78:   return KEY_X;
+    case 0x78:
+      return modifiers & kIMEModifierFlagCtrl ? KEY_X : KEY_UNKNOWN;
     case 0x1200011:  return KEY_RED;
     case 0x1200012:  return KEY_GREEN;
     case 0x1200013:  return KEY_YELLOW;
     case 0x1200014:  return KEY_BLUE;
     default:
-      return key_sym;
+      return KEY_UNKNOWN;
   }
 }
 
@@ -363,6 +367,10 @@ void WaylandTextInput::OnKeysym(void* data,
                                 uint32_t key,
                                 uint32_t state,
                                 uint32_t modifiers) {
+  uint32_t key_code = KeyNumberFromKeySymCode(key, modifiers);
+  if (key_code == KEY_UNKNOWN)
+    return;
+
   // Copied from WaylandKeyboard::OnKeyNotify().
   ui::EventType type = ui::ET_KEY_PRESSED;
   WaylandDisplay* dispatcher = WaylandDisplay::GetInstance();
@@ -378,7 +386,6 @@ void WaylandTextInput::OnKeysym(void* data,
     flag = flag >> 1;
   }
 
-  uint32_t key_code = KeyNumberFromKeySymCode(key);
   WaylandTextInput* wl_text_input = static_cast<WaylandTextInput*>(data);
   dispatcher->KeyNotify(type, key_code, ui::SOURCE_TYPE_VKB, device_id);
 

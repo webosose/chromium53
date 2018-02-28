@@ -84,7 +84,7 @@ class WaylandTextInput {
                             uint32_t serial,
                             int32_t index);
 
-  static uint32_t KeyNumberFromKeySymCode(uint32_t key_sym);
+  static uint32_t KeyNumberFromKeySymCode(uint32_t key_sym, uint32_t modifiers);
 
   static void OnModifiersMap(void* data,
                             struct text_model* text_input,
