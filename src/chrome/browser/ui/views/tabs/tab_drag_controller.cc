@@ -24,6 +24,7 @@
 #include "chrome/browser/ui/views/tabs/tab.h"
 #include "chrome/browser/ui/views/tabs/tab_strip.h"
 #include "chrome/browser/ui/views/tabs/window_finder.h"
+#include "chrome/common/chrome_features.h"
 #include "content/public/browser/notification_service.h"
 #include "content/public/browser/notification_source.h"
 #include "content/public/browser/user_metrics.h"
@@ -1011,6 +1012,9 @@ void TabDragController::Detach(ReleaseCapture release_capture) {
 
 void TabDragController::DetachIntoNewBrowserAndRunMoveLoop(
     const gfx::Point& point_in_screen) {
+  if (base::FeatureList::IsEnabled(features::kSingleWindow))
+      return;
+
   if (GetModel(attached_tabstrip_)->count() ==
       static_cast<int>(drag_data_.size())) {
     // All the tabs in a browser are being dragged but all the tabs weren't
