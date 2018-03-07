@@ -22,6 +22,8 @@
 #if defined(OS_WEBOS)
 #include "base/base_switches.h"
 #include "base/command_line.h"
+#include "chrome/browser/ui/webos/chrome_browser_webos_native_event_delegate.h"
+#include "chrome/browser/webos/luna_services.h"
 #include "ui/views/widget/desktop_aura/desktop_window_tree_host.h"
 #endif
 
@@ -86,13 +88,16 @@ void DesktopBrowserFrameAura::InitNativeWidget(
       "_WEBOS_LAUNCH_INFO_RECENT", "true");
   modified_params.desktop_window_tree_host->SetWindowProperty(
       "_WEBOS_LAUNCH_INFO_REASON", "true");
+  LunaServices::GetInstance()->RegisterNativeApp();
+  delegate_ = base::MakeUnique<ChromeBrowserWebOSNativeEventDelegate>(
+      browser_view_);
 #endif
 }
 
-#if defined(USE_OZONE) && defined(OS_WEBOS)
+#if defined(OS_WEBOS)
 webos::WebOSNativeEventDelegate*
 DesktopBrowserFrameAura::GetNativeEventDelegate() const {
-  return ChromeBrowserWebOSNativeEventDelegate::Get();
+  return delegate_.get();
 }
 #endif
 

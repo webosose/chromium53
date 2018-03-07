@@ -15,6 +15,9 @@
 class BrowserDesktopWindowTreeHost;
 class BrowserFrame;
 class BrowserView;
+#if defined(OS_WEBOS)
+class ChromeBrowserWebOSNativeEventDelegate;
+#endif
 
 namespace wm {
 class VisibilityController;
@@ -35,7 +38,7 @@ class DesktopBrowserFrameAura : public views::DesktopNativeWidgetAura,
   BrowserView* browser_view() const { return browser_view_; }
   BrowserFrame* browser_frame() const { return browser_frame_; }
 
-#if defined(USE_OZONE) && defined(OS_WEBOS)
+#if defined(OS_WEBOS)
   webos::WebOSNativeEventDelegate* GetNativeEventDelegate() const override;
 #endif
 
@@ -64,6 +67,9 @@ class DesktopBrowserFrameAura : public views::DesktopNativeWidgetAura,
   BrowserDesktopWindowTreeHost* browser_desktop_window_tree_host_;
 
   std::unique_ptr<wm::VisibilityController> visibility_controller_;
+#if defined(OS_WEBOS)
+  std::unique_ptr<ChromeBrowserWebOSNativeEventDelegate> delegate_;
+#endif
 
   DISALLOW_COPY_AND_ASSIGN(DesktopBrowserFrameAura);
 };

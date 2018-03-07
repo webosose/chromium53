@@ -2,36 +2,19 @@
 
 #include "chrome/browser/ui/webos/chrome_browser_webos_native_event_delegate.h"
 
+#if defined(OS_WEBOS)
 #include "base/bind.h"
 #include "base/message_loop/message_loop.h"
 #include "chrome/browser/ui/browser_commands.h"
+#include "chrome/browser/ui/views/frame/browser_view.h"
+#include "chrome/browser/ui/browser_list.h"
 
-// static
-ChromeBrowserWebOSNativeEventDelegate*
-    ChromeBrowserWebOSNativeEventDelegate::delegate_ = NULL;
-
-// static
-ChromeBrowserWebOSNativeEventDelegate*
-ChromeBrowserWebOSNativeEventDelegate::Get() {
-  return delegate_;
+ChromeBrowserWebOSNativeEventDelegate::ChromeBrowserWebOSNativeEventDelegate(
+    BrowserView* view) : browser_view(view) {
 }
 
-// static
-void ChromeBrowserWebOSNativeEventDelegate::Initialize(Browser* browser) {
-  if (!delegate_) {
-    delegate_ = new ChromeBrowserWebOSNativeEventDelegate();
-    delegate_->SetBrowser(browser);
-  }
-}
-
-ChromeBrowserWebOSNativeEventDelegate::
-    ~ChromeBrowserWebOSNativeEventDelegate() {
-  delegate_ = NULL;
-}
-
-#if defined(USE_OZONE)
 void ChromeBrowserWebOSNativeEventDelegate::OnClose() {
-  chrome::CloseWindow(browser_);
+  chrome::CloseWindow(browser_view->browser());
 }
 
 // Overridden from WebOSNativeEventDelegate:
@@ -41,10 +24,4 @@ void ChromeBrowserWebOSNativeEventDelegate::WindowHostClose() {
                             base::Unretained(this)));
 }
 #endif
-
-////////////////////////////////////////////////////////////////////////////
-// Private APIs, constructor : ChromeBrowserWebOSNativeEventDelegate
-ChromeBrowserWebOSNativeEventDelegate::ChromeBrowserWebOSNativeEventDelegate() {
-  delegate_ = this;
-}
 

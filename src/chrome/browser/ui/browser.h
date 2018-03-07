@@ -55,10 +55,6 @@
 #include "extensions/browser/extension_registry_observer.h"
 #endif
 
-#if defined(OS_WEBOS)
-#include "chrome/browser/ui/webos/chrome_browser_webos_native_event_delegate.h"
-#endif
-
 class BrowserContentSettingBubbleModelDelegate;
 class BrowserInstantController;
 class BrowserSyncedWindowDelegate;
@@ -1015,10 +1011,6 @@ class Browser : public TabStripModelObserver,
 
   // The following factory is used to close the frame at a later time.
   base::WeakPtrFactory<Browser> weak_factory_;
-
-#if defined(OS_WEBOS)
-  std::unique_ptr<ChromeBrowserWebOSNativeEventDelegate> delegate_;
-#endif
 
   DISALLOW_COPY_AND_ASSIGN(Browser);
 };

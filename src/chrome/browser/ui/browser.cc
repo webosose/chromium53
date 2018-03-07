@@ -234,10 +234,6 @@
 #include "ash/shell.h"
 #endif
 
-#if defined(OS_WEBOS)
-#include "chrome/browser/webos/luna_services.h"
-#endif
-
 using base::TimeDelta;
 using base::UserMetricsAction;
 using content::NativeWebKeyboardEvent;
@@ -476,13 +472,6 @@ Browser::Browser(const CreateParams& params)
   content::NotificationService::current()->Notify(
       chrome::NOTIFICATION_BROWSER_WINDOW_READY, content::Source<Browser>(this),
       content::NotificationService::NoDetails());
-
-#if defined(OS_WEBOS)
-  ChromeBrowserWebOSNativeEventDelegate::Initialize(this);
-  delegate_.reset(ChromeBrowserWebOSNativeEventDelegate::Get());
-
-  LunaServices::GetInstance()->RegisterNativeApp();
-#endif
 }
 
 Browser::~Browser() {

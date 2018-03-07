@@ -19,40 +19,24 @@
 
 #include "base/macros.h"
 
-#if defined(USE_OZONE)
+#if defined(OS_WEBOS)
 #include "webos/common/webos_native_event_delegate.h"
-#endif
 
-class Browser;
+class BrowserView;
 
 class ChromeBrowserWebOSNativeEventDelegate
-#if defined(USE_OZONE)
     : public webos::WebOSNativeEventDelegate
-#endif
 {
  public:
-  static ChromeBrowserWebOSNativeEventDelegate* Get();
-  static void Initialize(Browser* browser);
-
-  virtual ~ChromeBrowserWebOSNativeEventDelegate();
-
-#if defined(USE_OZONE)
+  explicit ChromeBrowserWebOSNativeEventDelegate(BrowserView* view);
   // Overridden from WebOSNativeEventDelegate:
   void WindowHostClose() override;
-#endif
 
  private:
-#if defined(USE_OZONE)
   void OnClose();
-#endif
 
-  void SetBrowser(Browser* browser) { browser_ = browser; }
-  explicit ChromeBrowserWebOSNativeEventDelegate();
-
-  static ChromeBrowserWebOSNativeEventDelegate* delegate_;
-  Browser* browser_;
-
-  DISALLOW_COPY_AND_ASSIGN(ChromeBrowserWebOSNativeEventDelegate);
+  BrowserView* browser_view;
 };  // class
+#endif
 
 #endif // CHROME_BROWSER_UI_CHROME_BROWSER_WEBOS_NATIVE_EVENT_DELEGATE_H_
