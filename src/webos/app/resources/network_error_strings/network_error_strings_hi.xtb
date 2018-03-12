@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE translationbundle>
+<translationbundle lang="hi">
+<translation id="1499093007998028961">नेटवर्क सेटिंग</translation>
+<translation id="1682620957554922882">कृपया सामग्री प्रदाता से संपर्क करें।</translation>
+<translation id="171447555090807962">Server certificate has expired or is not yet valid as the set time on UHD Broadcast Box is different from the current time.</translation>
+<translation id="203730040597967152">ऐप से बाहर जाएँ</translation>
+<translation id="2626799779920242286">कृपया दोबारा पुनः प्रयास करें।</translation>
+<translation id="27461552975087996">सर्वर प्रमाणपत्र विश्वसनीय नहीं हो सकता है।</translation>
+<translation id="288961708105972332">कनेक्शन प्रयास की समय सीमा समाप्त हो गई है।</translation>
+<translation id="3100161803646972327">कृपया नेटवर्क की स्थिति जाँचें और पुनः प्रयास करें।</translation>
+<translation id="334286403444714742">नेटवर्क कनेक्ट नहीं है।</translation>
+<translation id="4588672349582133274">नेटवर्क सेटिंग्स</translation>
+<translation id="4669109953235344059">पुनः प्रयास करें</translation>
+<translation id="4799446021133992159">लोड करने में असमर्थ</translation>
+<translation id="4897228579364425832">नेटवर्क कनेक्शन जाँचें</translation>
+<translation id="4922056813564935008">अनुरोध किया गया पता पाया नहीं जा सकता।</translation>
+<translation id="4964644330950338878">होस्ट नाम सर्वर प्रमाणपत्र से मेल नहीं खाता है।</translation>
+<translation id="5068657318680619278">This site can not be reached</translation>
+<translation id="5375809313377772901">कृपया समय सेटिंग्स जांचें।</translation>
+<translation id="5803768854262525793">REPLACE WITH HOSTNAME</translation>
+<translation id="6061420513894163219">कृपया नेटवर्क कनेक्शन स्थिति को जाँचें।</translation>
+<translation id="6661057429906338241">APP बंद करें।</translation>
+<translation id="6669270366426331193">ERROR PAGES TITLE NOT AVAILABLE</translation>
+<translation id="6765203878096346794">सर्वर का कनेक्शन अस्थाई है।</translation>
+<translation id="7144878232160441200">पुनःप्रयास करें</translation>
+<translation id="7402264192054099664">यह एक अस्थाई त्रुटि हो सकती है।</translation>
+<translation id="7570401931535381481">सर्वर प्रमाणपत्र की समय सीमा समाप्त हो चुकी है या TV पर सेट किए गए समय का वर्तमान समय से अलग होने के कारण अब तक अमान्य है।</translation>
+<translation id="7619490177640280081">वर्तमान समय सेटिंग</translation>
+<translation id="7885656482573166887">सेटिंग्स</translation>
+<translation id="8090699366918591820">वर्तमान समय</translation>
+<translation id="8138313893556460774">कार्य की समय सीमा समाप्त हो गई है।</translation>
+<translation id="8322836013946289105">फाइल या डायरेक्टरी नहीं पाई गई।</translation>
+<translation id="8461715367920190352">ERROR PAGES HEADING NOT AVAILABLE</translation>
+<translation id="8561467915632687957">नेटवर्क अस्थाई है।</translation>
+</translationbundle>

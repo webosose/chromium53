@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE translationbundle>
+<translationbundle lang="ja">
+<translation id="1499093007998028961">ネットワーク設定</translation>
+<translation id="1682620957554922882">コンテンツプロバイダーにお問い合わせください。</translation>
+<translation id="171447555090807962">Server certificate has expired or is not yet valid as the set time on UHD Broadcast Box is different from the current time.</translation>
+<translation id="203730040597967152">アプリを閉じる</translation>
+<translation id="2626799779920242286">後でもう一度お試しください。</translation>
+<translation id="27461552975087996">このサーバー証明書を信頼できません。</translation>
+<translation id="288961708105972332">接続できませんでした。</translation>
+<translation id="3100161803646972327">ネットワークの状況を確認して、もう一度お試しください。</translation>
+<translation id="334286403444714742">ネットワークに接続されていません。</translation>
+<translation id="4588672349582133274">ネットワーク設定</translation>
+<translation id="4669109953235344059">再試行</translation>
+<translation id="4799446021133992159">読み込めません</translation>
+<translation id="4897228579364425832">ネットワーク接続の確認</translation>
+<translation id="4922056813564935008">指定されたアドレスが見つかりません。</translation>
+<translation id="4964644330950338878">ホスト名がサーバー証明書と一致しません。</translation>
+<translation id="5068657318680619278">This site can not be reached</translation>
+<translation id="5375809313377772901">時刻設定を確認してください。</translation>
+<translation id="5803768854262525793">REPLACE WITH HOSTNAME</translation>
+<translation id="6061420513894163219">ネットワークの接続状態を確認してください。</translation>
+<translation id="6661057429906338241">アプリを閉じる</translation>
+<translation id="6669270366426331193">ERROR PAGES TITLE NOT AVAILABLE</translation>
+<translation id="6765203878096346794">サーバーとの接続が不安定です。</translation>
+<translation id="7144878232160441200">もう一度</translation>
+<translation id="7402264192054099664">一時的な問題の可能性があります。</translation>
+<translation id="7570401931535381481">期限切れの可能性があります。あるいは、テレビの時刻設定が正しくないため、サーバー証明書が無効になっている可能性があります。</translation>
+<translation id="7619490177640280081">現在の時刻設定</translation>
+<translation id="7885656482573166887">設定</translation>
+<translation id="8090699366918591820">現在時刻</translation>
+<translation id="8138313893556460774">接続できませんでした。</translation>
+<translation id="8322836013946289105">ファイルまたはディレクトリが見つかりません。</translation>
+<translation id="8461715367920190352">ERROR PAGES HEADING NOT AVAILABLE</translation>
+<translation id="8561467915632687957">ネットワークが不安定です。</translation>
+</translationbundle>

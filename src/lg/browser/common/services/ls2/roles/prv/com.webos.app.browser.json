@@ -1,0 +1,53 @@
+{
+    "role": {
+        "exeName":"/usr/palm/applications/com.webos.app.browser/chrome",
+        "type": "privileged",
+        "allowedNames": ["com.webos.app.browser",
+		"com.palm.chromiumwebprocess.mediaplayer*",
+		"com.webos.media.client.*",
+		"com.palm.chrome.media-*",
+		"com.webos.pipeline.*",
+		"com.webos.rm.client.*",""]
+    },
+    "permissions": [
+        {
+            "service":"com.webos.app.browser",
+            "inbound":["*"],
+            "outbound":["*"]
+        },
+        {
+            "service":"com.palm.chromiumwebprocess.mediaplayer*",
+            "inbound":["*"],
+            "outbound":["*"]
+        },
+        {
+            "service":"com.webos.media.client.*",
+            "inbound":["com.webos.media"],
+            "outbound":["com.webos.media"]
+        },
+		{
+            "service":"com.palm.chrome.media-*",
+            "inbound":["*"],
+            "outbound":["*"]
+        },
+		       {
+            "service":"com.webos.pipeline.*",
+            "inbound":["com.webos.pipelinectrl.*"],
+            "outbound":["com.webos.pipelinectrl.*"]
+        },
+        {
+            "service":"com.webos.rm.client.*",
+            "inbound":["com.webos.media"],
+            "outbound":["com.webos.media"]
+        },
+        {
+            "service":"",
+            "inbound":["com.webos.service.videosinkmanager",
+                "com.webos.service.admanager.service",
+                "com.webos.service.tv.display"],
+            "outbound":["com.webos.service.videosinkmanager",
+                "com.webos.service.admanager.service",
+                "com.webos.service.tv.display"]
+        }
+    ]
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE translationbundle>
+<translationbundle lang="et">
+<translation id="1499093007998028961">Võrgu seadistus</translation>
+<translation id="1682620957554922882">Võtke ühendust sisu pakkujaga.</translation>
+<translation id="171447555090807962">Server certificate has expired or is not yet valid as the set time on UHD Broadcast Box is different from the current time.</translation>
+<translation id="203730040597967152">VÄLJU RAKENDUSEST</translation>
+<translation id="2626799779920242286">Proovige hiljem uuesti.</translation>
+<translation id="27461552975087996">Serveri sertifikaati ei saa usaldada.</translation>
+<translation id="288961708105972332">Ühendamistaotlus katkenud.</translation>
+<translation id="3100161803646972327">Kontrollige võrgu olekut ja proovige uuesti.</translation>
+<translation id="334286403444714742">Võrguühendust ei ole loodud.</translation>
+<translation id="4588672349582133274">VÕRGUSEADED</translation>
+<translation id="4669109953235344059">PROOVI UUESTI</translation>
+<translation id="4799446021133992159">LAADIMINE EI ÕNNESTU</translation>
+<translation id="4897228579364425832">KONTROLLIGE VÕRGUÜHENDUST</translation>
+<translation id="4922056813564935008">Soovitud aadressi ei leita.</translation>
+<translation id="4964644330950338878">Hosti nimi ei ühti serveri sertifikaadiga.</translation>
+<translation id="5068657318680619278">This site can not be reached</translation>
+<translation id="5375809313377772901">Kontrollige kellaaja seadeid.</translation>
+<translation id="5803768854262525793">REPLACE WITH HOSTNAME</translation>
+<translation id="6061420513894163219">Kontrollige võrguühenduse olekut.</translation>
+<translation id="6661057429906338241">Sule rakendus</translation>
+<translation id="6669270366426331193">ERROR PAGES TITLE NOT AVAILABLE</translation>
+<translation id="6765203878096346794">Serveriühendus on ebastabiilne.</translation>
+<translation id="7144878232160441200">Proovi uuesti</translation>
+<translation id="7402264192054099664">Tegemist võib olla ajutise probleemiga.</translation>
+<translation id="7570401931535381481">Serveri sertifikaat on aegunud või ei ole kehtiv, kuna teleris seadistatud kellaaeg on praegusest kellaajast erinev.</translation>
+<translation id="7619490177640280081">Praeguse kellaaja seadistus</translation>
+<translation id="7885656482573166887">SEADED</translation>
+<translation id="8090699366918591820">Praegune kellaaeg</translation>
+<translation id="8138313893556460774">Toiming on katkestatud.</translation>
+<translation id="8322836013946289105">Faili või kataloogi ei leita.</translation>
+<translation id="8461715367920190352">ERROR PAGES HEADING NOT AVAILABLE</translation>
+<translation id="8561467915632687957">Võrguühendus on ebastabiilne.</translation>
+</translationbundle>

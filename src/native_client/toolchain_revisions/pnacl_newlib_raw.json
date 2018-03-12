@@ -1,0 +1,1102 @@
+{
+  "package_name": "pnacl_newlib_raw",
+  "package_targets": {
+    "linux_x86": {
+      "archives": [
+        {
+          "extract_dir": "",
+          "hash": "0ccb9069cb36c05e9c11bd6a9585d310131840c5",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/binutils_x86_64_linux_3190740bb8e6daee6c29dfbc6ab43f0cc8ddd9eb.log",
+          "name": "binutils_x86_64_linux.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/binutils_x86_64_linux_3190740bb8e6daee6c29dfbc6ab43f0cc8ddd9eb.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "d7ff303e87521243c8d54a976d853960194b70ce",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/binutils_x86_x86_64_linux_30c4db0a7bc45e907cd34b4975ecfd45503bc60c.log",
+          "name": "binutils_x86_x86_64_linux.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/binutils_x86_x86_64_linux_30c4db0a7bc45e907cd34b4975ecfd45503bc60c.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "4315dcb1c36823855423df3c1531e2c3a85c3b99",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/compiler_rt_bc_arm_bc_06f311029951e49279f93ee6b5d798ffb378921e.log",
+          "name": "compiler_rt_bc_arm_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/compiler_rt_bc_arm_bc_06f311029951e49279f93ee6b5d798ffb378921e.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "4986292a476291d48d0277cef79ce6865e28a1d7",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/compiler_rt_bc_i686_bc_71090b27cd8b1715e837612db7bb6ae9884eb9b2.log",
+          "name": "compiler_rt_bc_i686_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/compiler_rt_bc_i686_bc_71090b27cd8b1715e837612db7bb6ae9884eb9b2.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "bf4237dbb000fd8e010dd25e6dc5b06b5f7e2f5d",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/compiler_rt_bc_le32_8ffbdf3186f342d7bfbac5d6d213d30d906ce0c8.log",
+          "name": "compiler_rt_bc_le32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/compiler_rt_bc_le32_8ffbdf3186f342d7bfbac5d6d213d30d906ce0c8.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "57e2d79f66df4d6a5be288b5cdcb2f5fd661111e",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/compiler_rt_bc_x86_64_bc_835c0d337b0862daabf5f1c90c90acb70250d078.log",
+          "name": "compiler_rt_bc_x86_64_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/compiler_rt_bc_x86_64_bc_835c0d337b0862daabf5f1c90c90acb70250d078.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "edc004b612545482f708ac5431a358df0b9c0c51",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/driver_x86_64_linux_aebe5000b2daaa6ca9fff580835fa5d5948fdebc.log",
+          "name": "driver_x86_64_linux.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/driver_x86_64_linux_aebe5000b2daaa6ca9fff580835fa5d5948fdebc.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "1f5641be00b652a47dd4517e2bbb1e8aae55c41d",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_arm_4d1b38293fd2eeff895c379445d0e8cb7ca421eb.log",
+          "name": "libcxx_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_arm_4d1b38293fd2eeff895c379445d0e8cb7ca421eb.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "fcb607702018d01e900c15a6f982b81887e2a39c",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_arm_bc_e065df6463e4d4c11003308c96636b8d08fa558e.log",
+          "name": "libcxx_arm_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_arm_bc_e065df6463e4d4c11003308c96636b8d08fa558e.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "ddd864c1a77f4adb49869ec4a761063bdb5f564c",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_i686_ba67ebc8ed4865c85d28ac3189e36a492fd5906a.log",
+          "name": "libcxx_i686.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_i686_ba67ebc8ed4865c85d28ac3189e36a492fd5906a.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "81efd73888ba71afefab6a93f6e9bb2f497ec667",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_i686_bc_2ec9472750ffb4ff9714cfa5c17c933f08f63e9a.log",
+          "name": "libcxx_i686_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_i686_bc_2ec9472750ffb4ff9714cfa5c17c933f08f63e9a.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "8ec7ffc36b4ce312c58c4582e048174685ebb04f",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_le32_cd7894ffc6dd897b9549ed5930c4e46cec037de3.log",
+          "name": "libcxx_le32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_le32_cd7894ffc6dd897b9549ed5930c4e46cec037de3.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "8d60d34bc594f9a23e4a4fec5a89c075982a13d0",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_mipsel_0881fb263270dbcd040c967fe18f75cd5f4a3783.log",
+          "name": "libcxx_mipsel.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_mipsel_0881fb263270dbcd040c967fe18f75cd5f4a3783.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "d38923f33a969998bd3fa29221b97332fd220ab2",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_x86_64_54d64049fb92ed08573101943a02a52d0d3fda90.log",
+          "name": "libcxx_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_x86_64_54d64049fb92ed08573101943a02a52d0d3fda90.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "a2c8a961c59d79669142b1e679c339f16ad8edb8",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_x86_64_bc_cf9a7da4e44786685120a521f6fbbcece2ea177f.log",
+          "name": "libcxx_x86_64_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_x86_64_bc_cf9a7da4e44786685120a521f6fbbcece2ea177f.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "2316d962fe885f2a3c7fbad120d98980405ed86f",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_x86_64_linux_19e47435d179c7bc820f59b3162f6bf721335dd8.log",
+          "name": "libcxx_x86_64_linux.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_x86_64_linux_19e47435d179c7bc820f59b3162f6bf721335dd8.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "8f1c2a70c09ff915d06b6acfa32fddc35bd27e0f",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libgcc_eh_arm_45001886d5c01ef9002fed4dfde94881e22c6ad9.log",
+          "name": "libgcc_eh_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libgcc_eh_arm_45001886d5c01ef9002fed4dfde94881e22c6ad9.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "353609eef7ad8823fdd199241aa77bd5c0a484ac",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libgcc_eh_mips32_e61ee771bd0bce03cddc84c08710ba8f6a2dff74.log",
+          "name": "libgcc_eh_mips32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libgcc_eh_mips32_e61ee771bd0bce03cddc84c08710ba8f6a2dff74.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "ee5e8faaef043b2aef9e9427de40f176c843d09f",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libgcc_eh_x86_32_6dc8bbe08474537602c66fd6db3024b812d91448.log",
+          "name": "libgcc_eh_x86_32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libgcc_eh_x86_32_6dc8bbe08474537602c66fd6db3024b812d91448.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "775390254e1cd68cfbf2d8a193a2d83753a9f1a7",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libgcc_eh_x86_64_729cfb07fe284ff8deb43d30467ab31a3ae17edd.log",
+          "name": "libgcc_eh_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libgcc_eh_x86_64_729cfb07fe284ff8deb43d30467ab31a3ae17edd.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "2118ea9874158cc2eecdb81b17969fe8e8ab5f39",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_arm_a242b2d1648c9e8435943c9d18efffdefaf90cc2.log",
+          "name": "libs_support_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_arm_a242b2d1648c9e8435943c9d18efffdefaf90cc2.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "a27f3ab7cc2b1ca9b07ef79b959e2297a51f4e57",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_arm_bc_f1e64a7acab4e91d061cb111a1811e3ab1570dd0.log",
+          "name": "libs_support_arm_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_arm_bc_f1e64a7acab4e91d061cb111a1811e3ab1570dd0.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "89cb0cfbaa28bf8aac62411be462d805a58f286d",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_i686_97b91213450f99f7562375aa934779ba98b5d598.log",
+          "name": "libs_support_i686.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_i686_97b91213450f99f7562375aa934779ba98b5d598.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "6d12f87cbda16d2e00485b610939a1c92c1077e1",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_i686_bc_a270af9146913a4c0d922f0380a21e61e09e5ea8.log",
+          "name": "libs_support_i686_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_i686_bc_a270af9146913a4c0d922f0380a21e61e09e5ea8.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "3e2f94a3356127b9343b07115bd002c972bbb413",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_le32_ebaf6761a9ba9d5c3f2693b78efd5988763a712c.log",
+          "name": "libs_support_le32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_le32_ebaf6761a9ba9d5c3f2693b78efd5988763a712c.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "0a7eaa3edd7cf148328049f5d3faf40322d78e59",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_mipsel_c9279efa12b8e3c50ed0e94e5c19187ac0453f46.log",
+          "name": "libs_support_mipsel.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_mipsel_c9279efa12b8e3c50ed0e94e5c19187ac0453f46.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "bf1990a0cf8c8ca5d3e709748f3625a3803baa90",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_translator_arm_e1f6c095fbe793204ee056ff1d468339b5cac5ae.log",
+          "name": "libs_support_translator_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_translator_arm_e1f6c095fbe793204ee056ff1d468339b5cac5ae.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "1324829909f27ff92e6d344401f30f70c7d04e47",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_translator_arm_nonsfi_920829b387c943dc480baf93f67247f856e2dce8.log",
+          "name": "libs_support_translator_arm_nonsfi.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_translator_arm_nonsfi_920829b387c943dc480baf93f67247f856e2dce8.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "4d76019dbc414dc7a95d8ebf59eb395e67d890ca",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_translator_mips32_f0efb0e647431a05a8f0cbd2a0757c091ca1a728.log",
+          "name": "libs_support_translator_mips32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_translator_mips32_f0efb0e647431a05a8f0cbd2a0757c091ca1a728.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "b1ce0610cb74a935c9c0e37827ab824df3dac5d7",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_translator_x86_32_270be6a605f07e051e645d1af63fe2dd7b32543a.log",
+          "name": "libs_support_translator_x86_32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_translator_x86_32_270be6a605f07e051e645d1af63fe2dd7b32543a.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "bcc897dfda85ee02d18d13897afb26b34da2be12",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_translator_x86_32_nonsfi_e45cd81a7b6432d9c68d222308e8c43f65e86f8d.log",
+          "name": "libs_support_translator_x86_32_nonsfi.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_translator_x86_32_nonsfi_e45cd81a7b6432d9c68d222308e8c43f65e86f8d.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "6b16b3d5cd69ff1b05884b0d5e651b3d5588d2c2",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_translator_x86_64_ae6ca014ebc54ae04f398324eff54f2492330c3f.log",
+          "name": "libs_support_translator_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_translator_x86_64_ae6ca014ebc54ae04f398324eff54f2492330c3f.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "7ac03883c5198388d23fe3cd4fc9fd031ef21b27",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_x86_64_2c339a4b13ae5a3bc6dce14f78a9ed405960fce7.log",
+          "name": "libs_support_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_x86_64_2c339a4b13ae5a3bc6dce14f78a9ed405960fce7.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "33657167a7f19e684ef1f068b63a32d602bc72a6",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_x86_64_bc_96a311b617562f6035ddebddcfa8ef57955f4d63.log",
+          "name": "libs_support_x86_64_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_x86_64_bc_96a311b617562f6035ddebddcfa8ef57955f4d63.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "de1bee1f5e094f6b3d56dae2c1c8adfddd6558d8",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/llvm_x86_64_linux_d97c85063737d4200bd6d6a4b6d95a3e360a1351.log",
+          "name": "llvm_x86_64_linux.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/llvm_x86_64_linux_d97c85063737d4200bd6d6a4b6d95a3e360a1351.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "f0febe9fa5c8fef07a968cb7c1e676f33ee2b8c4",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/metadata_a652799f4f3de9d359878ef52c6624424b411557.log",
+          "name": "metadata.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/metadata_a652799f4f3de9d359878ef52c6624424b411557.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "5a82d0b74858da2a46e04b988c5e6680e4fbcd4c",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_arm_31af499711758f42caf7049e6ca9d008e818303c.log",
+          "name": "newlib_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_arm_31af499711758f42caf7049e6ca9d008e818303c.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "5273e9ee43e32480bd318add8e3785f5c740209e",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_arm_bc_a991a04e36ae2ed494f28721fab759d82b7168cf.log",
+          "name": "newlib_arm_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_arm_bc_a991a04e36ae2ed494f28721fab759d82b7168cf.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "fb0eec5e98a2243d4d39bf534824a4bcd049fb60",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_i686_bc57b675ba76cde66ad58810c2fb64fbbc888b50.log",
+          "name": "newlib_i686.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_i686_bc57b675ba76cde66ad58810c2fb64fbbc888b50.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "942d034c5fb54770d7d8aa615e8f941891f32a61",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_i686_bc_665d891237ad05188343e99663ae22d6af07378b.log",
+          "name": "newlib_i686_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_i686_bc_665d891237ad05188343e99663ae22d6af07378b.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "23fbdaac0d2458b0119254f5349ca7a4807fbd3e",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_le32_c6642a55a464c9ee71b8c38117dccb83781a8db6.log",
+          "name": "newlib_le32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_le32_c6642a55a464c9ee71b8c38117dccb83781a8db6.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "ae051afbaf1dcd7266f1d308fa526b1af665d2ad",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_mipsel_f825aae6177ab77ee8b56591f6e448e97ad2f671.log",
+          "name": "newlib_mipsel.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_mipsel_f825aae6177ab77ee8b56591f6e448e97ad2f671.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "c8eab432ccec7791fc95845f6ef056d504b7498c",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_x86_64_4d77590618780ad27f9d02be457cf5d402fea69a.log",
+          "name": "newlib_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_x86_64_4d77590618780ad27f9d02be457cf5d402fea69a.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "9bd910eb0caf0afdc29fb80009bdea61b54838f7",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_x86_64_bc_a90b5589e73df4fac7557f083e82c3f9a0d4da2e.log",
+          "name": "newlib_x86_64_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_x86_64_bc_a90b5589e73df4fac7557f083e82c3f9a0d4da2e.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "ad385c967ea2be0795bec2be3532ee520eb99047",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/unsandboxed_runtime_arm_linux_ab99e6225450cfcda190be70e28a2ba96118278c.log",
+          "name": "unsandboxed_runtime_arm_linux.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/unsandboxed_runtime_arm_linux_ab99e6225450cfcda190be70e28a2ba96118278c.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "1b2b06adb1ea6cb1c33029037886ffb0b5820ccc",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/unsandboxed_runtime_x86_32_linux_7e9469b5ebd96e40ea3f7b0de93c2361ad06ece3.log",
+          "name": "unsandboxed_runtime_x86_32_linux.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/unsandboxed_runtime_x86_32_linux_7e9469b5ebd96e40ea3f7b0de93c2361ad06ece3.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "0df66ff6a4844f33dbbfabab18b09cf6128482e3",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/unsandboxed_runtime_x86_64_linux_39cd59ce6be14ee949c9f430947bd393fb6182e8.log",
+          "name": "unsandboxed_runtime_x86_64_linux.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/unsandboxed_runtime_x86_64_linux_39cd59ce6be14ee949c9f430947bd393fb6182e8.tgz"
+        }
+      ],
+      "version": 1
+    },
+    "mac_x86": {
+      "archives": [
+        {
+          "extract_dir": "",
+          "hash": "5cf0e4e5eaf899f77c977d67552cc6153974fdaf",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/binutils_x86_64_apple_darwin_13db5cb353c9a7ed31490fe4086a0596f818ce9b.log",
+          "name": "binutils_x86_64_apple_darwin.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/binutils_x86_64_apple_darwin_13db5cb353c9a7ed31490fe4086a0596f818ce9b.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "2baba5e3f2eb2bef453487bdd3bdf65016d6cf1c",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/binutils_x86_x86_64_apple_darwin_f9ddfe974ce7fb47ff6eebff3f360fa8cdf5d12d.log",
+          "name": "binutils_x86_x86_64_apple_darwin.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/binutils_x86_x86_64_apple_darwin_f9ddfe974ce7fb47ff6eebff3f360fa8cdf5d12d.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "4315dcb1c36823855423df3c1531e2c3a85c3b99",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/compiler_rt_bc_arm_bc_06f311029951e49279f93ee6b5d798ffb378921e.log",
+          "name": "compiler_rt_bc_arm_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/compiler_rt_bc_arm_bc_06f311029951e49279f93ee6b5d798ffb378921e.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "4986292a476291d48d0277cef79ce6865e28a1d7",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/compiler_rt_bc_i686_bc_71090b27cd8b1715e837612db7bb6ae9884eb9b2.log",
+          "name": "compiler_rt_bc_i686_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/compiler_rt_bc_i686_bc_71090b27cd8b1715e837612db7bb6ae9884eb9b2.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "bf4237dbb000fd8e010dd25e6dc5b06b5f7e2f5d",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/compiler_rt_bc_le32_8ffbdf3186f342d7bfbac5d6d213d30d906ce0c8.log",
+          "name": "compiler_rt_bc_le32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/compiler_rt_bc_le32_8ffbdf3186f342d7bfbac5d6d213d30d906ce0c8.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "57e2d79f66df4d6a5be288b5cdcb2f5fd661111e",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/compiler_rt_bc_x86_64_bc_835c0d337b0862daabf5f1c90c90acb70250d078.log",
+          "name": "compiler_rt_bc_x86_64_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/compiler_rt_bc_x86_64_bc_835c0d337b0862daabf5f1c90c90acb70250d078.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "8716e5703bb234358c2ef953f103868d646b9965",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/driver_x86_64_apple_darwin_aebe5000b2daaa6ca9fff580835fa5d5948fdebc.log",
+          "name": "driver_x86_64_apple_darwin.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/driver_x86_64_apple_darwin_aebe5000b2daaa6ca9fff580835fa5d5948fdebc.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "1f5641be00b652a47dd4517e2bbb1e8aae55c41d",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_arm_4d1b38293fd2eeff895c379445d0e8cb7ca421eb.log",
+          "name": "libcxx_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_arm_4d1b38293fd2eeff895c379445d0e8cb7ca421eb.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "fcb607702018d01e900c15a6f982b81887e2a39c",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_arm_bc_e065df6463e4d4c11003308c96636b8d08fa558e.log",
+          "name": "libcxx_arm_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_arm_bc_e065df6463e4d4c11003308c96636b8d08fa558e.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "ddd864c1a77f4adb49869ec4a761063bdb5f564c",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_i686_ba67ebc8ed4865c85d28ac3189e36a492fd5906a.log",
+          "name": "libcxx_i686.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_i686_ba67ebc8ed4865c85d28ac3189e36a492fd5906a.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "81efd73888ba71afefab6a93f6e9bb2f497ec667",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_i686_bc_2ec9472750ffb4ff9714cfa5c17c933f08f63e9a.log",
+          "name": "libcxx_i686_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_i686_bc_2ec9472750ffb4ff9714cfa5c17c933f08f63e9a.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "8ec7ffc36b4ce312c58c4582e048174685ebb04f",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_le32_cd7894ffc6dd897b9549ed5930c4e46cec037de3.log",
+          "name": "libcxx_le32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_le32_cd7894ffc6dd897b9549ed5930c4e46cec037de3.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "8d60d34bc594f9a23e4a4fec5a89c075982a13d0",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_mipsel_0881fb263270dbcd040c967fe18f75cd5f4a3783.log",
+          "name": "libcxx_mipsel.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_mipsel_0881fb263270dbcd040c967fe18f75cd5f4a3783.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "d38923f33a969998bd3fa29221b97332fd220ab2",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_x86_64_54d64049fb92ed08573101943a02a52d0d3fda90.log",
+          "name": "libcxx_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_x86_64_54d64049fb92ed08573101943a02a52d0d3fda90.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "14684d820658ac387c3952a3a63e30d54e47783c",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_x86_64_apple_darwin_0f1e075040625a689a0f1a0f269c354de55395cf.log",
+          "name": "libcxx_x86_64_apple_darwin.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_x86_64_apple_darwin_0f1e075040625a689a0f1a0f269c354de55395cf.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "a2c8a961c59d79669142b1e679c339f16ad8edb8",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_x86_64_bc_cf9a7da4e44786685120a521f6fbbcece2ea177f.log",
+          "name": "libcxx_x86_64_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_x86_64_bc_cf9a7da4e44786685120a521f6fbbcece2ea177f.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "8f1c2a70c09ff915d06b6acfa32fddc35bd27e0f",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libgcc_eh_arm_45001886d5c01ef9002fed4dfde94881e22c6ad9.log",
+          "name": "libgcc_eh_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libgcc_eh_arm_45001886d5c01ef9002fed4dfde94881e22c6ad9.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "353609eef7ad8823fdd199241aa77bd5c0a484ac",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libgcc_eh_mips32_e61ee771bd0bce03cddc84c08710ba8f6a2dff74.log",
+          "name": "libgcc_eh_mips32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libgcc_eh_mips32_e61ee771bd0bce03cddc84c08710ba8f6a2dff74.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "ee5e8faaef043b2aef9e9427de40f176c843d09f",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libgcc_eh_x86_32_6dc8bbe08474537602c66fd6db3024b812d91448.log",
+          "name": "libgcc_eh_x86_32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libgcc_eh_x86_32_6dc8bbe08474537602c66fd6db3024b812d91448.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "775390254e1cd68cfbf2d8a193a2d83753a9f1a7",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libgcc_eh_x86_64_729cfb07fe284ff8deb43d30467ab31a3ae17edd.log",
+          "name": "libgcc_eh_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libgcc_eh_x86_64_729cfb07fe284ff8deb43d30467ab31a3ae17edd.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "2118ea9874158cc2eecdb81b17969fe8e8ab5f39",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_arm_a242b2d1648c9e8435943c9d18efffdefaf90cc2.log",
+          "name": "libs_support_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_arm_a242b2d1648c9e8435943c9d18efffdefaf90cc2.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "a27f3ab7cc2b1ca9b07ef79b959e2297a51f4e57",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_arm_bc_f1e64a7acab4e91d061cb111a1811e3ab1570dd0.log",
+          "name": "libs_support_arm_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_arm_bc_f1e64a7acab4e91d061cb111a1811e3ab1570dd0.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "89cb0cfbaa28bf8aac62411be462d805a58f286d",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_i686_97b91213450f99f7562375aa934779ba98b5d598.log",
+          "name": "libs_support_i686.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_i686_97b91213450f99f7562375aa934779ba98b5d598.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "6d12f87cbda16d2e00485b610939a1c92c1077e1",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_i686_bc_a270af9146913a4c0d922f0380a21e61e09e5ea8.log",
+          "name": "libs_support_i686_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_i686_bc_a270af9146913a4c0d922f0380a21e61e09e5ea8.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "3e2f94a3356127b9343b07115bd002c972bbb413",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_le32_ebaf6761a9ba9d5c3f2693b78efd5988763a712c.log",
+          "name": "libs_support_le32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_le32_ebaf6761a9ba9d5c3f2693b78efd5988763a712c.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "0a7eaa3edd7cf148328049f5d3faf40322d78e59",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_mipsel_c9279efa12b8e3c50ed0e94e5c19187ac0453f46.log",
+          "name": "libs_support_mipsel.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_mipsel_c9279efa12b8e3c50ed0e94e5c19187ac0453f46.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "bf1990a0cf8c8ca5d3e709748f3625a3803baa90",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_translator_arm_e1f6c095fbe793204ee056ff1d468339b5cac5ae.log",
+          "name": "libs_support_translator_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_translator_arm_e1f6c095fbe793204ee056ff1d468339b5cac5ae.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "1324829909f27ff92e6d344401f30f70c7d04e47",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_translator_arm_nonsfi_920829b387c943dc480baf93f67247f856e2dce8.log",
+          "name": "libs_support_translator_arm_nonsfi.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_translator_arm_nonsfi_920829b387c943dc480baf93f67247f856e2dce8.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "4d76019dbc414dc7a95d8ebf59eb395e67d890ca",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_translator_mips32_f0efb0e647431a05a8f0cbd2a0757c091ca1a728.log",
+          "name": "libs_support_translator_mips32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_translator_mips32_f0efb0e647431a05a8f0cbd2a0757c091ca1a728.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "b1ce0610cb74a935c9c0e37827ab824df3dac5d7",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_translator_x86_32_270be6a605f07e051e645d1af63fe2dd7b32543a.log",
+          "name": "libs_support_translator_x86_32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_translator_x86_32_270be6a605f07e051e645d1af63fe2dd7b32543a.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "bcc897dfda85ee02d18d13897afb26b34da2be12",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_translator_x86_32_nonsfi_e45cd81a7b6432d9c68d222308e8c43f65e86f8d.log",
+          "name": "libs_support_translator_x86_32_nonsfi.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_translator_x86_32_nonsfi_e45cd81a7b6432d9c68d222308e8c43f65e86f8d.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "6b16b3d5cd69ff1b05884b0d5e651b3d5588d2c2",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_translator_x86_64_ae6ca014ebc54ae04f398324eff54f2492330c3f.log",
+          "name": "libs_support_translator_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_translator_x86_64_ae6ca014ebc54ae04f398324eff54f2492330c3f.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "7ac03883c5198388d23fe3cd4fc9fd031ef21b27",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_x86_64_2c339a4b13ae5a3bc6dce14f78a9ed405960fce7.log",
+          "name": "libs_support_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_x86_64_2c339a4b13ae5a3bc6dce14f78a9ed405960fce7.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "33657167a7f19e684ef1f068b63a32d602bc72a6",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_x86_64_bc_96a311b617562f6035ddebddcfa8ef57955f4d63.log",
+          "name": "libs_support_x86_64_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_x86_64_bc_96a311b617562f6035ddebddcfa8ef57955f4d63.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "7dda36c85b2420027e163f2368f2bf49ac636630",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/llvm_x86_64_apple_darwin_3ad4073783094f0190a10b657ee0edfbb210ad2c.log",
+          "name": "llvm_x86_64_apple_darwin.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/llvm_x86_64_apple_darwin_3ad4073783094f0190a10b657ee0edfbb210ad2c.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "f0febe9fa5c8fef07a968cb7c1e676f33ee2b8c4",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/metadata_a652799f4f3de9d359878ef52c6624424b411557.log",
+          "name": "metadata.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/metadata_a652799f4f3de9d359878ef52c6624424b411557.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "5a82d0b74858da2a46e04b988c5e6680e4fbcd4c",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_arm_31af499711758f42caf7049e6ca9d008e818303c.log",
+          "name": "newlib_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_arm_31af499711758f42caf7049e6ca9d008e818303c.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "5273e9ee43e32480bd318add8e3785f5c740209e",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_arm_bc_a991a04e36ae2ed494f28721fab759d82b7168cf.log",
+          "name": "newlib_arm_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_arm_bc_a991a04e36ae2ed494f28721fab759d82b7168cf.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "fb0eec5e98a2243d4d39bf534824a4bcd049fb60",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_i686_bc57b675ba76cde66ad58810c2fb64fbbc888b50.log",
+          "name": "newlib_i686.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_i686_bc57b675ba76cde66ad58810c2fb64fbbc888b50.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "942d034c5fb54770d7d8aa615e8f941891f32a61",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_i686_bc_665d891237ad05188343e99663ae22d6af07378b.log",
+          "name": "newlib_i686_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_i686_bc_665d891237ad05188343e99663ae22d6af07378b.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "23fbdaac0d2458b0119254f5349ca7a4807fbd3e",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_le32_c6642a55a464c9ee71b8c38117dccb83781a8db6.log",
+          "name": "newlib_le32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_le32_c6642a55a464c9ee71b8c38117dccb83781a8db6.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "ae051afbaf1dcd7266f1d308fa526b1af665d2ad",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_mipsel_f825aae6177ab77ee8b56591f6e448e97ad2f671.log",
+          "name": "newlib_mipsel.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_mipsel_f825aae6177ab77ee8b56591f6e448e97ad2f671.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "c8eab432ccec7791fc95845f6ef056d504b7498c",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_x86_64_4d77590618780ad27f9d02be457cf5d402fea69a.log",
+          "name": "newlib_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_x86_64_4d77590618780ad27f9d02be457cf5d402fea69a.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "9bd910eb0caf0afdc29fb80009bdea61b54838f7",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_x86_64_bc_a90b5589e73df4fac7557f083e82c3f9a0d4da2e.log",
+          "name": "newlib_x86_64_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_x86_64_bc_a90b5589e73df4fac7557f083e82c3f9a0d4da2e.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "ee428aa69a3456422f247aab66b1eef2e2347148",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/unsandboxed_runtime_x86_32_mac_735ea3dafacda31c71914717394c75221d20ed04.log",
+          "name": "unsandboxed_runtime_x86_32_mac.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/unsandboxed_runtime_x86_32_mac_735ea3dafacda31c71914717394c75221d20ed04.tgz"
+        }
+      ],
+      "version": 1
+    },
+    "win_x86": {
+      "archives": [
+        {
+          "extract_dir": "",
+          "hash": "ad9cb3094abf9a93d4b53447e8000fa13f2dfcad",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/binutils_i686_w64_mingw32_a1a1bc058210d343aa9e31455658df596fcdeaed.log",
+          "name": "binutils_i686_w64_mingw32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/binutils_i686_w64_mingw32_a1a1bc058210d343aa9e31455658df596fcdeaed.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "66919319fb4a1264d349dda542c2b8fdac21af27",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/binutils_x86_i686_w64_mingw32_d53a0e2ab26089ac01f17fd5448d14ee6cec41c4.log",
+          "name": "binutils_x86_i686_w64_mingw32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/binutils_x86_i686_w64_mingw32_d53a0e2ab26089ac01f17fd5448d14ee6cec41c4.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "4315dcb1c36823855423df3c1531e2c3a85c3b99",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/compiler_rt_bc_arm_bc_06f311029951e49279f93ee6b5d798ffb378921e.log",
+          "name": "compiler_rt_bc_arm_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/compiler_rt_bc_arm_bc_06f311029951e49279f93ee6b5d798ffb378921e.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "4986292a476291d48d0277cef79ce6865e28a1d7",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/compiler_rt_bc_i686_bc_71090b27cd8b1715e837612db7bb6ae9884eb9b2.log",
+          "name": "compiler_rt_bc_i686_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/compiler_rt_bc_i686_bc_71090b27cd8b1715e837612db7bb6ae9884eb9b2.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "bf4237dbb000fd8e010dd25e6dc5b06b5f7e2f5d",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/compiler_rt_bc_le32_8ffbdf3186f342d7bfbac5d6d213d30d906ce0c8.log",
+          "name": "compiler_rt_bc_le32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/compiler_rt_bc_le32_8ffbdf3186f342d7bfbac5d6d213d30d906ce0c8.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "57e2d79f66df4d6a5be288b5cdcb2f5fd661111e",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/compiler_rt_bc_x86_64_bc_835c0d337b0862daabf5f1c90c90acb70250d078.log",
+          "name": "compiler_rt_bc_x86_64_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/compiler_rt_bc_x86_64_bc_835c0d337b0862daabf5f1c90c90acb70250d078.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "d9f55cad6a969751a47a2188f3c8e52de4124fc3",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/driver_i686_w64_mingw32_cbc6ea1c024c9ef1135d1c12a4e2b6a15ccf0296.log",
+          "name": "driver_i686_w64_mingw32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/driver_i686_w64_mingw32_cbc6ea1c024c9ef1135d1c12a4e2b6a15ccf0296.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "1f5641be00b652a47dd4517e2bbb1e8aae55c41d",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_arm_4d1b38293fd2eeff895c379445d0e8cb7ca421eb.log",
+          "name": "libcxx_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_arm_4d1b38293fd2eeff895c379445d0e8cb7ca421eb.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "fcb607702018d01e900c15a6f982b81887e2a39c",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_arm_bc_e065df6463e4d4c11003308c96636b8d08fa558e.log",
+          "name": "libcxx_arm_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_arm_bc_e065df6463e4d4c11003308c96636b8d08fa558e.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "ddd864c1a77f4adb49869ec4a761063bdb5f564c",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_i686_ba67ebc8ed4865c85d28ac3189e36a492fd5906a.log",
+          "name": "libcxx_i686.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_i686_ba67ebc8ed4865c85d28ac3189e36a492fd5906a.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "81efd73888ba71afefab6a93f6e9bb2f497ec667",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_i686_bc_2ec9472750ffb4ff9714cfa5c17c933f08f63e9a.log",
+          "name": "libcxx_i686_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_i686_bc_2ec9472750ffb4ff9714cfa5c17c933f08f63e9a.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "8ec7ffc36b4ce312c58c4582e048174685ebb04f",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_le32_cd7894ffc6dd897b9549ed5930c4e46cec037de3.log",
+          "name": "libcxx_le32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_le32_cd7894ffc6dd897b9549ed5930c4e46cec037de3.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "8d60d34bc594f9a23e4a4fec5a89c075982a13d0",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_mipsel_0881fb263270dbcd040c967fe18f75cd5f4a3783.log",
+          "name": "libcxx_mipsel.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_mipsel_0881fb263270dbcd040c967fe18f75cd5f4a3783.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "d38923f33a969998bd3fa29221b97332fd220ab2",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_x86_64_54d64049fb92ed08573101943a02a52d0d3fda90.log",
+          "name": "libcxx_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_x86_64_54d64049fb92ed08573101943a02a52d0d3fda90.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "a2c8a961c59d79669142b1e679c339f16ad8edb8",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_x86_64_bc_cf9a7da4e44786685120a521f6fbbcece2ea177f.log",
+          "name": "libcxx_x86_64_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_x86_64_bc_cf9a7da4e44786685120a521f6fbbcece2ea177f.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "8f1c2a70c09ff915d06b6acfa32fddc35bd27e0f",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libgcc_eh_arm_45001886d5c01ef9002fed4dfde94881e22c6ad9.log",
+          "name": "libgcc_eh_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libgcc_eh_arm_45001886d5c01ef9002fed4dfde94881e22c6ad9.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "353609eef7ad8823fdd199241aa77bd5c0a484ac",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libgcc_eh_mips32_e61ee771bd0bce03cddc84c08710ba8f6a2dff74.log",
+          "name": "libgcc_eh_mips32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libgcc_eh_mips32_e61ee771bd0bce03cddc84c08710ba8f6a2dff74.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "ee5e8faaef043b2aef9e9427de40f176c843d09f",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libgcc_eh_x86_32_6dc8bbe08474537602c66fd6db3024b812d91448.log",
+          "name": "libgcc_eh_x86_32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libgcc_eh_x86_32_6dc8bbe08474537602c66fd6db3024b812d91448.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "775390254e1cd68cfbf2d8a193a2d83753a9f1a7",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libgcc_eh_x86_64_729cfb07fe284ff8deb43d30467ab31a3ae17edd.log",
+          "name": "libgcc_eh_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libgcc_eh_x86_64_729cfb07fe284ff8deb43d30467ab31a3ae17edd.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "2118ea9874158cc2eecdb81b17969fe8e8ab5f39",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_arm_a242b2d1648c9e8435943c9d18efffdefaf90cc2.log",
+          "name": "libs_support_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_arm_a242b2d1648c9e8435943c9d18efffdefaf90cc2.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "a27f3ab7cc2b1ca9b07ef79b959e2297a51f4e57",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_arm_bc_f1e64a7acab4e91d061cb111a1811e3ab1570dd0.log",
+          "name": "libs_support_arm_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_arm_bc_f1e64a7acab4e91d061cb111a1811e3ab1570dd0.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "89cb0cfbaa28bf8aac62411be462d805a58f286d",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_i686_97b91213450f99f7562375aa934779ba98b5d598.log",
+          "name": "libs_support_i686.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_i686_97b91213450f99f7562375aa934779ba98b5d598.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "6d12f87cbda16d2e00485b610939a1c92c1077e1",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_i686_bc_a270af9146913a4c0d922f0380a21e61e09e5ea8.log",
+          "name": "libs_support_i686_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_i686_bc_a270af9146913a4c0d922f0380a21e61e09e5ea8.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "3e2f94a3356127b9343b07115bd002c972bbb413",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_le32_ebaf6761a9ba9d5c3f2693b78efd5988763a712c.log",
+          "name": "libs_support_le32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_le32_ebaf6761a9ba9d5c3f2693b78efd5988763a712c.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "0a7eaa3edd7cf148328049f5d3faf40322d78e59",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_mipsel_c9279efa12b8e3c50ed0e94e5c19187ac0453f46.log",
+          "name": "libs_support_mipsel.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_mipsel_c9279efa12b8e3c50ed0e94e5c19187ac0453f46.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "bf1990a0cf8c8ca5d3e709748f3625a3803baa90",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_translator_arm_e1f6c095fbe793204ee056ff1d468339b5cac5ae.log",
+          "name": "libs_support_translator_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_translator_arm_e1f6c095fbe793204ee056ff1d468339b5cac5ae.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "1324829909f27ff92e6d344401f30f70c7d04e47",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_translator_arm_nonsfi_920829b387c943dc480baf93f67247f856e2dce8.log",
+          "name": "libs_support_translator_arm_nonsfi.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_translator_arm_nonsfi_920829b387c943dc480baf93f67247f856e2dce8.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "4d76019dbc414dc7a95d8ebf59eb395e67d890ca",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_translator_mips32_f0efb0e647431a05a8f0cbd2a0757c091ca1a728.log",
+          "name": "libs_support_translator_mips32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_translator_mips32_f0efb0e647431a05a8f0cbd2a0757c091ca1a728.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "b1ce0610cb74a935c9c0e37827ab824df3dac5d7",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_translator_x86_32_270be6a605f07e051e645d1af63fe2dd7b32543a.log",
+          "name": "libs_support_translator_x86_32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_translator_x86_32_270be6a605f07e051e645d1af63fe2dd7b32543a.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "bcc897dfda85ee02d18d13897afb26b34da2be12",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_translator_x86_32_nonsfi_e45cd81a7b6432d9c68d222308e8c43f65e86f8d.log",
+          "name": "libs_support_translator_x86_32_nonsfi.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_translator_x86_32_nonsfi_e45cd81a7b6432d9c68d222308e8c43f65e86f8d.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "6b16b3d5cd69ff1b05884b0d5e651b3d5588d2c2",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_translator_x86_64_ae6ca014ebc54ae04f398324eff54f2492330c3f.log",
+          "name": "libs_support_translator_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_translator_x86_64_ae6ca014ebc54ae04f398324eff54f2492330c3f.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "7ac03883c5198388d23fe3cd4fc9fd031ef21b27",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_x86_64_2c339a4b13ae5a3bc6dce14f78a9ed405960fce7.log",
+          "name": "libs_support_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_x86_64_2c339a4b13ae5a3bc6dce14f78a9ed405960fce7.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "33657167a7f19e684ef1f068b63a32d602bc72a6",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_x86_64_bc_96a311b617562f6035ddebddcfa8ef57955f4d63.log",
+          "name": "libs_support_x86_64_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_x86_64_bc_96a311b617562f6035ddebddcfa8ef57955f4d63.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "6d68f57fd6add525db4af9f3642496a982273e3e",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/llvm_i686_w64_mingw32_413e0a20750f74fd27d0cc31089f8ddb7e94e886.log",
+          "name": "llvm_i686_w64_mingw32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/llvm_i686_w64_mingw32_413e0a20750f74fd27d0cc31089f8ddb7e94e886.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "f0febe9fa5c8fef07a968cb7c1e676f33ee2b8c4",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/metadata_a652799f4f3de9d359878ef52c6624424b411557.log",
+          "name": "metadata.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/metadata_a652799f4f3de9d359878ef52c6624424b411557.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "5a82d0b74858da2a46e04b988c5e6680e4fbcd4c",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_arm_31af499711758f42caf7049e6ca9d008e818303c.log",
+          "name": "newlib_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_arm_31af499711758f42caf7049e6ca9d008e818303c.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "5273e9ee43e32480bd318add8e3785f5c740209e",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_arm_bc_a991a04e36ae2ed494f28721fab759d82b7168cf.log",
+          "name": "newlib_arm_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_arm_bc_a991a04e36ae2ed494f28721fab759d82b7168cf.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "fb0eec5e98a2243d4d39bf534824a4bcd049fb60",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_i686_bc57b675ba76cde66ad58810c2fb64fbbc888b50.log",
+          "name": "newlib_i686.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_i686_bc57b675ba76cde66ad58810c2fb64fbbc888b50.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "942d034c5fb54770d7d8aa615e8f941891f32a61",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_i686_bc_665d891237ad05188343e99663ae22d6af07378b.log",
+          "name": "newlib_i686_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_i686_bc_665d891237ad05188343e99663ae22d6af07378b.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "23fbdaac0d2458b0119254f5349ca7a4807fbd3e",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_le32_c6642a55a464c9ee71b8c38117dccb83781a8db6.log",
+          "name": "newlib_le32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_le32_c6642a55a464c9ee71b8c38117dccb83781a8db6.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "ae051afbaf1dcd7266f1d308fa526b1af665d2ad",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_mipsel_f825aae6177ab77ee8b56591f6e448e97ad2f671.log",
+          "name": "newlib_mipsel.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_mipsel_f825aae6177ab77ee8b56591f6e448e97ad2f671.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "c8eab432ccec7791fc95845f6ef056d504b7498c",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_x86_64_4d77590618780ad27f9d02be457cf5d402fea69a.log",
+          "name": "newlib_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_x86_64_4d77590618780ad27f9d02be457cf5d402fea69a.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "9bd910eb0caf0afdc29fb80009bdea61b54838f7",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_x86_64_bc_a90b5589e73df4fac7557f083e82c3f9a0d4da2e.log",
+          "name": "newlib_x86_64_bc.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_x86_64_bc_a90b5589e73df4fac7557f083e82c3f9a0d4da2e.tgz"
+        }
+      ],
+      "version": 1
+    }
+  },
+  "revision": "2eeb54c6995817a39e5c5cc0b40e26518396335f",
+  "revision_hash": "6f28bc8481f1544079cabc88159317b59137d9d5"
+}

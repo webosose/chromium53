@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE translationbundle>
+<translationbundle lang="ko">
+<translation id="1499093007998028961">네트워크 설정</translation>
+<translation id="1682620957554922882">콘텐츠 제공 업체에 문의해주세요.</translation>
+<translation id="171447555090807962">Server certificate has expired or is not yet valid as the set time on UHD Broadcast Box is different from the current time.</translation>
+<translation id="203730040597967152">앱 종료</translation>
+<translation id="2626799779920242286">잠시 후 다시 시도해주세요.</translation>
+<translation id="27461552975087996">서버의 인증서를 신뢰할 수 없습니다.</translation>
+<translation id="288961708105972332">연결 시간이 초과되었습니다.</translation>
+<translation id="3100161803646972327">네트워크 상태를 확인 후 다시 시도해주세요.</translation>
+<translation id="334286403444714742">네트워크가 연결되어 있지 않습니다.</translation>
+<translation id="4588672349582133274">네트워크 설정</translation>
+<translation id="4669109953235344059">재시도</translation>
+<translation id="4799446021133992159">로딩할 수 없음</translation>
+<translation id="4897228579364425832">네트워크 확인 필요</translation>
+<translation id="4922056813564935008">요청한 주소를 찾을 수 없습니다.</translation>
+<translation id="4964644330950338878">호스트명과 서버 인증서가 일치하지 않습니다.</translation>
+<translation id="5068657318680619278">This site can not be reached</translation>
+<translation id="5375809313377772901">시간 설정을 확인하세요.</translation>
+<translation id="5803768854262525793">REPLACE WITH HOSTNAME</translation>
+<translation id="6061420513894163219">네트워크 상태를 확인해주세요.</translation>
+<translation id="6661057429906338241">앱 종료</translation>
+<translation id="6669270366426331193">ERROR PAGES TITLE NOT AVAILABLE</translation>
+<translation id="6765203878096346794">서버와 연결이 불안정합니다.</translation>
+<translation id="7144878232160441200">재시도</translation>
+<translation id="7402264192054099664">일시적인 현상일 수 있습니다.</translation>
+<translation id="7570401931535381481">서버 인증서가 만료되었거나 TV에 설정된 시간이 현재 시간과 다른 경우 발생할 수 있습니다.</translation>
+<translation id="7619490177640280081">현재 설정된 시간</translation>
+<translation id="7885656482573166887">설정</translation>
+<translation id="8090699366918591820">현재 시간</translation>
+<translation id="8138313893556460774">작업 시간이 초과되었습니다.</translation>
+<translation id="8322836013946289105">파일 또는 디렉토리를 찾을 수 없습니다.</translation>
+<translation id="8461715367920190352">ERROR PAGES HEADING NOT AVAILABLE</translation>
+<translation id="8561467915632687957">네트워크가 불안정합니다.</translation>
+</translationbundle>

@@ -1,0 +1,139 @@
+#!/bin/sh
+
+PmLogCtl def chrome.runscript warning
+PmLogCtl logkv chrome.runscript info launchTime place=start_chrome
+######################################################################
+                 #      Environment Variables       #
+######################################################################
+
+export CHROMIUM_BROWSER="yes"
+export BROWSER_NAME="Chromium53"
+export TMPDIR="/tmp"
+export ENABLE_INSPECTOR=1
+export BROWSER_APP_ID="com.webos.app.browser"
+
+if test -d ${XDG_RUNTIME_DIR}; then
+  export XDG_RUNTIME_DIR="${TMPDIR}/xdg"
+fi
+
+DEPLOY_DIR=$(dirname $(readlink -f $0))
+
+USER_CACHE_CONF=${DEPLOY_DIR}/user_cachedir_conf
+if [ -f ${USER_CACHE_CONF} ]; then
+    CACHE_DIR=`cat ${USER_CACHE_CONF}`
+else
+    CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}"
+fi
+
+FONT_CONFIG_CONF=${DEPLOY_DIR}/font_config_conf.sh
+if [ -x ${FONT_CONFIG_CONF} ]; then
+    . ${FONT_CONFIG_CONF}
+fi
+
+CHROME_CACHE="${CACHE_DIR}/chrome"
+WRITABLE_PATH="${CHROME_CACHE}/Default"
+
+$DEPLOY_DIR/kill_webbrowser
+
+WINDOW_SIZE_CONF=${DEPLOY_DIR}/window_size_conf
+if [ -f ${WINDOW_SIZE_CONF} ]; then
+    WINDOW_SIZE=`cat ${WINDOW_SIZE_CONF}`
+fi
+
+USER_AGENT_CONF=${DEPLOY_DIR}/user_agent_conf
+if [ -f ${USER_AGENT_CONF} ]; then
+    USER_AGENT=`cat ${USER_AGENT_CONF}`
+fi
+
+# limit the disk cache size as 10MB
+BROWSER_DISKCACHE_MAXSIZE=10485760
+
+######################################################################
+                #      Target Environment          #
+######################################################################
+PmLogCtl logkv chrome.runscript info launchTime place=start_env
+
+# temp code for security issue
+chmod -R 777 ${CHROME_CACHE}
+rm -f ${CHROME_CACHE}/Singleton*
+rm -rf ${TMPDIR}/.org.chromium.*
+
+######################################################################
+               #      WebBrowser Settings         #
+######################################################################
+export PANGO_RC_FILE=${DEPLOY_DIR}/etc/pango/pangorc
+
+######################################################################
+                 #      Runtime Configuration       #
+######################################################################
+CHROME_COMPOSITING_FLAGS=" \
+  --enable-accelerated-compositing\
+  --enable-smooth-scrolling\
+"
+CHROME_FLAGS=" \
+  --always-authorize-plugins\
+  --disable-component-update\
+  --disable-gpu-watchdog\
+  --disable-infobars\
+  --disable-new-video-renderer\
+  --disable-translate\
+  --disable-web-security\
+  --disk-cache-size=${BROWSER_DISKCACHE_MAXSIZE}\
+  --enable-file-cookies\
+  --gpu-no-context-lost\
+  --ignore-gpu-blacklist\
+  --in-process-gpu\
+  --noerrdialogs\
+  --no-sandbox\
+  --ozone-platform=wayland\
+  --safebrowsing-disable-auto-update\
+  --start-maximized\
+  --upstream-browser\
+  --webos-appid=${BROWSER_APP_ID}\
+  --user-data-dir=${CHROME_CACHE}\
+"
+
+CHROME_FLAGS="${CHROME_COMPOSITING_FLAGS} ${CHROME_FLAGS}"
+
+if [ "${ENABLE_INSPECTOR}" = "1" ] ; then
+  CHROME_FLAGS="${CHROME_FLAGS} --remote-debugging-port=9999"
+fi
+
+if [ -n "${WINDOW_SIZE}" ]; then
+    CHROME_FLAGS="${CHROME_FLAGS} --window-size=${WINDOW_SIZE}"
+fi
+
+EXTRA_CONF=${CACHE_DIR}/extra_conf
+if [ -f ${EXTRA_CONF} ]; then
+    source ${EXTRA_CONF}
+    echo "CHROME_FLAGS=${CHROME_FLAGS}"
+fi
+
+PmLogCtl logkv chrome.runscript info launchTime place=call_chrome
+
+######################################################################
+                #      Launch WebBrowser           #
+# REPLACE * is used to fill the compiled source version automatically #
+# So, should not be removed.
+######################################################################
+
+echo ""
+echo "----------------------------------------------------------------------"
+echo "                       Launching Web Browser                          "
+### REPLACE URL ###
+### REPLACE REVISION ###
+### REPLACE BUILD TIME ###
+echo "----------------------------------------------------------------------"
+echo ""
+
+# Below can be uncommented to run the benchmark test pages present at webtc.egloos.com
+#${DEPLOY_DIR}/chrome ${CHROME_FLAGS} --user-agent="${USER_AGENT}" http://webtc.egloos.com
+
+#Below can be unceommented to test LANGUAGE and COUNTRY settings in WebBrowser
+#${DEPLOY_DIR}/chrome ${CHROME_FLAGS} --user-agent="${USER_AGENT}" --chrome-switch-end ${WEB_LANGUAGE} ${WEB_COUNTRY} $@
+
+if [ -n "${USER_AGENT}" ]; then
+  exec ${DEPLOY_DIR}/chrome ${CHROME_FLAGS} --user-agent="${USER_AGENT}"
+else
+  exec ${DEPLOY_DIR}/chrome ${CHROME_FLAGS}
+fi

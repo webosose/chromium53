@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE translationbundle>
+<translationbundle lang="it">
+<translation id="1499093007998028961">Impostazioni di rete</translation>
+<translation id="1682620957554922882">Contattare il provider di contenuti.</translation>
+<translation id="171447555090807962">Server certificate has expired or is not yet valid as the set time on UHD Broadcast Box is different from the current time.</translation>
+<translation id="203730040597967152">CHIUDI APP</translation>
+<translation id="2626799779920242286">Riprovare più tardi.</translation>
+<translation id="27461552975087996">Certificato del server non attendibile.</translation>
+<translation id="288961708105972332">Il tentativo di connessione è scaduto.</translation>
+<translation id="3100161803646972327">Verificare lo stato della rete e riprovare.</translation>
+<translation id="334286403444714742">La rete non è connessa.</translation>
+<translation id="4588672349582133274">IMPOSTAZIONI DI RETE</translation>
+<translation id="4669109953235344059">RIPROVA</translation>
+<translation id="4799446021133992159">IMPOSSIBILE CARICARE</translation>
+<translation id="4897228579364425832">VERIFICA CONNESSIONE DI RETE</translation>
+<translation id="4922056813564935008">Impossibile trovare l'indirizzo richiesto.</translation>
+<translation id="4964644330950338878">L'host name non corrisponde al certificato del server.</translation>
+<translation id="5068657318680619278">This site can not be reached</translation>
+<translation id="5375809313377772901">Verificare le impostazioni relative all'orario.</translation>
+<translation id="5803768854262525793">REPLACE WITH HOSTNAME</translation>
+<translation id="6061420513894163219">Verificare lo stato della connessione di rete.</translation>
+<translation id="6661057429906338241">Chiudi app</translation>
+<translation id="6669270366426331193">ERROR PAGES TITLE NOT AVAILABLE</translation>
+<translation id="6765203878096346794">La connessione al server non è stabile.</translation>
+<translation id="7144878232160441200">Riprova</translation>
+<translation id="7402264192054099664">Potrebbe trattarsi di un problema temporaneo.</translation>
+<translation id="7570401931535381481">Il certificato del server è scaduto o non è ancora valido poiché l'orario impostato sulla TV è diverso da quello corrente.</translation>
+<translation id="7619490177640280081">Impostazione ora corrente</translation>
+<translation id="7885656482573166887">IMPOSTAZIONI</translation>
+<translation id="8090699366918591820">Ora corrente</translation>
+<translation id="8138313893556460774">L'operazione è scaduta.</translation>
+<translation id="8322836013946289105">Impossibile trovare file o directory.</translation>
+<translation id="8461715367920190352">ERROR PAGES HEADING NOT AVAILABLE</translation>
+<translation id="8561467915632687957">La rete non è stabile.</translation>
+</translationbundle>

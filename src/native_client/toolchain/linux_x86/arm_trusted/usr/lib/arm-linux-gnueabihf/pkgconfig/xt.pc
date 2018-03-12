@@ -1,0 +1,13 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${prefix}/lib/arm-linux-gnueabihf
+includedir=${prefix}/include
+appdefaultdir=/etc/X11/app-defaults
+
+Name: Xt
+Description: X Toolkit Library
+Version: 1.1.1
+Requires: xproto x11
+Requires.private: ice sm
+Cflags: -I${includedir}
+Libs: -L${libdir} -lXt

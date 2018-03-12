@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE translationbundle>
+<translationbundle lang="cs">
+<translation id="1499093007998028961">Nastavení sítě</translation>
+<translation id="1682620957554922882">Obraťte se na poskytovatele obsahu.</translation>
+<translation id="171447555090807962">Server certificate has expired or is not yet valid as the set time on UHD Broadcast Box is different from the current time.</translation>
+<translation id="203730040597967152">UKONČIT APLIKACI</translation>
+<translation id="2626799779920242286">Opakujte akci později.</translation>
+<translation id="27461552975087996">Certifikát serveru není důvěryhodný.</translation>
+<translation id="288961708105972332">Vypršel časový limit pokusu o připojení.</translation>
+<translation id="3100161803646972327">Zkontrolujte stav sítě a opakujte akci.</translation>
+<translation id="334286403444714742">Síť není připojena.</translation>
+<translation id="4588672349582133274">NASTAVENÍ SÍTĚ</translation>
+<translation id="4669109953235344059">OPAKOVAT</translation>
+<translation id="4799446021133992159">NELZE NAČÍST</translation>
+<translation id="4897228579364425832">ZKONTROLUJTE PŘIPOJENÍ K SÍTI</translation>
+<translation id="4922056813564935008">Požadovanou adresu nelze nalézt.</translation>
+<translation id="4964644330950338878">Název hostitele neodpovídá certifikátu serveru.</translation>
+<translation id="5068657318680619278">This site can not be reached</translation>
+<translation id="5375809313377772901">Zkontrolujte nastavení času.</translation>
+<translation id="5803768854262525793">REPLACE WITH HOSTNAME</translation>
+<translation id="6061420513894163219">Zkontrolujte stav připojení k síti.</translation>
+<translation id="6661057429906338241">Zavřít aplikaci</translation>
+<translation id="6669270366426331193">ERROR PAGES TITLE NOT AVAILABLE</translation>
+<translation id="6765203878096346794">Připojení k serveru je nestabilní.</translation>
+<translation id="7144878232160441200">Opakovat</translation>
+<translation id="7402264192054099664">Může jít o dočasný problém.</translation>
+<translation id="7570401931535381481">Certifikát serveru vypršel nebo ještě není platný, protože se čas nastavený v televizoru liší od aktuálního času.</translation>
+<translation id="7619490177640280081">Nastavení aktuálního času</translation>
+<translation id="7885656482573166887">NASTAVENÍ</translation>
+<translation id="8090699366918591820">Aktuální čas</translation>
+<translation id="8138313893556460774">Vypršel časový limit operace.</translation>
+<translation id="8322836013946289105">Soubor nebo složku nelze nalézt.</translation>
+<translation id="8461715367920190352">ERROR PAGES HEADING NOT AVAILABLE</translation>
+<translation id="8561467915632687957">Síť je nestabilní.</translation>
+</translationbundle>

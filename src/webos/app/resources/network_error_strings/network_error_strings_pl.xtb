@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE translationbundle>
+<translationbundle lang="pl">
+<translation id="1499093007998028961">Ustawienia sieci</translation>
+<translation id="1682620957554922882">Proszę skontaktować się z dostawcą treści.</translation>
+<translation id="171447555090807962">Server certificate has expired or is not yet valid as the set time on UHD Broadcast Box is different from the current time.</translation>
+<translation id="203730040597967152">ZAMKNIJ APLIKACJĘ</translation>
+<translation id="2626799779920242286">Proszę spróbować ponownie później.</translation>
+<translation id="27461552975087996">Certyfikat serwera nie jest godny zaufania.</translation>
+<translation id="288961708105972332">Upłynął czas próby połączenia.</translation>
+<translation id="3100161803646972327">Sprawdź stan sieci i spróbuj ponownie.</translation>
+<translation id="334286403444714742">Brak połączenia z siecią.</translation>
+<translation id="4588672349582133274">USTAWIENIA SIECI</translation>
+<translation id="4669109953235344059">PONÓW PRÓBĘ</translation>
+<translation id="4799446021133992159">NIE MOŻNA WCZYTAĆ</translation>
+<translation id="4897228579364425832">SPRAWDŹ POŁĄCZENIE Z SIECIĄ</translation>
+<translation id="4922056813564935008">Nie można odnaleźć żądanego adresu.</translation>
+<translation id="4964644330950338878">Nazwa hosta nie zgadza się z certyfikatem serwera.</translation>
+<translation id="5068657318680619278">This site can not be reached</translation>
+<translation id="5375809313377772901">Proszę sprawdzić ustawienia czasu.</translation>
+<translation id="5803768854262525793">REPLACE WITH HOSTNAME</translation>
+<translation id="6061420513894163219">Sprawdź stan połączenia z siecią.</translation>
+<translation id="6661057429906338241">Zamknij aplikację.</translation>
+<translation id="6669270366426331193">ERROR PAGES TITLE NOT AVAILABLE</translation>
+<translation id="6765203878096346794">Połączenie z serwerem jest niestabilne.</translation>
+<translation id="7144878232160441200">Ponów próbę</translation>
+<translation id="7402264192054099664">Może to być tymczasowy problem.</translation>
+<translation id="7570401931535381481">Certyfikat serwera wygasł lub nie jest jeszcze ważny, ponieważ ustawiony czas w telewizorze różni się od obecnego czasu.</translation>
+<translation id="7619490177640280081">Nieprawidłowe ustawienia godziny</translation>
+<translation id="7885656482573166887">USTAWIENIA</translation>
+<translation id="8090699366918591820">Bieżący czas</translation>
+<translation id="8138313893556460774">Upłynął czas operacji.</translation>
+<translation id="8322836013946289105">Nie można odnaleźć pliku lub katalogu.</translation>
+<translation id="8461715367920190352">ERROR PAGES HEADING NOT AVAILABLE</translation>
+<translation id="8561467915632687957">Sieć jest niestabilna.</translation>
+</translationbundle>

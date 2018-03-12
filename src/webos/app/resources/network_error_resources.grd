@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grit latest_public_release="0" current_release="1">
+  <outputs>
+    <output filename="grit/webos_network_error_resources.h" type="rc_header">
+      <emit emit_type='prepend'></emit>
+    </output>
+    <output filename="network_error_strings_af.pak" type="data_package" lang="af" />
+    <output filename="network_error_strings_am.pak" type="data_package" lang="am" />
+    <output filename="network_error_strings_ar.pak" type="data_package" lang="ar" />
+    <output filename="network_error_strings_as.pak" type="data_package" lang="as" />
+    <output filename="network_error_strings_az.pak" type="data_package" lang="az" />
+    <output filename="network_error_strings_bg.pak" type="data_package" lang="bg" />
+    <output filename="network_error_strings_bn.pak" type="data_package" lang="bn" />
+    <output filename="network_error_strings_bs.pak" type="data_package" lang="bs" />
+    <output filename="network_error_strings_cs.pak" type="data_package" lang="cs" />
+    <output filename="network_error_strings_da.pak" type="data_package" lang="da" />
+    <output filename="network_error_strings_de.pak" type="data_package" lang="de" />
+    <output filename="network_error_strings_el.pak" type="data_package" lang="el" />
+    <output filename="network_error_strings_en-GB.pak" type="data_package" lang="en-GB" />
+    <output filename="network_error_strings_en-US.pak" type="data_package" lang="en-US" />
+    <output filename="network_error_strings_es-419.pak" type="data_package" lang="es-419" />
+    <output filename="network_error_strings_es.pak" type="data_package" lang="es" />
+    <output filename="network_error_strings_et.pak" type="data_package" lang="et" />
+    <output filename="network_error_strings_eu.pak" type="data_package" lang="eu" />
+    <output filename="network_error_strings_fa.pak" type="data_package" lang="fa" />
+    <output filename="network_error_strings_fake-bidi.pak" type="data_package" lang="fake-bidi" />
+    <output filename="network_error_strings_fi.pak" type="data_package" lang="fi" />
+    <output filename="network_error_strings_fr-CA.pak" type="data_package" lang="fr-CA" />
+    <output filename="network_error_strings_fr.pak" type="data_package" lang="fr" />
+    <output filename="network_error_strings_ga.pak" type="data_package" lang="ga" />
+    <output filename="network_error_strings_gu.pak" type="data_package" lang="gu" />
+    <output filename="network_error_strings_ha.pak" type="data_package" lang="ha" />
+    <output filename="network_error_strings_he.pak" type="data_package" lang="he" />
+    <output filename="network_error_strings_hi.pak" type="data_package" lang="hi" />
+    <output filename="network_error_strings_hr.pak" type="data_package" lang="hr" />
+    <output filename="network_error_strings_hu.pak" type="data_package" lang="hu" />
+    <output filename="network_error_strings_id.pak" type="data_package" lang="id" />
+    <output filename="network_error_strings_it.pak" type="data_package" lang="it" />
+    <output filename="network_error_strings_ja.pak" type="data_package" lang="ja" />
+    <output filename="network_error_strings_kk.pak" type="data_package" lang="kk" />
+    <output filename="network_error_strings_km.pak" type="data_package" lang="km" />
+    <output filename="network_error_strings_kn.pak" type="data_package" lang="kn" />
+    <output filename="network_error_strings_ko.pak" type="data_package" lang="ko" />
+    <output filename="network_error_strings_ku.pak" type="data_package" lang="ku" />
+    <output filename="network_error_strings_lt.pak" type="data_package" lang="lt" />
+    <output filename="network_error_strings_lv.pak" type="data_package" lang="lv" />
+    <output filename="network_error_strings_mk.pak" type="data_package" lang="mk" />
+    <output filename="network_error_strings_ml.pak" type="data_package" lang="ml" />
+    <output filename="network_error_strings_mn.pak" type="data_package" lang="mn" />
+    <output filename="network_error_strings_mr.pak" type="data_package" lang="mr" />
+    <output filename="network_error_strings_ms.pak" type="data_package" lang="ms" />
+    <output filename="network_error_strings_nb.pak" type="data_package" lang="no" />
+    <output filename="network_error_strings_nl.pak" type="data_package" lang="nl" />
+    <output filename="network_error_strings_or.pak" type="data_package" lang="or" />
+    <output filename="network_error_strings_pa.pak" type="data_package" lang="pa" />
+    <output filename="network_error_strings_pl.pak" type="data_package" lang="pl" />
+    <output filename="network_error_strings_ps.pak" type="data_package" lang="ps" />
+    <output filename="network_error_strings_pt-BR.pak" type="data_package" lang="pt-BR" />
+    <output filename="network_error_strings_pt-PT.pak" type="data_package" lang="pt-PT" />
+    <output filename="network_error_strings_ro.pak" type="data_package" lang="ro" />
+    <output filename="network_error_strings_ru.pak" type="data_package" lang="ru" />
+    <output filename="network_error_strings_sk.pak" type="data_package" lang="sk" />
+    <output filename="network_error_strings_sl.pak" type="data_package" lang="sl" />
+    <output filename="network_error_strings_sq.pak" type="data_package" lang="sq" />
+    <output filename="network_error_strings_sr.pak" type="data_package" lang="sr" />
+    <output filename="network_error_strings_sv.pak" type="data_package" lang="sv" />
+    <output filename="network_error_strings_ta.pak" type="data_package" lang="ta" />
+    <output filename="network_error_strings_te.pak" type="data_package" lang="te" />
+    <output filename="network_error_strings_th.pak" type="data_package" lang="th" />
+    <output filename="network_error_strings_tr.pak" type="data_package" lang="tr" />
+    <output filename="network_error_strings_uk.pak" type="data_package" lang="uk" />
+    <output filename="network_error_strings_ur.pak" type="data_package" lang="ur" />
+    <output filename="network_error_strings_uz.pak" type="data_package" lang="uz" />
+    <output filename="network_error_strings_vi.pak" type="data_package" lang="vi" />
+    <output filename="network_error_strings_zh-CN.pak" type="data_package" lang="zh-CN" />
+    <output filename="network_error_strings_zh-HK.pak" type="data_package" lang="zh-HK" />
+    <output filename="network_error_strings_zh-TW.pak" type="data_package" lang="zh-TW" />
+    <output filename="network_error_strings_zu.pak" type="data_package" lang="zu" />
+  </outputs>
+  <translations>
+    <file path="network_error_strings/network_error_strings_af.xtb" lang="af" />
+    <file path="network_error_strings/network_error_strings_am.xtb" lang="am" />
+    <file path="network_error_strings/network_error_strings_ar.xtb" lang="ar" />
+    <file path="network_error_strings/network_error_strings_as.xtb" lang="as" />
+    <file path="network_error_strings/network_error_strings_az.xtb" lang="az" />
+    <file path="network_error_strings/network_error_strings_bg.xtb" lang="bg" />
+    <file path="network_error_strings/network_error_strings_bn.xtb" lang="bn" />
+    <file path="network_error_strings/network_error_strings_bs.xtb" lang="bs" />
+    <file path="network_error_strings/network_error_strings_cs.xtb" lang="cs" />
+    <file path="network_error_strings/network_error_strings_da.xtb" lang="da" />
+    <file path="network_error_strings/network_error_strings_de.xtb" lang="de" />
+    <file path="network_error_strings/network_error_strings_el.xtb" lang="el" />
+    <file path="network_error_strings/network_error_strings_en-US.xtb" lang="en-US" />
+    <file path="network_error_strings/network_error_strings_es-419.xtb" lang="es-419" />
+    <file path="network_error_strings/network_error_strings_es.xtb" lang="es" />
+    <file path="network_error_strings/network_error_strings_et.xtb" lang="et" />
+    <file path="network_error_strings/network_error_strings_eu.xtb" lang="eu" />
+    <file path="network_error_strings/network_error_strings_fa.xtb" lang="fa" />
+    <file path="network_error_strings/network_error_strings_fi.xtb" lang="fi" />
+    <file path="network_error_strings/network_error_strings_fr-CA.xtb" lang="fr-CA" />
+    <file path="network_error_strings/network_error_strings_fr.xtb" lang="fr" />
+    <file path="network_error_strings/network_error_strings_ga.xtb" lang="ga" />
+    <file path="network_error_strings/network_error_strings_gu.xtb" lang="gu" />
+    <file path="network_error_strings/network_error_strings_ha.xtb" lang="ha" />
+    <file path="network_error_strings/network_error_strings_he.xtb" lang="he" />
+    <file path="network_error_strings/network_error_strings_hi.xtb" lang="hi" />
+    <file path="network_error_strings/network_error_strings_hr.xtb" lang="hr" />
+    <file path="network_error_strings/network_error_strings_hu.xtb" lang="hu" />
+    <file path="network_error_strings/network_error_strings_id.xtb" lang="id" />
+    <file path="network_error_strings/network_error_strings_it.xtb" lang="it" />
+    <file path="network_error_strings/network_error_strings_ja.xtb" lang="ja" />
+    <file path="network_error_strings/network_error_strings_kk.xtb" lang="kk" />
+    <file path="network_error_strings/network_error_strings_km.xtb" lang="km" />
+    <file path="network_error_strings/network_error_strings_kn.xtb" lang="kn" />
+    <file path="network_error_strings/network_error_strings_ko.xtb" lang="ko" />
+    <file path="network_error_strings/network_error_strings_ku.xtb" lang="ku" />
+    <file path="network_error_strings/network_error_strings_lt.xtb" lang="lt" />
+    <file path="network_error_strings/network_error_strings_lv.xtb" lang="lv" />
+    <file path="network_error_strings/network_error_strings_mk.xtb" lang="mk" />
+    <file path="network_error_strings/network_error_strings_ml.xtb" lang="ml" />
+    <file path="network_error_strings/network_error_strings_mn.xtb" lang="mn" />
+    <file path="network_error_strings/network_error_strings_mr.xtb" lang="mr" />
+    <file path="network_error_strings/network_error_strings_ms.xtb" lang="ms" />
+    <file path="network_error_strings/network_error_strings_nb.xtb" lang="nb" />
+    <file path="network_error_strings/network_error_strings_nl.xtb" lang="nl" />
+    <file path="network_error_strings/network_error_strings_or.xtb" lang="or" />
+    <file path="network_error_strings/network_error_strings_pa.xtb" lang="pa" />
+    <file path="network_error_strings/network_error_strings_pl.xtb" lang="pl" />
+    <file path="network_error_strings/network_error_strings_ps.xtb" lang="ps" />
+    <file path="network_error_strings/network_error_strings_pt-BR.xtb" lang="pt-BR" />
+    <file path="network_error_strings/network_error_strings_pt-PT.xtb" lang="pt-PT" />
+    <file path="network_error_strings/network_error_strings_ro.xtb" lang="ro" />
+    <file path="network_error_strings/network_error_strings_ru.xtb" lang="ru" />
+    <file path="network_error_strings/network_error_strings_sk.xtb" lang="sk" />
+    <file path="network_error_strings/network_error_strings_sl.xtb" lang="sl" />
+    <file path="network_error_strings/network_error_strings_sq.xtb" lang="sq" />
+    <file path="network_error_strings/network_error_strings_sr.xtb" lang="sr" />
+    <file path="network_error_strings/network_error_strings_sv.xtb" lang="sv" />
+    <file path="network_error_strings/network_error_strings_ta.xtb" lang="ta" />
+    <file path="network_error_strings/network_error_strings_te.xtb" lang="te" />
+    <file path="network_error_strings/network_error_strings_th.xtb" lang="th" />
+    <file path="network_error_strings/network_error_strings_tr.xtb" lang="tr" />
+    <file path="network_error_strings/network_error_strings_uk.xtb" lang="uk" />
+    <file path="network_error_strings/network_error_strings_ur.xtb" lang="ur" />
+    <file path="network_error_strings/network_error_strings_uz.xtb" lang="uz" />
+    <file path="network_error_strings/network_error_strings_vi.xtb" lang="vi" />
+    <file path="network_error_strings/network_error_strings_zh-CN.xtb" lang="zh-CN" />
+    <file path="network_error_strings/network_error_strings_zh-HK.xtb" lang="zh-HK" />
+    <file path="network_error_strings/network_error_strings_zh-TW.xtb" lang="zh-TW" />
+    <file path="network_error_strings/network_error_strings_zu.xtb" lang="zu" />
+  </translations>
+  <release seq="1">
+     <messages fallback_to_english="true">
+      <message name="IDS_NET_ERROR_CHECK_NETWORK_CONNECTION" desc="CHECK NETWORK CONNECTION">
+        CHECK NETWORK CONNECTION
+      </message>
+      <message name="IDS_NET_ERROR_CLOSE_APP" desc="Close App">
+        Close App
+      </message>
+      <message name="IDS_NET_ERROR_CONNECTION_ATTEMP_TIMED_OUT" desc="Connection attempt has timed out.">
+        Connection attempt has timed out.
+      </message>
+      <message name="IDS_NET_ERROR_CONNECTION_TO_SERVER_UNSTABLE" desc="Connection to the server is unstable.">
+        Connection to the server is unstable.
+      </message>
+      <message name="IDS_NET_ERROR_CURRENT_TIME" desc="Current Time">
+        Current Time
+      </message>
+      <message name="IDS_NET_ERROR_CURRENT_TIME_SETTINGS" desc="Current Time Setting">
+        Current Time Setting
+      </message>
+      <message name="IDS_NET_ERROR_EXIT_APP_BUTTON_TEXT" desc="EXIT APP">
+        EXIT APP
+      </message>
+      <message name="IDS_NET_ERROR_FILE_OR_DIRECTORY_NOT_FOUND" desc="File or directory cannot be found.">
+        File or directory cannot be found.
+      </message>
+      <message name="IDS_NET_ERROR_HOSTNAME_DOES_NOT_MATCH_CERTIFICATE" desc="Hostname does not match server certificate.">
+        Hostname does not match server certificate.
+      </message>
+      <message name="IDS_NET_ERROR_NETWORK_SETTINGS_BUTTON_TEXT" desc="NETWORK SETTINGS">
+        NETWORK SETTINGS
+      </message>
+      <message name="IDS_NET_ERROR_NETWORK_SETTING" desc="Network Setting">
+        Network Setting
+      </message>
+      <message name="IDS_NET_ERROR_NETWORK_NOT_CONNECTED" desc="Network is not connected.">
+        Network is not connected.
+      </message>
+      <message name="IDS_NET_ERROR_CHECK_NETWORK_CONNECTION_STATUS" desc="Please check the network connection status.">
+        Please check the network connection status.
+      </message>
+      <message name="IDS_NET_ERROR_CHECK_NETWORK_STATUS_AND_TRY" desc="Please check the network status and try again.">
+        Please check the network status and try again.
+      </message>
+      <message name="IDS_NET_ERROR_CHECK_TIME_SETTINGS" desc="Please check time settings.">
+        Please check time settings.
+      </message>
+      <message name="IDS_NET_ERROR_CONTACT_CONTENT_PROVIDER" desc="Please contact content provider.">
+        Please contact content provider.
+      </message>
+      <message name="IDS_NET_ERROR_TRY_AGAIN_LATER" desc="Please try again later.">
+        Please try again later.
+      </message>
+      <message name="IDS_NET_ERROR_RETRY_BUTTON_TEXT" desc="RETRY">
+        RETRY
+      </message>
+      <message name="IDS_NET_ERROR_RETRY_LOWER_CASE" desc="Retry">
+        Retry
+      </message>
+      <message name="IDS_NET_ERROR_SETTINGS_UPPER_CASE" desc="SETTINGS">
+        SETTINGS
+      </message>
+      <message name="IDS_NET_ERROR_CERTIFICATE_CANNOT_BE_TRUSTED" desc="Server certificate cannot be trusted.">
+        Server certificate cannot be trusted.
+      </message>
+      <message name="IDS_NET_ERROR_CERTIFICATE_HAS_EXPIRED_TV" desc="Server certificate has expired or is not yet valid as the set time on TV is different from the current time.">
+        Server certificate has expired or is not yet valid as the set time on TV is different from the current time.
+      </message>
+      <message name="IDS_NET_ERROR_CERTIFICATE_HAS_EXPIRED_UHD" desc="Server certificate has expired or is not yet valid as the set time on UHD Broadcast Box is different from the current time.">
+        Server certificate has expired or is not yet valid as the set time on UHD Broadcast Box is different from the current time.
+      </message>
+      <message name="IDS_NET_ERROR_NETWORK_UNSTABLE" desc="The network is unstable.">
+        The network is unstable.
+      </message>
+      <message name="IDS_NET_ERROR_OPERATION_TIMED_OUT" desc="The operation has timed out.">
+        The operation has timed out.
+      </message>
+      <message name="IDS_NET_ERROR_ADDRESS_CANNOT_BE_FOUND" desc="The requested address cannot be found.">
+        The requested address cannot be found.
+      </message>
+      <message name="IDS_NET_ERROR_TEMPORARY_ISSUE" desc="This may be a temporary issue.">
+        This may be a temporary issue.
+      </message>
+      <message name="IDS_NET_ERROR_UNABLE_TO_LOAD" desc="UNABLE TO LOAD">
+        UNABLE TO LOAD
+      </message>
+      <message name="IDS_NET_ERROR_HOSTNAME" desc="REPLACE WITH HOSTNAME">
+        REPLACE WITH HOSTNAME
+      </message>
+      <message name="IDS_NET_ERROR_ERRORPAGES_TITLE_NOT_AVAILABLE" desc="ERROR PAGES TITLE NOT AVAILABLE">
+        ERROR PAGES TITLE NOT AVAILABLE
+      </message>
+      <message name="IDS_NET_ERROR_ERRORPAGES_HEADING_NOT_AVAILABLE" desc="Heading in the error page when we can't connect to a site">
+        This site can not be reached
+      </message>
+      <message name="IDS_NET_ERROR_ERRORPAGES_SUMMARY_DNS_PROBE_RUNNING" desc="ERROR PAGES SUMMARY DNS PROBE RUNNING">
+        ERROR PAGES HEADING NOT AVAILABLE
+      </message>
+      <message name="IDS_NET_ERROR_EMPTY_STRING" desc="ERROR PAGES EMPTY STRING">
+      </message>
+     </messages>
+  </release>
+</grit>

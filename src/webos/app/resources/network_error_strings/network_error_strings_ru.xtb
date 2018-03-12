@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE translationbundle>
+<translationbundle lang="ru">
+<translation id="1499093007998028961">Настройки сети</translation>
+<translation id="1682620957554922882">Обратитесь к поставщику контента.</translation>
+<translation id="171447555090807962">Server certificate has expired or is not yet valid as the set time on UHD Broadcast Box is different from the current time.</translation>
+<translation id="203730040597967152">ЗАКРЫТЬ ПРИЛОЖЕНИЕ</translation>
+<translation id="2626799779920242286">Повторите попытку позже.</translation>
+<translation id="27461552975087996">Сертификат сервера не является надежным.</translation>
+<translation id="288961708105972332">Истекло время ожидания подключения.</translation>
+<translation id="3100161803646972327">Проверьте состояние сети и повторите попытку.</translation>
+<translation id="334286403444714742">Сеть не подключена.</translation>
+<translation id="4588672349582133274">НАСТРОЙКИ СЕТИ</translation>
+<translation id="4669109953235344059">ПОВТОРИТЬ ПОПЫТКУ</translation>
+<translation id="4799446021133992159">НЕ УДАЕТСЯ ЗАГРУЗИТЬ</translation>
+<translation id="4897228579364425832">ПОДКЛЮЧЕНИЕ К СЕТИ</translation>
+<translation id="4922056813564935008">Не удается найти запрашиваемый адрес.</translation>
+<translation id="4964644330950338878">Несоответствие имён хоста с сертификатом сервера.</translation>
+<translation id="5068657318680619278">This site can not be reached</translation>
+<translation id="5375809313377772901">Проверьте настройки времени.</translation>
+<translation id="5803768854262525793">REPLACE WITH HOSTNAME</translation>
+<translation id="6061420513894163219">Проверьте состояние подключения к сети.</translation>
+<translation id="6661057429906338241">Закрыть приложение</translation>
+<translation id="6669270366426331193">ERROR PAGES TITLE NOT AVAILABLE</translation>
+<translation id="6765203878096346794">Подключение к серверу нестабильно.</translation>
+<translation id="7144878232160441200">Повторить</translation>
+<translation id="7402264192054099664">Возможно, это временная ошибка.</translation>
+<translation id="7570401931535381481">Срок действия сертификата истёк или он ещё не действителен, так как установленное в ТВ время отличается от текущего.</translation>
+<translation id="7619490177640280081">Настройка текущего времени</translation>
+<translation id="7885656482573166887">НАСТРОЙКИ</translation>
+<translation id="8090699366918591820">Текущее время</translation>
+<translation id="8138313893556460774">Истекло время ожидания операции.</translation>
+<translation id="8322836013946289105">Не удается найти файл или каталог.</translation>
+<translation id="8461715367920190352">ERROR PAGES HEADING NOT AVAILABLE</translation>
+<translation id="8561467915632687957">Сеть нестабильна.</translation>
+</translationbundle>

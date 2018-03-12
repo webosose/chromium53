@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE translationbundle>
+<translationbundle lang="sr">
+<translation id="1499093007998028961">Mrežna podešavanja</translation>
+<translation id="1682620957554922882">Obratite se pružaocu sadržaja.</translation>
+<translation id="171447555090807962">Server certificate has expired or is not yet valid as the set time on UHD Broadcast Box is different from the current time.</translation>
+<translation id="203730040597967152">IZLAZAK IZ APLIKACIJE</translation>
+<translation id="2626799779920242286">Pokušajte ponovo kasnije.</translation>
+<translation id="27461552975087996">Sertifikat servera nije pouzdan.</translation>
+<translation id="288961708105972332">Isteklo je vreme za pokušaj povezivanja.</translation>
+<translation id="3100161803646972327">Proverite mrežni status i pokušajte ponovo.</translation>
+<translation id="334286403444714742">Mreža nije povezana.</translation>
+<translation id="4588672349582133274">PODEŠAVANJE MREŽE</translation>
+<translation id="4669109953235344059">POKUŠAJ PONOVO</translation>
+<translation id="4799446021133992159">NIJE MOGUĆE UČITATI</translation>
+<translation id="4897228579364425832">PROVERITE MREŽNU KONEKCIJU</translation>
+<translation id="4922056813564935008">Nije moguće pronaći zahtevanu adresu.</translation>
+<translation id="4964644330950338878">Ime hosta se ne podudara sa sertifikatom servera.</translation>
+<translation id="5068657318680619278">This site can not be reached</translation>
+<translation id="5375809313377772901">Proverite postavke vremena.</translation>
+<translation id="5803768854262525793">REPLACE WITH HOSTNAME</translation>
+<translation id="6061420513894163219">Proverite status mrežne veze.</translation>
+<translation id="6661057429906338241">Zatvori aplikaciju</translation>
+<translation id="6669270366426331193">ERROR PAGES TITLE NOT AVAILABLE</translation>
+<translation id="6765203878096346794">Veza sa serverom nije stabilna.</translation>
+<translation id="7144878232160441200">Pokušaj ponovo</translation>
+<translation id="7402264192054099664">Ovo je možda privremeni problem.</translation>
+<translation id="7570401931535381481">Sertifikat servera je istekao ili još nije važeći jer se vreme podešeno na televizoru razlikuje od trenutnog vremena.</translation>
+<translation id="7619490177640280081">Podešavanje trenutnog vremena</translation>
+<translation id="7885656482573166887">PODEŠAVANJA</translation>
+<translation id="8090699366918591820">Trenutno vreme</translation>
+<translation id="8138313893556460774">Isteklo je vreme za radnju.</translation>
+<translation id="8322836013946289105">Nije moguće pronaći datoteku ili direktorijum.</translation>
+<translation id="8461715367920190352">ERROR PAGES HEADING NOT AVAILABLE</translation>
+<translation id="8561467915632687957">Mreža je nestabilna.</translation>
+</translationbundle>

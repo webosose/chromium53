@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE translationbundle>
+<translationbundle lang="en-US">
+<translation id="1499093007998028961">Network Setting</translation>
+<translation id="1682620957554922882">Please contact content provider.</translation>
+<translation id="171447555090807962">Server certificate has expired or is not yet valid as the set time on UHD Broadcast Box is different from the current time.</translation>
+<translation id="203730040597967152">EXIT APP</translation>
+<translation id="2626799779920242286">Please try again later.</translation>
+<translation id="27461552975087996">Server certificate cannot be trusted.</translation>
+<translation id="288961708105972332">Connection attempt has timed out.</translation>
+<translation id="3100161803646972327">Please check the network status and try again.</translation>
+<translation id="334286403444714742">Network is not connected.</translation>
+<translation id="4588672349582133274">NETWORK SETTINGS</translation>
+<translation id="4669109953235344059">RETRY</translation>
+<translation id="4799446021133992159">UNABLE TO LOAD</translation>
+<translation id="4897228579364425832">CHECK NETWORK CONNECTION</translation>
+<translation id="4922056813564935008">The requested address cannot be found.</translation>
+<translation id="4964644330950338878">Hostname does not match server certificate.</translation>
+<translation id="5068657318680619278">This site can not be reached</translation>
+<translation id="5375809313377772901">Please check time settings.</translation>
+<translation id="5803768854262525793">REPLACE WITH HOSTNAME</translation>
+<translation id="6061420513894163219">Please check the network connection status.</translation>
+<translation id="6661057429906338241">Close App</translation>
+<translation id="6669270366426331193">ERROR PAGES TITLE NOT AVAILABLE</translation>
+<translation id="6765203878096346794">Connection to the server is unstable.</translation>
+<translation id="7144878232160441200">Retry</translation>
+<translation id="7402264192054099664">This may be a temporary issue.</translation>
+<translation id="7570401931535381481">Server certificate has expired or is not yet valid as the set time on TV is different from the current time.</translation>
+<translation id="7619490177640280081">Current Time Setting</translation>
+<translation id="7885656482573166887">SETTINGS</translation>
+<translation id="8090699366918591820">Current Time</translation>
+<translation id="8138313893556460774">The operation has timed out.</translation>
+<translation id="8322836013946289105">File or directory cannot be found.</translation>
+<translation id="8461715367920190352">ERROR PAGES HEADING NOT AVAILABLE</translation>
+<translation id="8561467915632687957">The network is unstable.</translation>
+</translationbundle>

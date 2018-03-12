@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE translationbundle>
+<translationbundle lang="lt">
+<translation id="1499093007998028961">Tinklo nuostatos</translation>
+<translation id="1682620957554922882">Kreipkitės į turinio teikėją.</translation>
+<translation id="171447555090807962">Server certificate has expired or is not yet valid as the set time on UHD Broadcast Box is different from the current time.</translation>
+<translation id="203730040597967152">IŠJUNGTI PROGRAMĖLĘ</translation>
+<translation id="2626799779920242286">Pabandykite dar kartą vėliau.</translation>
+<translation id="27461552975087996">Serverio sertifikatas yra nepatikimas.</translation>
+<translation id="288961708105972332">Baigėsi bandymui prisijungti skirtas laikas.</translation>
+<translation id="3100161803646972327">Patikrinkite tinklo būseną ir bandykite dar kartą.</translation>
+<translation id="334286403444714742">Tinklas neprijungtas.</translation>
+<translation id="4588672349582133274">TINKLO NUOSTATOS</translation>
+<translation id="4669109953235344059">KART.</translation>
+<translation id="4799446021133992159">NEPAVYKO ĮKELTI</translation>
+<translation id="4897228579364425832">PATIKRINKITE TINKLO RYŠĮ</translation>
+<translation id="4922056813564935008">Nurodytas adresas nerastas.</translation>
+<translation id="4964644330950338878">Pagrindinio kompiuterio vardas neatitinka serverio sertifikato.</translation>
+<translation id="5068657318680619278">This site can not be reached</translation>
+<translation id="5375809313377772901">Patikrinkite laiko nuostatas.</translation>
+<translation id="5803768854262525793">REPLACE WITH HOSTNAME</translation>
+<translation id="6061420513894163219">Patikrinkite tinklo ryšio būseną.</translation>
+<translation id="6661057429906338241">Uždaryti programą</translation>
+<translation id="6669270366426331193">ERROR PAGES TITLE NOT AVAILABLE</translation>
+<translation id="6765203878096346794">Ryšys su serveriu nepastovus.</translation>
+<translation id="7144878232160441200">Bandyti dar kartą</translation>
+<translation id="7402264192054099664">Ši problema gali būti laikina.</translation>
+<translation id="7570401931535381481">Serverio sertifikatas nebegalioja arba dar negalioja, nes televizoriuje nustatytas laikas skiriasi nuo esamo laiko.</translation>
+<translation id="7619490177640280081">Esamo laiko nuostata</translation>
+<translation id="7885656482573166887">NUOSTATOS</translation>
+<translation id="8090699366918591820">Esamas laikas</translation>
+<translation id="8138313893556460774">Baigėsi operacijai skirtas laikas.</translation>
+<translation id="8322836013946289105">Failas ar katalogas nerastas.</translation>
+<translation id="8461715367920190352">ERROR PAGES HEADING NOT AVAILABLE</translation>
+<translation id="8561467915632687957">Tinklo ryšys nepastovus.</translation>
+</translationbundle>

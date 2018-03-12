@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grit latest_public_release="0" current_release="1">
+  <outputs>
+    <output filename="grit/webos_inspector_resources.h" type="rc_header">
+      <emit emit_type='prepend'></emit>
+    </output>
+    <output filename="webos_inspector_resources.pak" type="data_package" />
+    <output filename="webos_inspector_resources.rc" type="rc_all" />
+  </outputs>
+  <translations />
+  <release seq="1">
+    <includes>
+      <include name="IDR_WEBOS_INSPECTOR_DISCOVERY_PAGE" file="webos_inspector_discovery_page.html" type="BINDATA" />
+      <include name="IDR_WEBOS_NETWORK_ERROR_PAGE" file="webos_network_error_page.html" flattenhtml="true" type="BINDATA" />
+      <include name="IDR_WEBOS_NETWORK_ERROR_PAGE_TEMPLATE_JS" file="net_error_page_template.js" flattenhtml="true" type="BINDATA" />
+    </includes>
+  </release>
+</grit>

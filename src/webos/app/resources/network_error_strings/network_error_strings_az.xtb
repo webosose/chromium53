@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE translationbundle>
+<translationbundle lang="az">
+<translation id="1499093007998028961">Şəbəkə Ayarı</translation>
+<translation id="1682620957554922882">Lütfən məzmun təminatçısı ilə əlaqə saxlayın.</translation>
+<translation id="171447555090807962">Server certificate has expired or is not yet valid as the set time on UHD Broadcast Box is different from the current time.</translation>
+<translation id="203730040597967152">PROQRAMDAN ÇIX</translation>
+<translation id="2626799779920242286">Lütfən, daha sonra yenidən cəhd edin.</translation>
+<translation id="27461552975087996">Server sertifikatına etibar etmək olmur.</translation>
+<translation id="288961708105972332">Bağlantı cəhdinin vaxtı keçdi.</translation>
+<translation id="3100161803646972327">Şəbəkə vəziyyətini yoxlayın və yenidən cəhd edin.</translation>
+<translation id="334286403444714742">Şəbəkə qoşulmayıb.</translation>
+<translation id="4588672349582133274">ŞƏBƏKƏ PARAMETRLƏRİ</translation>
+<translation id="4669109953235344059">YENİDƏN CƏHD EDİN</translation>
+<translation id="4799446021133992159">YÜKLƏMƏK OLMUR</translation>
+<translation id="4897228579364425832">ŞƏBƏKƏ BAĞLANTISINI YOXLA</translation>
+<translation id="4922056813564935008">Sorğulanan ünvanı tapmaq mümkün deyil.</translation>
+<translation id="4964644330950338878">Host adı server sertifikatına uyğun gəlmir.</translation>
+<translation id="5068657318680619278">This site can not be reached</translation>
+<translation id="5375809313377772901">Vaxt parametrlərini yoxlayın.</translation>
+<translation id="5803768854262525793">REPLACE WITH HOSTNAME</translation>
+<translation id="6061420513894163219">Lütfən şəbəkə bağlantısı vəziyyətini yoxlayın.</translation>
+<translation id="6661057429906338241">Proqramı Bağla</translation>
+<translation id="6669270366426331193">ERROR PAGES TITLE NOT AVAILABLE</translation>
+<translation id="6765203878096346794">Serverə bağlantı qeyri-stabildir.</translation>
+<translation id="7144878232160441200">Yenidən cəhd edin</translation>
+<translation id="7402264192054099664">Bu, müvəqqəti problem ola bilər.</translation>
+<translation id="7570401931535381481">Server sertifikatının vaxtı keçib və ya TV-də təyin edilmiş vaxt cari vaxtdan fərqli olduğu üçün hələlik etibarlı deyil.</translation>
+<translation id="7619490177640280081">Cari Vaxt Parametri</translation>
+<translation id="7885656482573166887">PARAMETRLƏR</translation>
+<translation id="8090699366918591820">Cari Vaxt</translation>
+<translation id="8138313893556460774">Əməliyyatın vaxtı keçib.</translation>
+<translation id="8322836013946289105">Fayl və ya kataloqu tapmaq mümkün deyil.</translation>
+<translation id="8461715367920190352">ERROR PAGES HEADING NOT AVAILABLE</translation>
+<translation id="8561467915632687957">Şəbəkə qeyri-sabitdir.</translation>
+</translationbundle>

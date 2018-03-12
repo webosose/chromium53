@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE translationbundle>
+<translationbundle lang="sl">
+<translation id="1499093007998028961">Nastavitve omrežja</translation>
+<translation id="1682620957554922882">Obrnite se na ponudnika vsebine.</translation>
+<translation id="171447555090807962">Server certificate has expired or is not yet valid as the set time on UHD Broadcast Box is different from the current time.</translation>
+<translation id="203730040597967152">IZHOD IZ APLIKACIJE</translation>
+<translation id="2626799779920242286">Poskusite znova pozneje.</translation>
+<translation id="27461552975087996">Certifikatu strežnika ni mogoče zaupati.</translation>
+<translation id="288961708105972332">Poskus povezovanja je potekel.</translation>
+<translation id="3100161803646972327">Preverite stanje omrežja in poskusite znova.</translation>
+<translation id="334286403444714742">Povezava z omrežjem ni vzpostavljena.</translation>
+<translation id="4588672349582133274">NASTAVITVE OMREŽJA</translation>
+<translation id="4669109953235344059">POSKUSI ZNOVA</translation>
+<translation id="4799446021133992159">NALAGANJE NI MOGOČE</translation>
+<translation id="4897228579364425832">PREVERITE OMREŽNO POVEZAVO</translation>
+<translation id="4922056813564935008">Zahtevanega naslova ni mogoče najti.</translation>
+<translation id="4964644330950338878">Ime gostitelja se ne ujema s certifikatom strežnika.</translation>
+<translation id="5068657318680619278">This site can not be reached</translation>
+<translation id="5375809313377772901">Preverite nastavitve časa.</translation>
+<translation id="5803768854262525793">REPLACE WITH HOSTNAME</translation>
+<translation id="6061420513894163219">Preverite stanje povezave z omrežjem.</translation>
+<translation id="6661057429906338241">Zapri aplikacijo</translation>
+<translation id="6669270366426331193">ERROR PAGES TITLE NOT AVAILABLE</translation>
+<translation id="6765203878096346794">Povezava s strežnikom je nestabilna.</translation>
+<translation id="7144878232160441200">Poskusi znova</translation>
+<translation id="7402264192054099664">Lahko gre za začasno težavo.</translation>
+<translation id="7570401931535381481">Veljavnost certifikata strežnika je potekla ali pa ta ni veljaven, saj se nastavljen čas na TV-ju razlikuje od trenutnega časa.</translation>
+<translation id="7619490177640280081">Trenutna nastavitev časa</translation>
+<translation id="7885656482573166887">Nastavitve</translation>
+<translation id="8090699366918591820">Trenutni čas</translation>
+<translation id="8138313893556460774">Izvajalni postopek je potekel.</translation>
+<translation id="8322836013946289105">Datoteke ali imenika ni mogoče najti.</translation>
+<translation id="8461715367920190352">ERROR PAGES HEADING NOT AVAILABLE</translation>
+<translation id="8561467915632687957">Omrežje ni stabilno.</translation>
+</translationbundle>

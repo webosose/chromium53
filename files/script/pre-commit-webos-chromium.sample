@@ -1,0 +1,34 @@
+#!/bin/sh
+#
+# A script to check if there is Chromium coding style violation. This script
+# will be called by "git commit" with no arguments. If you want to ignore to run
+# this script, please use "git commit --no-verify".
+#
+# To enable this hook, we'd recommend to create a link file from ./files/script/pre-commit-webos-chromium.sample
+# to .git/hooks/pre-commit. It will help to keep the latest version of the pre-commit.
+#
+# Steps:
+#   $ ln ./files/script/pre-commit-webos-chromium.sample .git/hooks/pre-commit
+#   $ git add [files]
+#   $ git commit
+
+check_failed=false
+
+clang_format_success_msg1='clang-format did not modify any files'
+clang_format_success_msg2='no modified files to format'
+
+clang_format_test() {
+    clang_format_result_msg="$("$PWD"/src/buildtools/clang_format/script/git-clang-format --diff)"
+    if [ "$clang_format_result_msg" != "$clang_format_success_msg1" ] &&
+       [ "$clang_format_result_msg" != "$clang_format_success_msg2" ]; then
+        echo "$clang_format_result_msg"
+        check_failed=true
+    fi
+}
+
+clang_format_test
+
+if [ $check_failed = true ]; then
+    printf "\\nThere were commit validation errors, if you want to ignore the errors, please use --no-verify option.\\n"
+    exit 1
+fi

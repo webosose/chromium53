@@ -1,0 +1,8 @@
+options:
+  Build_webos_raspberrypi3: true
+  Build_webos_qemux86: true
+  Build_signage_m16: false
+  Build_webos_pro_raspberrypi3: false
+  Build_webos_pro_qemux86: false
+  Build_starfish_qemux86: false
+  Build_starfish_m16p: false

@@ -1,0 +1,10 @@
+// Copyright 2014 Intel Corporation. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#------------------------------------------------
+# Functions from libva-wayland used in chromium code.
+#------------------------------------------------
+VADisplay vaGetDisplayWl(struct wl_display *display);
+VAStatus vaAcquireBufferHandle(VADisplay dpy, VABufferID buf_id, VABufferInfo *buf_info);
+VAStatus vaReleaseBufferHandle(VADisplay dpy, VABufferID buf_id);

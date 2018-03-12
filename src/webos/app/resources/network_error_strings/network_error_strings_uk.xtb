@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE translationbundle>
+<translationbundle lang="uk">
+<translation id="1499093007998028961">Налаштування мережі</translation>
+<translation id="1682620957554922882">Зверніться до постачальника вмісту.</translation>
+<translation id="171447555090807962">Server certificate has expired or is not yet valid as the set time on UHD Broadcast Box is different from the current time.</translation>
+<translation id="203730040597967152">ЗАКРИТИ ПРОГРАМУ</translation>
+<translation id="2626799779920242286">Повторіть спробу пізніше.</translation>
+<translation id="27461552975087996">Сертифікат сервера не є надійним.</translation>
+<translation id="288961708105972332">Минув час очікування спроби підключення.</translation>
+<translation id="3100161803646972327">Перевірте стан мережі та повторіть спробу.</translation>
+<translation id="334286403444714742">Мережа не підключена.</translation>
+<translation id="4588672349582133274">НАЛАШТУВАННЯ МЕРЕЖІ</translation>
+<translation id="4669109953235344059">ПОВТОРИТИ СПРОБУ</translation>
+<translation id="4799446021133992159">НЕ ВДАЄТЬСЯ ЗАВАНТАЖИТИ</translation>
+<translation id="4897228579364425832">ПЕРЕВІРИТИ ПІДКЛЮЧЕННЯ ДО МЕРЕЖІ</translation>
+<translation id="4922056813564935008">Не вдається знайти запитувану адресу.</translation>
+<translation id="4964644330950338878">Ім'я хоста не збігається з іменем хоста у сертифікаті сервера.</translation>
+<translation id="5068657318680619278">This site can not be reached</translation>
+<translation id="5375809313377772901">Перевірте налаштування часу.</translation>
+<translation id="5803768854262525793">REPLACE WITH HOSTNAME</translation>
+<translation id="6061420513894163219">Перевірте стан підключення до мережі.</translation>
+<translation id="6661057429906338241">Закрити програму</translation>
+<translation id="6669270366426331193">ERROR PAGES TITLE NOT AVAILABLE</translation>
+<translation id="6765203878096346794">Підключення до сервера нестабільне.</translation>
+<translation id="7144878232160441200">Повторити</translation>
+<translation id="7402264192054099664">Можливо, це тимчасова помилка.</translation>
+<translation id="7570401931535381481">Термін дії сертифіката минув або сертифікат ще не дійсний, оскільки встановлений на телевізорі час відрізняється від поточного.</translation>
+<translation id="7619490177640280081">Налаштування поточного часу</translation>
+<translation id="7885656482573166887">НАСТРОЙКИ</translation>
+<translation id="8090699366918591820">Поточний час</translation>
+<translation id="8138313893556460774">Минув час очікування операції.</translation>
+<translation id="8322836013946289105">Не вдається знайти файл або каталог.</translation>
+<translation id="8461715367920190352">ERROR PAGES HEADING NOT AVAILABLE</translation>
+<translation id="8561467915632687957">Мережа нестабільна.</translation>
+</translationbundle>

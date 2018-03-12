@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<!DOCTYPE translationbundle>
+<translationbundle lang="en-US">
+<translation id="1604895788661369850">notselected</translation>
+<translation id="1900853990564648845">expanded</translation>
+<translation id="2707727489630287657">characters</translation>
+<translation id="2833778822652069754">value required</translation>
+<translation id="2875560722654171864">{pos} of {size}</translation>
+<translation id="2978592506248334545">character</translation>
+<translation id="3040011195152428237">link</translation>
+<translation id="3283583562490372694">unchecked</translation>
+<translation id="3630697955794050612">off</translation>
+<translation id="3690911206619410479">collapsed</translation>
+<translation id="4004802134384979325">checked</translation>
+<translation id="4661075872484491155">tree</translation>
+<translation id="5643186887447432888">button</translation>
+<translation id="7491962110804786152">tab</translation>
+<translation id="7866482334467279021">on</translation>
+<translation id="8033827949643255796">selected</translation>
+<translation id="8530525165931290512">submenu</translation>
+<translation id="8597182159515967513">heading</translation>
+<translation id="9108370397979208512">math</translation>
+</translationbundle>
