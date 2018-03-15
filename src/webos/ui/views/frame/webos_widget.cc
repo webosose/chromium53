@@ -76,17 +76,13 @@ views::View* WebOSWidget::GetFrameView() const {
 // WebOSWidget, views::Widget overrides:
 
 views::internal::RootView* WebOSWidget::CreateRootView() {
-  if (root_view_)
-    delete root_view_;
-
+  delete root_view_;
   root_view_ = new WebOSRootView(view_, this);
   return root_view_;
 }
 
 views::NonClientFrameView* WebOSWidget::CreateNonClientFrameView() {
-  if (widget_view_)
-    delete widget_view_;
-
+  delete widget_view_;
   widget_view_ = new WebOSWidgetView(this, view_);
   return widget_view_;
 }
