@@ -62,6 +62,10 @@ void DesktopCursorLoaderUpdaterAuraLinux::OnCreate(
   LoadImageCursors(device_scale_factor, loader);
 }
 
+void DesktopCursorLoaderUpdaterAuraLinux::OnDestroy(ui::CursorLoader* loader) {
+  loader->UnloadAll();
+}
+
 void DesktopCursorLoaderUpdaterAuraLinux::OnDisplayUpdated(
     const display::Display& display,
     ui::CursorLoader* loader) {

@@ -37,6 +37,9 @@ class VIEWS_EXPORT DesktopCursorLoaderUpdater {
   virtual void OnCreate(float device_scale_factor,
                         ui::CursorLoader* loader) = 0;
 
+  // Called when a CursorLoader is destroyed.
+  virtual void OnDestroy(ui::CursorLoader* loader) = 0;
+
   // Called when the display has changed (as we may need to reload the cursor
   // assets in response to a device scale factor or rotation change).
   virtual void OnDisplayUpdated(const display::Display& display,

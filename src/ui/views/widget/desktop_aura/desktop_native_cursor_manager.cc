@@ -22,6 +22,8 @@ DesktopNativeCursorManager::DesktopNativeCursorManager(
 }
 
 DesktopNativeCursorManager::~DesktopNativeCursorManager() {
+  if (cursor_loader_updater_.get() && cursor_loader_.get())
+    cursor_loader_updater_->OnDestroy(cursor_loader_.get());
 }
 
 gfx::NativeCursor DesktopNativeCursorManager::GetInitializedCursor(int type) {
