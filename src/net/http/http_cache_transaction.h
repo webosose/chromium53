@@ -168,9 +168,6 @@ class HttpCache::Transaction : public HttpTransaction {
 
  private:
   static const size_t kNumValidationHeaders = 2;
-#if defined(OS_WEBOS)
-  static const int64_t kCacheMinContentLength = 16*1024;
-#endif
   // Helper struct to pair a header name with its value, for
   // headers used to validate cache entries.
   struct ValidationHeaders {
