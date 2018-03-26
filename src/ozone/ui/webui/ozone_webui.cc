@@ -41,11 +41,7 @@ void OzoneWebUI::MaterialDesignControllerReady() {
 ui::SelectFileDialog* OzoneWebUI::CreateSelectFileDialog(
     ui::SelectFileDialog::Listener* listener,
     ui::SelectFilePolicy* policy) const {
-#if defined(USE_SELECT_FILE_DIALOG_WEBUI_IMPL)
   return ui::SelectFileDialogImplWebUI::Create(listener, policy);
-#endif
-  NOTIMPLEMENTED();
-  return nullptr;
 }
 
 std::unique_ptr<ui::LinuxInputMethodContext>
