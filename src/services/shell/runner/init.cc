@@ -77,7 +77,6 @@ void WaitForDebuggerIfNecessary() {
 void CallLibraryEarlyInitialization(base::NativeLibrary app_library) {
   // Do whatever warming that the mojo application wants.
 
-#if defined(ICU_USE_DATA_FILE_FLAG)
 #if ICU_UTIL_DATA_IMPL == ICU_UTIL_DATA_FILE
   typedef void (*LibraryEarlyInitFunction)(const uint8_t*);
   LibraryEarlyInitFunction init_function =
@@ -91,7 +90,6 @@ void CallLibraryEarlyInitialization(base::NativeLibrary app_library) {
     init_function(icu_data);
   }
 #endif  // ICU_UTIL_DATA_IMPL == ICU_UTIL_DATA_FILE
-#endif
 
   // TODO(erg): All chromium binaries load base. We might want to make a
   // general system for other people.

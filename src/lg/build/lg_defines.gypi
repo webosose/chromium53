@@ -6,8 +6,13 @@
       ['ozone_platform_wayland_external==1', {
         'defines': ['OZONE_PLATFORM_WAYLAND_EXTERNAL=1'],
       }],
+      # This is required in chromium53. In recent GN based chromiums
+      # ICU_UTIL_DATA_IMPL is already passed properly without needing
+      # to explicitely pass it here.
       ['icu_use_data_file_flag==1', {
-        'defines': ['ICU_USE_DATA_FILE_FLAG=1'],
+        'defines': ['ICU_UTIL_DATA_IMPL=ICU_UTIL_DATA_FILE'],
+      }, { # else icu_use_data_file_flag !=1
+        'defines': ['ICU_UTIL_DATA_IMPL=ICU_UTIL_DATA_STATIC'],
       }],
       ['webos!=0', {
         'defines': ['OS_WEBOS=1'],
