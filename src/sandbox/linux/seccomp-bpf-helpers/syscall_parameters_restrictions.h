@@ -17,13 +17,11 @@
 
 namespace sandbox {
 
-#if NDEBUG
 // Allow clone(2) for threads.
 // Reject fork(2) attempts with EPERM.
 // Don't restrict on ASAN.
 // Crash if anything else is attempted.
 SANDBOX_EXPORT bpf_dsl::ResultExpr RestrictCloneToThreadsAndEPERMFork();
-#endif
 
 // Allow PR_SET_NAME, PR_SET_DUMPABLE, PR_GET_DUMPABLE.
 // Crash if anything else is attempted.

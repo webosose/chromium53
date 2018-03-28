@@ -140,11 +140,9 @@ ResultExpr EvaluateSyscallImpl(int fs_denied_errno,
     return RestrictClockID();
   }
 
-#if NDEBUG
   if (sysno == __NR_clone) {
     return RestrictCloneToThreadsAndEPERMFork();
   }
-#endif
 
   if (sysno == __NR_fcntl)
     return RestrictFcntlCommands();

@@ -120,7 +120,6 @@ using sandbox::bpf_dsl::ResultExpr;
 namespace sandbox {
 
 #if !defined(OS_NACL_NONSFI)
-#if NDEBUG
 // Allow Glibc's and Android pthread creation flags, crash on any other
 // thread creation attempts and EPERM attempts to use neither
 // CLONE_VM, nor CLONE_THREAD, which includes all fork() implementations.
@@ -146,7 +145,6 @@ ResultExpr RestrictCloneToThreadsAndEPERMFork() {
       .ElseIf((flags & (CLONE_VM | CLONE_THREAD)) == 0, Error(EPERM))
       .Else(CrashSIGSYSClone());
 }
-#endif
 
 ResultExpr RestrictPrctl() {
   // Will need to add seccomp compositing in the future. PR_SET_PTRACER is
