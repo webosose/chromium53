@@ -5412,7 +5412,7 @@ void Heap::SetOldGenerationAllocationLimit(size_t old_gen_size, double gc_speed,
 
   if (FLAG_trace_gc_verbose) {
     isolate_->PrintWithTimestamp(
-        "Heap growing factor %.1f based on mu=%.3f, speed_ratio=%.f "
+        "Heap growing factor %.3f based on mu=%.3f, speed_ratio=%.f "
         "(gc=%.f, mutator=%.f)\n",
         factor, kTargetMutatorUtilization, gc_speed / mutator_speed, gc_speed,
         mutator_speed);
@@ -5440,7 +5440,7 @@ void Heap::SetOldGenerationAllocationLimit(size_t old_gen_size, double gc_speed,
 
   if (FLAG_trace_gc_verbose) {
     isolate_->PrintWithTimestamp(
-        "Grow: old size: %" PRIuS " KB, new limit: %" PRIuS " KB (%.1f)\n",
+        "Grow: old size: %" PRIuS " KB, new limit: %" PRIuS " KB (%.3f)\n",
         old_gen_size / KB, old_generation_allocation_limit_ / KB, factor);
   }
 }
@@ -5455,7 +5455,7 @@ void Heap::DampenOldGenerationAllocationLimit(size_t old_gen_size,
       isolate_->PrintWithTimestamp(
           "Dampen: old size: %" PRIuS " KB, old limit: %" PRIuS
           " KB, "
-          "new limit: %" PRIuS " KB (%.1f)\n",
+          "new limit: %" PRIuS " KB (%.3f)\n",
           old_gen_size / KB, old_generation_allocation_limit_ / KB, limit / KB,
           factor);
     }
