@@ -487,10 +487,7 @@ scoped_refptr<VideoFrame> VideoFrame::CreateBlackFrame(const gfx::Size& size) {
   const uint8_t kBlackY = 0x00;
   const uint8_t kBlackUV = 0x80;
   const base::TimeDelta kZero;
-  scoped_refptr<VideoFrame> frame = VideoFrame::CreateFrame(
-      media::PIXEL_FORMAT_YV24, size, gfx::Rect(size), size, kZero);
-  FillYUV(frame.get(), kBlackY, kBlackUV, kBlackUV);
-  return frame;
+  return CreateColorFrame(size, kBlackY, kBlackUV, kBlackUV, kZero);
 }
 
 // static
