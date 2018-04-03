@@ -1234,6 +1234,11 @@ class Heap {
   // Incremental marking API. ==================================================
   // ===========================================================================
 
+  int GCFlagsForIncrementalMarking() {
+    return ShouldOptimizeForMemoryUsage() ? kReduceMemoryFootprintMask
+                                          : kNoGCFlags;
+  }
+
   // Start incremental marking and ensure that idle time handler can perform
   // incremental steps.
   void StartIdleIncrementalMarking(GarbageCollectionReason gc_reason);
