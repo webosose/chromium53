@@ -27,12 +27,14 @@
 #include "base/strings/string_piece.h"
 #include "base/strings/string_util.h"  // For LowerCaseEqualsASCII.
 #include "base/strings/stringprintf.h"
+#include "base/base_switches.h"
 #include "base/threading/thread_task_runner_handle.h"
 #include "base/time/clock.h"
 #include "base/values.h"
 #include "net/base/auth.h"
 #include "net/base/load_flags.h"
 #include "net/base/load_timing_info.h"
+#include "net/base/mime_util.h"
 #include "net/base/upload_data_stream.h"
 #include "net/cert/cert_status_flags.h"
 #include "net/cert/x509_certificate.h"
@@ -2544,7 +2546,7 @@ int HttpCache::Transaction::WriteResponseInfoToEntry(bool truncated) {
   if (net_log_.IsCapturing())
     net_log_.BeginEvent(NetLog::TYPE_HTTP_CACHE_WRITE_INFO);
 
-  // Do not cache no-store content.  Do not cache content with cert errors
+  // 1. Do not cache no-store content.  Do not cache content with cert errors
   // either.  This is to prevent not reporting net errors when loading a
   // resource from the cache.  When we load a page over HTTPS with a cert error
   // we show an SSL blocking page.  If the user clicks proceed we reload the
@@ -2554,7 +2556,15 @@ int HttpCache::Transaction::WriteResponseInfoToEntry(bool truncated) {
   // blocking page is shown.  An alternative would be to reverse-map the cert
   // status to a net error and replay the net error.
 
+  // 2. webOS: Do not cache audio, video content-type for stable eMMC.
+  std::string mime_type;
+  response_.headers->GetMimeType(&mime_type);
   if ((response_.headers->HasHeaderValue("cache-control", "no-store")) ||
+#if defined(OS_WEBOS)
+      (base::CommandLine::ForCurrentProcess()->HasSwitch(switches::kWebOSWAM)
+      && (!MatchesMimeType("image/*", mime_type) ||
+      response_.headers->GetContentLength() <= kCacheMinContentLength)) ||
+#endif
       IsCertStatusError(response_.ssl_info.cert_status)) {
     DoneWritingToEntry(false);
     if (net_log_.IsCapturing())
