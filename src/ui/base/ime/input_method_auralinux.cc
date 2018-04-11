@@ -365,7 +365,8 @@ void InputMethodAuraLinux::OnCaretBoundsChanged(const TextInputClient* client) {
                    ? 0
                    : anchor_position - SURROUNDING_TEXT_MAX);
     anchor_position = cursor_position -= pos;
-    text = text.substr(pos, SURROUNDING_TEXT_MAX);
+    text = (pos < text.size()) ? text.substr(pos, SURROUNDING_TEXT_MAX)
+                               : std::string();
   }
 
   context_->SetSurroundingText(text, cursor_position, anchor_position);
