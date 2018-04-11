@@ -10,6 +10,7 @@
 #include "base/logging.h"
 #include "base/strings/string16.h"
 #include "chrome/app/chrome_command_ids.h"
+#include "chrome/common/chrome_features.h"
 #include "chrome/common/chrome_switches.h"
 #include "chrome/grit/generated_resources.h"
 #include "components/renderer_context_menu/views/toolkit_delegate_views.h"
@@ -126,6 +127,8 @@ bool RenderViewContextMenuViews::GetAcceleratorForCommandId(
 
     case IDC_CONTENT_CONTEXT_SAVEAVAS:
     case IDC_SAVE_PAGE:
+      if (!base::FeatureList::IsEnabled(features::kSavePage))
+        return false;
       *accel = ui::Accelerator(ui::VKEY_S, ui::EF_CONTROL_DOWN);
       return true;
 

@@ -49,6 +49,7 @@ extern const base::Feature kRuntimeMemoryLeakDetector;
 
 extern const base::Feature kSafeSearchUrlReporting;
 
+extern const base::Feature kSavePage;
 extern const base::Feature kSimplifiedFullscreenUI;
 
 extern const base::Feature kSingleWindow;

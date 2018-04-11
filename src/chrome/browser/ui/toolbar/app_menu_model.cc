@@ -41,6 +41,7 @@
 #include "chrome/browser/ui/toolbar/recent_tabs_sub_menu_model.h"
 #include "chrome/browser/ui/toolbar/toolbar_actions_bar.h"
 #include "chrome/browser/upgrade_detector.h"
+#include "chrome/common/chrome_features.h"
 #include "chrome/common/chrome_paths.h"
 #include "chrome/common/chrome_switches.h"
 #include "chrome/common/profiling.h"
@@ -252,7 +253,8 @@ void ToolsMenuModel::Build(Browser* browser) {
 #if defined(OS_CHROMEOS) || defined(OS_MACOSX) || defined(USE_ASH)
   show_create_shortcuts = false;
 #endif
-  AddItemWithStringId(IDC_SAVE_PAGE, IDS_SAVE_PAGE);
+  if (base::FeatureList::IsEnabled(features::kSavePage))
+    AddItemWithStringId(IDC_SAVE_PAGE, IDS_SAVE_PAGE);
   if (extensions::util::IsNewBookmarkAppsEnabled()) {
     int string_id = IDS_ADD_TO_DESKTOP;
 #if defined(OS_MACOSX)
