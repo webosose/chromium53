@@ -430,17 +430,17 @@ void InputMethodAuraLinux::OnCommit(const base::string16& text) {
   } else if (!IsTextInputTypeNone()) {
     // If we are not handling key event, do not bother sending text result if
     // the focused text input client does not support text input.
-#if defined(OS_WEBOS)
-    KeyEvent event(ui::ET_KEY_RELEASED, ui::VKEY_PROCESSKEY, 0);
-#else
-    ui::KeyEvent event(ui::ET_KEY_PRESSED, ui::VKEY_PROCESSKEY, 0);
-#endif
-    ui::EventDispatchDetails details = SendFakeProcessKeyEvent(&event);
+    ui::KeyEvent press_event(ui::ET_KEY_PRESSED, ui::VKEY_PROCESSKEY, 0);
+    ui::EventDispatchDetails details = SendFakeProcessKeyEvent(&press_event);
     if (details.dispatcher_destroyed)
       return;
-    if (!event.stopped_propagation() && !details.target_destroyed)
+    if (!press_event.stopped_propagation() && !details.target_destroyed)
       GetTextInputClient()->InsertText(text);
     composition_.Clear();
+#if defined(OS_WEBOS)
+    ui::KeyEvent release_event(ui::ET_KEY_RELEASED, ui::VKEY_PROCESSKEY, 0);
+    SendFakeProcessKeyEvent(&release_event);
+#endif
   }
 }
 
@@ -454,15 +454,19 @@ void InputMethodAuraLinux::OnPreeditChanged(
       composition_changed_ = true;
   } else {
 #if defined(OS_WEBOS)
-    KeyEvent event(ui::ET_KEY_RELEASED, ui::VKEY_PROCESSKEY, 0);
-#else
-    ui::KeyEvent event(ui::ET_KEY_PRESSED, ui::VKEY_PROCESSKEY, 0);
+    if (!composition_.text.empty() || !composition_text.text.empty()) {
 #endif
-    ui::EventDispatchDetails details = SendFakeProcessKeyEvent(&event);
-    if (details.dispatcher_destroyed)
-      return;
-    if (!event.stopped_propagation() && !details.target_destroyed)
-      GetTextInputClient()->SetCompositionText(composition_text);
+      ui::KeyEvent press_event(ui::ET_KEY_PRESSED, ui::VKEY_PROCESSKEY, 0);
+      ui::EventDispatchDetails details = SendFakeProcessKeyEvent(&press_event);
+      if (details.dispatcher_destroyed)
+        return;
+      if (!press_event.stopped_propagation() && !details.target_destroyed)
+        GetTextInputClient()->SetCompositionText(composition_text);
+#if defined(OS_WEBOS)
+      ui::KeyEvent release_event(ui::ET_KEY_RELEASED, ui::VKEY_PROCESSKEY, 0);
+      SendFakeProcessKeyEvent(&release_event);
+    }
+#endif
   }
 
   composition_ = composition_text;
@@ -480,16 +484,16 @@ void InputMethodAuraLinux::OnPreeditEnd() {
   } else {
     TextInputClient* client = GetTextInputClient();
     if (client && client->HasCompositionText()) {
-#if defined(OS_WEBOS)
-      KeyEvent event(ui::ET_KEY_RELEASED, ui::VKEY_PROCESSKEY, 0);
-#else
-      ui::KeyEvent event(ui::ET_KEY_PRESSED, ui::VKEY_PROCESSKEY, 0);
-#endif
-      ui::EventDispatchDetails details = SendFakeProcessKeyEvent(&event);
+      ui::KeyEvent press_event(ui::ET_KEY_PRESSED, ui::VKEY_PROCESSKEY, 0);
+      ui::EventDispatchDetails details = SendFakeProcessKeyEvent(&press_event);
       if (details.dispatcher_destroyed)
         return;
-      if (!event.stopped_propagation() && !details.target_destroyed)
+      if (!press_event.stopped_propagation() && !details.target_destroyed)
         client->ClearCompositionText();
+#if defined(OS_WEBOS)
+      ui::KeyEvent release_event(ui::ET_KEY_RELEASED, ui::VKEY_PROCESSKEY, 0);
+      SendFakeProcessKeyEvent(&release_event);
+#endif
     }
     composition_.Clear();
   }
@@ -583,7 +587,7 @@ bool InputMethodAuraLinux::NeedInsertChar() const {
 
 ui::EventDispatchDetails InputMethodAuraLinux::SendFakeProcessKeyEvent(
     ui::KeyEvent* event) const {
-  KeyEvent key_event(ui::ET_KEY_PRESSED, ui::VKEY_PROCESSKEY, event->flags());
+  KeyEvent key_event(event->type(), ui::VKEY_PROCESSKEY, event->flags());
   ui::EventDispatchDetails details = DispatchKeyEventPostIME(&key_event);
   if (key_event.stopped_propagation())
     event->StopPropagation();
