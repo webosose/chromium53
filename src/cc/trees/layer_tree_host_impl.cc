@@ -1259,10 +1259,12 @@ void LayerTreeHostImpl::UpdateTileManagerMemoryPolicy(
         (static_cast<int64_t>(global_tile_state_.hard_memory_limit_in_bytes) *
          settings_.max_memory_for_prepaint_percentage) /
         100;
+#if defined(OS_WEBOS)
     if (memory_pressure_level_ !=
         base::MemoryPressureListener::MEMORY_PRESSURE_LEVEL_NONE) {
       global_tile_state_.soft_memory_limit_in_bytes = 0;
     }
+#endif
   }
   global_tile_state_.memory_limit_policy =
       ManagedMemoryPolicy::PriorityCutoffToTileMemoryLimitPolicy(
