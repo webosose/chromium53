@@ -728,7 +728,9 @@ WebPluginContainerImpl::WebPluginContainerImpl(HTMLPlugInElement* element, WebPl
     , m_isDisposed(false)
 {
     ThreadState::current()->registerPreFinalizer(this);
+#if defined(OS_WEBOS)
     element->document().registerMediaStateObserver(this);
+#endif
 }
 
 WebPluginContainerImpl::~WebPluginContainerImpl()
@@ -760,7 +762,9 @@ void WebPluginContainerImpl::dispose()
         m_webLayer = nullptr;
     }
 
+#if defined(OS_WEBOS)
     m_element->document().unregisterMediaStateObserver(this);
+#endif
 
 #if !ENABLE(OILPAN)
     m_pluginLoadObservers.clear();
