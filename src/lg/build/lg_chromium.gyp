@@ -9,7 +9,7 @@
         '<(DEPTH)/chrome/chrome.gyp:chrome',
       ],
       'conditions': [
-        ['webos==1', {
+        ['webos==1 or agl==1', {
           'dependencies': [
             '<(DEPTH)/lg/browser/install.gyp:install_webos',
           ],

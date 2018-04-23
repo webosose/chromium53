@@ -93,7 +93,7 @@
           },
         ],
       }],
-      ['webos==1', {
+      ['webos==1 or agl==1', {
         'actions' : [
           {
             'action_name': 'copy_chrome_run_webbrowser',
