@@ -107,7 +107,7 @@
         'video_hole%': 1,
         'use_webos_media_focus_extension%': 1,
       }],
-      ['webos==1', {
+      ['webos==1 or agl==1', {
         'grit_defines': ['-D', 'webos'],
         'webos_locales': [
           'af', 'am', 'ar', 'as', 'az', 'bg', 'bn', 'bs', 'cs', 'da', 'de',

@@ -41,7 +41,7 @@
       '<(DEPTH)/third_party/WebKit/public/blink_devtools.gyp:blink_devtools_frontend_resources',
     ],
     'conditions': [
-      ['webos==1', {
+      ['webos==1 or agl==1', {
         'grit_out_dir': '<(SHARED_INTERMEDIATE_DIR)/chrome',
         'chromium_browser_dependencies': [
           '<(DEPTH)/chrome/chrome.gyp:browser',
