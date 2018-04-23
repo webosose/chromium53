@@ -380,12 +380,6 @@ void WaylandTextInput::OnKeysym(void* data,
   const uint32_t device_id = wl_proxy_get_id(
       reinterpret_cast<wl_proxy*>(text_input));
 
-  uint32_t flag = kIMEModifierFlagAlt;
-  while (flag) {
-    dispatcher->TextInputModifier(state, GetModifierKey(flag & modifiers));
-    flag = flag >> 1;
-  }
-
   WaylandTextInput* wl_text_input = static_cast<WaylandTextInput*>(data);
   dispatcher->KeyNotify(type, key_code, ui::SOURCE_TYPE_VKB, device_id);
 
