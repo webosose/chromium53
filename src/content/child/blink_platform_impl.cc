@@ -1009,10 +1009,6 @@ int BlinkPlatformImpl::domKeyEnumFromString(const WebString& key_string) {
       ui::KeycodeConverter::KeyStringToDomKey(key_string.utf8()));
 }
 
-uint64_t BlinkPlatformImpl::getMaxImageSize() const {
-  return GetContentClient()->GetMaxImageSize();
-}
-
 bool BlinkPlatformImpl::useDynamicRefetch() {
   return GetContentClient()->UseDynamicRefetch();
 }

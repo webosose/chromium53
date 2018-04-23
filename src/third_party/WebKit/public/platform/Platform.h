@@ -597,8 +597,6 @@ public:
 
     virtual WebTrialTokenValidator* trialTokenValidator() { return nullptr; }
 
-    virtual uint64_t getMaxImageSize() const { return ((1 << 29) - 1); }
-
     virtual bool useDynamicRefetch()
     {
         return false;

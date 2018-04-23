@@ -135,8 +135,6 @@ class CONTENT_EXPORT BlinkPlatformImpl
   blink::WebString domKeyStringFromEnum(int dom_key) override;
   int domKeyEnumFromString(const blink::WebString& key_string) override;
 
-  uint64_t getMaxImageSize() const override;
-
   bool useDynamicRefetch() override;
   char* getDynamicRefetchDummy() override;
   char* getDynamicRefetchDummyFile() override;

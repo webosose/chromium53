@@ -185,8 +185,6 @@ class CONTENT_EXPORT ContentClient {
   virtual media::MediaClientAndroid* GetMediaClientAndroid();
 #endif  // OS_ANDROID
 
-  virtual uint64_t GetMaxImageSize() { return ((1 << 29) - 1); }
-
   // Return whether Dynamic Resource Refetch switch exists or not.
   virtual bool UseDynamicRefetch() { return false; }
   virtual char* GetDynamicRefetchDummy() { return NULL; }
