@@ -29,7 +29,9 @@
     'chromium_code': 1,
     'allocator_target': '../../base/allocator/allocator.gyp:allocator',
     'protoc_out_dir': '<(SHARED_INTERMEDIATE_DIR)/protoc_out',
-    'cbe_extra_dependencies': [],
+    'cbe_extra_dependencies': [
+      '<(DEPTH)/webos/webos_impl.gyp:webosport',
+    ],
 
     # Add list of extra components to add to libcbe.so
     'chromium_child_dependencies': [
@@ -57,11 +59,6 @@
           '<(DEPTH)/sync/sync.gyp:sync',
         ],
         'conditions': [
-          ['webos==1' , {
-            'cbe_extra_dependencies': [
-              '<(DEPTH)/webos/webos_impl.gyp:webosport',
-            ],
-          }],
           ['enable_plugins==1 and disable_nacl==0', {
             'chromium_child_dependencies': [
               '<(DEPTH)/components/nacl/renderer/plugin/plugin.gyp:nacl_trusted_plugin',
@@ -78,6 +75,8 @@
             ],
           }],
         ],
+      }, {
+        'cbe_extra_dependencies': [],
       }],
     ],
   },

@@ -209,7 +209,7 @@ public:
     virtual void setViewportSize(const WebSize&) = 0;
 
     // Get the viewport size
-#if defined(OS_WEBOS)
+#if defined(OS_WEBOS) || defined(OS_AGL)
     virtual WebSize viewportSize() { return WebSize(0, 0); }
 #endif
     // Hierarchy ----------------------------------------------------------

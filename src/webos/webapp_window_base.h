@@ -41,10 +41,12 @@ class WEBOS_EXPORT WebAppWindowBase : public WebAppWindowDelegate {
   virtual void Show();
   virtual void Hide();
 
+#if defined(OS_WEBOS)
   virtual void SetCustomCursor(CustomCursorType type,
                                const std::string& path,
                                int hotspot_x,
                                int hotspot_y);
+#endif
   int DisplayWidth();
   int DisplayHeight();
 
@@ -55,7 +57,9 @@ class WEBOS_EXPORT WebAppWindowBase : public WebAppWindowDelegate {
   NativeWindowState GetWindowHostState() const;
   NativeWindowState GetWindowHostStateAboutToChange() const;
   void SetWindowHostState(NativeWindowState state);
+#if defined(OS_WEBOS)
   unsigned GetWindowHandle();
+#endif
   void SetKeyMask(WebOSKeyMask key_mask, bool value);
   void SetWindowProperty(const std::string& name, const std::string& value);
   void SetOpacity(float opacity);
@@ -70,11 +74,13 @@ class WEBOS_EXPORT WebAppWindowBase : public WebAppWindowDelegate {
   void FocusWindowGroupLayer();
   void DetachWindowGroup();
 
+#if defined(OS_WEBOS)
   void XInputActivate(const std::string& type = std::string());
   void XInputDeactivate();
   void XInputInvokeAction(uint32_t keysym,
                           SpecialKeySymbolType symType = QT_KEY_SYMBOL,
                           XInputEventType eventType = XINPUT_PRESS_AND_RELEASE);
+#endif
 
  private:
   std::unique_ptr<WebAppWindow> webapp_window_;

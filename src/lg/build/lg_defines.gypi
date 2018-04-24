@@ -17,6 +17,9 @@
           '-Wl,--fatal-warnings',
         ],
       }],
+      ['agl!=0', {
+        'defines': ['OS_AGL=1'],
+      }],
       ['webos_tv!=0', {
         'defines': [
           'PLATFORM_WEBOS_TV=1',

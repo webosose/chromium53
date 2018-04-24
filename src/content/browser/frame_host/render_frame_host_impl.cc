@@ -186,7 +186,7 @@ void RenderFrameHost::AllowInjectingJavaScriptForAndroidWebView() {
 }
 #endif
 
-#if defined(OS_WEBOS)
+#if defined(OS_WEBOS) || defined(OS_AGL)
 // static
 void RenderFrameHost::AllowInjectingJavaScriptForWebOSWebView() {
   g_allow_injecting_javascript = true;

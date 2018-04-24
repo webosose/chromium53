@@ -99,7 +99,9 @@ void WebOSContentRendererClient::RenderFrameCreated(
 
 void WebOSContentRendererClient::AddSupportedKeySystems(
     std::vector<std::unique_ptr<media::KeySystemProperties>>* key_systems) {
+#if defined(OS_WEBOS)
   cdm::AddWebOSKeySystems(key_systems);
+#endif
 }
 
 void WebOSContentRendererClient::ArmWatchdog() {
@@ -152,6 +154,7 @@ bool WebOSContentRendererClient::HasErrorPage(int http_status_code,
   return true;
 }
 
+#if defined(OS_WEBOS)
 void  WebOSContentRendererClient::NotifyLocaleChanged(
     const std::string& new_locale) {
 
@@ -161,5 +164,6 @@ void  WebOSContentRendererClient::NotifyLocaleChanged(
     ResourceBundle::GetSharedInstance().ReloadFonts();
   }
 }
+#endif
 
 } // namespace webos

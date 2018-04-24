@@ -122,8 +122,10 @@ void WebAppWindow::Show() {
 }
 
 void WebAppWindow::Hide() {
+#if defined(OS_WEBOS)
   if (host_)
     host_->WebAppWindowHidden();
+#endif
 }
 
 gfx::NativeWindow WebAppWindow::GetNativeWindow() {
@@ -165,8 +167,10 @@ void WebAppWindow::SetDelegate(WebAppWindowDelegate* webapp_window_delegate) {
 void WebAppWindow::SetHost(views::DesktopWindowTreeHost* host) {
   host_ = host;
 
+#if defined(OS_WEBOS)
   if (host_)
     host_->AddPreTargetHandler(this);
+#endif
 }
 
 bool WebAppWindow::Event(WebOSEvent* webos_event) {
@@ -177,8 +181,10 @@ bool WebAppWindow::Event(WebOSEvent* webos_event) {
 }
 
 void WebAppWindow::SetWindowHostState(NativeWindowState state) {
+#if defined(OS_WEBOS)
   if (host_)
     host_->SetWindowHostState(ToWidgetState(state));
+#endif
 }
 
 void WebAppWindow::SetKeyMask(WebOSKeyMask key_mask, bool value) {
@@ -187,7 +193,9 @@ void WebAppWindow::SetKeyMask(WebOSKeyMask key_mask, bool value) {
   if (!host_)
     return ;
 
+#if defined(OS_WEBOS)
   host_->SetKeyMask(key_mask, value);
+#endif
 }
 
 void WebAppWindow::SetWindowProperty(const std::string& name,
@@ -197,7 +205,9 @@ void WebAppWindow::SetWindowProperty(const std::string& name,
   if (!host_)
     return ;
 
+#if defined(OS_WEBOS)
   host_->SetWindowProperty(name, value);
+#endif
 }
 
 void WebAppWindow::SetOpacity(float opacity) {
@@ -213,7 +223,9 @@ void WebAppWindow::CreateGroup(const ui::WindowGroupConfiguration& config) {
   if (!host_)
     return;
 
+#if defined(OS_WEBOS)
   host_->CreateGroup(config);
+#endif
 }
 
 void WebAppWindow::AttachToGroup(const std::string& group,
@@ -221,28 +233,36 @@ void WebAppWindow::AttachToGroup(const std::string& group,
   if (!host_)
     return;
 
+#if defined(OS_WEBOS)
   host_->AttachToGroup(group, layer);
+#endif
 }
 
 void WebAppWindow::FocusGroupOwner() {
   if (!host_)
     return;
 
+#if defined(OS_WEBOS)
   host_->FocusGroupOwner();
+#endif
 }
 
 void WebAppWindow::FocusGroupLayer() {
   if (!host_)
     return;
 
+#if defined(OS_WEBOS)
   host_->FocusGroupLayer();
+#endif
 }
 
 void WebAppWindow::DetachGroup() {
   if (!host_)
     return;
 
+#if defined(OS_WEBOS)
   host_->DetachGroup();
+#endif
 }
 
 void WebAppWindow::Resize(int width, int height) {
@@ -282,6 +302,7 @@ void WebAppWindow::InputPanelHidden() {
 }
 
 void WebAppWindow::InputPanelShown() {
+#if defined(OS_WEBOS)
   int input_panel_height = host_->GetInputMethod()->GetInputPanelRect().height();
   gfx::Rect caret_bounds = host_->GetInputMethod()->GetCaretBounds();
   int caret_bottom = caret_bounds.y() + caret_bounds.height();
@@ -308,9 +329,11 @@ void WebAppWindow::InputPanelShown() {
                                           input_panel_height);
     Event(&webos_event);
   }
+#endif
 }
 
 void WebAppWindow::InputPanelRectChanged() {
+#if defined(OS_WEBOS)
   int input_panel_height = host_->GetInputMethod()->GetInputPanelRect().height();
   gfx::Rect caret_bounds = host_->GetInputMethod()->GetCaretBounds();
   int caret_bottom =
@@ -324,6 +347,7 @@ void WebAppWindow::InputPanelRectChanged() {
     viewport_shift_height_ = -input_panel_height / scale_factor_;
     UpdateViewportY();
   }
+#endif
 }
 
 void WebAppWindow::UpdateViewportY() {
@@ -556,6 +580,7 @@ void WebAppWindow::Restore() {
   if (!host_)
     return;
 
+#if defined(OS_WEBOS)
   std::map<WebOSKeyMask, bool>::const_iterator key_mask_it;
   for (key_mask_it = key_mask_list_.begin();
        key_mask_it != key_mask_list_.end();
@@ -570,6 +595,7 @@ void WebAppWindow::Restore() {
     host_->SetWindowProperty(window_property_it->first,
                              window_property_it->second);
   }
+#endif
 
   webos_view_->AttachWebContents(web_contents_);
 

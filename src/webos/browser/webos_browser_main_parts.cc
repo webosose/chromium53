@@ -58,11 +58,13 @@ void WebOSBrowserMainParts::PreMainMessageLoopRun() {
 
   ui::MaterialDesignController::Initialize();
 
+#if defined(OS_WEBOS)
   // Replace the default NetworkChangeNotifierFactory with browser
   // implementation. This must be done before BrowserMainLoop calls
   // net::NetworkChangeNotifier::Create() in MainMessageLoopStart().
   net::NetworkChangeNotifier::SetFactory(
       new webos::NetworkChangeNotifierFactoryWebos());
+#endif
   if (base::CommandLine::ForCurrentProcess()->HasSwitch(
       switches::kEnableWatchdog)) {
     ui_watchdog_ = new WebOSWatchdog();

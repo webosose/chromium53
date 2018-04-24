@@ -44,7 +44,9 @@ class WebOSContentRendererClient : public content::ContentRendererClient {
                                  std::string* error_html,
                                  base::string16* error_description) override;
   bool HasErrorPage(int http_status_code, std::string* error_domain) override;
+#if defined(OS_WEBOS)
   void NotifyLocaleChanged(const std::string& new_locale) override;
+#endif
 
  private:
   void ArmWatchdog();

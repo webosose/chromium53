@@ -85,9 +85,11 @@ class WebOSView : public ui::BaseWindow,
   void SetNativeEventDelegate(webos::WebOSNativeEventDelegate* delegate) {
       native_event_delegate_ = delegate;
   }
+#if defined(OS_WEBOS)
   webos::WebOSNativeEventDelegate* GetNativeEventDelegate() const {
       return native_event_delegate_;
   }
+#endif
 
   void SetFullscreen(bool fullscreen);
 

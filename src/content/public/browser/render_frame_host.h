@@ -51,7 +51,7 @@ class CONTENT_EXPORT RenderFrameHost : public IPC::Listener,
   static void AllowInjectingJavaScriptForAndroidWebView();
 #endif
 
-#if defined(OS_WEBOS)
+#if defined(OS_WEBOS) || defined(OS_AGL)
   // Also needed in WebOS WebView, as our API to inject JavaScript needs to
   // inject contents to main world.
   static void AllowInjectingJavaScriptForWebOSWebView();

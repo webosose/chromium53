@@ -7,11 +7,14 @@
 #include "net/base/webos/network_change_notifier_factory_webos.h"
 #include "net/base/webos/network_change_notifier_webos.h"
 #include "ozone/wayland/display.h"
-#include "ozone/wayland/shell/webos_shell_surface.h"
 #include "ozone/wayland/window.h"
 #include "webos/app/webos_content_main_delegate.h"
 #include "webos/common/webos_locales_mapping.h"
 #include "webos/public/runtime.h"
+
+#if defined(OS_WEBOS)
+#include "ozone/wayland/shell/webos_shell_surface.h"
+#endif
 
 namespace webos {
 
@@ -34,10 +37,12 @@ void WebOSPlatform::OnCursorVisibilityChanged(bool visible) {
 }
 
 void WebOSPlatform::OnNetworkStateChanged(bool is_connected) {
+#if defined(OS_WEBOS)
   webos::NetworkChangeNotifierWebos* network_change_notifier =
       NetworkChangeNotifierFactoryWebos::GetInstance();
   if (network_change_notifier)
     network_change_notifier->OnNetworkStateChanged(is_connected);
+#endif
 }
 
 void WebOSPlatform::OnLocaleInfoChanged(std::string language) {
@@ -55,21 +60,25 @@ InputPointer* WebOSPlatform::GetInputPointer() {
 
 void WebOSPlatform::SetInputRegion(unsigned handle,
                                    std::vector<gfx::Rect>region) {
+#if defined(OS_WEBOS)
   ozonewayland::WaylandDisplay* display = ozonewayland::WaylandDisplay::GetInstance();
   ozonewayland::WaylandWindow* window = display->GetWindow(handle);
 
   ozonewayland::WebosShellSurface* shellSurface =
       static_cast<ozonewayland::WebosShellSurface*>(window->ShellSurface());
   shellSurface->SetInputRegion(region);
+#endif
 }
 
 void WebOSPlatform::SetKeyMask(unsigned handle, webos::WebOSKeyMask keyMask) {
+#if defined(OS_WEBOS)
   ozonewayland::WaylandDisplay* display = ozonewayland::WaylandDisplay::GetInstance();
   ozonewayland::WaylandWindow* window = display->GetWindow(handle);
 
   ozonewayland::WebosShellSurface* shellSurface =
       static_cast<ozonewayland::WebosShellSurface*>(window->ShellSurface());
   shellSurface->SetKeyMask(keyMask);
+#endif
 }
 
 } //namespace ozonewayland

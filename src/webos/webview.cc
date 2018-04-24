@@ -545,12 +545,14 @@ void WebView::UpdatePreferencesAttribute(
       m_webPreferences->fixed_position_creates_stacking_context = on;
       break;
 #endif
+#if defined(OS_WEBOS)
     case Attribute::KeepAliveWebApp :
       m_webPreferences->keep_alive_webapp = on;
       break;
     case Attribute::NotifyFMPDirectly :
       m_webPreferences->notify_fmp_directly = on;
       break;
+#endif
     case Attribute::BackHistoryAPIDisabled :
       m_webPreferences->back_history_api_disabled = on;
       break;
@@ -565,9 +567,11 @@ void WebView::UpdatePreferencesAttribute(
 void WebView::UpdatePreferencesAttribute(WebView::Attribute attribute,
                                          double value) {
   switch (attribute) {
+#if defined(OS_WEBOS)
     case Attribute::NetworkStableTimeout:
       m_webPreferences->network_stable_timeout = value;
       break;
+#endif
     default:
       return;
   }
@@ -635,8 +639,10 @@ void WebView::SetViewportSize(int width, int height) {
 }
 
 void WebView::NotifyMemoryPressure(base::MemoryPressureListener::MemoryPressureLevel level) {
+#if defined(OS_WEBOS)
   if (m_webContents->GetRenderViewHost())
     m_webContents->GetRenderViewHost()->NotifyMemoryPressure(level);
+#endif
 }
 
 void WebView::SetVisible(bool visible) {
@@ -787,6 +793,7 @@ void WebView::RequestGetCookies(const std::string& url) {
 }
 
 void WebView::SetHardwareResolution(int width, int height) {
+#if defined(OS_WEBOS)
   content::RenderWidgetHostViewAura* const host_view =
       static_cast<content::RenderWidgetHostViewAura*>(
           m_webContents->GetRenderWidgetHostView());
@@ -795,9 +802,11 @@ void WebView::SetHardwareResolution(int width, int height) {
     return;
 
   host_view->SetHardwareResolution(width, height);
+#endif
 }
 
 void WebView::SetEnableHtmlSystemKeyboardAttr(bool enable) {
+#if defined(OS_WEBOS)
   content::RenderWidgetHostViewAura* const host_view =
       static_cast<content::RenderWidgetHostViewAura*>(
           m_webContents->GetRenderViewHost()->GetWidget()->GetView());
@@ -806,9 +815,11 @@ void WebView::SetEnableHtmlSystemKeyboardAttr(bool enable) {
     return;
 
   host_view->SetEnableHtmlSystemKeyboardAttr(enable);
+#endif
 }
 
 bool WebView::IsKeyboardVisible() const {
+#if defined(OS_WEBOS)
   content::RenderWidgetHostViewAura* const host_view =
       static_cast<content::RenderWidgetHostViewAura*>(
           m_webContents->GetRenderWidgetHostView());
@@ -818,9 +829,13 @@ bool WebView::IsKeyboardVisible() const {
     return input_method->IsVisible();
   else
     return false;
+#else
+  return false;
+#endif
 }
 
 bool WebView::IsInputMethodActive() const {
+#if defined(OS_WEBOS)
   content::RenderWidgetHostViewAura* const host_view =
       static_cast<content::RenderWidgetHostViewAura*>(
           m_webContents->GetRenderWidgetHostView());
@@ -828,6 +843,7 @@ bool WebView::IsInputMethodActive() const {
   ui::InputMethod* input_method = host_view->GetInputMethod();
   if (input_method)
     return input_method->IsInputMethodActive();
+#endif
   return false;
 }
 
@@ -909,6 +925,7 @@ void WebView::DidFailLoad(content::RenderFrameHost* render_frame_host,
 }
 
 void WebView::RenderProcessCreated(base::ProcessHandle handle) {
+#if defined(OS_WEBOS)
   // Helps in initializing resources for the renderer process
   std::string locale = GetWebOSContentBrowserClient()->GetApplicationLocale();
   for (content::RenderProcessHost::iterator it(
@@ -919,6 +936,7 @@ void WebView::RenderProcessCreated(base::ProcessHandle handle) {
       break;
     }
   }
+#endif
 
   if (m_delegate)
     m_delegate->RenderProcessCreated(handle);
@@ -1071,9 +1089,11 @@ void WebView::ResetStateToMarkNextPaintForContainer() {
   content::RenderViewHost* rvh = m_webContents->GetRenderViewHost();
   if (rvh) {
     rvh->ResetStateToMarkNextPaintForContainer();
+#if defined(USE_SPLASH_SCREEN)
     first_meaningful_paint_detected_ = 0;
     arriving_meaningful_paint_ = 0;
     load_visually_committed_ = false;
+#endif
   }
 }
 

@@ -104,7 +104,7 @@ const char kEnableCrashReporterForTesting[] =
 // V8 snapshot blob path
 const char kV8SnapshotBlobPath[] = "v8-snapshot-blob-path";
 
-#if defined(OS_WEBOS)
+#if defined(OS_WEBOS) || defined(OS_AGL)
 // Enable or disable some features only for WAM.
 const char kWebOSWAM[] = "webos-wam";
 // appId property

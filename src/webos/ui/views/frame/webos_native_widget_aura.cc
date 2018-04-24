@@ -72,7 +72,8 @@ void WebOSNativeWidgetAura::InitNativeWidget(
   tooltip_disabler_.reset(new aura::client::ScopedTooltipDisabler(root_window));
 }
 
+#if defined(OS_WEBOS)
 webos::WebOSNativeEventDelegate* WebOSNativeWidgetAura::GetNativeEventDelegate() const {
   return view_->GetNativeEventDelegate();
 }
-
+#endif

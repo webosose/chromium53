@@ -138,7 +138,7 @@ enum IPCMessageStart {
   BrowserControlMsgStart,
   InjectionMsgStart,
 #endif
-#if defined(OS_WEBOS)
+#if defined(OS_WEBOS) || defined(OS_AGL)
   WebOSViewMsgStart,
 #endif
   LgContentMsgStart,

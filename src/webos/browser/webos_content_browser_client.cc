@@ -305,6 +305,7 @@ void WebOSContentBrowserClient::SetApplicationLocale(
     ResourceBundle::GetSharedInstance().ReloadFonts();
   }
 
+#if defined(OS_WEBOS)
   // notify locale change for accessibility
   content::AccessibilityLocalizationWebos::GetInstance()->SetLocale(locale);
 
@@ -313,6 +314,7 @@ void WebOSContentBrowserClient::SetApplicationLocale(
        !it.IsAtEnd(); it.Advance()) {
     it.GetCurrentValue()->NotifyLocaleChanged(locale);
   }
+#endif
 }
 
 void WebOSContentBrowserClient::OverrideWebkitPrefs(

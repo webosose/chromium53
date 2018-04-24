@@ -12,6 +12,9 @@
       # Whether the WebOS platform target is TV.
       'webos_tv%': 0,
 
+      # Whether we are building an AGL build.
+      'agl%': 0,
+
       # Whether we're using fixes for both vanilla and webos browser
       'browser_common%': 1,
 
@@ -68,6 +71,7 @@
     'ozone_platform_wayland_external%': '<(ozone_platform_wayland_external)',
     'webos%': '<(webos)',
     'webos_tv%': '<(webos_tv)',
+    'agl%': '<(agl)',
     'browser_common%': '<(browser_common)',
     'use_chromium_cbe%': '<(use_chromium_cbe)',
     'cbe_data%': '<(cbe_data)',

@@ -34,13 +34,16 @@ void WebAppWindowBase::Hide() {
   webapp_window_->Hide();
 }
 
+#if defined(OS_WEBOS)
 unsigned WebAppWindowBase::GetWindowHandle() {
   if (!webapp_window_->host())
     return 0;
 
   return webapp_window_->host()->GetWindowHandle();
 }
+#endif
 
+#if defined(OS_WEBOS)
 void WebAppWindowBase::SetCustomCursor(CustomCursorType type,
                                        const std::string& path,
                                        int hotspot_x,
@@ -50,6 +53,7 @@ void WebAppWindowBase::SetCustomCursor(CustomCursorType type,
 
   webapp_window_->host()->SetCustomCursor(type, path, hotspot_x, hotspot_y);
 }
+#endif
 
 int WebAppWindowBase::DisplayWidth() {
   return webapp_window_->DisplayWidth();
@@ -71,7 +75,9 @@ void WebAppWindowBase::RecreatedWebContents() {
   if (!webapp_window_->host())
     return;
 
+#if defined(OS_WEBOS)
   webapp_window_->host()->ResetCompositor();
+#endif
 }
 
 NativeWindowState WebAppWindowBase::GetWindowHostState() const {
@@ -140,6 +146,7 @@ void WebAppWindowBase::DetachWindowGroup() {
   webapp_window_->DetachGroup();
 }
 
+#if defined(OS_WEBOS)
 void WebAppWindowBase::XInputActivate(const std::string& type) {
   if (!webapp_window_->host())
     return;
@@ -186,5 +193,6 @@ void WebAppWindowBase::XInputInvokeAction(uint32_t keysym,
   webapp_window_->host()->WebOSXInputInvokeAction(keysym, ui_symbol_type,
                                                   ui_event_type);
 }
+#endif
 
 }  // namespace webos

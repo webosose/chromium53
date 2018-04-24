@@ -40,7 +40,7 @@ extern const char kEnableCrashReporterForTesting[];
 
 extern const char kV8SnapshotBlobPath[];
 
-#if defined(OS_WEBOS)
+#if defined(OS_WEBOS) || defined(OS_AGL)
 extern const char kWebOSWAM[];
 extern const char kWebOSAppId[];
 #endif

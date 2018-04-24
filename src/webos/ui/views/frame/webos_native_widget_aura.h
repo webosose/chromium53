@@ -51,7 +51,9 @@ class WebOSNativeWidgetAura : public views::DesktopNativeWidgetAura {
   WebOSView* view() const { return view_; }
 
   // Overridden from views::DesktopNativeWidgetAura:
+#if defined(OS_WEBOS)
   webos::WebOSNativeEventDelegate* GetNativeEventDelegate() const override;
+#endif
 
  protected:
   virtual ~WebOSNativeWidgetAura();
