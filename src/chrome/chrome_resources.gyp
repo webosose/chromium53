@@ -531,7 +531,7 @@
         },
       ],
       'conditions': [
-        ['webos==1', {
+        ['webos==1 or agl==1', {
           'actions': [
             {
               # GN version: //chrome:repack_locales_pack

@@ -3399,7 +3399,7 @@
             '<@(chrome_browser_ui_omnibox_non_mobile_sources)',
           ],
         }],
-        ['webos==1', {
+        ['webos==1 or agl==1', {
           'sources': [
             '<@(chrome_browser_ui_webos_sources)',
           ],
