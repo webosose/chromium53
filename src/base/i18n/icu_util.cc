@@ -106,7 +106,7 @@ void LazyInitIcuDataFile() {
   CHECK(path_ok);  // TODO(scottmg): http://crbug.com/445616
 #elif defined(OS_ANDROID)
   bool path_ok = PathService::Get(DIR_ANDROID_APP_DATA, &data_path);
-#elif defined(OS_WEBOS) && defined(USE_CBE)
+#elif defined(USE_CBE)
   // With CBE, shared resource files should go to shared system path
   bool path_ok = PathService::Get(DIR_CBE_DATA, &data_path);
 #else
@@ -250,7 +250,7 @@ bool InitializeICU() {
 #if (ICU_UTIL_DATA_IMPL == ICU_UTIL_DATA_SHARED)
   // We expect to find the ICU data module alongside the current module.
   FilePath data_path;
-#if defined(OS_WEBOS) && defined(USE_CBE)
+#if defined(USE_CBE)
   PathService::Get(DIR_EXE, &data_path);
 #else
   PathService::Get(DIR_MODULE, &data_path);

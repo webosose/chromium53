@@ -59,7 +59,7 @@ base::FilePath GetResourcesPakFilePath() {
       CFSTR("extensions_shell_and_test.pak"));
 #else
   base::FilePath extensions_shell_and_test_pak_path;
-#if defined(OS_WEBOS) && defined(USE_CBE)
+#if defined(USE_CBE)
   // base::DIR_MODULE not properly works in WebOS, issue related to patchset
   // https://gpro.lgsvl.com/92010
   PathService::Get(base::DIR_EXE, &extensions_shell_and_test_pak_path);

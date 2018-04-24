@@ -24,7 +24,7 @@
 #include "base/process/process_metrics.h"
 #include "build/build_config.h"
 
-#if defined(OS_WEBOS)
+#if defined(USE_CBE)
 #include <dlfcn.h>
 #endif
 #if defined(OS_FREEBSD)
@@ -40,7 +40,7 @@ bool PathProviderPosix(int key, FilePath* result) {
   FilePath path;
   switch (key) {
     case base::FILE_MODULE: {
-#if defined(OS_WEBOS) && defined(USE_CBE)
+#if defined(USE_CBE)
       Dl_info info;
       if (dladdr((void*) PathService::Get, &info) != 0)
       {
