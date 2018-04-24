@@ -93,14 +93,28 @@
           },
         ],
       }],
-      ['webos==1 or agl==1', {
+      ['webos==1', {
         'actions' : [
           {
             'action_name': 'copy_chrome_run_webbrowser',
-            'inputs':  ['chrome/run_webbrowser.in'],
+            'inputs':  ['chrome/run_webbrowser.webos.in'],
             'outputs': ['<(install)/run_webbrowser'],
             'action': ['cp', '<@(_inputs)', '<@(_outputs)'],
           },
+        ],
+      }],
+      ['agl==1', {
+        'actions' : [
+          {
+            'action_name': 'copy_chrome_run_webbrowser',
+            'inputs':  ['chrome/run_webbrowser.agl.in'],
+            'outputs': ['<(install)/run_webbrowser'],
+            'action': ['cp', '<@(_inputs)', '<@(_outputs)'],
+          },
+        ],
+      }],
+      ['webos==1 or agl==1', {
+        'actions' : [
           {
             'action_name': 'copy chrome EXE to install',
             'inputs': ['<(PRODUCT_DIR)/chrome'],
