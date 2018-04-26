@@ -2,6 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+#include <sys/types.h>
+#include <unistd.h>
+
 #include "ozone/wayland/shell/ivi_shell_surface.h"
 
 #include "base/logging.h"
@@ -37,7 +40,7 @@ void IVIShellSurface::InitializeShellSurface(WaylandWindow* window,
   if ((env = getenv("OZONE_WAYLAND_IVI_SURFACE_ID")))
     ivi_surface_id_ = atoi(env);
   else
-    ivi_surface_id_ = last_ivi_surface_id_ + 1;
+    ivi_surface_id_ = getpid();
   ivi_surface_ = ivi_application_surface_create(
                      shell->GetIVIShell(), ivi_surface_id_, GetWLSurface());
   last_ivi_surface_id_ = ivi_surface_id_;
