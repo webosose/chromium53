@@ -100,10 +100,10 @@ ScaleFactor FindClosestScaleFactorUnsafe(float scale) {
 
 base::FilePath GetResourcesPakFilePath(const std::string& pak_name) {
   base::FilePath path;
-#if defined(OS_WEBOS)
+#if defined(USE_CBE)
   if (PathService::Get(base::DIR_EXE, &path))
     return path.AppendASCII(pak_name.c_str());
-#endif  // defined(OS_WEBOS)
+#endif  // defined(USE_CBE)
 
   if (PathService::Get(base::DIR_MODULE, &path))
     return path.AppendASCII(pak_name.c_str());
@@ -396,7 +396,7 @@ std::string ResourceBundle::LoadLocaleResources(
     return std::string();
   }
 
-#if defined(OS_WEBOS)
+#if defined(USE_CBE)
   loaded_locale_ = app_locale;
 #endif
 
@@ -445,7 +445,7 @@ std::string ResourceBundle::ReloadLocaleResources(
     const std::string& pref_locale) {
   base::AutoLock lock_scope(*locale_resources_data_lock_);
 
-#if defined(OS_WEBOS)
+#if defined(USE_CBE)
   // When zygote is running the locales are loaded in zygote process and
   // are shared across for renderer process. Render process can not keep track
   // as locale has been reloaded for language change or not. This check will

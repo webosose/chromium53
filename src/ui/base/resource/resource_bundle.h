@@ -448,7 +448,7 @@ class UI_BASE_EXPORT ResourceBundle {
 
   gfx::Image empty_image_;
 
-#if defined(OS_WEBOS)
+#if defined(USE_CBE)
   std::string loaded_locale_;
 #endif
 
