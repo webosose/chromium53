@@ -194,7 +194,7 @@ void OzoneWaylandWindow::SetTitle(const base::string16& title) {
 }
 
 void OzoneWaylandWindow::SetSurfaceId(int surface_id) {
-  surface_id_ = surface_id_;
+  surface_id_ = surface_id;
 }
 
 void OzoneWaylandWindow::SetWindowShape(const SkPath& path) {
