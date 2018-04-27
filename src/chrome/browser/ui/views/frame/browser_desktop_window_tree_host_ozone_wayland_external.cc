@@ -19,6 +19,13 @@ BrowserDesktopWindowTreeHostOzone::BrowserDesktopWindowTreeHostOzone(
     BrowserFrame* browser_frame)
     : DesktopWindowTreeHostOzone(native_widget_delegate,
                                  desktop_native_widget_aura) {
+  char* env;
+  int surface_id;
+  if ((env = getenv("OZONE_WAYLAND_IVI_SURFACE_ID")))
+    surface_id = atoi(env);
+  else
+    surface_id = getpid();
+  SetWindowSurfaceId(surface_id);
 }
 
 
