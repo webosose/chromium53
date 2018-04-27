@@ -38,6 +38,7 @@ class AURA_EXPORT WindowTreeHostPlatform
   void ReleaseCapture() override;
   void SetWindowProperty(const std::string& name,
                          const std::string& value) override;
+  void SetWindowSurfaceId(int surface_id) override;
   void SetCursorNative(gfx::NativeCursor cursor) override;
   void MoveCursorToNative(const gfx::Point& location) override;
   void OnCursorVisibilityChangedNative(bool show) override;

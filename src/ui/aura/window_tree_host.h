@@ -181,6 +181,7 @@ class AURA_EXPORT WindowTreeHost : public ui::internal::InputMethodDelegate,
 
   virtual void SetWindowProperty(const std::string& name,
                                  const std::string& value) {}
+  virtual void SetWindowSurfaceId(int surface_id) {}
 
  protected:
   friend class TestScreen;  // TODO(beng): see if we can remove/consolidate.

@@ -101,6 +101,10 @@ void WebAppWindowBase::SetWindowProperty(const std::string& name,
   webapp_window_->SetWindowProperty(name, value);
 }
 
+void WebAppWindowBase::SetWindowSurfaceId(int surface_id) {
+  webapp_window_->SetWindowSurfaceId(surface_id);
+}
+
 void WebAppWindowBase::SetOpacity(float opacity) {
   webapp_window_->SetOpacity(opacity);
 }

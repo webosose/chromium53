@@ -28,7 +28,8 @@ class WaylandShell {
   // wl_shell, xdg_shell or any shell which supports wayland protocol.
   // Ownership is passed to the caller.
   WaylandShellSurface* CreateShellSurface(WaylandWindow* parent,
-                                          WaylandWindow::ShellType type);
+                                          WaylandWindow::ShellType type,
+                                          int surface_id);
   void Initialize(struct wl_registry *registry,
                   uint32_t name,
                   const char *interface,

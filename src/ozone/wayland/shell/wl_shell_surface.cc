@@ -23,7 +23,8 @@ WLShellSurface::~WLShellSurface() {
 }
 
 void WLShellSurface::InitializeShellSurface(WaylandWindow* window,
-                                            WaylandWindow::ShellType type) {
+                                            WaylandWindow::ShellType type,
+                                            int surface_id) {
   DCHECK(!shell_surface_);
   WaylandDisplay* display = WaylandDisplay::GetInstance();
   DCHECK(display);

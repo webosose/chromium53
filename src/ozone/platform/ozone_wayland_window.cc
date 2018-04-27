@@ -103,6 +103,11 @@ OzoneWaylandWindow::OzoneWaylandWindow(PlatformWindowDelegate* delegate,
   handle_ = opaque_handle;
   delegate_->OnAcceleratedWidgetAvailable(opaque_handle, 1.0);
 
+  char* env;
+  if ((env = getenv("OZONE_WAYLAND_IVI_SURFACE_ID")))
+    surface_id_ = atoi(env);
+  else
+    surface_id_ = getpid();
   PlatformEventSource::GetInstance()->AddPlatformEventDispatcher(this);
   sender_->AddChannelObserver(this);
   window_manager_->OnRootWindowCreated(this);
@@ -186,6 +191,10 @@ void OzoneWaylandWindow::SetTitle(const base::string16& title) {
     return;
 
   sender_->Send(new WaylandDisplay_Title(handle_, title_));
+}
+
+void OzoneWaylandWindow::SetSurfaceId(int surface_id) {
+  surface_id_ = surface_id_;
 }
 
 void OzoneWaylandWindow::SetWindowShape(const SkPath& path) {
@@ -458,7 +467,7 @@ uint32_t OzoneWaylandWindow::DispatchEvent(
 }
 
 void OzoneWaylandWindow::OnChannelEstablished() {
-  sender_->Send(new WaylandDisplay_Create(handle_));
+  sender_->Send(new WaylandDisplay_Create(handle_, surface_id_));
   InitNativeWidget();
 }
 

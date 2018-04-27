@@ -18,7 +18,8 @@ class WLShellSurface : public WaylandShellSurface {
   ~WLShellSurface() override;
 
   void InitializeShellSurface(WaylandWindow* window,
-                              WaylandWindow::ShellType type) override;
+                              WaylandWindow::ShellType type,
+                              int surface_id) override;
   void UpdateShellSurface(WaylandWindow::ShellType type,
                           WaylandShellSurface* shell_parent,
                           int x,

@@ -42,8 +42,9 @@ WebosShellSurface::~WebosShellSurface() {
 }
 
 void WebosShellSurface::InitializeShellSurface(WaylandWindow* window,
-                                               WaylandWindow::ShellType type) {
-  WLShellSurface::InitializeShellSurface(window, type);
+                                               WaylandWindow::ShellType type,
+                                               int surface_id) {
+  WLShellSurface::InitializeShellSurface(window, type, surface_id);
   DCHECK(!webos_shell_surface_);
   WaylandDisplay* display = WaylandDisplay::GetInstance();
   DCHECK(display);

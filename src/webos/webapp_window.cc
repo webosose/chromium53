@@ -155,6 +155,7 @@ void WebAppWindow::DetachWebContents() {
   opacity_ = 1.f;
   key_mask_list_.clear();
   window_property_list_.clear();
+  window_surface_id_ = 0;
 
   if (webos_view_)
     webos_view_->AttachWebContents(NULL);
@@ -208,6 +209,15 @@ void WebAppWindow::SetWindowProperty(const std::string& name,
 #if defined(OS_WEBOS)
   host_->SetWindowProperty(name, value);
 #endif
+}
+
+void WebAppWindow::SetWindowSurfaceId(int surface_id) {
+  window_surface_id_ = surface_id;
+
+  if (!host_)
+    return;
+
+  host_->SetWindowSurfaceId(surface_id);
 }
 
 void WebAppWindow::SetOpacity(float opacity) {
@@ -596,6 +606,7 @@ void WebAppWindow::Restore() {
                              window_property_it->second);
   }
 #endif
+  host_->SetWindowSurfaceId(window_surface_id_);
 
   webos_view_->AttachWebContents(web_contents_);
 

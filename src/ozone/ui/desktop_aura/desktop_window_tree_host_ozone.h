@@ -83,6 +83,8 @@ class VIEWS_EXPORT DesktopWindowTreeHostOzone
     return desktop_native_widget_aura_;
   }
 
+  void SetWindowSurfaceId(int surface_id) override;
+
 #if defined(OS_WEBOS)
   // Overridden from DesktopWindowTreeHostWebOS
   ui::InputMethod* GetInputMethod() override;

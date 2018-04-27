@@ -83,6 +83,7 @@ class OzoneWaylandWindow : public PlatformWindow,
   void MoveCursorTo(const gfx::Point& location) override;
   void ConfineCursorToBounds(const gfx::Rect& bounds) override;
   PlatformImeController* GetPlatformImeController() override;
+  void SetSurfaceId(int surface_id) override;
 #if defined(OS_WEBOS)
   void SetCustomCursor(webos::CustomCursorType type,
                        const std::string& path,
@@ -144,6 +145,7 @@ class OzoneWaylandWindow : public PlatformWindow,
   // The current cursor bitmap (immutable).
   scoped_refptr<BitmapCursorOzone> bitmap_;
   bool init_window_;
+  int surface_id_;
 
   DISALLOW_COPY_AND_ASSIGN(OzoneWaylandWindow);
 };

@@ -30,7 +30,8 @@ XDGShellSurface::~XDGShellSurface() {
 }
 
 void XDGShellSurface::InitializeShellSurface(WaylandWindow* window,
-                                             WaylandWindow::ShellType type) {
+                                             WaylandWindow::ShellType type,
+                                             int surface_id) {
   DCHECK(!xdg_surface_);
   DCHECK(!xdg_popup_);
   WaylandDisplay* display = WaylandDisplay::GetInstance();

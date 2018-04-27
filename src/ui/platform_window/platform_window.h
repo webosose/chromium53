@@ -80,6 +80,7 @@ class PlatformWindow {
   virtual gfx::Rect GetBounds() = 0;
 
   virtual void SetTitle(const base::string16& title) = 0;
+  virtual void SetSurfaceId(int surface_id) = 0;
 
 #if defined(OS_WEBOS)
   virtual void SetCustomCursor(webos::CustomCursorType type,

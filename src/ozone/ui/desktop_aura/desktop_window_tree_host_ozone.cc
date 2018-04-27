@@ -1099,6 +1099,10 @@ DesktopWindowTreeHost::GetNativeTheme(aura::Window* window) {
   return ui::NativeTheme::GetInstanceForWeb();
 }
 
+void DesktopWindowTreeHostOzone::SetWindowSurfaceId(int surface_id) {
+  platform_window_->SetSurfaceId(surface_id);
+}
+
 #if defined(OS_WEBOS)
 //////////////////////////////////////////////////////////////////////////////
 // DesktopWindowTreeHostWebOS implementation

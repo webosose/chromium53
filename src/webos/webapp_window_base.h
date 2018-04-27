@@ -62,6 +62,7 @@ class WEBOS_EXPORT WebAppWindowBase : public WebAppWindowDelegate {
 #endif
   void SetKeyMask(WebOSKeyMask key_mask, bool value);
   void SetWindowProperty(const std::string& name, const std::string& value);
+  void SetWindowSurfaceId(int surface_id);
   void SetOpacity(float opacity);
   void Resize(int width, int height);
   void SetScaleFactor(float scale);

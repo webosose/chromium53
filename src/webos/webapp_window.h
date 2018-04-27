@@ -85,6 +85,7 @@ class WebAppWindow : public WebOSNativeEventDelegate,
 
   void SetKeyMask(WebOSKeyMask key_mask, bool value);
   void SetWindowProperty(const std::string& name, const std::string& value);
+  void SetWindowSurfaceId(int surface_id);
   void SetOpacity(float opacity);
   void Resize(int width, int height);
   void SetUseVirtualKeyboard(bool enable);
@@ -153,6 +154,7 @@ class WebAppWindow : public WebOSNativeEventDelegate,
   WebOSBrowserContext* browser_context_;
   content::WebContents* web_contents_;
   std::map<std::string, std::string> window_property_list_;
+  int window_surface_id_;
   std::map<WebOSKeyMask, bool> key_mask_list_;
   float opacity_;
   gfx::Rect rect_;
