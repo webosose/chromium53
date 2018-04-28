@@ -56,7 +56,7 @@ class WebAppWindow : public WebOSNativeEventDelegate,
                      public display::DisplayObserver,
                      public ui::EventHandler {
  public:
-  WebAppWindow(const gfx::Rect& rect);
+  WebAppWindow(const gfx::Rect& rect, int surface_id);
   virtual ~WebAppWindow();
 
   void Show();

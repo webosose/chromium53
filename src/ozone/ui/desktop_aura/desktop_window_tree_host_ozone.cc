@@ -942,8 +942,7 @@ void DesktopWindowTreeHostOzone::InitOzoneWindow(
   platform_window_ =
       ui::OzonePlatform::GetInstance()->CreatePlatformWindow(this, bounds);
   DCHECK(window_);
-  if (pending_surface_id_)
-    platform_window_->SetSurfaceId(pending_surface_id_);
+  platform_window_->SetSurfaceId(params.surface_id);
   // Maintain parent child relation as done in X11 version.
   // If we have a parent, record the parent/child relationship. We use this
   // data during destruction to make sure that when we try to close a parent

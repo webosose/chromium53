@@ -85,6 +85,7 @@ class WEBOS_EXPORT WebAppWindowBase : public WebAppWindowDelegate {
 
  private:
   std::unique_ptr<WebAppWindow> webapp_window_;
+  int pending_surface_id_;
 
   DISALLOW_COPY_AND_ASSIGN(WebAppWindowBase);
 };

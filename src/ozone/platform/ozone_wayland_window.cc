@@ -123,7 +123,7 @@ OzoneWaylandWindow::~OzoneWaylandWindow() {
 void OzoneWaylandWindow::InitNativeWidget() {
   if (init_window_)
     sender_->Send(new WaylandDisplay_InitWindow(handle_, parent_, bounds_.x(),
-                                                bounds_.y(), type_));
+                                                bounds_.y(), type_, surface_id_));
 
   if (state_)
     sender_->Send(new WaylandDisplay_State(handle_, state_));
@@ -182,7 +182,7 @@ void OzoneWaylandWindow::InitPlatformWindow(
     return;
 
   sender_->Send(new WaylandDisplay_InitWindow(handle_, parent_, bounds_.x(),
-                                              bounds_.y(), type_));
+                                              bounds_.y(), type_, surface_id_));
 }
 
 void OzoneWaylandWindow::SetTitle(const base::string16& title) {
@@ -467,7 +467,7 @@ uint32_t OzoneWaylandWindow::DispatchEvent(
 }
 
 void OzoneWaylandWindow::OnChannelEstablished() {
-  sender_->Send(new WaylandDisplay_Create(handle_, surface_id_));
+  sender_->Send(new WaylandDisplay_Create(handle_));
   InitNativeWidget();
 }
 

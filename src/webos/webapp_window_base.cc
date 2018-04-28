@@ -14,7 +14,8 @@ namespace webos {
 ////////////////////////////////////////////////////////////////////////////////
 // WebAppWindowBase, public:
 
-WebAppWindowBase::WebAppWindowBase() {}
+WebAppWindowBase::WebAppWindowBase()
+    : pending_surface_id_(0) {}
 
 WebAppWindowBase::~WebAppWindowBase() {
   webapp_window_->SetDelegate(NULL);
@@ -22,7 +23,7 @@ WebAppWindowBase::~WebAppWindowBase() {
 
 void WebAppWindowBase::InitWindow(int width, int height) {
   webapp_window_ =
-      std::unique_ptr<WebAppWindow>(new WebAppWindow(gfx::Rect(width, height)));
+    std::unique_ptr<WebAppWindow>(new WebAppWindow(gfx::Rect(width, height), pending_surface_id_));
   webapp_window_->SetDelegate(this);
 }
 
@@ -102,7 +103,10 @@ void WebAppWindowBase::SetWindowProperty(const std::string& name,
 }
 
 void WebAppWindowBase::SetWindowSurfaceId(int surface_id) {
-  webapp_window_->SetWindowSurfaceId(surface_id);
+  if (webapp_window_)
+    webapp_window_->SetWindowSurfaceId(surface_id);
+  else
+    pending_surface_id_ = surface_id;
 }
 
 void WebAppWindowBase::SetOpacity(float opacity) {

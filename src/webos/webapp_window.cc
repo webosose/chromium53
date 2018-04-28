@@ -63,7 +63,7 @@ ui::WidgetState ToWidgetState(NativeWindowState state) {
 ////////////////////////////////////////////////////////////////////////////////
 // WebAppWindow, public:
 
-WebAppWindow::WebAppWindow(const gfx::Rect& rect)
+WebAppWindow::WebAppWindow(const gfx::Rect& rect, int surface_id)
     : opacity_(1.f),
       rect_(rect),
       web_contents_(0),
@@ -73,6 +73,7 @@ WebAppWindow::WebAppWindow(const gfx::Rect& rect)
       window_host_state_(NativeWindowState::NATIVE_WINDOW_DEFAULT),
       window_host_state_about_to_change_(
           NativeWindowState::NATIVE_WINDOW_DEFAULT),
+      window_surface_id_(surface_id),
       keyboard_enter_(false),
       viewport_shift_height_(0),
       input_panel_visible_(false),
@@ -90,7 +91,7 @@ WebAppWindow::WebAppWindow(const gfx::Rect& rect)
   webos_view_ = new WebOSView(this);
   webos_view_->Init(browser_context_);
   webos_view_->SetNativeEventDelegate(this);
-  (new WebOSWidget(webos_view_))->InitWebOSWidget(rect_);
+  (new WebOSWidget(webos_view_))->InitWebOSWidget(rect_, surface_id);
 
   if (display::Screen::GetScreen()->GetNumDisplays() > 0) {
     current_rotation_ =
@@ -167,6 +168,8 @@ void WebAppWindow::SetDelegate(WebAppWindowDelegate* webapp_window_delegate) {
 
 void WebAppWindow::SetHost(views::DesktopWindowTreeHost* host) {
   host_ = host;
+  if (window_surface_id_ && host_)
+    host_->SetWindowSurfaceId(window_surface_id_);
 
 #if defined(OS_WEBOS)
   if (host_)
@@ -585,7 +588,7 @@ void WebAppWindow::Restore() {
   webos_view_ = new WebOSView(this);
   webos_view_->Init(browser_context_);
   webos_view_->SetNativeEventDelegate(this);
-  (new WebOSWidget(webos_view_))->InitWebOSWidget(rect_);
+  (new WebOSWidget(webos_view_))->InitWebOSWidget(rect_, window_surface_id_);
 
   if (!host_)
     return;

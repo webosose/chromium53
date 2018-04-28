@@ -291,6 +291,9 @@ class VIEWS_EXPORT Widget : public internal::NativeWidgetDelegate,
     // be sent to the widget.
     bool wants_mouse_events_when_inactive = false;
 
+    // Surface ID used in IVI.
+    int surface_id = 0;
+
     // A map of properties applied to windows when running in mus.
     std::map<std::string, std::vector<uint8_t>> mus_properties;
   };

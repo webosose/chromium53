@@ -46,7 +46,7 @@ const gfx::FontList& WebOSWidget::GetTitleFontList() {
   return *title_font_list;
 }
 
-void WebOSWidget::InitWebOSWidget(const gfx::Rect& rect) {
+void WebOSWidget::InitWebOSWidget(const gfx::Rect& rect, int surface_id) {
   views::Widget::InitParams params;
   params.delegate = view_;
   params.native_widget = new WebOSNativeWidgetAura(this, view_);
@@ -55,6 +55,7 @@ void WebOSWidget::InitWebOSWidget(const gfx::Rect& rect) {
   params.opacity = views::Widget::InitParams::TRANSLUCENT_WINDOW;
   params.wm_role_name = "WebApp";
   params.remove_standard_frame = false;
+  params.surface_id = surface_id;
   set_frame_type(FRAME_TYPE_FORCE_NATIVE);
 
   Init(params);
