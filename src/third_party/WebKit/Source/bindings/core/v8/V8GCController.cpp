@@ -390,6 +390,11 @@ void V8GCController::gcEpilogue(v8::Isolate* isolate, v8::GCType type, v8::GCCal
             // because the above conservative GC is sufficient for collecting
             // most objects. So we intentionally don't schedule a precise GC here.
         }
+
+        // Schedules a precise GC for the next idle time period.
+        if (flags & v8::kGCCallbackScheduleIdleGarbageCollection) {
+            ThreadState::current()->scheduleIdleGC();
+        }
     }
 
     TRACE_EVENT_INSTANT1(TRACE_DISABLED_BY_DEFAULT("devtools.timeline"), "UpdateCounters", TRACE_EVENT_SCOPE_THREAD, "data", InspectorUpdateCountersEvent::data());

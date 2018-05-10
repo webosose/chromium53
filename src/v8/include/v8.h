@@ -6030,6 +6030,8 @@ enum GCType {
  *   - kGCCallbackFlagCollectAllAvailableGarbage: The GC callback is called
  *     in a phase where V8 is trying to collect all available garbage
  *     (e.g., handling a low memory notification).
+ *   - kGCCallbackScheduleIdleGarbageCollection: The GC callback is called to
+ *     trigger an idle garbage collection.
  */
 enum GCCallbackFlags {
   kNoGCCallbackFlags = 0,
@@ -6038,6 +6040,7 @@ enum GCCallbackFlags {
   kGCCallbackFlagSynchronousPhantomCallbackProcessing = 1 << 3,
   kGCCallbackFlagCollectAllAvailableGarbage = 1 << 4,
   kGCCallbackFlagCollectAllExternalMemory = 1 << 5,
+  kGCCallbackScheduleIdleGarbageCollection = 1 << 6,
 };
 
 typedef void (*GCCallback)(GCType type, GCCallbackFlags flags);
