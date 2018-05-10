@@ -39,6 +39,10 @@ IsolateHolder::IsolateHolder(AccessMode access_mode)
   params.code_event_handler = DebugImpl::GetJitCodeEventHandler();
   params.constraints.ConfigureDefaults(base::SysInfo::AmountOfPhysicalMemory(),
                                        base::SysInfo::AmountOfVirtualMemory());
+  // It passes now 0 values as params, but if each webapp wants to configure details
+  // for its own, the configured values have to be passed.
+  params.constraints.ConfigureDetails(0, 0, 0, 0);
+
   params.array_buffer_allocator = allocator;
   isolate_ = v8::Isolate::New(params);
   isolate_data_.reset(new PerIsolateData(isolate_, allocator));

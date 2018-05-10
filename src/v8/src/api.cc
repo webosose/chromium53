@@ -842,7 +842,11 @@ ResourceConstraints::ResourceConstraints()
       max_executable_size_(0),
       stack_limit_(NULL),
       code_range_size_(0),
-      max_zone_pool_size_(0) {}
+      max_zone_pool_size_(0),
+      min_allocation_limit_growing_step_size_(0),
+      high_fragmentation_slack_(0),
+      external_allocation_hard_limit_(0),
+      external_allocation_soft_limit_(0) {}
 
 void ResourceConstraints::ConfigureDefaults(uint64_t physical_memory,
                                             uint64_t virtual_memory_limit) {
@@ -905,6 +909,17 @@ void ResourceConstraints::ConfigureDefaults(uint64_t physical_memory,
 }
 
 
+void ResourceConstraints::ConfigureDetails(size_t min_allocation_limit_growing_step_size,
+                                           size_t high_fragmentation_slack,
+                                           int external_allocation_hard_limit,
+                                           int external_allocation_soft_limit) {
+  set_min_allocation_limit_growing_step_size(min_allocation_limit_growing_step_size);
+  set_high_fragmentation_slack(high_fragmentation_slack);
+  set_external_allocation_hard_limit(external_allocation_hard_limit);
+  set_external_allocation_soft_limit(external_allocation_soft_limit);
+}
+
+
 void SetResourceConstraints(i::Isolate* isolate,
                             const ResourceConstraints& constraints) {
   int semi_space_size = constraints.max_semi_space_size();
@@ -916,6 +931,10 @@ void SetResourceConstraints(i::Isolate* isolate,
       max_executable_size != 0 || code_range_size != 0) {
     isolate->heap()->ConfigureHeap(semi_space_size, old_space_size,
                                    max_executable_size, code_range_size);
+    isolate->heap()->ConfigureHeapDetails(constraints.min_allocation_limit_growing_step_size(),
+                                          constraints.high_fragmentation_slack(),
+                                          constraints.external_allocation_hard_limit(),
+                                          constraints.external_allocation_soft_limit());
   }
   isolate->allocator()->ConfigureSegmentPool(max_pool_size);
 

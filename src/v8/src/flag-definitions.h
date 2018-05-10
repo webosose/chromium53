@@ -707,6 +707,18 @@ DEFINE_BOOL(manual_evacuation_candidates_selection, false,
             "candidates pages (requires --stress_compaction).")
 DEFINE_BOOL(fast_promotion_new_space, false,
             "fast promote new space on high survival rates")
+DEFINE_BOOL(configure_heap_details, false,
+            "heap configurable values in detail")
+DEFINE_BOOL(trace_configure_heap_details, false,
+            "trace configure_heap_details")
+DEFINE_UINT(minimum_allocation_limit_growing_step_size, 0,
+            "minimum allocation limit growing step size for old generation")
+DEFINE_UINT(high_fragmentation_slack, 0,
+            "high fragmentation slack to trigger mark compact")
+DEFINE_UINT(external_allocation_hard_limit, 0,
+            "external allocation hard limit for external memory to trigger GC")
+DEFINE_UINT(external_allocation_soft_limit, 0,
+            "external allocation soft limit to set external memory limit after MarkCompact")
 
 // assembler-ia32.cc / assembler-arm.cc / assembler-x64.cc
 DEFINE_BOOL(debug_code, DEBUG_BOOL,

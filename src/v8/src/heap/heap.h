@@ -902,7 +902,19 @@ class Heap {
     global_ic_age_ = (global_ic_age_ + 1) & SharedFunctionInfo::ICAgeBits::kMax;
   }
 
-  int64_t external_memory_hard_limit() { return MaxOldGenerationSize() / 2; }
+  int64_t external_memory_hard_limit() {
+    if (FLAG_configure_heap_details) {
+      return external_allocation_hard_limit_ * MB;
+    }
+    return MaxOldGenerationSize() / 2;
+  }
+
+  int external_memory_soft_limit() {
+    if (FLAG_configure_heap_details) {
+      return external_allocation_soft_limit_ * MB;
+    }
+    return kExternalAllocationSoftLimit;
+  }
 
   int64_t external_memory() { return external_memory_; }
   void update_external_memory(int64_t delta) { external_memory_ += delta; }
@@ -997,6 +1009,10 @@ class Heap {
   bool ConfigureHeap(size_t max_semi_space_size, size_t max_old_space_size,
                      size_t max_executable_size, size_t code_range_size);
   bool ConfigureHeapDefault();
+  void ConfigureHeapDetails(size_t min_allocation_limit_growing_step_size,
+                            size_t high_fragmentation_slack,
+                            int external_allocation_hard_limit,
+                            int external_allocation_soft_limit);
 
   // Prepares the heap, setting up memory areas that are needed in the isolate
   // without actually creating any objects.
@@ -2163,6 +2179,11 @@ class Heap {
   size_t max_executable_size_;
   size_t maximum_committed_;
 
+  size_t min_allocation_limit_growing_step_size_;
+  size_t high_fragmentation_slack_;
+  int external_allocation_hard_limit_;
+  int external_allocation_soft_limit_;
+
   // For keeping track of how much data has survived
   // scavenge since last new space expansion.
   size_t survived_since_last_expansion_;
@@ -2343,6 +2364,7 @@ class Heap {
   // Flag is set when the heap has been configured.  The heap can be repeatedly
   // configured through the API until it is set up.
   bool configured_;
+  bool configured_details_;
 
   // Currently set GC flags that are respected by all GC components.
   int current_gc_flags_;
