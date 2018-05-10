@@ -1197,8 +1197,6 @@ const char kHideSelectionHandles[] = "hide-selection-handles";
 #if defined(BROWSER_COMMON)
 const char kInProcessZygote[]   = "in-process-zygote";
 
-const char kMaxImageSize[]      = "max-image-size";
-
 const char kRenderMemoryThreshold[] = "renderer-memory-threshold";
 #endif
 

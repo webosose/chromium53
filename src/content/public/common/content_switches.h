@@ -371,9 +371,6 @@ CONTENT_EXPORT extern const char kHideSelectionHandles[];
 // Suppress the Zygote process and fork main process to create render process
 CONTENT_EXPORT extern const char kInProcessZygote[];
 
-// Maximum sized image to be rendered in the page.
-CONTENT_EXPORT extern const char kMaxImageSize[];
-
 // Activate renderer swapping when memory usage crosses a defined limit.
 CONTENT_EXPORT extern const char kRenderMemoryThreshold[];
 #endif
