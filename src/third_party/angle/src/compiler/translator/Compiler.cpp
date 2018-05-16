@@ -202,6 +202,7 @@ TIntermNode *TCompiler::compileTreeImpl(const char *const shaderStrings[],
                                         const int compileOptions)
 {
     clearResults();
+    symbolTable.clearInvariantVaryings();
 
     ASSERT(numStrings > 0);
     ASSERT(GetGlobalPoolAllocator());
