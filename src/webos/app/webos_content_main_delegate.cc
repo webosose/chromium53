@@ -52,7 +52,11 @@ bool WebOSContentMainDelegate::BasicStartupComplete(int* exit_code) {
 }
 
 void WebOSContentMainDelegate::PreSandboxStartup() {
-  WebosResourceDelegate::InitializeResourceBundle();
+  base::CommandLine* parsedCommandLine = base::CommandLine::ForCurrentProcess();
+  std::string process_type =
+      parsedCommandLine->GetSwitchValueASCII(switches::kProcessType);
+  if (SubprocessNeedsResourceBundle(process_type))
+    WebosResourceDelegate::InitializeResourceBundle();
 }
 
 content::ContentBrowserClient*
