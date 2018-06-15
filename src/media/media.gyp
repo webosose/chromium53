@@ -1090,9 +1090,22 @@
             '../third_party/jsoncpp/jsoncpp.gyp:jsoncpp',
           ],
           'conditions': [
-            ['use_directmedia2==1', {
+            ['use_gst_media==1', {
+              'defines': [
+                # We should support only hardware video decoding.
+                'DISABLE_FFMPEG_VIDEO_DECODERS',
+              ],
+              'sources': [
+                'webos/base/media_apis_wrapper_gmp.cc',
+                'webos/base/media_apis_wrapper_gmp.h',
+              ],
+              'direct_dependent_settings': {
+                'defines': [
+                  'DISABLE_FFMPEG_VIDEO_DECODERS',
+                ],
+              },
               'dependencies': [
-                '../build/linux/system.gyp:libndl-directmedia2',
+                '../build/linux/system.gyp:gmp-player-client',
               ],
             }],
             ['enable_lg_svp!=0', {

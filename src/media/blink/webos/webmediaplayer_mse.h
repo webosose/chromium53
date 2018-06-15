@@ -24,7 +24,6 @@
 #include <vector>
 
 #include "media/blink/webmediaplayer_impl.h"
-#include "media/webos/base/media_apis_wrapper.h"
 #include "third_party/WebKit/public/platform/WebRect.h"
 #include "third_party/WebKit/public/platform/WebFloatPoint.h"
 
@@ -87,10 +86,15 @@ class MEDIA_BLINK_EXPORT WebMediaPlayerMSE : public WebMediaPlayerImpl {
     PausedStatus,
   };
 
+  // Notifies blink of the video size change.
+  void OnVideoSizeChange();
+
   const blink::WebFloatPoint additional_contents_scale_;
   std::string app_id_;
   StatusOnSuspended status_on_suspended_;
   bool is_suspended_;
+
+  bool pending_size_change_;
 
   scoped_refptr<media::MediaAPIsWrapper> media_apis_wrapper_;
   blink::WebRect previous_video_rect_;

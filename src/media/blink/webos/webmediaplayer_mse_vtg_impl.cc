@@ -8,6 +8,7 @@
 #include "cc/blink/web_layer_impl.h"
 #include "cc/layers/video_layer.h"
 #include "media/base/bind_to_current_loop.h"
+#include "media/webos/base/media_apis_wrapper.h"
 #include "third_party/WebKit/public/platform/WebMediaPlayerClient.h"
 
 #define INFO_LOG(format, ...)                                           \
@@ -55,11 +56,15 @@ WebMediaPlayerMSEVTGImpl::WebMediaPlayerMSEVTGImpl(
   video_frame_provider_vtg_->createVideoFrameHole();
 
   // Create MediaApis Wrapper
-  media_apis_wrapper_ = new media::MediaAPIsWrapper(
+  media_apis_wrapper_ = media::MediaAPIsWrapper::Create(
       media_task_runner_, client_->isVideo(), app_id_,
       BIND_TO_RENDER_LOOP_VIDEO_FRAME_PROVIDER(
           &VideoFrameProviderVTGImpl::activeRegionChanged),
       BIND_TO_RENDER_LOOP(&WebMediaPlayerMSEVTGImpl::OnError));
+
+  media_apis_wrapper_->SetActiveRegionCb(
+      BIND_TO_RENDER_LOOP_VIDEO_FRAME_PROVIDER(
+          &VideoFrameProviderVTGImpl::activeRegionChanged));
 
   renderer_factory_->SetMediaAPIsWrapper(media_apis_wrapper_);
   pipeline_.SetMediaAPIsWrapper(media_apis_wrapper_);
@@ -174,7 +179,7 @@ void WebMediaPlayerMSEVTGImpl::updateVideo(const blink::WebRect& rect,
         }
       } else {
         media_apis_wrapper_->SetDisplayWindow(scaled_rect_, scaled_in_rect_,
-                                              checked_fullscreen_);
+                                              checked_fullscreen_, false);
       }
     }
   }
@@ -309,7 +314,7 @@ void WebMediaPlayerMSEVTGImpl::OnScreenOrientationUpdate(
     video_frame_provider_vtg_->setActiveVideoRegionChanged(false);
     video_frame_provider_vtg_->setActiveVideoRegion(blink::WebRect());
     media_apis_wrapper_->SetDisplayWindow(scaled_rect_, scaled_in_rect_,
-                                          checked_fullscreen_);
+                                          checked_fullscreen_, false);
     video_frame_provider_vtg_->createVideoFrameHole();
   }
 }

@@ -70,10 +70,6 @@ class MEDIA_EXPORT DecoderBuffer
   // is disallowed.
   static scoped_refptr<DecoderBuffer> CreateEOSBuffer();
 
-#if defined(USE_DIRECTMEDIA2)
-  static scoped_refptr<DecoderBuffer> CreateNonEOSBuffer();
-#endif
-
   base::TimeDelta timestamp() const {
     DCHECK(!end_of_stream());
     return timestamp_;
@@ -152,15 +148,6 @@ class MEDIA_EXPORT DecoderBuffer
     return data_ == NULL;
   }
 
-#if defined(USE_DIRECTMEDIA2)
-  bool eos_for_directmedia() const {
-    if (is_empty_buff_eof_)
-      return data_ == NULL;
-    else
-      return false;
-  }
-#endif
-
   // Indicates this buffer is part of a splice around |splice_timestamp_|.
   // Returns kNoTimestamp() if the buffer is not part of a splice.
   base::TimeDelta splice_timestamp() const {
@@ -201,12 +188,7 @@ class MEDIA_EXPORT DecoderBuffer
   DecoderBuffer(const uint8_t* data,
                 size_t size,
                 const uint8_t* side_data,
-#if defined(USE_DIRECTMEDIA2)
-                size_t side_data_size,
-                bool is_empty_buff_eof = true);
-#else
                 size_t side_data_size);
-#endif
   virtual ~DecoderBuffer();
 
  private:
@@ -221,9 +203,6 @@ class MEDIA_EXPORT DecoderBuffer
   DiscardPadding discard_padding_;
   base::TimeDelta splice_timestamp_;
   bool is_key_frame_;
-#if defined(USE_DIRECTMEDIA2)
-  bool is_empty_buff_eof_;
-#endif
 
   // Constructor helper method for memory allocations.
   void Initialize();

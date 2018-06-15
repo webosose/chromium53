@@ -67,8 +67,8 @@
       ['use_npapi_plugin_external_path==1', {
         'defines': ['USE_NPAPI_PLUGIN_EXTERNAL_PATH=1'],
       }],
-      ['use_directmedia2==1', {
-        'defines': ['USE_DIRECTMEDIA2=1'],
+      ['use_gst_media==1', {
+        'defines': ['USE_GST_MEDIA=1'],
       }],
       ['use_webos_media_focus_extension==1', {
         'defines': ['USE_WEBOS_MEDIA_FOCUS_EXTENSION=1'],

@@ -386,22 +386,9 @@ void DecoderStream<StreamType>::DecodeInternal(
 
 template <DemuxerStream::Type StreamType>
 void DecoderStream<StreamType>::FlushDecoder() {
-#if defined(USE_DIRECTMEDIA2)
-  // For directmedia, we create a special buffer that acts like
-  // and EOS buffer as far as chromium is concerned, but
-  // the eos_for_directmedia() function will return false
-  // even though end_of_stream() returns true on this buffer.
-  // For a real EOS, both these functions return true.
-  // MediaAPIsWrapper will always call eos_for_directmedia()
-  // so that it will not send an incorrect EOS flag to
-  // directmedia when a decoder flush gets called for
-  // an adaptive bitrate change.
-  DecodeInternal(DecoderBuffer::CreateNonEOSBuffer());
-#else
   // Send the EOS directly to the decoder, bypassing a potential add to
   // |pending_buffers_|.
   DecodeInternal(DecoderBuffer::CreateEOSBuffer());
-#endif
 }
 
 template <DemuxerStream::Type StreamType>

@@ -11,6 +11,7 @@
 #include "media/base/renderer_factory.h"
 #include "media/blink/webaudiosourceprovider_impl.h"
 #include "media/blink/webcontentdecryptionmodule_impl.h"
+#include "media/webos/base/media_apis_wrapper.h"
 #include "third_party/WebKit/public/platform/WebMediaPlayerClient.h"
 
 #define INFO_LOG(format, ...) \
@@ -51,7 +52,8 @@ WebMediaPlayerMSE::WebMediaPlayerMSE(
       additional_contents_scale_(additional_contents_scale),
       app_id_(app_id.utf8().data()),
       status_on_suspended_(UnknownStatus),
-      is_suspended_(false) {
+      is_suspended_(false),
+      pending_size_change_(false) {
   previous_video_rect_ = blink::WebRect(-1, -1, -1, -1);
 
   // Use the null sink for our MSE player
@@ -59,9 +61,12 @@ WebMediaPlayerMSE::WebMediaPlayerMSE(
       new media::NullAudioSink(media_task_runner_));
 
   // Create MediaApis Wrapper
-  media_apis_wrapper_ = new media::MediaAPIsWrapper(
+  media_apis_wrapper_ = media::MediaAPIsWrapper::Create(
       media_task_runner_, client_->isVideo(), app_id_,
       BIND_TO_RENDER_LOOP(&WebMediaPlayerMSE::OnError));
+
+  media_apis_wrapper_->SetSizeChangeCb(
+      BIND_TO_RENDER_LOOP(&WebMediaPlayerMSE::OnVideoSizeChange));
 
   renderer_factory_->SetMediaAPIsWrapper(media_apis_wrapper_);
   pipeline_.SetMediaAPIsWrapper(media_apis_wrapper_);
@@ -146,9 +151,9 @@ void WebMediaPlayerMSE::updateVideo(
   DCHECK(main_task_runner_->BelongsToCurrentThread());
 
   blink::WebRect scaled_rect = scaleWebRect(rect, additional_contents_scale_);
-  if (previous_video_rect_ != scaled_rect) {
-    if (pipeline_metadata_.natural_size == gfx::Size())
-      return;
+  if (pending_size_change_ || previous_video_rect_ != scaled_rect) {
+    bool forced = pending_size_change_;
+    pending_size_change_ = false;
     previous_video_rect_ = scaled_rect;
 
     bool checked_fullscreen = fullScreen;
@@ -216,9 +221,10 @@ void WebMediaPlayerMSE::updateVideo(
       scaled_rect.height = clipped_height;
     }
 
-    if (media_apis_wrapper_)
+    if (media_apis_wrapper_) {
       media_apis_wrapper_->SetDisplayWindow(scaled_rect, scaled_in_rect,
-                                            checked_fullscreen);
+                                            checked_fullscreen, forced);
+    }
   }
 }
 
@@ -294,6 +300,10 @@ void WebMediaPlayerMSE::resume() {
   }
 }
 
+void WebMediaPlayerMSE::OnVideoSizeChange() {
+  pending_size_change_ = true;
+}
+
 // helpers
 blink::WebRect WebMediaPlayerMSE::scaleWebRect(
     const blink::WebRect& rect, blink::WebFloatPoint scale) {
@@ -308,6 +318,11 @@ blink::WebRect WebMediaPlayerMSE::scaleWebRect(
 }
 
 void WebMediaPlayerMSE::paintTimerFired() {
+  if (pending_size_change_) {
+    client_->repaint();
+    client_->sizeChanged();
+  }
+
   client_->checkBounds();
 }
 

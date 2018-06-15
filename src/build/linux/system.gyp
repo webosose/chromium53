@@ -842,20 +842,20 @@
         },
       ],
     }],
-    ['use_umediaserver==1 and use_directmedia2==1', {
+    ['use_umediaserver==1 and use_gst_media==1', {
       'targets': [
          {
-           'target_name': 'libndl-directmedia2',
+           'target_name': 'gmp-player-client',
            'type': 'none',
            'toolsets': ['target'],
            'direct_dependent_settings': {
              'cflags': [
-               '<!@(<(pkg-config) --cflags libndl-directmedia2)'
+               '<!@(<(pkg-config) --cflags gmp-player-client)'
              ],
            },
            'link_settings': {
              'libraries': [
-               '<!@(<(pkg-config) --libs-only-l libndl-directmedia2)',
+               '<!@(<(pkg-config) --libs-only-l gmp-player-client)',
              ],
            },
          },

@@ -23,17 +23,8 @@ DecoderBuffer::DecoderBuffer(size_t size)
 DecoderBuffer::DecoderBuffer(const uint8_t* data,
                              size_t size,
                              const uint8_t* side_data,
-#if defined(USE_DIRECTMEDIA2)
-                             size_t side_data_size,
-                             bool is_empty_buff_eof)
-    : size_(size),
-      side_data_size_(side_data_size),
-      is_key_frame_(false),
-      is_empty_buff_eof_(is_empty_buff_eof) {
-#else
                              size_t side_data_size)
     : size_(size), side_data_size_(side_data_size), is_key_frame_(false) {
-#endif
   if (!data) {
     CHECK_EQ(size_, 0u);
     CHECK(!side_data);
@@ -86,12 +77,6 @@ scoped_refptr<DecoderBuffer> DecoderBuffer::CopyFrom(const uint8_t* data,
 scoped_refptr<DecoderBuffer> DecoderBuffer::CreateEOSBuffer() {
   return make_scoped_refptr(new DecoderBuffer(NULL, 0, NULL, 0));
 }
-
-#if defined(USE_DIRECTMEDIA2)
-scoped_refptr<DecoderBuffer> DecoderBuffer::CreateNonEOSBuffer() {
-  return make_scoped_refptr(new DecoderBuffer(NULL, 0, NULL, 0, false));
-}
-#endif
 
 std::string DecoderBuffer::AsHumanReadableString() {
   if (end_of_stream()) {

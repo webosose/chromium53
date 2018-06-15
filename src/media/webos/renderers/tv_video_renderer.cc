@@ -431,7 +431,7 @@ bool TvVideoRenderer::HaveEnoughData_Locked() {
   if (received_end_of_stream_ && media_apis_wrapper_->IsEOSReceived())
     return true;
 
-  if (HaveReachedBufferingCap() && !media_apis_wrapper_->allowedFeedVideo())
+  if (HaveReachedBufferingCap() && !media_apis_wrapper_->AllowedFeedVideo())
     return true;
 
   if (was_background_rendering_ && frames_decoded_)
@@ -482,10 +482,12 @@ void TvVideoRenderer::AttemptRead_Locked() {
   DCHECK(task_runner_->BelongsToCurrentThread());
   lock_.AssertAcquired();
 
-  if (pending_read_ || (received_end_of_stream_ && media_apis_wrapper_->IsEOSReceived()))
+  if (pending_read_ ||
+      (received_end_of_stream_ && media_apis_wrapper_->IsEOSReceived())) {
     return;
+  }
 
-  if (HaveReachedBufferingCap() && !media_apis_wrapper_->allowedFeedVideo())
+  if (HaveReachedBufferingCap() && !media_apis_wrapper_->AllowedFeedVideo())
     return;
 
   switch (state_) {

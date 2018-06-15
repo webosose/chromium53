@@ -121,9 +121,9 @@
             'webos/webmediaplayer_mse.h',
           ],
         }],
-        ['webos!=0 and use_umediaserver==1 and use_directmedia2==1', {
+        ['webos!=0 and use_umediaserver==1 and use_gst_media==1', {
           'dependencies': [
-            '../../build/linux/system.gyp:libndl-directmedia2',
+            '../../build/linux/system.gyp:gmp-player-client',
           ],
         }],
       ],

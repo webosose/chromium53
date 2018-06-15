@@ -246,6 +246,11 @@ void RendererImpl::SetVolume(float volume) {
 
   if (audio_renderer_)
     audio_renderer_->SetVolume(volume);
+
+#if defined(OS_WEBOS) && defined(USE_UMEDIASERVER)
+  if (media_apis_wrapper_)
+    media_apis_wrapper_->SetPlaybackVolume(volume);
+#endif
 }
 
 base::TimeDelta RendererImpl::GetMediaTime() {

@@ -46,8 +46,8 @@
       # Should a hole for plug-ins be punched
       'punch_hole_for_plugins%': 0,
 
-      # Use DirectMedia2
-      'use_directmedia2%': 0,
+      # Enable using gstreamer media pipeline.
+      'use_gst_media%': 0,
 
       # Use WebOS Media Focus Extension
       'use_webos_media_focus_extension%': 0,
@@ -79,7 +79,7 @@
     'enable_widevine_cdm%': '<(enable_widevine_cdm)',
     'enable_lg_svp%': '<(enable_lg_svp)',
     'punch_hole_for_plugins%': '<(punch_hole_for_plugins)',
-    'use_directmedia2%': '<(use_directmedia2)',
+    'use_gst_media%': '<(use_gst_media)',
     'use_webos_media_focus_extension%': '<(use_webos_media_focus_extension)',
     'use_webos_surface%': '<(use_webos_surface)',
     'enable_vp9%': '<(enable_vp9)',
