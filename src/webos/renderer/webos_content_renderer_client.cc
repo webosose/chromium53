@@ -83,6 +83,7 @@ bool WebOSContentRendererClient::ShouldSuppressErrorPage(
       WebOsNetErrorHelper::Get(render_frame)->ShouldSuppressErrorPage(url)) {
     return true;
   }
+  return false;
 }
 
 void WebOSContentRendererClient::RenderFrameCreated(
