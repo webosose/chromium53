@@ -125,6 +125,8 @@ int WebOSBrowserMainParts::PreCreateThreads() {
 
   for (size_t i = 0; i < webos_extra_parts_.size(); ++i)
     webos_extra_parts_[i]->PreCreateThreads();
+
+  return 0;
 }
 
 void WebOSBrowserMainParts::PostDestroyThreads() {
