@@ -856,8 +856,9 @@ IPC_MESSAGE_ROUTED1(ViewMsg_ReplaceBaseURL,
                     GURL)
 IPC_MESSAGE_ROUTED1(ViewMsg_DropAllPeerConnections,
                     content::DropPeerConnectionReason)
-IPC_MESSAGE_ROUTED1(ViewMsg_SetUseLaunchOptimization,
-                    bool /* enabled */)
+IPC_MESSAGE_ROUTED2(ViewMsg_SetUseLaunchOptimization,
+                    bool /* enabled */,
+                    int  /* delayMs */)
 IPC_MESSAGE_ROUTED1(ViewMsg_SetBlockWriteDiskcache, bool /* blocked */)
 IPC_MESSAGE_ROUTED0(ViewMsg_ResetStateToMarkNextPaintForContainer)
 

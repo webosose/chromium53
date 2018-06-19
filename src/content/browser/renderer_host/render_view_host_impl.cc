@@ -613,8 +613,8 @@ void RenderViewHostImpl::ClosePageIgnoringUnloadEvents() {
   delegate_->Close(this);
 }
 
-void RenderViewHostImpl::SetUseLaunchOptimization(bool enabled) {
-  Send(new ViewMsg_SetUseLaunchOptimization(GetRoutingID(), enabled));
+void RenderViewHostImpl::SetUseLaunchOptimization(bool enabled, int delayMs) {
+  Send(new ViewMsg_SetUseLaunchOptimization(GetRoutingID(), enabled, delayMs));
 }
 
 void RenderViewHostImpl::SetBlockWriteDiskcache(bool blocked) {

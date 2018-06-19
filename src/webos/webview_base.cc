@@ -136,8 +136,8 @@ void WebViewBase::SetAcceptLanguages(const std::string& languages) {
   m_webview->SetAcceptLanguages(languages);
 }
 
-void WebViewBase::SetUseLaunchOptimization(bool enabled) {
-  m_webview->SetUseLaunchOptimization(enabled);
+void WebViewBase::SetUseLaunchOptimization(bool enabled, int delayMs) {
+  m_webview->SetUseLaunchOptimization(enabled, delayMs);
 }
 
 void WebViewBase::SetUseEnyoOptimization(bool enabled) {

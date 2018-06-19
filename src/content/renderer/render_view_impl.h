@@ -707,7 +707,7 @@ class CONTENT_EXPORT RenderViewImpl
   void OnPageWasShown();
 
   void SetPreferredLanguages(const std::string& languages);
-  void OnSetUseLaunchOptimization(bool enabled);
+  void OnSetUseLaunchOptimization(bool enabled, int delayMs);
   void OnResetStateToMarkNextPaintForContainer();
   void OnSetBlockWriteDiskcache(bool blocked);
   void OnDropAllPeerConnections(DropPeerConnectionReason reason);
@@ -987,6 +987,9 @@ class CONTENT_EXPORT RenderViewImpl
   bool dom_suspended_;
 
   bool block_write_diskcache_;
+
+  // Timer used to delay optimizing compiler(crankshaft) on.
+  base::OneShotTimer optimizing_compiler_on_timer_;
 
   // ---------------------------------------------------------------------------
   // ADDING NEW DATA? Please see if it fits appropriately in one of the above

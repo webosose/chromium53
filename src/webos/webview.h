@@ -121,7 +121,7 @@ class WebView : public content::WebContentsDelegate,
   void SetShouldSuppressDialogs(bool suppress);
   void SetAppId(const std::string& appId);
   void SetAcceptLanguages(const std::string& languages);
-  void SetUseLaunchOptimization(bool enabled);
+  void SetUseLaunchOptimization(bool enabled, int delayMs);
   void SetUseEnyoOptimization(bool enabled);
   void SetBlockWriteDiskcache(bool blocked);
   void SetTransparentBackground(bool enable);

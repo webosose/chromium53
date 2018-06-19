@@ -123,7 +123,7 @@ class WEBOS_EXPORT WebViewBase : public WebViewDelegate {
   content::WebContents* GetWebContents();
 
   //RenderViewHost
-  void SetUseLaunchOptimization(bool enabled);
+  void SetUseLaunchOptimization(bool enabled, int delayMs);
   void SetUseEnyoOptimization(bool enabled);
   void SetBlockWriteDiskcache(bool blocked);
   void SetTransparentBackground(bool enabled);

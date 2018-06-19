@@ -164,7 +164,7 @@ class CONTENT_EXPORT RenderViewHostImpl : public RenderViewHost,
   void ResumeDOM() override;
   void ContentsPositionChanged(float position) override;
 
-  void SetUseLaunchOptimization(bool enabled) override;
+  void SetUseLaunchOptimization(bool enabled, int delayMs) override;
   void SetBlockWriteDiskcache(bool blocked) override;
   void ResetStateToMarkNextPaintForContainer() override;
 

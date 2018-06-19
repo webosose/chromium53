@@ -427,10 +427,10 @@ void WebView::SetAcceptLanguages(const std::string& languages) {
   PushStateToIOThread();
 }
 
-void WebView::SetUseLaunchOptimization(bool enabled) {
+void WebView::SetUseLaunchOptimization(bool enabled, int delayMs) {
   content::RenderViewHost* rvh = m_webContents->GetRenderViewHost();
   if (rvh)
-    rvh->SetUseLaunchOptimization(enabled);
+    rvh->SetUseLaunchOptimization(enabled, delayMs);
 }
 
 void WebView::SetUseEnyoOptimization(bool enabled) {

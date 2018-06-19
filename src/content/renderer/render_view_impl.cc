@@ -308,6 +308,7 @@ static base::LazyInstance<RoutingIDViewMap> g_routing_id_view_map =
 // better than having to wake up all renderers during shutdown.
 const int kDelaySecondsForContentStateSyncHidden = 5;
 const int kDelaySecondsForContentStateSync = 1;
+const int kDelayMsForMininumLaunchOptmization = 0;
 
 #if defined(OS_ANDROID)
 // Delay between tapping in content and launching the associated android intent.
@@ -1615,13 +1616,23 @@ void RenderViewImpl::SetPreferredLanguages(const std::string& languages) {
     webview()->setPreferredLanguages(preferred_languages);
 }
 //for launching time optimization. while app is launching, flag is true (after then, flag is false)
-void RenderViewImpl::OnSetUseLaunchOptimization(bool enabled) {
+void RenderViewImpl::OnSetUseLaunchOptimization(bool enabled, int delayMs) {
   //Disable Crankshaft while app loading, And Enable Crankshaft after app loaded.
   v8::Isolate* isolate = v8::Isolate::GetCurrent();
   if (!isolate)
     return;
 
-  isolate->SetLaunchOptimization(enabled);
+  if (optimizing_compiler_on_timer_.IsRunning()) {
+    optimizing_compiler_on_timer_.Stop();
+  }
+
+  if (delayMs <= kDelayMsForMininumLaunchOptmization) {
+    isolate->SetLaunchOptimization(enabled);
+  } else {
+    optimizing_compiler_on_timer_.Start(FROM_HERE, TimeDelta::FromMilliseconds(delayMs),
+        base::Bind(&v8::Isolate::SetLaunchOptimization,
+                    base::Unretained(isolate), enabled));
+  }
 }
 
 void RenderViewImpl::OnSetBlockWriteDiskcache(bool blocked) {

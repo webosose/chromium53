@@ -226,7 +226,7 @@ class CONTENT_EXPORT RenderViewHost : public IPC::Sender {
   virtual void ResumeDOM() = 0;
   virtual void ContentsPositionChanged(float position) = 0;
 
-  virtual void SetUseLaunchOptimization(bool enabled) = 0;
+  virtual void SetUseLaunchOptimization(bool enabled, int delayMs) = 0;
   virtual void SetBlockWriteDiskcache(bool blocked) = 0;
   virtual void ResetStateToMarkNextPaintForContainer() = 0;
 
