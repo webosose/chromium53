@@ -353,28 +353,12 @@ void WaylandDisplay::FlushDisplay() {
   wl_display_flush(display_);
 }
 
-void WaylandDisplay::DestroyWindow(unsigned w) {
-  std::map<unsigned, WaylandWindow*>::const_iterator it = widget_map_.find(w);
-  WaylandWindow* widget = it == widget_map_.end() ? NULL : it->second;
-  DCHECK(widget);
-
-  if (widget) {
-    RAW_PMLOG_INFO(
-        "WebOSWebView",
-        "Wayland Window(id:%d widget:%p) will be destroyed. at %s(%d)", w,
-        widget, __FUNCTION__, __LINE__);
-  }
-
-  delete widget;
-  widget_map_.erase(w);
-}
-
 intptr_t WaylandDisplay::GetNativeWindow(unsigned window_handle) {
   WaylandWindow* widget = GetWidget(window_handle);
   DCHECK(widget);
   if (!widget) {
     // widget may be destroyed on OnDestroyCommandBuffer caused by parse errors
-    widget = CreateAcceleratedSurface(window_handle);
+    widget = CreateWindow(window_handle);
     Dispatch(new WaylandWindow_ReInitialize(window_handle));
   }
 
@@ -514,7 +498,7 @@ void WaylandDisplay::InitializeDisplay() {
   display_poll_thread_ = new WaylandDisplayPollThread(display_);
 }
 
-WaylandWindow* WaylandDisplay::CreateAcceleratedSurface(unsigned w) {
+WaylandWindow* WaylandDisplay::CreateWindow(unsigned w) {
   WaylandWindow* window = new WaylandWindow(w);
   widget_map_[w] = window;
 
@@ -523,6 +507,22 @@ WaylandWindow* WaylandDisplay::CreateAcceleratedSurface(unsigned w) {
                  window, __FUNCTION__, __LINE__);
 
   return window;
+}
+
+void WaylandDisplay::DestroyWindow(unsigned w) {
+  std::map<unsigned, WaylandWindow*>::const_iterator it = widget_map_.find(w);
+  WaylandWindow* widget = it == widget_map_.end() ? NULL : it->second;
+  DCHECK(widget);
+
+  if (widget) {
+    RAW_PMLOG_INFO(
+        "WebOSWebView",
+        "Wayland Window(id:%d widget:%p) will be destroyed. at %s(%d)", w,
+        widget, __FUNCTION__, __LINE__);
+  }
+
+  delete widget;
+  widget_map_.erase(w);
 }
 
 void WaylandDisplay::StartProcessingEvents() {
@@ -669,7 +669,7 @@ void WaylandDisplay::SetWidgetTitle(unsigned w, const base::string16& title) {
 
 void WaylandDisplay::CreateWidget(unsigned widget) {
   DCHECK(!GetWidget(widget));
-  CreateAcceleratedSurface(widget);
+  CreateWindow(widget);
 }
 
 void WaylandDisplay::InitWindow(unsigned handle,
@@ -956,6 +956,7 @@ bool WaylandDisplay::OnMessageReceived(const IPC::Message& message) {
   IPC_MESSAGE_HANDLER(WaylandDisplay_State, SetWidgetState)
   IPC_MESSAGE_HANDLER(WaylandDisplay_Create, CreateWidget)
   IPC_MESSAGE_HANDLER(WaylandDisplay_InitWindow, InitWindow)
+  IPC_MESSAGE_HANDLER(WaylandDisplay_DestroyWindow, DestroyWindow)
   IPC_MESSAGE_HANDLER(WaylandDisplay_MoveWindow, MoveWindow)
   IPC_MESSAGE_HANDLER(WaylandDisplay_Title, SetWidgetTitle)
   IPC_MESSAGE_HANDLER(WaylandDisplay_AddRegion, AddRegion)

@@ -262,6 +262,9 @@ IPC_MESSAGE_CONTROL5(WaylandDisplay_InitWindow,  // NOLINT(readability/fn_size)
                      int /* y */,
                      ui::WidgetType /* window type */)
 
+IPC_MESSAGE_CONTROL1(WaylandDisplay_DestroyWindow,  // NOLINT(readability/fn_size)
+                     unsigned /* window handle */)
+
 IPC_MESSAGE_CONTROL4(WaylandDisplay_MoveWindow,  // NOLINT(readability/fn_size)
                      unsigned /* window handle */,
                      unsigned /* window parent */,

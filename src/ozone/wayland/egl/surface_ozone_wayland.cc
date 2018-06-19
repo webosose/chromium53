@@ -17,8 +17,11 @@ SurfaceOzoneWayland::SurfaceOzoneWayland(unsigned handle)
 }
 
 SurfaceOzoneWayland::~SurfaceOzoneWayland() {
-  WaylandDisplay::GetInstance()->DestroyWindow(handle_);
-  WaylandDisplay::GetInstance()->FlushDisplay();
+  WaylandWindow* window = WaylandDisplay::GetInstance()->GetWindow(handle_);
+  if (window) {
+    window->DestroyAcceleratedWidget();
+    WaylandDisplay::GetInstance()->FlushDisplay();
+  }
 }
 
 intptr_t SurfaceOzoneWayland::GetNativeWindow() {

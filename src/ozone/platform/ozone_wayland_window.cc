@@ -111,6 +111,7 @@ OzoneWaylandWindow::OzoneWaylandWindow(PlatformWindowDelegate* delegate,
 OzoneWaylandWindow::~OzoneWaylandWindow() {
   sender_->RemoveChannelObserver(this);
   PlatformEventSource::GetInstance()->RemovePlatformEventDispatcher(this);
+  sender_->Send(new WaylandDisplay_DestroyWindow(handle_));
   if (region_)
     delete region_;
 }

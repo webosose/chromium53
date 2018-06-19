@@ -224,6 +224,11 @@ void WaylandWindow::RealizeAcceleratedWidget() {
                             allocation_.height());
 }
 
+void WaylandWindow::DestroyAcceleratedWidget() {
+  delete window_;
+  window_ = nullptr;
+}
+
 wl_egl_window* WaylandWindow::egl_window() const {
   DCHECK(window_);
   return window_->egl_window();
