@@ -48,7 +48,7 @@ WaylandShell::CreateShellSurface(WaylandWindow* window,
   WaylandShellSurface* surface = NULL;
   if (ivi_application_)
     surface = new IVIShellSurface();
-  if (xdg_shell_)
+  if (xdg_shell_ && !surface)
     surface = new XDGShellSurface();
 #if defined(OS_WEBOS)
   if (webos_shell_ && !surface)
