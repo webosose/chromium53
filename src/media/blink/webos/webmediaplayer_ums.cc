@@ -631,7 +631,7 @@ void WebMediaPlayerUMS::updateVideo(const blink::WebRect& rect,
         clipped_height = display_rect.height;
 
       gfx::Size natural_size = umedia_client_->naturalVideoSize();
-      if (natural_size == gfx::Size()) {
+      if (natural_size == gfx::Size() && !forced) {
         previous_video_rect_ = blink::WebRect();
         return;
       }
@@ -912,6 +912,7 @@ void WebMediaPlayerUMS::OnDurationChange() {
 }
 
 void WebMediaPlayerUMS::OnVideoSizeChange() {
+  DEBUG_LOG("%s", __FUNCTION__);
   pending_size_change_ = true;
 }
 

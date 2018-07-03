@@ -114,7 +114,10 @@ void UMediaClientImpl::load(bool video,
   updated_payload_ = updateMediaOption(payload, current_time_);
 
   using std::placeholders::_1;
-  set_source_info_callback(std::bind(&UMediaClientImpl::onSourceInfoCb, this, _1));
+  set_source_info_callback(
+      std::bind(&UMediaClientImpl::onSourceInfo, this, _1));
+  set_video_info_callback(std::bind(&UMediaClientImpl::onVideoInfo, this, _1));
+  set_audio_info_callback(std::bind(&UMediaClientImpl::onAudioInfo, this, _1));
 
   if (use_pipeline_preload_) {
     uMediaServer::uMediaClient::preload(url_.c_str(), kMedia,
@@ -249,7 +252,8 @@ void UMediaClientImpl::dispatchLoadCompleted() {
   DEBUG_LOG("%s", __FUNCTION__);
   loaded_ = true;
 
-  update_ums_info_cb_.Run(mediaInfoToJson(NotifyLoadCompleted));
+  if (!update_ums_info_cb_.is_null())
+    update_ums_info_cb_.Run(mediaInfoToJson(NotifyLoadCompleted));
 
   if (isNotSupportedSourceInfo()) {
     has_audio_ = true;
@@ -280,7 +284,8 @@ void UMediaClientImpl::dispatchPreloadCompleted() {
 
   preloaded_ = true;
 
-  update_ums_info_cb_.Run(mediaInfoToJson(NotifyPreloadCompleted));
+  if (!update_ums_info_cb_.is_null())
+    update_ums_info_cb_.Run(mediaInfoToJson(NotifyPreloadCompleted));
 
   if (isNotSupportedSourceInfo()) {
     has_audio_ = true;
@@ -310,8 +315,10 @@ void UMediaClientImpl::dispatchPlaying() {
   SetPlaybackVolume(volume_, true);
   requests_play_ = false;
 
-  playback_state_cb_.Run(true);
-  update_ums_info_cb_.Run(mediaInfoToJson(NotifyPlaying));
+  if (!playback_state_cb_.is_null())
+    playback_state_cb_.Run(true);
+  if (!update_ums_info_cb_.is_null())
+    update_ums_info_cb_.Run(mediaInfoToJson(NotifyPlaying));
 }
 
 bool UMediaClientImpl::onPaused() {
@@ -327,7 +334,8 @@ void UMediaClientImpl::dispatchPaused() {
   playback_rate_on_paused_ = playback_rate_;
   playback_rate_ = 0.f;
 
-  playback_state_cb_.Run(false);
+  if (!playback_state_cb_.is_null())
+    playback_state_cb_.Run(false);
 }
 
 bool UMediaClientImpl::onEndOfStream() {
@@ -345,8 +353,11 @@ void UMediaClientImpl::dispatchEndOfStream() {
     current_time_ = (playback_rate_ < 0) ? 0. : duration_;
 
   playback_rate_ = 0.0f;
-  ended_cb_.Run();
-  update_ums_info_cb_.Run(mediaInfoToJson(NotifyEndOfStream));
+  if (!ended_cb_.is_null())
+    ended_cb_.Run();
+
+  if (!update_ums_info_cb_.is_null())
+    update_ums_info_cb_.Run(mediaInfoToJson(NotifyEndOfStream));
 }
 
 bool UMediaClientImpl::onSeekDone() {
@@ -363,7 +374,8 @@ bool UMediaClientImpl::onSeekDone() {
 void UMediaClientImpl::dispatchSeekDone() {
   if (!seek_cb_.is_null())
     base::ResetAndReturn(&seek_cb_).Run(media::PIPELINE_OK);
-  update_ums_info_cb_.Run(mediaInfoToJson(NotifySeekDone));
+  if (!update_ums_info_cb_.is_null())
+    update_ums_info_cb_.Run(mediaInfoToJson(NotifySeekDone));
 }
 
 bool UMediaClientImpl::onCurrentTime(int64_t currentTime) {
@@ -396,6 +408,44 @@ void UMediaClientImpl::dispatchBufferRange(
   }
 }
 
+#if UMS_INTERNAL_API_VERSION == 2
+bool UMediaClientImpl::onVideoInfo(const struct ums::video_info_t& videoInfo) {
+  media_task_runner_->PostTask(
+      FROM_HERE,
+      base::Bind(&UMediaClientImpl::dispatchVideoInfo, AsWeakPtr(), videoInfo));
+  return true;
+}
+
+void UMediaClientImpl::dispatchVideoInfo(
+    const struct ums::video_info_t& videoInfo) {
+  DEBUG_LOG("%s", __FUNCTION__);
+  has_video_ = true;
+  gfx::Size naturalVideoSize(videoInfo.width, videoInfo.height);
+
+  if (natural_video_size_ != naturalVideoSize) {
+    natural_video_size_ = naturalVideoSize;
+    if (!video_size_change_cb_.is_null())
+      video_size_change_cb_.Run();
+  }
+
+  if (!update_ums_info_cb_.is_null())
+    update_ums_info_cb_.Run(mediaInfoToJson(videoInfo));
+}
+
+bool UMediaClientImpl::onAudioInfo(const struct ums::audio_info_t& audioInfo) {
+  media_task_runner_->PostTask(
+      FROM_HERE,
+      base::Bind(&UMediaClientImpl::dispatchAudioInfo, AsWeakPtr(), audioInfo));
+  return true;
+}
+
+void UMediaClientImpl::dispatchAudioInfo(
+    const struct ums::audio_info_t& audioInfo) {
+  has_audio_ = true;
+  if (!update_ums_info_cb_.is_null())
+    update_ums_info_cb_.Run(mediaInfoToJson(audioInfo));
+}
+#else  // UMS_INTERNAL_API_VERSION == 2
 bool UMediaClientImpl::onVideoInfo(
     const struct uMediaServer::video_info_t& videoInfo) {
   media_task_runner_->PostTask(
@@ -416,7 +466,8 @@ void UMediaClientImpl::dispatchVideoInfo(
     if (!video_size_change_cb_.is_null())
       video_size_change_cb_.Run();
   }
-  update_ums_info_cb_.Run(mediaInfoToJson(videoInfo));
+  if (!update_ums_info_cb_.is_null())
+    update_ums_info_cb_.Run(mediaInfoToJson(videoInfo));
 }
 
 bool UMediaClientImpl::onAudioInfo(
@@ -431,31 +482,22 @@ bool UMediaClientImpl::onAudioInfo(
 void UMediaClientImpl::dispatchAudioInfo(
     const struct uMediaServer::audio_info_t& audioInfo) {
   has_audio_ = true;
-  update_ums_info_cb_.Run(mediaInfoToJson(audioInfo));
+  if (!update_ums_info_cb_.is_null())
+    update_ums_info_cb_.Run(mediaInfoToJson(audioInfo));
 }
+#endif
 
 #if UMS_INTERNAL_API_VERSION == 2
-bool UMediaClientImpl::onSourceInfoCb(const struct ums::source_info_t& sourceInfo) {
-  media_task_runner_->PostTask(
-      FROM_HERE,
-      base::Bind(&UMediaClientImpl::dispatchSourceInfo2,
-                 AsWeakPtr(), sourceInfo));
-  return true;
-}
-#else
-bool UMediaClientImpl::onSourceInfoCb(
-    const struct uMediaServer::source_info_t& sourceInfo) {
+bool UMediaClientImpl::onSourceInfo(
+    const struct ums::source_info_t& sourceInfo) {
   media_task_runner_->PostTask(
       FROM_HERE,
       base::Bind(&UMediaClientImpl::dispatchSourceInfo,
                  AsWeakPtr(), sourceInfo));
   return true;
 }
-#endif
 
-
-#if UMS_INTERNAL_API_VERSION == 2
-void UMediaClientImpl::dispatchSourceInfo2(
+void UMediaClientImpl::dispatchSourceInfo(
     const struct ums::source_info_t& sourceInfo) {
   DEBUG_LOG("%s", __FUNCTION__);
 
@@ -503,9 +545,18 @@ void UMediaClientImpl::dispatchSourceInfo2(
   }
   updated_source_info_ = true;
 
-  update_ums_info_cb_.Run(mediaInfoToJson(sourceInfo));
+  if (!update_ums_info_cb_.is_null())
+    update_ums_info_cb_.Run(mediaInfoToJson(sourceInfo));
 }
-#else
+#else  // UMS_INTERNAL_API_VERSION == 2
+bool UMediaClientImpl::onSourceInfo(
+    const struct uMediaServer::source_info_t& sourceInfo) {
+  media_task_runner_->PostTask(
+      FROM_HERE, base::Bind(&UMediaClientImpl::dispatchSourceInfo, AsWeakPtr(),
+                            sourceInfo));
+  return true;
+}
+
 void UMediaClientImpl::dispatchSourceInfo(
     const struct uMediaServer::source_info_t& sourceInfo) {
   DEBUG_LOG("%s", __FUNCTION__);
@@ -556,7 +607,8 @@ void UMediaClientImpl::dispatchSourceInfo(
   }
   updated_source_info_ = true;
 
-  update_ums_info_cb_.Run(mediaInfoToJson(sourceInfo));
+  if (!update_ums_info_cb_.is_null())
+    update_ums_info_cb_.Run(mediaInfoToJson(sourceInfo));
 }
 #endif
 
@@ -571,7 +623,8 @@ bool UMediaClientImpl::onExternalSubtitleTrackInfo(
 
 void UMediaClientImpl::dispatchExternalSubtitleTrackInfo(
     const struct uMediaServer::external_subtitle_track_info_t& trackInfo) {
-  update_ums_info_cb_.Run(mediaInfoToJson(trackInfo));
+  if (!update_ums_info_cb_.is_null())
+    update_ums_info_cb_.Run(mediaInfoToJson(trackInfo));
 }
 
 bool UMediaClientImpl::onError(int64_t errorCode, const std::string& errorText) {
@@ -591,7 +644,8 @@ void UMediaClientImpl::dispatchError(
   INFO_LOG("%s - %s error(%lld) - %s", __FUNCTION__, mediaId().c_str(),
       errorCode, errorText.c_str());
 
-  update_ums_info_cb_.Run(mediaInfoToJson(errorCode, errorText));
+  if (!update_ums_info_cb_.is_null())
+    update_ums_info_cb_.Run(mediaInfoToJson(errorCode, errorText));
 
   media::PipelineStatus status = media::PIPELINE_OK;
 
@@ -659,7 +713,8 @@ bool UMediaClientImpl::onUserDefinedChanged(const char* message) {
 }
 
 void UMediaClientImpl::dispatchUserDefinedChanged(const std::string& message) {
-  update_ums_info_cb_.Run(mediaInfoToJson(message));
+  if (!update_ums_info_cb_.is_null())
+    update_ums_info_cb_.Run(mediaInfoToJson(message));
 }
 
 bool UMediaClientImpl::onBufferingStart() {
@@ -912,7 +967,66 @@ std::string UMediaClientImpl::mediaInfoToJson(
 
   return res;
 }
-#else
+
+// refer to uMediaServer/include/public/dto_type.h
+std::string UMediaClientImpl::mediaInfoToJson(
+    const struct ums::video_info_t& value) {
+  if (!isRequiredUMSInfo())
+    return std::string();
+
+  Json::Value eventInfo;
+  Json::Value videoInfo;
+  Json::Value frameRate;
+  Json::FastWriter writer;
+  std::string res;
+
+  eventInfo["type"] = "videoInfo";
+  eventInfo["mediaId"] = mediaId().c_str();
+
+  videoInfo["width"] = value.width;
+  videoInfo["height"] = value.height;
+  frameRate["num"] = value.frame_rate.num;
+  frameRate["den"] = value.frame_rate.den;
+  videoInfo["frameRate"] = frameRate;
+  videoInfo["codec"] = value.codec.c_str();
+  videoInfo["bitRate"] = value.bit_rate;
+
+  eventInfo["info"] = videoInfo;
+  res = writer.write(eventInfo);
+
+  INFO_LOG("%s - videoInfo[%s]", __FUNCTION__, res.c_str());
+
+  if (previous_video_info_ == res)
+    return std::string();
+
+  previous_video_info_ = res;
+
+  return res;
+}
+
+std::string UMediaClientImpl::mediaInfoToJson(
+    const struct ums::audio_info_t& value) {
+  if (!isRequiredUMSInfo())
+    return std::string();
+
+  Json::Value eventInfo;
+  Json::Value audioInfo;
+  Json::FastWriter writer;
+  std::string res;
+
+  eventInfo["type"] = "audioInfo";
+  eventInfo["mediaId"] = mediaId().c_str();
+
+  audioInfo["sampleRate"] = value.sample_rate;
+  audioInfo["codec"] = value.codec.c_str();
+  audioInfo["bitRate"] = value.bit_rate;
+
+  eventInfo["info"] = audioInfo;
+  res = writer.write(eventInfo);
+
+  return res;
+}
+#else  // UMS_INTERNAL_API_VERSION == 2
 std::string UMediaClientImpl::mediaInfoToJson(
     const struct uMediaServer::source_info_t& value) {
   if (!isRequiredUMSInfo())
@@ -1014,7 +1128,6 @@ std::string UMediaClientImpl::mediaInfoToJson(
 
   return res;
 }
-#endif
 
 std::string UMediaClientImpl::mediaInfoToJson(
     const struct uMediaServer::video_info_t& value) {
@@ -1067,6 +1180,7 @@ std::string UMediaClientImpl::mediaInfoToJson(
 
   return res;
 }
+#endif
 
 std::string UMediaClientImpl::mediaInfoToJson(
     const struct uMediaServer::external_subtitle_track_info_t& value) {

@@ -96,29 +96,32 @@ class UMediaClientImpl
   std::string mediaId() const;
 
   // implement ums virtual functions
-  virtual bool onPlaying();
-  virtual bool onPaused();
-  virtual bool onSeekDone();
-  virtual bool onEndOfStream();
-  virtual bool onLoadCompleted();
-  virtual bool onPreloadCompleted();
-  virtual bool onCurrentTime(int64_t currentTime);
+  bool onPlaying() override;
+  bool onPaused() override;
+  bool onSeekDone() override;
+  bool onEndOfStream() override;
+  bool onLoadCompleted() override;
+  bool onPreloadCompleted() override;
+  bool onCurrentTime(int64_t currentTime) override;
 #if UMS_INTERNAL_API_VERSION == 2
-  bool onSourceInfoCb(const struct ums::source_info_t& sourceInfo);
+  bool onSourceInfo(const struct ums::source_info_t& sourceInfo) override;
+  bool onAudioInfo(const struct ums::audio_info_t&) override;
+  bool onVideoInfo(const struct ums::video_info_t&) override;
 #else
-  bool onSourceInfoCb(const struct uMediaServer::source_info_t& sourceInfo);
+  bool onSourceInfo(
+      const struct uMediaServer::source_info_t& sourceInfo) override;
+  bool onAudioInfo(const struct uMediaServer::audio_info_t&) override;
+  bool onVideoInfo(const struct uMediaServer::video_info_t&) override;
 #endif
-  virtual bool onBufferRange(const struct uMediaServer::buffer_range_t&);
-  virtual bool onAudioInfo(const struct uMediaServer::audio_info_t&);
-  virtual bool onVideoInfo(const struct uMediaServer::video_info_t&);
-  virtual bool onError(int64_t errorCode, const std::string& errorText);
-  virtual bool onExternalSubtitleTrackInfo(
-      const struct uMediaServer::external_subtitle_track_info_t&);
-  virtual bool onUserDefinedChanged(const char* message);
-  bool onBufferingStart();
-  bool onBufferingEnd();
-  bool onFocusChanged(bool);
-  bool onActiveRegion(const uMediaServer::rect_t&);
+  bool onBufferRange(const struct uMediaServer::buffer_range_t&) override;
+  bool onError(int64_t errorCode, const std::string& errorText) override;
+  bool onExternalSubtitleTrackInfo(
+      const struct uMediaServer::external_subtitle_track_info_t&) override;
+  bool onUserDefinedChanged(const char* message) override;
+  bool onBufferingStart() override;
+  bool onBufferingEnd() override;
+  bool onFocusChanged(bool) override;
+  bool onActiveRegion(const uMediaServer::rect_t&) override;
 
   // dispatch event
   void dispatchPlaying();
@@ -129,13 +132,15 @@ class UMediaClientImpl
   void dispatchPreloadCompleted();
   void dispatchCurrentTime(int64_t currentTime);
 #if UMS_INTERNAL_API_VERSION == 2
-  void dispatchSourceInfo2(const struct ums::source_info_t&);
+  void dispatchSourceInfo(const struct ums::source_info_t&);
+  void dispatchAudioInfo(const struct ums::audio_info_t&);
+  void dispatchVideoInfo(const struct ums::video_info_t&);
 #else
   void dispatchSourceInfo(const struct uMediaServer::source_info_t&);
-#endif
-  void dispatchBufferRange(const struct uMediaServer::buffer_range_t&);
   void dispatchAudioInfo(const struct uMediaServer::audio_info_t&);
   void dispatchVideoInfo(const struct uMediaServer::video_info_t&);
+#endif
+  void dispatchBufferRange(const struct uMediaServer::buffer_range_t&);
   void dispatchError(int64_t errorCode, const std::string& errorText);
   void dispatchExternalSubtitleTrackInfo(
       const struct uMediaServer::external_subtitle_track_info_t&);
@@ -180,11 +185,13 @@ class UMediaClientImpl
 
 #if UMS_INTERNAL_API_VERSION == 2
   std::string mediaInfoToJson(const struct ums::source_info_t&);
+  std::string mediaInfoToJson(const struct ums::video_info_t&);
+  std::string mediaInfoToJson(const struct ums::audio_info_t&);
 #else
   std::string mediaInfoToJson(const struct uMediaServer::source_info_t&);
-#endif
   std::string mediaInfoToJson(const struct uMediaServer::video_info_t&);
   std::string mediaInfoToJson(const struct uMediaServer::audio_info_t&);
+#endif
   std::string mediaInfoToJson(
       const struct uMediaServer::external_subtitle_track_info_t&);
   std::string mediaInfoToJson(
