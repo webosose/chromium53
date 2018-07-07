@@ -314,15 +314,22 @@ void MimeUtil::AddSupportedMediaFormats() {
   wav_codecs.insert(PCM);
 
   CodecSet ogg_audio_codecs;
+#if !defined(OS_WEBOS)
   ogg_audio_codecs.insert(OPUS);
+#endif
   ogg_audio_codecs.insert(VORBIS);
+#if !defined(OS_WEBOS)
   CodecSet ogg_video_codecs;
 #if !defined(OS_ANDROID)
   ogg_video_codecs.insert(THEORA);
 #endif  // !defined(OS_ANDROID)
+#endif
   CodecSet ogg_codecs(ogg_audio_codecs);
+#if !defined(OS_WEBOS)
   ogg_codecs.insert(ogg_video_codecs.begin(), ogg_video_codecs.end());
+#endif
 
+#if !defined(OS_WEBOS)
   CodecSet webm_audio_codecs;
   webm_audio_codecs.insert(OPUS);
   webm_audio_codecs.insert(VORBIS);
@@ -331,6 +338,7 @@ void MimeUtil::AddSupportedMediaFormats() {
   webm_video_codecs.insert(VP9);
   CodecSet webm_codecs(webm_audio_codecs);
   webm_codecs.insert(webm_video_codecs.begin(), webm_video_codecs.end());
+#endif
 
 #if defined(USE_PROPRIETARY_CODECS)
   CodecSet mp3_codecs;
@@ -357,26 +365,27 @@ void MimeUtil::AddSupportedMediaFormats() {
 #endif  // BUILDFLAG(ENABLE_HEVC_DEMUXING)
   // Only VP9 with valid codec string vp09.xx.xx.xx.xx.xx.xx.xx is supported.
   // See ParseVp9CodecID for details.
+#if !defined(OS_WEBOS)
   mp4_video_codecs.insert(VP9);
+#endif
   CodecSet mp4_codecs(mp4_audio_codecs);
   mp4_codecs.insert(mp4_video_codecs.begin(), mp4_video_codecs.end());
 #endif  // defined(USE_PROPRIETARY_CODECS)
 
-#if defined(OS_WEBOS) && defined(USE_UMEDIASERVER)
-  CodecSet webos_codecs;
-  webos_codecs.insert(VALID_CODEC);
-#endif
-
   AddContainerWithCodecs("audio/wav", wav_codecs, false);
   AddContainerWithCodecs("audio/x-wav", wav_codecs, false);
+#if !defined(OS_WEBOS)
   AddContainerWithCodecs("audio/webm", webm_audio_codecs, false);
   DCHECK(!webm_video_codecs.empty());
   AddContainerWithCodecs("video/webm", webm_codecs, false);
+#endif
   AddContainerWithCodecs("audio/ogg", ogg_audio_codecs, false);
+#if !defined(OS_WEBOS)
   // video/ogg is only supported if an appropriate video codec is supported.
   // Note: This assumes such codecs cannot be later excluded.
   if (!ogg_video_codecs.empty())
     AddContainerWithCodecs("video/ogg", ogg_codecs, false);
+#endif
   // TODO(ddorwin): Should the application type support Opus?
   AddContainerWithCodecs("application/ogg", ogg_codecs, false);
 
@@ -384,13 +393,17 @@ void MimeUtil::AddSupportedMediaFormats() {
   AddContainerWithCodecs("audio/mpeg", mp3_codecs, true);  // Allow "mp3".
   AddContainerWithCodecs("audio/mp3", implicit_codec, true);
   AddContainerWithCodecs("audio/x-mp3", implicit_codec, true);
+#if !defined(OS_WEBOS)
   AddContainerWithCodecs("audio/aac", implicit_codec, true);  // AAC / ADTS.
+#endif
   AddContainerWithCodecs("audio/mp4", mp4_audio_codecs, true);
   DCHECK(!mp4_video_codecs.empty());
   AddContainerWithCodecs("video/mp4", mp4_codecs, true);
   // These strings are supported for backwards compatibility only and thus only
   // support the codecs needed for compatibility.
+#if !defined(OS_WEBOS)
   AddContainerWithCodecs("audio/x-m4a", aac, true);
+#endif
   AddContainerWithCodecs("video/x-m4v", avc_and_aac, true);
 
 #if BUILDFLAG(ENABLE_MSE_MPEG2TS_STREAM_PARSER)
@@ -408,34 +421,14 @@ void MimeUtil::AddSupportedMediaFormats() {
 #endif  // defined(OS_ANDROID)
 #endif  // defined(USE_PROPRIETARY_CODECS)
 #if defined(OS_WEBOS) && defined(USE_UMEDIASERVER)
-  // extended support type on tv platform
-  AddContainerWithCodecs("audio/x-mpeg", webos_codecs, true);
-  AddContainerWithCodecs("video/x-ms-wmv", webos_codecs, true);
-  AddContainerWithCodecs("video/x-ms-asf", webos_codecs, true);
-  AddContainerWithCodecs("video/x-m2ts", webos_codecs, true);
-  AddContainerWithCodecs("video/m2ts", webos_codecs, true);
-  // MPEG-2 TS.
-  AddContainerWithCodecs("video/mp2t", webos_codecs, true);
+  CodecSet webos_codecs;
+  webos_codecs.insert(VALID_CODEC);
   // hls
   AddContainerWithCodecs("application/vnd.apple.mpegurl", webos_codecs, true);
-  AddContainerWithCodecs("application/vnd.apple.mpegurl.audio",
-                         webos_codecs, true);
   AddContainerWithCodecs("application/mpegurl", webos_codecs, true);
   AddContainerWithCodecs("application/x-mpegurl", webos_codecs, true);
   AddContainerWithCodecs("audio/mpegurl", webos_codecs, true);
   AddContainerWithCodecs("audio/x-mpegurl", webos_codecs, true);
-  // mpeg-dash
-  AddContainerWithCodecs("application/dash+xml", webos_codecs, true);
-  // msiis
-  AddContainerWithCodecs("application/vnd.ms-sstr+xml", webos_codecs, true);
-  // TV_Custom
-  AddContainerWithCodecs("service/webos-broadcast", webos_codecs, true);
-  AddContainerWithCodecs("service/webos-broadcast-cable", webos_codecs, true);
-  AddContainerWithCodecs("service/webos-camera", webos_codecs, true);
-  AddContainerWithCodecs("service/webos-dvr", webos_codecs, true);
-  AddContainerWithCodecs("service/webos-external", webos_codecs, true);
-  AddContainerWithCodecs("service/webos-photo", webos_codecs, true);
-  AddContainerWithCodecs("service/webos-photo-camera", webos_codecs, true);
 #endif
 }
 

@@ -318,9 +318,14 @@ static const SupportedTypeInfo kSupportedTypeInfo[] = {
     {"audio/webm", &BuildWebMParser, kAudioWebMCodecs},
 #endif
 #if defined(USE_PROPRIETARY_CODECS)
+#if !defined(OS_WEBOS)
     {"audio/aac", &BuildADTSParser, kAudioADTSCodecs},
+#endif
     {"audio/mpeg", &BuildMP3Parser, kAudioMP3Codecs},
     {"video/mp4", &BuildMP4Parser, kVideoMP4Codecs},
+#if defined(OS_WEBOS)
+    {"video/x-m4v", &BuildMP4Parser, kVideoMP4Codecs},
+#endif
     {"audio/mp4", &BuildMP4Parser, kAudioMP4Codecs},
 #if BUILDFLAG(ENABLE_MSE_MPEG2TS_STREAM_PARSER)
     {"video/mp2t", &BuildMP2TParser, kVideoMP2TCodecs},
