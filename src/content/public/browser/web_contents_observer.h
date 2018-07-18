@@ -347,6 +347,10 @@ class CONTENT_EXPORT WebContentsObserver : public IPC::Listener,
   // the first paint after a navigation.
   virtual void DidFirstPaintAfterLoad(RenderWidgetHost* render_widget_host) {}
 
+  // This method is invoked when the renderer process has completed its
+  // swap compositor frame
+  virtual void DidSwapCompositorFrame(RenderWidgetHost* render_widget_host) {}
+
   // When WebContents::Stop() is called, the WebContents stops loading and then
   // invokes this method. If there are ongoing navigations, their respective
   // failure methods will also be invoked.

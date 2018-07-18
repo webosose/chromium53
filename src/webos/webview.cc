@@ -967,6 +967,11 @@ void WebView::DidDropAllPeerConnections(
   }
 }
 
+void WebView::DidSwapCompositorFrame(content::RenderWidgetHost* render_widget_host) {
+  if (m_delegate)
+    m_delegate->DidSwapCompositorFrame();
+}
+
 bool WebView::OnMessageReceived(const IPC::Message& message) {
   bool handled = true;
   IPC_BEGIN_MESSAGE_MAP(WebView, message)

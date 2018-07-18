@@ -654,6 +654,7 @@ class CONTENT_EXPORT WebContentsImpl
   void SendScreenRects() override;
   void OnFirstPaintAfterLoad(RenderWidgetHostImpl* render_widget_host) override;
   TextInputManager* GetTextInputManager() override;
+  void OnCompositorFrameSwapped(RenderWidgetHostImpl* render_widget_host) override;
 
   // RenderFrameHostManager::Delegate ------------------------------------------
 

@@ -206,6 +206,9 @@ class CONTENT_EXPORT RenderWidgetHostDelegate {
   virtual void OnFirstPaintAfterLoad(RenderWidgetHostImpl* render_widget_host) {
   }
 
+  // Notifies that the compositor in the renderer has swapped a new frame.
+  virtual void OnCompositorFrameSwapped(RenderWidgetHostImpl* render_widget_host) {}
+
   // Returns the TextInputManager tracking text input state.
   virtual TextInputManager* GetTextInputManager();
 

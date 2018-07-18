@@ -51,6 +51,7 @@ class WebViewDelegate {
       const std::vector<std::string>& arguments,
       std::string* result) {}
   virtual void DidDropAllPeerConnections(DropPeerConnectionReason reason) {}
+  virtual void DidSwapCompositorFrame() {}
   virtual bool AllowMouseOnOffEvent() const = 0;
 
   //Pluggable delegate

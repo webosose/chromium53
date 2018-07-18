@@ -1612,6 +1612,9 @@ bool RenderWidgetHostImpl::OnSwapCompositorFrame(
   }
   messages_to_deliver_with_frame.clear();
 
+  if (delegate_)
+    delegate_->OnCompositorFrameSwapped(this);
+
   return true;
 }
 

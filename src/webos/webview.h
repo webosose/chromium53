@@ -27,6 +27,7 @@
 #include <memory>
 
 namespace content {
+class RenderWidgetHost;
 class WebContents;
 class WebPreferences;
 } // namespace content
@@ -209,6 +210,7 @@ class WebView : public content::WebContentsDelegate,
   void DocumentLoadedInFrame(content::RenderFrameHost* frame_host) override;
   void DidDropAllPeerConnections(
       content::DropPeerConnectionReason reason) override;
+  void DidSwapCompositorFrame(content::RenderWidgetHost* render_widget_host) override;
 
   void UpdatePreferences();
 
