@@ -119,6 +119,7 @@ CHROME_FLAGS=" \
   --user-data-dir=${CHROME_CACHE}\
   --no-zygote\
   --load-apps=${APP_FOLDER_PATH}\
+  --v8-snapshot-blob-path=${APP_FOLDER_PATH}/snapshot_blob.bin\
 "
 
 CHROME_FLAGS="${CHROME_COMPOSITING_FLAGS} ${CHROME_FLAGS}"

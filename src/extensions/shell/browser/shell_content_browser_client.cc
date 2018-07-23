@@ -8,6 +8,7 @@
 
 #include <utility>
 
+#include "base/base_switches.h"
 #include "base/command_line.h"
 #include "base/macros.h"
 #include "components/guest_view/browser/guest_view_message_filter.h"
@@ -147,6 +148,14 @@ void ShellContentBrowserClient::SiteInstanceGotProcess(
   if (!extension)
     return;
 
+  if (base::CommandLine::ForCurrentProcess()->HasSwitch(
+          ::switches::kV8SnapshotBlobPath)) {
+    v8_snapshot_path_ = std::make_pair(
+        site_instance->GetProcess()->GetID(),
+        base::CommandLine::ForCurrentProcess()->GetSwitchValuePath(
+            ::switches::kV8SnapshotBlobPath).value());
+  }
+
   ProcessMap::Get(browser_main_parts_->browser_context())
       ->Insert(extension->id(),
                site_instance->GetProcess()->GetID(),
@@ -191,6 +200,12 @@ void ShellContentBrowserClient::AppendExtraCommandLineSwitches(
       command_line->GetSwitchValueASCII(::switches::kProcessType);
   if (process_type == ::switches::kRendererProcess)
     AppendRendererSwitches(command_line);
+
+  // Append v8 snapshot path if given
+  if (v8_snapshot_path_.first == child_process_id) {
+    command_line->AppendSwitchPath(::switches::kV8SnapshotBlobPath,
+                                   base::FilePath(v8_snapshot_path_.second));
+  }
 }
 
 content::SpeechRecognitionManagerDelegate*
