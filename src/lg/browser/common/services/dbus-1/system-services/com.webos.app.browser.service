@@ -1,4 +1,0 @@
-[D-BUS Service]
-Name=com.webos.app.browser
-Exec=/usr/palm/applications/com.webos.app.browser/chrome
-Type=static

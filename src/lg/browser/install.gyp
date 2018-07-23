@@ -53,10 +53,6 @@
         'destination': '<(install)',
         'files': [ 'common/etc', 'common/resources' ],
       },
-      {
-        'destination': '<(PRODUCT_DIR)',
-        'files': [ 'common/services' ],
-      },
     ],
     'conditions': [
       ['platform_apollo==1', {
