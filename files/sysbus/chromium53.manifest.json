@@ -1,0 +1,18 @@
+{
+    "roleFilesPrv": [
+        "/usr/share/ls2/roles/prv/app-shell.json",
+        "/usr/share/ls2/roles/prv/com.webos.app.browser.json"
+    ],
+    "roleFilesPub": [
+        "/usr/share/ls2/roles/pub/app-shell.json",
+        "/usr/share/ls2/roles/pub/com.webos.app.browser.json"
+    ],
+    "serviceFiles": [
+        "/usr/share/dbus-1/services/app-shell.service",
+        "/usr/share/dbus-1/services/com.webos.app.browser.service",
+        "/usr/share/dbus-1/system-services/app-shell.service",
+        "/usr/share/dbus-1/system-services/com.webos.app.browser.service"
+    ],
+    "id": "chromium53",
+    "version": "1.0.0"
+}
