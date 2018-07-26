@@ -2359,6 +2359,9 @@ bool WebViewImpl::setComposition(
     // ongoing composition) we exit and signal success only for attempts to
     // clear the composition.
     if (m_suppressNextKeypressEvent && !inputMethodController.hasComposition())
+#if defined(OS_WEBOS)
+      if (!base::CommandLine::ForCurrentProcess()->HasSwitch(switches::kWebOSWAM))
+#endif
         return text.isEmpty();
 
     UserGestureIndicator gestureIndicator(DefinitelyProcessingNewUserGesture);
