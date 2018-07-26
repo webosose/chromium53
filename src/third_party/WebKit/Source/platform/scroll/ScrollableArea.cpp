@@ -191,6 +191,14 @@ void ScrollableArea::setScrollPosition(const DoublePoint& position, ScrollType s
     if (behavior == ScrollBehaviorAuto)
         behavior = scrollBehaviorStyle();
 
+#if defined(OS_WEBOS)
+    if (scrollType == CompositorScroll &&
+        existingProgrammaticScrollAnimator() &&
+        existingProgrammaticScrollAnimator()->isWaitingToCancelOnCompositor()) {
+        return;
+    }
+#endif
+
     switch (scrollType) {
     case CompositorScroll:
     case AnchoringScroll:

@@ -43,6 +43,7 @@ public:
 
 #if defined(OS_WEBOS)
     bool isWebOSNativeScrollEnabled();
+    bool isWaitingToCancelOnCompositor() { return m_runState == RunState::WaitingToCancelOnCompositor; }
 #endif
 
     // ScrollAnimatorCompositorCoordinator implementation.
