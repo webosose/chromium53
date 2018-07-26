@@ -2561,10 +2561,12 @@ int HttpCache::Transaction::WriteResponseInfoToEntry(bool truncated) {
   response_.headers->GetMimeType(&mime_type);
   if ((response_.headers->HasHeaderValue("cache-control", "no-store")) ||
 #if defined(OS_WEBOS)
-      (base::CommandLine::ForCurrentProcess()->HasSwitch(switches::kWebOSWAM)
-      && (!MatchesMimeType("image/*", mime_type) ||
-      response_.headers->GetContentLength() <= kCacheMinContentLength)) ||
-#endif
+       (base::CommandLine::ForCurrentProcess()->HasSwitch(switches::kWebOSWAM)
+       && response_.headers->GetContentLength() != 0 // domain entry is zero length and needs
+       && !MatchesMimeType("text/cache-manifest", mime_type) // manifest needs caching
+       && (!MatchesMimeType("image/*", mime_type) ||
+       response_.headers->GetContentLength() <= kCacheMinContentLength)) ||
+ #endif
       IsCertStatusError(response_.ssl_info.cert_status)) {
     DoneWritingToEntry(false);
     if (net_log_.IsCapturing())
