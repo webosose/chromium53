@@ -136,7 +136,7 @@ class WaylandDisplay : public ui::SurfaceFactoryOzone,
   // until all pending request are processed by the server.
   void FlushDisplay();
 
-  bool InitializeHardware();
+  void InitializeHardware();
 
   // Ozone Display implementation:
   intptr_t GetNativeDisplay() override;

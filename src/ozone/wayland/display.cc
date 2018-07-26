@@ -374,14 +374,8 @@ intptr_t WaylandDisplay::GetNativeWindow(unsigned window_handle) {
   return reinterpret_cast<intptr_t>(widget->egl_window());
 }
 
-bool WaylandDisplay::InitializeHardware() {
+void WaylandDisplay::InitializeHardware() {
   InitializeDisplay();
-  if (!display_) {
-    LOG(ERROR) << "WaylandDisplay failed to initialize hardware";
-    return false;
-  }
-
-  return true;
 }
 
 intptr_t WaylandDisplay::GetNativeDisplay() {
@@ -478,8 +472,20 @@ std::unique_ptr<ui::SurfaceOzoneCanvas> WaylandDisplay::CreateCanvasForWidget(
 void WaylandDisplay::InitializeDisplay() {
   DCHECK(!display_);
   display_ = wl_display_connect(NULL);
-  if (!display_)
-    return;
+
+  const int max_retries = 10, interval_retries_us = 500000;
+  int count = 0;
+  while (display_ == NULL && count++ < max_retries) {
+    LOG(WARNING) << "wl_display_connect returned NULL (retrying " << count
+                 << "/" << max_retries << ")";
+    usleep(interval_retries_us);
+    display_ = wl_display_connect(NULL);
+  }
+  if (!display_) {
+    LOG(FATAL) << "WaylandDisplay failed to initialize display hardware";
+    Terminate();
+    exit(EXIT_FAILURE);
+  }
 
   instance_ = this;
   static const struct wl_registry_listener registry_all = {
