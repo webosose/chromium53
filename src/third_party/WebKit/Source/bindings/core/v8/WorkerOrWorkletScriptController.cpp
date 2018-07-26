@@ -193,6 +193,9 @@ bool WorkerOrWorkletScriptController::initializeContextIfNeeded()
 
     // The global proxy object.  Note this is not the global object.
     v8::Local<v8::Object> globalProxy = context->Global();
+    V8DOMWrapper::setNativeInfo(m_isolate, globalProxy, wrapperTypeInfo,
+                                scriptWrappable);
+
     // The global object, aka worker/worklet wrapper object.
     v8::Local<v8::Object> globalObject = globalProxy->GetPrototype().As<v8::Object>();
     globalObject = V8DOMWrapper::associateObjectWithWrapper(m_isolate, scriptWrappable, wrapperTypeInfo, globalObject);

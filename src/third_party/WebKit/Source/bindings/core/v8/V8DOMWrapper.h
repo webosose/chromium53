@@ -58,7 +58,7 @@ public:
     static v8::Local<v8::Object> associateObjectWithWrapper(v8::Isolate*, ScriptWrappable*, const WrapperTypeInfo*, v8::Local<v8::Object> wrapper) WARN_UNUSED_RETURN;
     static v8::Local<v8::Object> associateObjectWithWrapper(v8::Isolate*, Node*, const WrapperTypeInfo*, v8::Local<v8::Object> wrapper) WARN_UNUSED_RETURN;
     static void setNativeInfo(v8::Isolate*, v8::Local<v8::Object>, const WrapperTypeInfo*, ScriptWrappable*);
-    static void clearNativeInfo(v8::Local<v8::Object>, const WrapperTypeInfo*);
+    static void clearNativeInfo(v8::Isolate*, v8::Local<v8::Object>);
     // hasInternalFieldsSet only checks if the value has the internal fields for
     // wrapper obejct and type, and does not check if it's valid or not.  The
     // value may not be a Blink's wrapper object.  In order to make sure of it,
@@ -85,16 +85,12 @@ inline void V8DOMWrapper::setNativeInfo(v8::Isolate* isolate, v8::Local<v8::Obje
     }
 }
 
-inline void V8DOMWrapper::clearNativeInfo(v8::Local<v8::Object> wrapper, const WrapperTypeInfo* wrapperTypeInfo)
-{
-    ASSERT(wrapper->InternalFieldCount() >= 2);
-    ASSERT(wrapperTypeInfo);
-#ifdef NDEBUG
-    // clearNativeInfo() is used only by NP objects, which are not garbage collected.
-    ASSERT(wrapperTypeInfo->gcType == WrapperTypeInfo::RefCountedObject);
-#endif
-    wrapper->SetAlignedPointerInInternalField(v8DOMWrapperTypeIndex, const_cast<WrapperTypeInfo*>(wrapperTypeInfo));
-    wrapper->SetAlignedPointerInInternalField(v8DOMWrapperObjectIndex, 0);
+inline void V8DOMWrapper::clearNativeInfo(v8::Isolate* isolate,
+                                          v8::Local<v8::Object> wrapper) {
+  int indices[] = {v8DOMWrapperObjectIndex, v8DOMWrapperTypeIndex};
+  void* values[] = {nullptr, nullptr};
+  wrapper->SetAlignedPointerInInternalFields(WTF_ARRAY_LENGTH(indices), indices,
+                                             values);
 }
 
 inline v8::Local<v8::Object> V8DOMWrapper::associateObjectWithWrapper(v8::Isolate* isolate, ScriptWrappable* impl, const WrapperTypeInfo* wrapperTypeInfo, v8::Local<v8::Object> wrapper)

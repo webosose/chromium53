@@ -71,7 +71,7 @@ public:
     void updateSecurityOrigin(SecurityOrigin*);
 
     bool isContextInitialized() { return m_scriptState && !!m_scriptState->perContextData(); }
-    bool isGlobalInitialized() { return !m_global.isEmpty(); }
+    bool isGlobalInitialized() { return !m_globalProxy.isEmpty(); }
 
     bool initializeIfNeeded();
     void updateDocumentWrapper(v8::Local<v8::Object> wrapper);
@@ -119,7 +119,7 @@ private:
     v8::Isolate* m_isolate;
     RefPtr<ScriptState> m_scriptState;
     RefPtr<DOMWrapperWorld> m_world;
-    ScopedPersistent<v8::Object> m_global;
+    ScopedPersistent<v8::Object> m_globalProxy;
     ScopedPersistent<v8::Object> m_document;
 };
 

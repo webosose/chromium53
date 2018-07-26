@@ -497,7 +497,7 @@ void forgetV8ObjectForNPObject(NPObject* object)
     v8::HandleScope scope(isolate);
     v8::Local<v8::Object> wrapper = staticNPObjectMap().newLocal(isolate, object);
     if (!wrapper.IsEmpty()) {
-        V8DOMWrapper::clearNativeInfo(wrapper, npObjectTypeInfo());
+        V8DOMWrapper::clearNativeInfo(isolate, wrapper);
         staticNPObjectMap().removeAndDispose(object);
         _NPN_ReleaseObject(object);
     }

@@ -115,8 +115,16 @@ void WindowProxy::disposeContext(GlobalDetachmentBehavior behavior)
 
     m_document.clear();
 
-    if (behavior == DetachGlobal)
+    if (behavior == DetachGlobal) {
+        // Clean up state on the global proxy, which will be reused.
+        CHECK(m_globalProxy == context->Global());
+        CHECK_EQ(
+            toScriptWrappable(context->Global()),
+            toScriptWrappable(context->Global()->GetPrototype().As<v8::Object>()));
+        V8DOMWrapper::clearNativeInfo(m_isolate, context->Global());
+        m_globalProxy.get().SetWrapperClassId(0);
         m_scriptState->detachGlobalObject();
+    }
 
     m_scriptState->disposePerContextData();
 
@@ -148,9 +156,9 @@ v8::Local<v8::Object> WindowProxy::globalIfNotDetached()
 {
     if (!isContextInitialized())
         return v8::Local<v8::Object>();
-    ASSERT(m_scriptState->contextIsValid());
-    ASSERT(m_global == m_scriptState->context()->Global());
-    return m_global.newLocal(m_isolate);
+    DCHECK(m_scriptState->contextIsValid());
+    DCHECK(m_globalProxy == m_scriptState->context()->Global());
+    return m_globalProxy.newLocal(m_isolate);
 }
 
 v8::Local<v8::Object> WindowProxy::releaseGlobal()
@@ -160,14 +168,14 @@ v8::Local<v8::Object> WindowProxy::releaseGlobal()
     // Make sure the global object was detached from the proxy by calling clearForNavigation().
     if (m_scriptState)
         ASSERT(m_scriptState->isGlobalObjectDetached());
-    v8::Local<v8::Object> global = m_global.newLocal(m_isolate);
-    m_global.clear();
+    v8::Local<v8::Object> global = m_globalProxy.newLocal(m_isolate);
+    m_globalProxy.clear();
     return global;
 }
 
 void WindowProxy::setGlobal(v8::Local<v8::Object> global)
 {
-    m_global.set(m_isolate, global);
+    m_globalProxy.set(m_isolate, global);
 
     // Initialize the window proxy now, to re-establish the connection between
     // the global object and the v8::Context. This is really only needed for a
@@ -238,9 +246,9 @@ bool WindowProxy::initialize()
 
     ScriptState::Scope scope(m_scriptState.get());
     v8::Local<v8::Context> context = m_scriptState->context();
-    if (m_global.isEmpty()) {
-        m_global.set(m_isolate, context->Global());
-        if (m_global.isEmpty()) {
+    if (m_globalProxy.isEmpty()) {
+        m_globalProxy.set(m_isolate, context->Global());
+        if (m_globalProxy.isEmpty()) {
             disposeContext(DoNotDetachGlobal);
             return false;
         }
@@ -332,7 +340,7 @@ void WindowProxy::createContext()
     v8::Local<v8::Context> context;
     {
         V8PerIsolateData::UseCounterDisabledScope useCounterDisabled(V8PerIsolateData::from(m_isolate));
-        context = v8::Context::New(m_isolate, &extensionConfiguration, globalTemplate, m_global.newLocal(m_isolate));
+        context = v8::Context::New(m_isolate, &extensionConfiguration, globalTemplate, m_globalProxy.newLocal(m_isolate));
     }
     if (context.IsEmpty())
         return;
@@ -371,20 +379,28 @@ bool WindowProxy::setupWindowPrototypeChain()
 
     DOMWindow* window = m_frame->domWindow();
     const WrapperTypeInfo* wrapperTypeInfo = window->wrapperTypeInfo();
-
     v8::Local<v8::Context> context = m_scriptState->context();
+
     // The global proxy object.  Note this is not the global object.
     v8::Local<v8::Object> globalProxy = context->Global();
+    CHECK(m_globalProxy == globalProxy);
+    V8DOMWrapper::setNativeInfo(m_isolate, globalProxy, wrapperTypeInfo, window);
+    // Mark the handle to be traced by Oilpan, since the global proxy has a
+    // reference to the DOMWindow.
+    m_globalProxy.get().SetWrapperClassId(wrapperTypeInfo->wrapperClassId);
+
     // The global object, aka window wrapper object.
     v8::Local<v8::Object> windowWrapper = globalProxy->GetPrototype().As<v8::Object>();
     windowWrapper = V8DOMWrapper::associateObjectWithWrapper(m_isolate, window, wrapperTypeInfo, windowWrapper);
+
     // The prototype object of Window interface.
     v8::Local<v8::Object> windowPrototype = windowWrapper->GetPrototype().As<v8::Object>();
-    RELEASE_ASSERT(!windowPrototype.IsEmpty());
+    CHECK(!windowPrototype.IsEmpty());
     V8DOMWrapper::setNativeInfo(m_isolate, windowPrototype, wrapperTypeInfo, window);
+
     // The named properties object of Window interface.
     v8::Local<v8::Object> windowProperties = windowPrototype->GetPrototype().As<v8::Object>();
-    RELEASE_ASSERT(!windowProperties.IsEmpty());
+    CHECK(!windowProperties.IsEmpty());
     V8DOMWrapper::setNativeInfo(m_isolate, windowProperties, wrapperTypeInfo, window);
 
     // TODO(keishi): Remove installPagePopupController and implement
