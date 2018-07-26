@@ -2471,6 +2471,9 @@
         '..',
         '<(DEPTH)',
       ],
+      'ldflags': [
+        '-static',
+      ],
       'sources': [
         'snapshot/mksnapshot.cc',
       ],
