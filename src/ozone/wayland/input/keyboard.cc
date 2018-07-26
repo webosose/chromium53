@@ -12,14 +12,44 @@ namespace ozonewayland {
 
 namespace {
 
+#if defined(OS_WEBOS)
+#include <linux/input.h>
+
+uint32_t NumLockLookupTable(uint32_t key_code, bool is_num_locked) {
+  if (is_num_locked)
+    return key_code;
+
+  switch (key_code) {
+    case KEY_KP7: return KEY_HOME;
+    case KEY_KP8: return KEY_UP;
+    case KEY_KP9: return KEY_PAGEUP;
+    case KEY_KP4: return KEY_LEFT;
+    case KEY_KP5: return KEY_RESERVED;
+    case KEY_KP6: return KEY_RIGHT;
+    case KEY_KP1: return KEY_END;
+    case KEY_KP2: return KEY_DOWN;
+    case KEY_KP3: return KEY_PAGEDOWN;
+    case KEY_KP0: return KEY_INSERT;
+    case KEY_KPDOT: return KEY_DELETE;
+    default: break;
+  }
+  return key_code;
+}
+#endif
+
 // Key code for wheel (OK) from Magic Motion RCU
 const int32_t kMotionBtnOK = -8;
+const uint32_t kKeyCodeNumLock = 0x10;
 }
 
 WaylandKeyboard::WaylandKeyboard()
     : input_keyboard_(NULL),
       dispatcher_(NULL),
-      source_type_(ui::SOURCE_TYPE_UNKNOWN) {}
+      source_type_(ui::SOURCE_TYPE_UNKNOWN)
+#if defined(OS_WEBOS)
+      , is_num_lock_on_(false)
+#endif
+      {}
 
 WaylandKeyboard::~WaylandKeyboard() {
   if (input_keyboard_)
@@ -60,12 +90,16 @@ void WaylandKeyboard::OnKeyNotify(void* data,
   if (state == WL_KEYBOARD_KEY_STATE_RELEASED)
     type = ui::ET_KEY_RELEASED;
 
-  if (key == kMotionBtnOK)
-    key = 28;  // Value corresponding to KEY_ENTER;
+  uint32_t key_code = key;
+  if (key_code == kMotionBtnOK)
+    key_code = 28;  // Value corresponding to KEY_ENTER;
 
+#if defined(OS_WEBOS)
+  key_code = NumLockLookupTable(key, device->is_num_lock_on_);
+#endif
   const uint32_t device_id = wl_proxy_get_id(
       reinterpret_cast<wl_proxy*>(input_keyboard));
-  device->dispatcher_->KeyNotify(type, key,
+  device->dispatcher_->KeyNotify(type, key_code,
 #if defined(OS_WEBOS)
                                  device->source_type_,
 #endif
@@ -145,6 +179,7 @@ void WaylandKeyboard::OnKeyModifiers(void *data,
                                      uint32_t group) {
 #if defined(OS_WEBOS)
   WaylandKeyboard* device = static_cast<WaylandKeyboard*>(data);
+  device->is_num_lock_on_ = (mods_locked & kKeyCodeNumLock) == kKeyCodeNumLock;
   device->dispatcher_->KeyboardModifier(mods_depressed, mods_locked);
 #endif
 }

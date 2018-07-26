@@ -28,7 +28,6 @@ namespace {
 const int kRepeatDelayMs = 500;
 const int kRepeatIntervalMs = 50;
 
-const int kKeyCodeNumLock = 0x10;
 const int kKeyCapsLock = 0x2;
 
 int EventFlagToEvdevModifier(int flag) {
@@ -61,27 +60,6 @@ int EventFlagToEvdevModifier(int flag) {
       return EVDEV_MODIFIER_NONE;
   }
 }
-
-#if defined(OS_WEBOS)
-uint32_t NumLockLookupTable(uint32_t key_code) {
-  switch (key_code) {
-    case KEY_KP7: return KEY_HOME;
-    case KEY_KP8: return KEY_UP;
-    case KEY_KP9: return KEY_PAGEUP;
-    case KEY_KP4: return KEY_LEFT;
-    case KEY_KP5: return KEY_RESERVED;
-    case KEY_KP6: return KEY_RIGHT;
-    case KEY_KP1: return KEY_END;
-    case KEY_KP2: return KEY_DOWN;
-    case KEY_KP3: return KEY_PAGEDOWN;
-    case KEY_KP0: return KEY_INSERT;
-    case KEY_KPDOT: return KEY_DELETE;
-    default: break;
-  }
-  return key_code;
-}
-#endif
-
 }  // namespace
 
 KeyboardEvdev::KeyboardEvdev(EventModifiersEvdev* modifiers,
@@ -90,9 +68,6 @@ KeyboardEvdev::KeyboardEvdev(EventModifiersEvdev* modifiers,
     : callback_(callback),
       modifiers_(modifiers),
       keyboard_layout_engine_(keyboard_layout_engine),
-#if defined(OS_WEBOS)
-      is_num_lock_on_(false),
-#endif
       weak_ptr_factory_(this) {
   repeat_delay_ = base::TimeDelta::FromMilliseconds(kRepeatDelayMs);
   repeat_interval_ = base::TimeDelta::FromMilliseconds(kRepeatIntervalMs);
@@ -200,18 +175,6 @@ void KeyboardEvdev::TextInputModifier(uint32_t state, uint32_t modifier) {
 
 void KeyboardEvdev::KeyboardModifier(uint32_t mods_depressed,
                                      uint32_t mods_locked) {
-  if (is_num_lock_on_) {
-    if (!(mods_depressed & kKeyCodeNumLock) &&
-        !(mods_locked & kKeyCodeNumLock)) {
-      is_num_lock_on_ = false;
-    }
-  } else {
-    if (!(mods_depressed & kKeyCodeNumLock) &&
-        (mods_locked & kKeyCodeNumLock)) {
-      is_num_lock_on_ = true;
-    }
-  }
-
   modifiers_->SetModifierLock(EVDEV_MODIFIER_CAPS_LOCK, mods_locked & kKeyCapsLock);
 }
 #endif
@@ -324,16 +287,6 @@ void KeyboardEvdev::DispatchKey(unsigned int key,
 #endif
                                 base::TimeTicks timestamp,
                                 int device_id) {
-#if defined(OS_WEBOS)
-  if (!is_num_lock_on_) {
-    // Home, arrow, PgUp and PgDown should work with num lock
-    key = NumLockLookupTable(key);
-  }
-
-  if (key == KEY_NUMLOCK && down)
-    is_num_lock_on_ = !is_num_lock_on_;
-#endif
-
   DomCode dom_code =
       KeycodeConverter::NativeKeycodeToDomCode(EvdevCodeToNativeCode(key));
   if (dom_code == DomCode::NONE)

@@ -110,10 +110,6 @@ class EVENTS_OZONE_EVDEV_EXPORT KeyboardEvdev {
   // Shared layout engine.
   KeyboardLayoutEngine* keyboard_layout_engine_;
 
-#if defined(OS_WEBOS)
-  bool is_num_lock_on_;
-#endif
-
   // Key repeat state.
   bool auto_repeat_enabled_ = true;
   unsigned int repeat_key_ = KEY_RESERVED;

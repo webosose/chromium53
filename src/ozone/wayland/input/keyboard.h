@@ -55,6 +55,9 @@ class WaylandKeyboard {
   wl_keyboard* input_keyboard_;
   WaylandDisplay* dispatcher_;
   ui::EventSourceType source_type_;
+#if defined(OS_WEBOS)
+  bool is_num_lock_on_;
+#endif
 
   DISALLOW_COPY_AND_ASSIGN(WaylandKeyboard);
 };
