@@ -78,8 +78,6 @@ class CONTENT_EXPORT GpuDataManagerImplPrivate {
   void AppendGpuCommandLine(base::CommandLine* command_line,
                             gpu::GpuPreferences* gpu_preferences) const;
 
-  void AppendPluginCommandLine(base::CommandLine* command_line) const;
-
   void UpdateRendererWebPrefs(WebPreferences* prefs) const;
 
   std::string GetBlacklistVersion() const;

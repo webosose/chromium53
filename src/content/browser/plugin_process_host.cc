@@ -213,8 +213,6 @@ bool PluginProcessHost::Init(const WebPluginInfo& info) {
   cmd_line->CopySwitchesFrom(browser_command_line, kSwitchNames,
                              arraysize(kSwitchNames));
 
-  GpuDataManagerImpl::GetInstance()->AppendPluginCommandLine(cmd_line);
-
   // If specified, prepend a launcher program to the command line.
   if (!plugin_launcher.empty())
     cmd_line->PrependWrapper(plugin_launcher);
