@@ -362,7 +362,9 @@ void WebViewGuest::CreateWebContents(
       owner_render_process_host->GetBrowserContext(),
       std::move(guest_site_instance));
   params.guest_delegate = this;
-  callback.Run(WebContents::Create(params));
+  content::WebContents* web_contents = WebContents::Create(params);
+  web_contents->EnableInspectable();
+  callback.Run(web_contents);
 }
 
 void WebViewGuest::DidAttachToEmbedder() {

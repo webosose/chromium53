@@ -18,6 +18,7 @@ ShellAppDelegate::~ShellAppDelegate() {
 }
 
 void ShellAppDelegate::InitWebContents(content::WebContents* web_contents) {
+  web_contents->EnableInspectable();
   ShellExtensionWebContentsObserver::CreateForWebContents(web_contents);
 }
 
