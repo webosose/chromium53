@@ -40,6 +40,9 @@ void AppWindowContentsImpl::Initialize(content::BrowserContext* context,
   Observe(web_contents_.get());
   web_contents_->GetMutableRendererPrefs()->
       browser_handles_all_top_level_requests = true;
+  web_contents_->GetMutableRendererPrefs()->
+      application_id = host_->GetApplicationId();
+
   web_contents_->GetRenderViewHost()->SyncRendererPrefs();
 }
 

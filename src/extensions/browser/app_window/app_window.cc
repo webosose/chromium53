@@ -11,6 +11,7 @@
 #include <utility>
 #include <vector>
 
+#include "base/base_switches.h"
 #include "base/callback_helpers.h"
 #include "base/command_line.h"
 #include "base/memory/ptr_util.h"
@@ -265,6 +266,14 @@ void AppWindow::Init(const GURL& url,
                      AppWindowContents* app_window_contents,
                      content::RenderFrameHost* creator_frame,
                      const CreateParams& params) {
+#if defined(OS_WEBOS)
+  base::CommandLine* command_line = base::CommandLine::ForCurrentProcess();
+  if (command_line->HasSwitch(::switches::kWebOSAppId)) {
+    std::string app_id = command_line->GetSwitchValueASCII(::switches::kWebOSAppId);
+    SetApplicationId(app_id);
+  }
+#endif
+
   // Initialize the render interface and web contents
   app_window_contents_.reset(app_window_contents);
   app_window_contents_->Initialize(browser_context(), creator_frame, url);

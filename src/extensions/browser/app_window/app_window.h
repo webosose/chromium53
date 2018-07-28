@@ -373,6 +373,12 @@ class AppWindow : public content::WebContentsDelegate,
     app_window_contents_ = std::move(contents);
   }
 
+  void SetApplicationId(const std::string& application_id) {
+    application_id_ = application_id;
+  }
+
+  std::string GetApplicationId() const { return application_id_; }
+
  protected:
   ~AppWindow() override;
 
@@ -572,6 +578,9 @@ class AppWindow : public content::WebContentsDelegate,
 
   // PlzNavigate: this is called when the first navigation is ready to commit.
   base::Closure on_first_commit_callback_;
+
+  // application id that is sent to backend
+  std::string application_id_;
 
   base::WeakPtrFactory<AppWindow> image_loader_ptr_factory_;
 
