@@ -907,8 +907,13 @@ void WindowManagerWayland::OnWebosWindowClose(unsigned windowhandle) {
   webos::WebOSNativeEventDelegate* webos_native_event_delegate =
       GetNativeEventDelegate(windowhandle);
 
-  if (webos_native_event_delegate)
+  if (webos_native_event_delegate) {
     webos_native_event_delegate->WindowHostClose();
+  } else {
+    OzoneWaylandWindow* window = GetWindow(windowhandle);
+    if (window)
+      window->GetDelegate()->WindowHostClose();
+  }
 }
 #endif
 

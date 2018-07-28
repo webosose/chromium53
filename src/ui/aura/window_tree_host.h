@@ -32,6 +32,12 @@ class InputMethod;
 class ViewProp;
 }
 
+#if defined(OS_WEBOS)
+namespace webos {
+class WebOSNativeEventDelegate;
+}
+#endif
+
 namespace aura {
 namespace test {
 class WindowTreeHostTestApi;
@@ -182,6 +188,13 @@ class AURA_EXPORT WindowTreeHost : public ui::internal::InputMethodDelegate,
   virtual void SetWindowProperty(const std::string& name,
                                  const std::string& value) {}
 
+#if defined(OS_WEBOS)
+  // webos::WebOSNativeEventDelegate overrides:
+  void SetWebOSNativeEventDelegate(webos::WebOSNativeEventDelegate* delegate) {
+    webos_event_delegate_ = delegate;
+  }
+#endif
+
  protected:
   friend class TestScreen;  // TODO(beng): see if we can remove/consolidate.
 
@@ -219,6 +232,10 @@ class AURA_EXPORT WindowTreeHost : public ui::internal::InputMethodDelegate,
 
   // Overridden from ui::EventSource:
   ui::EventProcessor* GetEventProcessor() override;
+
+#if defined(OS_WEBOS)
+  webos::WebOSNativeEventDelegate* webos_event_delegate_;
+#endif
 
  private:
   friend class test::WindowTreeHostTestApi;

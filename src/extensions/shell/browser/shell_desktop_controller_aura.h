@@ -20,6 +20,10 @@
 #include "ui/display/chromeos/display_configurator.h"
 #endif
 
+#if defined(OS_WEBOS)
+#include "webos/common/webos_native_event_delegate.h"
+#endif
+
 namespace aura {
 class Window;
 class WindowTreeHost;
@@ -62,6 +66,9 @@ class ShellDesktopControllerAura
       public chromeos::PowerManagerClient::Observer,
       public ui::DisplayConfigurator::Observer,
 #endif
+#if defined(OS_WEBOS)
+      public webos::WebOSNativeEventDelegate,
+#endif
       public aura::WindowTreeHostObserver {
  public:
   ShellDesktopControllerAura();
@@ -92,6 +99,11 @@ class ShellDesktopControllerAura
 
   // aura::WindowTreeHostObserver overrides:
   void OnHostCloseRequested(const aura::WindowTreeHost* host) override;
+
+#if defined(OS_WEBOS)
+  // webos::WebOSNativeEventDelegate overrides:
+  void WindowHostClose() override;
+#endif
 
  protected:
   // Creates and sets the aura clients and window manager stuff. Subclass may

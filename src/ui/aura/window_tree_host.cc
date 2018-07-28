@@ -225,7 +225,11 @@ void WindowTreeHost::Hide() {
 // WindowTreeHost, protected:
 
 WindowTreeHost::WindowTreeHost()
-    : window_(new Window(nullptr)),
+    :
+#if defined(OS_WEBOS)
+      webos_event_delegate_(nullptr),
+#endif
+      window_(new Window(nullptr)),
       last_cursor_(ui::kCursorNull),
       input_method_(nullptr),
       owned_input_method_(false) {

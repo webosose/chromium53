@@ -69,6 +69,9 @@ class PlatformWindowDelegate {
                             uint32_t time) { }
 
   virtual void OnDragDrop() { }
+
+  // WEBOS extension
+  virtual void WindowHostClose() {}
 };
 
 }  // namespace ui

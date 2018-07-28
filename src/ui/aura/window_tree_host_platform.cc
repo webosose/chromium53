@@ -29,6 +29,10 @@
 #include "ui/platform_window/win/win_window.h"
 #endif
 
+#if defined(OS_WEBOS)
+#include "webos/common/webos_native_event_delegate.h"
+#endif
+
 namespace aura {
 
 #if defined(OS_WIN) || defined(OS_ANDROID) || defined(USE_OZONE)
@@ -207,6 +211,13 @@ void WindowTreeHostPlatform::OnAcceleratedWidgetDestroyed() {
 void WindowTreeHostPlatform::OnActivationChanged(bool active) {
   if (active)
     OnHostActivated();
+}
+
+void WindowTreeHostPlatform::WindowHostClose() {
+#if defined(OS_WEBOS)
+  if (webos_event_delegate_)
+    webos_event_delegate_->WindowHostClose();
+#endif
 }
 
 }  // namespace aura

@@ -59,6 +59,7 @@ class AURA_EXPORT WindowTreeHostPlatform
                                     float device_pixel_ratio) override;
   void OnAcceleratedWidgetDestroyed() override;
   void OnActivationChanged(bool active) override;
+  void WindowHostClose() override;
 
  private:
   gfx::AcceleratedWidget widget_;

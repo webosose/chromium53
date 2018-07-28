@@ -203,6 +203,9 @@ ShellDesktopControllerAura::ShellDesktopControllerAura()
 }
 
 ShellDesktopControllerAura::~ShellDesktopControllerAura() {
+#if defined(OS_WEBOS)
+  host_->SetWebOSNativeEventDelegate(NULL);
+#endif
   CloseAppWindows();
   DestroyRootWindow();
 #if defined(OS_CHROMEOS)
@@ -279,6 +282,12 @@ void ShellDesktopControllerAura::OnHostCloseRequested(
       FROM_HERE, base::MessageLoop::QuitWhenIdleClosure());
 }
 
+#if defined(OS_WEBOS)
+void ShellDesktopControllerAura::WindowHostClose() {
+  OnHostCloseRequested(host_.get());
+}
+#endif
+
 void ShellDesktopControllerAura::InitWindowManager() {
   wm::FocusController* focus_controller =
       new wm::FocusController(new AppsFocusRules());
@@ -335,10 +344,14 @@ void ShellDesktopControllerAura::CreateRootWindow() {
   InitWindowManager();
 
 #if defined(OS_WEBOS)
+  host_->SetWebOSNativeEventDelegate(this);
   std::string appId(kShellAppId);
   if (command_line->HasSwitch(::switches::kWebOSAppId))
     appId.assign(command_line->GetSwitchValueASCII(::switches::kWebOSAppId));
   host_->SetWindowProperty("appId", appId.c_str());
+  host_->SetWindowProperty("_WEBOS_ACCESS_POLICY_KEYS_BACK", "true");
+  host_->SetWindowProperty("_WEBOS_LAUNCH_INFO_RECENT", "true");
+  host_->SetWindowProperty("_WEBOS_LAUNCH_INFO_REASON", "true");
 #endif
 
   host_->AddObserver(this);
