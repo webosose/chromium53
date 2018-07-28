@@ -50,6 +50,7 @@
 using base::CommandLine;
 using content::BrowserContext;
 using content::BrowserThread;
+using content::ResourceType;
 
 namespace extensions {
 namespace {
@@ -241,6 +242,27 @@ void ShellContentBrowserClient::GetAdditionalAllowedSchemesForFileSystem(
 content::DevToolsManagerDelegate*
 ShellContentBrowserClient::GetDevToolsManagerDelegate() {
   return new content::ShellDevToolsManagerDelegate();
+}
+
+void ShellContentBrowserClient::AllowCertificateError(
+    content::WebContents* web_contents,
+    int cert_error,
+    const net::SSLInfo& ssl_info,
+    const GURL& request_url,
+    ResourceType resource_type,
+    bool overridable,
+    bool strict_enforcement,
+    bool expired_previous_decision,
+    const base::Callback<void(bool)>& callback,
+    content::CertificateRequestResultType* result) {
+  DCHECK(web_contents);
+  if (resource_type != content::RESOURCE_TYPE_MAIN_FRAME) {
+    // A sub-resource has a certificate error.  The user doesn't really
+    // have a context for making the right decision, so block the
+    // request hard, without an info bar to allow showing the insecure
+    // content.
+    *result = content::CERTIFICATE_REQUEST_RESULT_TYPE_DENY;
+  }
 }
 
 ShellBrowserMainParts* ShellContentBrowserClient::CreateShellBrowserMainParts(

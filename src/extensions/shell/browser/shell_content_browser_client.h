@@ -56,6 +56,17 @@ class ShellContentBrowserClient : public content::ContentBrowserClient {
   void GetAdditionalAllowedSchemesForFileSystem(
       std::vector<std::string>* additional_schemes) override;
   content::DevToolsManagerDelegate* GetDevToolsManagerDelegate() override;
+  void AllowCertificateError(
+      content::WebContents* web_contents,
+      int cert_error,
+      const net::SSLInfo& ssl_info,
+      const GURL& request_url,
+      content::ResourceType resource_type,
+      bool overridable,
+      bool strict_enforcement,
+      bool expired_previous_decision,
+      const base::Callback<void(bool)>& callback,
+      content::CertificateRequestResultType* request) override;
 
  protected:
   // Subclasses may wish to provide their own ShellBrowserMainParts.
