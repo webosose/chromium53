@@ -80,7 +80,7 @@
         'defines': ['ENABLE_VP9=1'],
       }],
       ['platform_apollo==1', {
-        'defines': ['PLATFORM_APOLLO=1', 'USE_BROADCOM=1', 'USE_SOFTWARE_DECODED_HTML5_VIDEO=1'],
+        'defines': ['PLATFORM_APOLLO=1', 'USE_BROADCOM=1'],
       }],
       ['platform_apollo==1', {
         'defines': [

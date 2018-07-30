@@ -2715,31 +2715,12 @@ blink::WebMediaPlayer* RenderFrameImpl::createMediaPlayer(
       GetContentClient()->renderer()->CreateMediaRendererFactory(
           this, render_thread->GetGpuFactories(), media_log);
 #if defined(OS_WEBOS) && defined(USE_UMEDIASERVER)
-  blink::WebMediaPlayer::LoadType load_type = client->loadType();
-#if defined(USE_SOFTWARE_DECODED_HTML5_VIDEO)
-  if (load_type == blink::WebMediaPlayer::LoadTypeURL) {
-      if (!media_renderer_factory.get()) {
-        media_renderer_factory.reset(new media::DefaultRendererFactory(
-            media_log, GetDecoderFactory(),
-            base::Bind(&RenderThreadImpl::GetGpuFactories,
-                       base::Unretained(render_thread))));
-      }
-  } else {
-      if (!media_renderer_factory.get()) {
-        media_renderer_factory.reset(new media::TvRendererFactory(
-            media_log, GetDecoderFactory(),
-            base::Bind(&RenderThreadImpl::GetGpuFactories,
-                       base::Unretained(render_thread))));
-      }
-  }
-#else
   if (!media_renderer_factory.get()) {
     media_renderer_factory.reset(new media::TvRendererFactory(
         media_log, GetDecoderFactory(),
         base::Bind(&RenderThreadImpl::GetGpuFactories,
                    base::Unretained(render_thread))));
   }
-#endif
 #else
   if (!media_renderer_factory.get()) {
     media_renderer_factory.reset(new media::DefaultRendererFactory(
@@ -2752,16 +2733,14 @@ blink::WebMediaPlayer* RenderFrameImpl::createMediaPlayer(
 #endif  // defined(ENABLE_MOJO_RENDERER)
 
 #if defined(OS_WEBOS) && defined(USE_UMEDIASERVER)
-#if !defined(USE_SOFTWARE_DECODED_HTML5_VIDEO)
+  blink::WebMediaPlayer::LoadType load_type = client->loadType();
   if (load_type == blink::WebMediaPlayer::LoadTypeURL) {
     std::string mime_type = client->contentMIMEType().latin1();
     return new media::WebMediaPlayerUMS(
         frame_, client, GetWebMediaPlayerDelegate()->AsWeakPtr(), params,
         render_view_->screen_info().additionalContentsScale,
         render_view_->applicationId());
-  }
-#endif  // !defined(USE_SOFTWARE_DECODED_HTML5_VIDEO)
-  if (load_type == blink::WebMediaPlayer::LoadTypeMediaSource) {
+  } else if (load_type == blink::WebMediaPlayer::LoadTypeMediaSource) {
     return new media::WebMediaPlayerMSE(
         frame_, client, encrypted_client,
         GetWebMediaPlayerDelegate()->AsWeakPtr(),

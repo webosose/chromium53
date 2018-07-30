@@ -92,7 +92,7 @@ static const CodecInfo kVorbisCodecInfo = { "vorbis", CodecInfo::AUDIO, NULL,
 static const CodecInfo kOpusCodecInfo = { "opus", CodecInfo::AUDIO, NULL,
                                           CodecInfo::HISTOGRAM_OPUS };
 
-#if !defined(OS_WEBOS) || !defined(USE_UMEDIASERVER) || defined(ENABLE_VP9) || defined(USE_SOFTWARE_DECODED_HTML5_VIDEO)
+#if !defined(OS_WEBOS) || !defined(USE_UMEDIASERVER) || defined(ENABLE_VP9)
 static const CodecInfo* kVideoWebMCodecs[] = {
   &kVP8CodecInfo,
   &kVP9CodecInfo,
@@ -102,7 +102,7 @@ static const CodecInfo* kVideoWebMCodecs[] = {
 };
 #endif
 
-#if !defined(OS_WEBOS) || !defined(USE_UMEDIASERVER) || defined(USE_SOFTWARE_DECODED_HTML5_VIDEO)
+#if !defined(OS_WEBOS) || !defined(USE_UMEDIASERVER)
 static const CodecInfo* kAudioWebMCodecs[] = {
   &kVorbisCodecInfo,
   &kOpusCodecInfo,
@@ -110,7 +110,7 @@ static const CodecInfo* kAudioWebMCodecs[] = {
 };
 #endif
 
-#if !defined(OS_WEBOS) || !defined(USE_UMEDIASERVER) || defined(ENABLE_VP9) || defined(USE_SOFTWARE_DECODED_HTML5_VIDEO)
+#if !defined(OS_WEBOS) || !defined(USE_UMEDIASERVER) || defined(ENABLE_VP9)
 static StreamParser* BuildWebMParser(const std::vector<std::string>& codecs,
                                      const scoped_refptr<MediaLog>& media_log) {
   return new WebMStreamParser();
@@ -311,10 +311,10 @@ static StreamParser* BuildMP2TParser(const std::vector<std::string>& codecs,
 #endif
 
 static const SupportedTypeInfo kSupportedTypeInfo[] = {
-#if !defined(OS_WEBOS) || !defined(USE_UMEDIASERVER) || defined(ENABLE_VP9) || defined(USE_SOFTWARE_DECODED_HTML5_VIDEO)
+#if !defined(OS_WEBOS) || !defined(USE_UMEDIASERVER) || defined(ENABLE_VP9)
     {"video/webm", &BuildWebMParser, kVideoWebMCodecs},
 #endif
-#if !defined(OS_WEBOS) || !defined(USE_UMEDIASERVER) || defined(USE_SOFTWARE_DECODED_HTML5_VIDEO)
+#if !defined(OS_WEBOS) || !defined(USE_UMEDIASERVER)
     {"audio/webm", &BuildWebMParser, kAudioWebMCodecs},
 #endif
 #if defined(USE_PROPRIETARY_CODECS)
