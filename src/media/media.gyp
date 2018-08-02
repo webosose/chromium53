@@ -1101,6 +1101,7 @@
               ],
               'direct_dependent_settings': {
                 'defines': [
+                  # We should support only hardware video decoding.
                   'DISABLE_FFMPEG_VIDEO_DECODERS',
                 ],
               },

@@ -65,11 +65,11 @@ WebMediaPlayerMSE::WebMediaPlayerMSE(
       media_task_runner_, client_->isVideo(), app_id_,
       BIND_TO_RENDER_LOOP(&WebMediaPlayerMSE::OnError));
 
-  media_apis_wrapper_->SetSizeChangeCb(
-      BIND_TO_RENDER_LOOP(&WebMediaPlayerMSE::OnVideoSizeChange));
-
   renderer_factory_->SetMediaAPIsWrapper(media_apis_wrapper_);
   pipeline_.SetMediaAPIsWrapper(media_apis_wrapper_);
+
+  media_apis_wrapper_->SetSizeChangeCb(
+      BIND_TO_RENDER_LOOP(&WebMediaPlayerMSE::OnVideoSizeChange));
 
 #if defined(ENABLE_LG_SVP)
   if (params.initial_cdm()) {

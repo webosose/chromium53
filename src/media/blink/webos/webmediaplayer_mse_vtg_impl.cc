@@ -58,8 +58,6 @@ WebMediaPlayerMSEVTGImpl::WebMediaPlayerMSEVTGImpl(
   // Create MediaApis Wrapper
   media_apis_wrapper_ = media::MediaAPIsWrapper::Create(
       media_task_runner_, client_->isVideo(), app_id_,
-      BIND_TO_RENDER_LOOP_VIDEO_FRAME_PROVIDER(
-          &VideoFrameProviderVTGImpl::activeRegionChanged),
       BIND_TO_RENDER_LOOP(&WebMediaPlayerMSEVTGImpl::OnError));
 
   media_apis_wrapper_->SetActiveRegionCb(
