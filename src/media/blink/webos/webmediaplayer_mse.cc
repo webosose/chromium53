@@ -163,8 +163,6 @@ void WebMediaPlayerMSE::updateVideo(
     blink::WebRect display_rect(0, 0,
         display_resolution_.width(), display_resolution_.height());
 
-    scaled_rect.y = scaled_rect.y + (delegate_?delegate_->GetRenderViewBounds().y():0);
-
     blink::WebRect clip_rect = gfx::IntersectRects(scaled_rect, display_rect);
     if (clip_rect != scaled_rect)
       clipping_rect = true;
@@ -220,6 +218,9 @@ void WebMediaPlayerMSE::updateVideo(
       scaled_rect.width = clipped_width;
       scaled_rect.height = clipped_height;
     }
+#if defined(PLATFORM_APOLLO)
+    scaled_rect.y += delegate_ ? delegate_->GetRenderViewBounds().y() : 0;
+#endif
 
     if (media_apis_wrapper_) {
       media_apis_wrapper_->SetDisplayWindow(scaled_rect, scaled_in_rect,

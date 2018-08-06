@@ -583,9 +583,6 @@ void WebMediaPlayerUMS::updateVideo(const blink::WebRect& rect,
     blink::WebRect display_rect(0, 0, display_resolution_.width(),
                                 display_resolution_.height());
 
-    display_window_out_rect.y +=
-        delegate_ ? delegate_->GetRenderViewBounds().y() : 0;
-
     blink::WebRect clip_rect =
         gfx::IntersectRects(display_window_out_rect, display_rect);
     if (clip_rect != display_window_out_rect)
@@ -686,6 +683,11 @@ void WebMediaPlayerUMS::updateVideo(const blink::WebRect& rect,
         umedia_client_->setVisibility(true);
       }
     }
+#if defined(PLATFORM_APOLLO)
+    display_window_out_rect.y +=
+        delegate_ ? delegate_->GetRenderViewBounds().y() : 0;
+#endif
+
     umedia_client_->setDisplayWindow(display_window_out_rect,
                                      display_window_in_rect_,
                                      checked_fullscreen, forced);

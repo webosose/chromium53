@@ -166,6 +166,9 @@ void WebMediaPlayerMSEVTGImpl::updateVideo(const blink::WebRect& rect,
       scaled_rect_.width = clipped_width;
       scaled_rect_.height = clipped_height;
     }
+#if defined(PLATFORM_APOLLO)
+    scaled_rect.y += delegate_ ? delegate_->GetRenderViewBounds().y() : 0;
+#endif
 
     if (media_apis_wrapper_) {
       if (prev_rect_exists && video_frame_provider_vtg_->useVideoTexture())

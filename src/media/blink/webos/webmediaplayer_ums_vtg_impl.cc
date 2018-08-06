@@ -238,8 +238,6 @@ void WebMediaPlayerUMSVTGImpl::updateVideo(const blink::WebRect& rect,
     blink::WebRect display_rect(0, 0, display_resolution_.width(),
                                 display_resolution_.height());
 
-    display_window_out_rect.y +=
-        delegate_ ? delegate_->GetRenderViewBounds().y() : 0;
 
     blink::WebRect clip_rect =
         gfx::IntersectRects(display_window_out_rect, display_rect);
@@ -341,6 +339,10 @@ void WebMediaPlayerUMSVTGImpl::updateVideo(const blink::WebRect& rect,
         umedia_client_->setVisibility(true);
       }
     }
+#if defined(PLATFORM_APOLLO)
+    display_window_out_rect.y +=
+        delegate_ ? delegate_->GetRenderViewBounds().y() : 0;
+#endif
 
     if (video_frame_provider_vtg_->useVideoTexture()) {
       if (video_frame_provider_vtg_->getActiveVideoRegion().isEmpty())
