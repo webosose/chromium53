@@ -637,7 +637,7 @@ void HTMLMediaElement::removedFrom(ContainerNode* insertionPoint)
         configureMediaControls();
         if (m_networkState > NETWORK_EMPTY)
             pauseInternal();
-#if OS(WEBOS) && defined(USE_UMEDIASERVER)
+#if OS(WEBOS) && defined(USE_UMEDIASERVER) && !defined(PLATFORM_APOLLO)
         // need to unload media pipeline.
         clearMediaPlayer();
 #endif
