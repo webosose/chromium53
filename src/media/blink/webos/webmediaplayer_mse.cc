@@ -54,6 +54,8 @@ WebMediaPlayerMSE::WebMediaPlayerMSE(
       status_on_suspended_(UnknownStatus),
       is_suspended_(false),
       pending_size_change_(false) {
+  INFO_LOG("[%p] %s", this, __FUNCTION__);
+
   previous_video_rect_ = blink::WebRect(-1, -1, -1, -1);
 
   // Use the null sink for our MSE player
@@ -87,6 +89,8 @@ WebMediaPlayerMSE::WebMediaPlayerMSE(
 }
 
 WebMediaPlayerMSE::~WebMediaPlayerMSE() {
+  INFO_LOG("[%p] %s", this, __FUNCTION__);
+
   DCHECK(main_task_runner_->BelongsToCurrentThread());
 
   if (paintTimer_.IsRunning())
@@ -99,6 +103,8 @@ WebMediaPlayerMSE::~WebMediaPlayerMSE() {
 void WebMediaPlayerMSE::load(LoadType load_type,
                              const blink::WebMediaPlayerSource& source,
                              CORSMode cors_mode) {
+  INFO_LOG("[%p] %s", this, __FUNCTION__);
+
   // call base-class implementation
   media::WebMediaPlayerImpl::load(load_type, source, cors_mode);
 
@@ -113,7 +119,8 @@ void WebMediaPlayerMSE::load(LoadType load_type,
 }
 
 void WebMediaPlayerMSE::play() {
-  DEBUG_LOG("play()");
+  INFO_LOG("[%p] %s", this, __FUNCTION__);
+
   DVLOG(1) << __FUNCTION__;
   DCHECK(main_task_runner_->BelongsToCurrentThread());
 
@@ -127,23 +134,24 @@ void WebMediaPlayerMSE::play() {
 }
 
 void WebMediaPlayerMSE::pause() {
-  DEBUG_LOG("pause()");
+  INFO_LOG("[%p] %s", this, __FUNCTION__);
   media::WebMediaPlayerImpl::pause();
 }
 
 
 void WebMediaPlayerMSE::setRate(double rate) {
+  DEBUG_LOG("[%p] %s : rate ( %f )", this, __FUNCTION__, rate);
+
   DVLOG(1) << __FUNCTION__ << "(" << rate << ")";
   DCHECK(main_task_runner_->BelongsToCurrentThread());
-
-  if (must_suspend_)
-    return;
 
   // call base-class implementation
   media::WebMediaPlayerImpl::setRate(rate);
 }
 
 void WebMediaPlayerMSE::setVolume(double volume) {
+  DEBUG_LOG("[%p] %s : volume ( %f )", this, __FUNCTION__, volume);
+
   // call base-class implementation
   media::WebMediaPlayerImpl::setVolume(volume);
 }
@@ -234,7 +242,7 @@ void WebMediaPlayerMSE::updateVideo(
 void WebMediaPlayerMSE::setContentDecryptionModule(
     blink::WebContentDecryptionModule* cdm,
     blink::WebContentDecryptionModuleResult result) {
-  DEBUG_LOG("%s", __FUNCTION__);
+  INFO_LOG("[%p] %s", this, __FUNCTION__);
 
   DCHECK(main_task_runner_->BelongsToCurrentThread());
 
@@ -243,7 +251,8 @@ void WebMediaPlayerMSE::setContentDecryptionModule(
   if (cdm && media_apis_wrapper_.get()) {
     const std::string ks =
         media::ToWebContentDecryptionModuleImpl(cdm)->GetKeySystem();
-    DEBUG_LOG("Setting key_system to media APIs = '%s'", ks.c_str());
+    DEBUG_LOG("[%p] %s : Setting key_system to media APIs = '%s'", this,
+              __FUNCTION__, ks.c_str());
     media_apis_wrapper_->SetKeySystem(ks);
   }
 #endif
@@ -253,31 +262,28 @@ void WebMediaPlayerMSE::setContentDecryptionModule(
 }
 
 void WebMediaPlayerMSE::suspend() {
+  DEBUG_LOG("[%p] %s : is_suspended_ = %d", this, __FUNCTION__, is_suspended_);
+
   if (is_suspended_)
     return;
 
-  DEBUG_LOG("%s - 0x%x", __FUNCTION__, this);
-
   is_suspended_ = true;
-  must_suspend_ = true;
 
   status_on_suspended_ = paused() ? PausedStatus : PlayingStatus;
-  if (status_on_suspended_ == PlayingStatus) {
+  if (status_on_suspended_ == PlayingStatus)
     pause();
-  }
 
   if (media_apis_wrapper_.get())
     media_apis_wrapper_->Suspend();
 }
 
 void WebMediaPlayerMSE::resume() {
+  DEBUG_LOG("[%p] %s : is_suspended_ = %d", this, __FUNCTION__, is_suspended_);
+
   if (!is_suspended_)
     return;
 
-  DEBUG_LOG("%s - 0x%x", __FUNCTION__, this);
-
   is_suspended_ = false;
-  must_suspend_ = false;
 
   media::MediaAPIsWrapper::RestorePlaybackMode restore_playback_mode;
 
@@ -299,7 +305,7 @@ void WebMediaPlayerMSE::resume() {
       seek(paused_time_.InSecondsF());
   }
 
-  DEBUG_LOG("%s-[%p], status_on_suspended_ = %d", __FUNCTION__, this,
+  DEBUG_LOG("[%p] %s : status_on_suspended_ = %d", this, __FUNCTION__,
             status_on_suspended_);
   if (status_on_suspended_ == PlayingStatus) {
     play();
