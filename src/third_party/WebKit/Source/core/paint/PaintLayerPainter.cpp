@@ -560,10 +560,17 @@ PaintLayerPainter::PaintResult PaintLayerPainter::paintFragmentByApplyingTransfo
     LayoutPoint delta;
     m_paintLayer.convertToLayerCoords(paintingInfo.rootLayer, delta);
     delta.moveBy(fragmentTranslation);
-    TransformationMatrix transform(m_paintLayer.renderableTransform(paintingInfo.getGlobalPaintFlags()));
+    delta += paintingInfo.subPixelAccumulation;
     IntPoint roundedDelta = roundedIntPoint(delta);
+
+    TransformationMatrix transform(m_paintLayer.renderableTransform(paintingInfo.getGlobalPaintFlags()));
     transform.translateRight(roundedDelta.x(), roundedDelta.y());
-    LayoutSize adjustedSubPixelAccumulation = paintingInfo.subPixelAccumulation + (delta - roundedDelta);
+
+    LayoutSize newSubPixelAccumulation;
+    if (transform.isIdentityOrTranslation())
+        newSubPixelAccumulation += delta - roundedDelta;
+    // Otherwise discard the sub-pixel remainder because paint offset can't be
+    // transformed by a non-translation transform.
 
     // TODO(jbroman): Put the real transform origin here, instead of using a
     // matrix with the origin baked in.
@@ -572,7 +579,7 @@ PaintLayerPainter::PaintResult PaintLayerPainter::paintFragmentByApplyingTransfo
 
     // Now do a paint with the root layer shifted to be us.
     PaintLayerPaintingInfo transformedPaintingInfo(&m_paintLayer, LayoutRect(enclosingIntRect(transform.inverse().mapRect(paintingInfo.paintDirtyRect))), paintingInfo.getGlobalPaintFlags(),
-        adjustedSubPixelAccumulation);
+        newSubPixelAccumulation);
     transformedPaintingInfo.ancestorHasClipPathClipping = paintingInfo.ancestorHasClipPathClipping;
     return paintLayerContentsAndReflection(context, transformedPaintingInfo, paintFlags, ForceSingleFragment);
 }
