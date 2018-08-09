@@ -37,6 +37,7 @@
 #include "core/dom/ElementData.h"
 #include "core/dom/SpaceSplitString.h"
 #include "core/html/CollectionType.h"
+#include "core/html/FocusOptions.h"
 #include "platform/heap/Handle.h"
 #include "public/platform/WebFocusType.h"
 
@@ -56,6 +57,7 @@ class Dictionary;
 class ElementRareData;
 class ElementShadow;
 class ExceptionState;
+class FocusOptions;
 class Image;
 class IntSize;
 class Locale;
@@ -100,14 +102,16 @@ struct FocusParams {
     STACK_ALLOCATED();
 
     FocusParams() {}
-    FocusParams(SelectionBehaviorOnFocus selection, WebFocusType focusType, InputDeviceCapabilities* capabilities)
+    FocusParams(SelectionBehaviorOnFocus selection, WebFocusType focusType, InputDeviceCapabilities* capabilities, FocusOptions focus_options = FocusOptions())
         : selectionBehavior(selection)
         , type(focusType)
-        , sourceCapabilities(capabilities) {}
+        , sourceCapabilities(capabilities)
+        , options(focus_options) {}
 
     SelectionBehaviorOnFocus selectionBehavior = SelectionBehaviorOnFocus::Restore;
     WebFocusType type = WebFocusTypeNone;
     Member<InputDeviceCapabilities> sourceCapabilities = nullptr;
+    FocusOptions options = FocusOptions();
 };
 
 typedef HeapVector<Member<Attr>> AttrNodeList;
@@ -401,7 +405,11 @@ public:
 
     bool isPreventScrollOnFocus();
     virtual void focus(const FocusParams& = FocusParams());
-    virtual void updateFocusAppearance(SelectionBehaviorOnFocus);
+    void focus(FocusOptions);
+
+    void updateFocusAppearance(SelectionBehaviorOnFocus);
+    virtual void updateFocusAppearanceWithOptions(SelectionBehaviorOnFocus,
+                                                  const FocusOptions&);
     virtual void blur();
 
     void setDistributeScroll(ScrollStateCallback*, String nativeScrollBehavior);

@@ -32,7 +32,7 @@ interface HTMLElement : Element {
     [CEReactions, Reflect] attribute boolean hidden;
     [ImplementedAs=clickForBindings] void click();
     [CEReactions, CustomElementCallbacks] attribute long tabIndex;
-    void focus();
+    void focus(optional FocusOptions options);
     void blur();
     [CEReactions, Reflect] attribute DOMString accessKey;
     [CEReactions, CustomElementCallbacks] attribute boolean draggable;

@@ -330,8 +330,9 @@ bool HTMLInputElement::shouldShowFocusRingOnMouseFocus() const
     return m_inputType->shouldShowFocusRingOnMouseFocus();
 }
 
-void HTMLInputElement::updateFocusAppearance(SelectionBehaviorOnFocus selectionBehavior)
-{
+void HTMLInputElement::updateFocusAppearanceWithOptions(
+    SelectionBehaviorOnFocus selectionBehavior,
+    const FocusOptions& options) {
     if (isTextField()) {
         switch (selectionBehavior) {
         case SelectionBehaviorOnFocus::Reset:
@@ -346,12 +347,15 @@ void HTMLInputElement::updateFocusAppearance(SelectionBehaviorOnFocus selectionB
         // TODO(tkent): scrollRectToVisible is a workaround of a bug of
         // FrameSelection::revealSelection().  It doesn't scroll correctly in a
         // case of RangeSelection. crbug.com/443061.
-        if (layoutObject())
+        if (!options.preventScroll()) {
+          if (layoutObject())
             layoutObject()->scrollRectToVisible(boundingBox());
-        if (document().frame())
+          if (document().frame())
             document().frame()->selection().revealSelection();
+        }
     } else {
-        HTMLTextFormControlElement::updateFocusAppearance(selectionBehavior);
+        HTMLTextFormControlElement::updateFocusAppearanceWithOptions(selectionBehavior,
+                                                             options);
     }
 }
 

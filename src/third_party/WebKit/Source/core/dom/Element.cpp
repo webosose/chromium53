@@ -2388,6 +2388,11 @@ bool Element::isPreventScrollOnFocus()
     return false;
 }
 
+void Element::focus(FocusOptions options) {
+  focus(FocusParams(SelectionBehaviorOnFocus::Restore, WebFocusTypeNone,
+                    nullptr, options));
+}
+
 void Element::focus(const FocusParams& params)
 {
     if (!inShadowIncludingDocument())
@@ -2410,7 +2415,7 @@ void Element::focus(const FocusParams& params)
         // Slide the focus to its inner node.
         Element* found = document().page()->focusController().findFocusableElementInShadowHost(*this);
         if (found && isShadowIncludingInclusiveAncestorOf(found)) {
-            found->focus(FocusParams(SelectionBehaviorOnFocus::Reset, WebFocusTypeForward, nullptr));
+            found->focus(FocusParams(SelectionBehaviorOnFocus::Reset, WebFocusTypeForward, nullptr, params.options));
             return;
         }
     }
@@ -2429,6 +2434,12 @@ void Element::focus(const FocusParams& params)
 
 void Element::updateFocusAppearance(SelectionBehaviorOnFocus selectionBehavior)
 {
+  updateFocusAppearanceWithOptions(selectionBehavior, FocusOptions());
+}
+
+void Element::updateFocusAppearanceWithOptions(
+    SelectionBehaviorOnFocus selectionBehavior,
+    const FocusOptions& options) {
     if (selectionBehavior == SelectionBehaviorOnFocus::None)
         return;
     if (isRootEditableElement()) {
@@ -2446,8 +2457,10 @@ void Element::updateFocusAppearance(SelectionBehaviorOnFocus selectionBehavior)
         // and we don't want to change the focus to a new Element.
 
         frame->selection().setSelection(newSelection,  FrameSelection::CloseTyping | FrameSelection::ClearTypingStyle | FrameSelection::DoNotSetFocus);
-        frame->selection().revealSelection();
+        if (!options.preventScroll())
+          frame->selection().revealSelection();
     } else if (layoutObject() && !layoutObject()->isLayoutPart() && !isPreventScrollOnFocus()) {
+      if (!options.preventScroll())
         layoutObject()->scrollRectToVisible(boundingBox());
     }
 }

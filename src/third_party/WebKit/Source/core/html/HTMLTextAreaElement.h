@@ -127,7 +127,8 @@ private:
     bool hasCustomFocusLogic() const override;
     bool shouldShowFocusRingOnMouseFocus() const override;
     bool isKeyboardFocusable() const override;
-    void updateFocusAppearance(SelectionBehaviorOnFocus) override;
+    void updateFocusAppearanceWithOptions(SelectionBehaviorOnFocus,
+                                          const FocusOptions&) override;
 
     void accessKeyAction(bool sendMouseEvents) override;
 

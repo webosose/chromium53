@@ -223,14 +223,17 @@ void HTMLAreaElement::setFocus(bool shouldBeFocused)
     toLayoutImage(layoutObject)->areaElementFocusChanged(this);
 }
 
-void HTMLAreaElement::updateFocusAppearance(SelectionBehaviorOnFocus selectionBehavior)
-{
+void HTMLAreaElement::updateFocusAppearanceWithOptions(
+    SelectionBehaviorOnFocus selectionBehavior,
+    const FocusOptions& options) {
     document().updateStyleAndLayoutTreeForNode(this);
     if (!isFocusable())
         return;
 
-    if (HTMLImageElement* imageElement = this->imageElement())
-        imageElement->updateFocusAppearance(selectionBehavior);
+    if (HTMLImageElement* imageElement = this->imageElement()) {
+        imageElement->updateFocusAppearanceWithOptions(selectionBehavior,
+                                                       options);
+    }
 }
 
 } // namespace blink
