@@ -87,6 +87,12 @@ var WEB_VIEW_API_METHODS = [
   // Reloads the current top-level page.
   'reload',
 
+  // Resumes the guest web page's renderer process.
+  'resume',
+
+  // Suspends the guest web page's renderer process.
+  'suspend',
+
   // Override the user agent string used by the webview for guest page requests.
   'setUserAgentOverride',
 

@@ -415,6 +415,33 @@ class WebViewInternalStopFunction : public WebViewInternalExtensionFunction {
   DISALLOW_COPY_AND_ASSIGN(WebViewInternalStopFunction);
 };
 
+class WebViewInternalSuspendFunction : public WebViewInternalExtensionFunction {
+ public:
+  DECLARE_EXTENSION_FUNCTION("webViewInternal.suspend",
+                             WEBVIEWINTERNAL_SUSPEND);
+
+  WebViewInternalSuspendFunction();
+
+ protected:
+  ~WebViewInternalSuspendFunction() override;
+  ResponseAction Run() override;
+
+  DISALLOW_COPY_AND_ASSIGN(WebViewInternalSuspendFunction);
+};
+
+class WebViewInternalResumeFunction : public WebViewInternalExtensionFunction {
+ public:
+  DECLARE_EXTENSION_FUNCTION("webViewInternal.resume", WEBVIEWINTERNAL_RESUME);
+
+  WebViewInternalResumeFunction();
+
+ protected:
+  ~WebViewInternalResumeFunction() override;
+  ResponseAction Run() override;
+
+  DISALLOW_COPY_AND_ASSIGN(WebViewInternalResumeFunction);
+};
+
 class WebViewInternalTerminateFunction
     : public WebViewInternalExtensionFunction {
  public:

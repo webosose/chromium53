@@ -723,6 +723,26 @@ void WebViewGuest::Stop() {
   web_contents()->Stop();
 }
 
+void WebViewGuest::Suspend() {
+  if (is_suspended_)
+    return;
+  is_suspended_ = true;
+  content::RecordAction(UserMetricsAction("WebView.Guest.Suspend"));
+  content::RenderViewHost* rvh = web_contents()->GetRenderViewHost();
+  if (rvh)
+    rvh->SuspendMedia();
+}
+
+void WebViewGuest::Resume() {
+  if (!is_suspended_)
+    return;
+  is_suspended_ = false;
+  content::RecordAction(UserMetricsAction("WebView.Guest.Resume"));
+  content::RenderViewHost* rvh = web_contents()->GetRenderViewHost();
+  if (rvh)
+    rvh->ResumeMedia();
+}
+
 void WebViewGuest::Terminate() {
   content::RecordAction(UserMetricsAction("WebView.Guest.Terminate"));
   base::ProcessHandle process_handle =
@@ -781,6 +801,7 @@ WebViewGuest::WebViewGuest(WebContents* owner_web_contents)
       is_embedder_fullscreen_(false),
       last_fullscreen_permission_was_allowed_by_embedder_(false),
       pending_zoom_factor_(0.0),
+      is_suspended_(false),
       weak_ptr_factory_(this) {
   web_view_guest_delegate_.reset(
       ExtensionsAPIClient::Get()->CreateWebViewGuestDelegate(this));

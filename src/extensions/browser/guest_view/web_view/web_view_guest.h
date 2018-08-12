@@ -134,6 +134,12 @@ class WebViewGuest : public guest_view::GuestView<WebViewGuest>,
   // Stop loading the guest.
   void Stop();
 
+  // Suspend the guest process
+  void Suspend();
+
+  // Resume the guest process
+  void Resume();
+
   // Kill the guest process.
   void Terminate();
 
@@ -376,6 +382,9 @@ class WebViewGuest : public guest_view::GuestView<WebViewGuest>,
   // Tracks whether the webview has a pending zoom from before the first
   // navigation. This will be equal to 0 when there is no pending zoom.
   double pending_zoom_factor_;
+
+  // Whether the GuestView is suspended.
+  bool is_suspended_;
 
   // This is used to ensure pending tasks will not fire after this object is
   // destroyed.
