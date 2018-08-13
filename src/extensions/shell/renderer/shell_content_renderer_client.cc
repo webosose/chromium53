@@ -4,6 +4,7 @@
 
 #include "extensions/shell/renderer/shell_content_renderer_client.h"
 
+#include "components/error_page/common/localized_error.h"
 #include "content/public/common/content_constants.h"
 #include "content/public/renderer/render_frame.h"
 #include "content/public/renderer/render_frame_observer.h"
@@ -19,7 +20,11 @@
 #include "extensions/renderer/guest_view/mime_handler_view/mime_handler_view_container.h"
 #include "extensions/shell/common/shell_extensions_client.h"
 #include "extensions/shell/renderer/shell_extensions_renderer_client.h"
+#include "third_party/WebKit/public/platform/WebCachePolicy.h"
+#include "third_party/WebKit/public/platform/WebURL.h"
+#include "third_party/WebKit/public/platform/WebURLError.h"
 #include "third_party/WebKit/public/web/WebLocalFrame.h"
+#include "webos/renderer/net/webos_net_error_helper.h"
 
 #if !defined(DISABLE_NACL)
 #include "components/nacl/common/nacl_constants.h"
@@ -145,6 +150,27 @@ void ShellContentRendererClient::RunScriptsAtDocumentEnd(
 
 ExtensionsClient* ShellContentRendererClient::CreateExtensionsClient() {
   return new ShellExtensionsClient;
+}
+void ShellContentRendererClient::GetNavigationErrorStrings(
+    content::RenderFrame* render_frame,
+    const blink::WebURLRequest& failed_request,
+    const blink::WebURLError& error,
+    std::string* error_html,
+    base::string16* error_description) {
+  const GURL failed_url = error.unreachableURL;
+  bool is_post = base::EqualsASCII(
+      base::StringPiece16(failed_request.httpMethod()), "POST");
+  bool is_ignoring_cache =
+      failed_request.getCachePolicy() == blink::WebCachePolicy::BypassingCache;
+  if (error_html) {
+    webos::WebOsNetErrorHelper::Get(render_frame)
+        ->GetErrorHTML(error, is_post, is_ignoring_cache, error_html);
+  }
+
+  if (error_description) {
+    *error_description = error_page::LocalizedError::GetErrorDetails(
+        error.domain.utf8(), error.reason, is_post);
+  }
 }
 
 }  // namespace extensions

@@ -50,6 +50,11 @@ class ShellContentRendererClient : public content::ContentRendererClient {
       const GURL& original_url) override;
   void RunScriptsAtDocumentStart(content::RenderFrame* render_frame) override;
   void RunScriptsAtDocumentEnd(content::RenderFrame* render_frame) override;
+  void GetNavigationErrorStrings(content::RenderFrame* render_frame,
+                                 const blink::WebURLRequest& failed_request,
+                                 const blink::WebURLError& error,
+                                 std::string* error_html,
+                                 base::string16* error_description) override;
 
  protected:
   // app_shell embedders may need custom extensions client interfaces.
