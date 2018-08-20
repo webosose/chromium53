@@ -145,18 +145,32 @@ void LayoutBoxModelObject::willBeDestroyed()
 
 void LayoutBoxModelObject::styleWillChange(StyleDifference diff, const ComputedStyle& newStyle)
 {
-    // This object's layer may cease to be a stacking context, in which case the paint
-    // invalidation container of the children may change. Thus we need to invalidate paint
-    // eagerly for all such children.
-    if (hasLayer()
-        && enclosingLayer()->stackingNode()
-        && enclosingLayer()->stackingNode()->isStackingContext()
-        && newStyle.hasAutoZIndex()) {
-        // The following disablers are valid because we need to invalidate based on the current
-        // status.
-        DisableCompositingQueryAsserts compositingDisabler;
-        DisablePaintInvalidationStateAsserts paintDisabler;
-        invalidatePaintIncludingNonCompositingDescendants();
+    // SPv1:
+    // This object's layer may begin or cease to be stacked or stacking context,
+    // in which case the paint invalidation container of this object and
+    // descendants may change. Thus we need to invalidate paint eagerly for all
+    // such children. PaintLayerCompositor::paintInvalidationOnCompositingChange()
+    // doesn't work for the case because we can only see the new
+    // paintInvalidationContainer during compositing update.
+    // SPv1 and v2:
+    // Change of stacked/stacking context status may cause change of this or
+    // descendant PaintLayer's CompositingContainer, so we need to eagerly
+    // invalidate the current compositing container chain which may have painted
+    // cached subsequences containing this object or descendant objects.
+    if (style() &&
+      (style()->isStacked() != newStyle.isStacked() ||
+       style()->isStackingContext() != newStyle.isStackingContext()) &&
+      // InvalidatePaintIncludingNonCompositingDescendants() requires this.
+      isRooted()) {
+        if (RuntimeEnabledFeatures::slimmingPaintV2Enabled()) {
+            slowSetPaintingLayerNeedsRepaint();
+        } else {
+            // The following disablers are valid because we need to invalidate based
+            // on the current status.
+            DisableCompositingQueryAsserts compositing_disabler;
+            DisablePaintInvalidationStateAsserts paint_disabler;
+            invalidatePaintIncludingNonCompositingDescendants();
+        }
     }
 
     FloatStateForStyleChange::setWasFloating(this, isFloating());
