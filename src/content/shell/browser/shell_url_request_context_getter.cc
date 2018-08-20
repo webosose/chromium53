@@ -51,6 +51,25 @@
 #include "net/url_request/url_request_job_factory_impl.h"
 #include "url/url_constants.h"
 
+namespace certificate_transparency {
+
+class ShellRequireCTDelegate
+    : public net::TransportSecurityState::RequireCTDelegate {
+ public:
+  explicit ShellRequireCTDelegate(){};
+  ~ShellRequireCTDelegate() override{};
+
+  CTRequirementLevel IsCTRequiredForHost(const std::string& hostname) override {
+    return CTRequirementLevel::NOT_REQUIRED;
+  };
+
+  DISALLOW_COPY_AND_ASSIGN(ShellRequireCTDelegate);
+};
+
+static ShellRequireCTDelegate g_shell_req_delegate;
+
+}  // namespace certificate_transparency
+
 namespace content {
 
 namespace {
@@ -184,6 +203,10 @@ net::URLRequestContext* ShellURLRequestContextGetter::GetURLRequestContext() {
         url_request_context_->cert_verifier();
     network_session_params.transport_security_state =
         url_request_context_->transport_security_state();
+
+    network_session_params.transport_security_state->SetRequireCTDelegate(
+        &certificate_transparency::g_shell_req_delegate);
+
     network_session_params.cert_transparency_verifier =
         url_request_context_->cert_transparency_verifier();
     network_session_params.ct_policy_enforcer =
