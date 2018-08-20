@@ -568,6 +568,12 @@ void WebMediaPlayerUMS::updateVideo(const blink::WebRect& rect,
   DCHECK(main_loop_->task_runner()->BelongsToCurrentThread());
 
   if (pending_size_change_ || previous_video_rect_ != rect) {
+#if defined(PLATFORM_APOLLO)
+    display_resolution_.SetSize(
+        GetClient()->displayResolution().width * additional_contents_scale_.x,
+        GetClient()->displayResolution().height * additional_contents_scale_.y);
+#endif
+
     bool forced = pending_size_change_;
     pending_size_change_ = false;
     previous_video_rect_ = rect;

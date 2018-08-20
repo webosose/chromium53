@@ -162,6 +162,12 @@ void WebMediaPlayerMSE::updateVideo(
 
   blink::WebRect scaled_rect = scaleWebRect(rect, additional_contents_scale_);
   if (pending_size_change_ || previous_video_rect_ != scaled_rect) {
+#if defined(PLATFORM_APOLLO)
+    display_resolution_.SetSize(
+        client_->displayResolution().width * additional_contents_scale_.x,
+        client_->displayResolution().height * additional_contents_scale_.y);
+#endif
+
     bool forced = pending_size_change_;
     pending_size_change_ = false;
     previous_video_rect_ = scaled_rect;
