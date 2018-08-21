@@ -114,6 +114,7 @@ MediaAPIsWrapperGmp::MediaAPIsWrapperGmp(
     const std::string& app_id,
     const PipelineStatusCB& error_cb)
     : MediaAPIsWrapper(task_runner, video, app_id, error_cb),
+      ls_client_(media::LunaServiceClient::PrivateBus),
       play_internal_(false),
       released_media_resource_(false),
       is_destructed_(false),
@@ -327,8 +328,8 @@ void MediaAPIsWrapperGmp::SetPlaybackRate(float playback_rate) {
 }
 
 void MediaAPIsWrapperGmp::Suspend() {
-  DEBUG_LOG("[%p] %s -> media_player_client_[%p], %s", this, __FUNCTION__,
-            media_player_client_.get(), GetMediaID().c_str());
+  DEBUG_LOG("[%p] %s -> media_player_client_[%p] is_finalized_[%d]", this,
+            __FUNCTION__, media_player_client_.get(), is_finalized_);
 
   std::lock_guard<std::recursive_mutex> lock(recursive_mutex_);
 
@@ -557,8 +558,14 @@ void MediaAPIsWrapperGmp::PauseInternal(bool update_media) {
 void MediaAPIsWrapperGmp::SetVolumeInternal(double volume) {
   DEBUG_LOG("[%p] %s, volume = %f", this, __FUNCTION__, volume);
 
-  if (media_player_client_)
-    media_player_client_->SetVolume(volume * 100);
+  Json::Value root;
+  Json::FastWriter writer;
+
+  root["volume"] = (int)(volume * 100);
+  std::string param = writer.write(root);
+
+  // Send input volume to audiod
+  ls_client_.callASync("luna://com.webos.service.audio/media/setVolume", param);
 }
 
 MediaAPIsWrapperGmp::FeedStatus MediaAPIsWrapperGmp::FeedInternal(
