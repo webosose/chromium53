@@ -97,6 +97,8 @@ class MEDIA_EXPORT TvVideoRenderer
   void OnBufferingStateChange(BufferingState state);
   void OnWaitingForDecryptionKey();
 
+  void OnLoaded_Locked();
+
   // Callback for |video_frame_stream_| to deliver decoded video frames and
   // report video decoding status. If a frame is available the planes will be
   // copied asynchronously and FrameReady will be called once finished copying.

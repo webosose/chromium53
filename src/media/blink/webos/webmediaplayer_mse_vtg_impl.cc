@@ -60,7 +60,7 @@ WebMediaPlayerMSEVTGImpl::WebMediaPlayerMSEVTGImpl(
       media_task_runner_, client_->isVideo(), app_id_,
       BIND_TO_RENDER_LOOP(&WebMediaPlayerMSEVTGImpl::OnError));
 
-  media_apis_wrapper_->SetActiveRegionCb(
+  media_apis_wrapper_->SetActiveRegionCallback(
       BIND_TO_RENDER_LOOP_VIDEO_FRAME_PROVIDER(
           &VideoFrameProviderVTGImpl::activeRegionChanged));
 
@@ -73,7 +73,7 @@ WebMediaPlayerMSEVTGImpl::WebMediaPlayerMSEVTGImpl(
         media::ToWebContentDecryptionModuleImpl(params.initial_cdm())
             ->GetKeySystem();
     DEBUG_LOG("Setting key_system to media APIs = '%s'", ks.c_str());
-    media_apis_wrapper_->setKeySystem(ks);
+    media_apis_wrapper_->SetKeySystem(ks);
   }
 #endif
 }
