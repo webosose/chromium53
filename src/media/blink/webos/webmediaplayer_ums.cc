@@ -101,6 +101,9 @@ WebMediaPlayerUMS::WebMediaPlayerUMS(
       fullscreen_(false),
       additional_contents_scale_(additional_contents_scale),
       is_video_offscreen_(false),
+#if defined(PLATFORM_APOLLO)
+      render_view_bounds_(blink::WebRect()),
+#endif
       app_id_(app_id.utf8().data()) {
   if (delegate_)
     delegate_id_ = delegate_->AddObserver(this);
@@ -566,14 +569,17 @@ blink::WebRect WebMediaPlayerUMS::ScaleWebRect(
 void WebMediaPlayerUMS::updateVideo(const blink::WebRect& rect,
                                     bool fullscreen) {
   DCHECK(main_loop_->task_runner()->BelongsToCurrentThread());
-
-  if (pending_size_change_ || previous_video_rect_ != rect) {
 #if defined(PLATFORM_APOLLO)
+  blink::WebRect render_view_bounds = delegate_->GetRenderViewBounds();
+  if (pending_size_change_ || previous_video_rect_ != rect ||
+      render_view_bounds_ != render_view_bounds) {
+    render_view_bounds_ = render_view_bounds;
     display_resolution_.SetSize(
         GetClient()->displayResolution().width * additional_contents_scale_.x,
         GetClient()->displayResolution().height * additional_contents_scale_.y);
+#else
+  if (pending_size_change_ || previous_video_rect_ != rect) {
 #endif
-
     bool forced = pending_size_change_;
     pending_size_change_ = false;
     previous_video_rect_ = rect;

@@ -93,6 +93,10 @@ class MEDIA_BLINK_EXPORT WebMediaPlayerMSE : public WebMediaPlayerImpl {
   std::string app_id_;
   StatusOnSuspended status_on_suspended_;
   bool is_suspended_;
+  bool suspended_by_policy_;
+#if defined(PLATFORM_APOLLO)
+  blink::WebRect render_view_bounds_;
+#endif
 
   bool pending_size_change_;
 

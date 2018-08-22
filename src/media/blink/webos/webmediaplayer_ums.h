@@ -316,6 +316,9 @@ class WebMediaPlayerUMS : public blink::WebMediaPlayer,
   blink::WebRect ScaleWebRect(
       const blink::WebRect& rect, blink::WebFloatPoint scale);
   std::string url_;
+#if defined(PLATFORM_APOLLO)
+  blink::WebRect render_view_bounds_;
+#endif
   std::string app_id_;
   std::unique_ptr<MediaInfoLoader> info_loader_;
 

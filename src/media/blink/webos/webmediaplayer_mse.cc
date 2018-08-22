@@ -53,6 +53,9 @@ WebMediaPlayerMSE::WebMediaPlayerMSE(
       app_id_(app_id.utf8().data()),
       status_on_suspended_(UnknownStatus),
       is_suspended_(false),
+#if defined(PLATFORM_APOLLO)
+      render_view_bounds_(blink::WebRect()),
+#endif
       pending_size_change_(false) {
   INFO_LOG("[%p] %s", this, __FUNCTION__);
 
@@ -161,13 +164,17 @@ void WebMediaPlayerMSE::updateVideo(
   DCHECK(main_task_runner_->BelongsToCurrentThread());
 
   blink::WebRect scaled_rect = scaleWebRect(rect, additional_contents_scale_);
-  if (pending_size_change_ || previous_video_rect_ != scaled_rect) {
 #if defined(PLATFORM_APOLLO)
+  blink::WebRect render_view_bounds = delegate_->GetRenderViewBounds();
+  if (pending_size_change_ || previous_video_rect_ != scaled_rect ||
+      render_view_bounds_ != render_view_bounds) {
+    render_view_bounds_ = render_view_bounds;
     display_resolution_.SetSize(
         client_->displayResolution().width * additional_contents_scale_.x,
         client_->displayResolution().height * additional_contents_scale_.y);
+#else
+  if (pending_size_change_ || previous_video_rect_ != scaled_rect) {
 #endif
-
     bool forced = pending_size_change_;
     pending_size_change_ = false;
     previous_video_rect_ = scaled_rect;
@@ -235,7 +242,7 @@ void WebMediaPlayerMSE::updateVideo(
       scaled_rect.height = clipped_height;
     }
 #if defined(PLATFORM_APOLLO)
-    scaled_rect.y += delegate_ ? delegate_->GetRenderViewBounds().y() : 0;
+    scaled_rect.y += delegate_ ? (render_view_bounds_.y) : 0;
 #endif
 
     if (media_apis_wrapper_) {
