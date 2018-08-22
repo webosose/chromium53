@@ -38,6 +38,7 @@ class ExtensionOptionsGuest
   const char* GetAPINamespace() const final;
   int GetTaskPrefix() const final;
   bool IsPreferredSizeModeEnabled() const final;
+  bool IsDragAndDropEnabled() const final;
   void OnPreferredSizeChanged(const gfx::Size& pref_size) final;
   bool ShouldHandleFindRequestsForEmbedder() const final;
 

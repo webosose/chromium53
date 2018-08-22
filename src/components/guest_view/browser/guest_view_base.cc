@@ -386,6 +386,10 @@ bool GuestViewBase::IsPreferredSizeModeEnabled() const {
   return false;
 }
 
+bool GuestViewBase::IsDragAndDropEnabled() const {
+  return false;
+}
+
 bool GuestViewBase::ZoomPropagatesFromEmbedderToGuest() const {
   return true;
 }
@@ -577,6 +581,13 @@ void GuestViewBase::DidStopLoading() {
 
   if (IsPreferredSizeModeEnabled())
     rvh->EnablePreferredSizeMode();
+  if (!IsDragAndDropEnabled()) {
+    const char script[] =
+        "window.addEventListener('dragstart', function() { "
+        "  window.event.preventDefault(); "
+        "});";
+    rvh->GetMainFrame()->ExecuteJavaScript(base::ASCIIToUTF16(script));
+  }
   GuestViewDidStopLoading();
 }
 

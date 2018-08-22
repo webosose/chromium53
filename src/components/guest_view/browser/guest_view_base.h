@@ -294,6 +294,11 @@ class GuestViewBase : public content::BrowserPluginGuestDelegate,
   // entirety of the embedder's content.
   virtual bool ShouldHandleFindRequestsForEmbedder() const;
 
+  // This method queries whether drag-and-drop is enabled for this particular
+  // view. By default, drag-and-drop is disabled. Derived classes can override
+  // this behavior to enable drag-and-drop.
+  virtual bool IsDragAndDropEnabled() const;
+
   // This method is called immediately before suspended resource loads have been
   // resumed on attachment to an embedder.
   //
