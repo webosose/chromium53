@@ -12,6 +12,7 @@
 #include "base/callback.h"
 #include "base/command_line.h"
 #include "cc/layers/video_layer.h"
+#include "media/base/media_switches.h"
 #include "media/blink/webaudiosourceprovider_impl.h"
 #include "media/blink/webmediaplayer_delegate.h"
 #include "media/blink/webmediaplayer_params.h"
@@ -569,6 +570,36 @@ blink::WebRect WebMediaPlayerUMS::ScaleWebRect(
 void WebMediaPlayerUMS::updateVideo(const blink::WebRect& rect,
                                     bool fullscreen) {
   DCHECK(main_loop_->task_runner()->BelongsToCurrentThread());
+  if (!base::CommandLine::ForCurrentProcess()->HasSwitch(
+          switches::kDisableMediaVisibilityCheck)) {
+    if (video_weblayer_.get() && video_weblayer_->layer() &&
+        video_weblayer_->layer()->transform_tree_index() == -1) {
+      if (!is_video_offscreen_) {
+        LOG(INFO) << "[" << this << "] " << __func__
+                  << " videoLayer isn't visible";
+// TODO: once setVisibility api works correctly, below workaround will be
+// removed
+#if defined(PLATFORM_APOLLO)
+        umedia_client_->setDisplayWindow(gfx::Rect(0, 0, 1, 1),
+                                         gfx::Rect(0, 0, 1, 1), 0, 1);
+#endif
+#if defined(USE_MDC_MEDIA) || defined(USE_SIGNAGE_MEDIA)
+        umedia_client_->setVisibility(false);
+#endif
+        is_video_offscreen_ = true;
+        previous_video_rect_ = blink::WebRect();
+      }
+      return;
+    }
+
+    if (is_video_offscreen_) {
+#if defined(USE_MDC_MEDIA) || defined(USE_SIGNAGE_MEDIA)
+      umedia_client_->setVisibility(true);
+#endif
+      is_video_offscreen_ = false;
+    }
+  }
+
 #if defined(PLATFORM_APOLLO)
   blink::WebRect render_view_bounds = delegate_->GetRenderViewBounds();
   if (pending_size_change_ || previous_video_rect_ != rect ||

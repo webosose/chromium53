@@ -1577,6 +1577,7 @@ void RenderProcessHostImpl::PropagateBrowserCommandLineToRenderer(
 #if defined(OS_WEBOS)
     switches::kNetworkStableTimeout,
     switches::kWebOSWAM,
+    switches::kDisableMediaVisibilityCheck,
 #endif
     switches::kEnableWatchdog,
     switches::kWatchdogRenderTimeout,

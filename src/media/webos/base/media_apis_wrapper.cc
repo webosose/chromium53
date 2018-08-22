@@ -127,4 +127,11 @@ void MediaAPIsWrapper::UpdateCurrentTime(int64_t current_time) {
   current_time_ = current_time;
 }
 
+void MediaAPIsWrapper::SetVisibility(bool visible) {
+  visible_ = visible;
+}
+bool MediaAPIsWrapper::Visibility() {
+  return visible_;
+}
+
 }  // namespace media

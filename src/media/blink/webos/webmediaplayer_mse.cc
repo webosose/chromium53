@@ -6,8 +6,11 @@
 
 #include "base/command_line.h"
 #include "base/strings/utf_string_conversions.h"
+#include "cc/blink/web_layer_impl.h"
+#include "cc/layers/video_layer.h"
 #include "media/audio/null_audio_sink.h"
 #include "media/base/bind_to_current_loop.h"
+#include "media/base/media_switches.h"
 #include "media/base/renderer_factory.h"
 #include "media/blink/webaudiosourceprovider_impl.h"
 #include "media/blink/webcontentdecryptionmodule_impl.h"
@@ -51,6 +54,7 @@ WebMediaPlayerMSE::WebMediaPlayerMSE(
                                 params),
       additional_contents_scale_(additional_contents_scale),
       app_id_(app_id.utf8().data()),
+      is_video_offscreen_(false),
       status_on_suspended_(UnknownStatus),
       is_suspended_(false),
 #if defined(PLATFORM_APOLLO)
@@ -162,6 +166,31 @@ void WebMediaPlayerMSE::setVolume(double volume) {
 void WebMediaPlayerMSE::updateVideo(
     const blink::WebRect& rect, bool fullScreen) {
   DCHECK(main_task_runner_->BelongsToCurrentThread());
+
+  if (!base::CommandLine::ForCurrentProcess()->HasSwitch(
+          switches::kDisableMediaVisibilityCheck)) {
+    if (video_weblayer_.get() && video_weblayer_->layer() &&
+        video_weblayer_->layer()->transform_tree_index() == -1) {
+      if (!is_video_offscreen_) {
+        LOG(INFO) << "[" << this << "] " << __func__
+                  << " videoLayer isn't visible";
+// TODO: once SetVisibility api is ready, below workaround will be removed
+#if defined(PLATFORM_APOLLO)
+        media_apis_wrapper_->SetDisplayWindow(gfx::Rect(0, 0, 1, 1),
+                                              gfx::Rect(0, 0, 1, 1), 0, 1);
+#endif
+        media_apis_wrapper_->SetVisibility(false);
+        is_video_offscreen_ = true;
+        previous_video_rect_ = blink::WebRect();
+      }
+      return;
+    }
+
+    if (is_video_offscreen_) {
+      media_apis_wrapper_->SetVisibility(true);
+      is_video_offscreen_ = false;
+    }
+  }
 
   blink::WebRect scaled_rect = scaleWebRect(rect, additional_contents_scale_);
 #if defined(PLATFORM_APOLLO)

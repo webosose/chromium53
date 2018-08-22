@@ -130,6 +130,10 @@ const char kDisableRTCSmoothnessAlgorithm[] =
 // https://code.google.com/p/chrome-os-partner/issues/detail?id=54806
 const char kCastEncoderUtilHeuristic[] = "cast-encoder-util-heuristic";
 
+#if defined(OS_WEBOS)
+const char kDisableMediaVisibilityCheck[] = "disable-media-visibility-check";
+#endif
+
 }  // namespace switches
 
 namespace media {

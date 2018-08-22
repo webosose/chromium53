@@ -91,6 +91,7 @@ class MEDIA_BLINK_EXPORT WebMediaPlayerMSE : public WebMediaPlayerImpl {
 
   const blink::WebFloatPoint additional_contents_scale_;
   std::string app_id_;
+  bool is_video_offscreen_;
   StatusOnSuspended status_on_suspended_;
   bool is_suspended_;
   bool suspended_by_policy_;

@@ -68,6 +68,10 @@ MEDIA_EXPORT extern const char kDisableRTCSmoothnessAlgorithm[];
 
 MEDIA_EXPORT extern const char kCastEncoderUtilHeuristic[];
 
+#if defined(OS_WEBOS)
+MEDIA_EXPORT extern const char kDisableMediaVisibilityCheck[];
+#endif
+
 }  // namespace switches
 
 namespace media {

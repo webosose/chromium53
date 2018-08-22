@@ -103,6 +103,9 @@ class MEDIA_EXPORT MediaAPIsWrapper
   virtual void SetSizeChangeCb(const base::Closure& size_change_cb) {}
   virtual void SetLoadCompletedCb(const LoadCompletedCB& loaded_cb) {}
 
+  virtual void SetVisibility(bool visible);
+  virtual bool Visibility();
+
  protected:
   class BufferQueue {
     public:
@@ -182,6 +185,7 @@ class MEDIA_EXPORT MediaAPIsWrapper
   VideoDecoderConfig video_config_;
 
   int64_t current_time_;
+  bool visible_;
 
   static Json::Value supported_codec_mse_;
 
