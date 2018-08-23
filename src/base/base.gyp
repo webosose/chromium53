@@ -247,6 +247,14 @@
               'cflags_cc+': ['-fexceptions'],
             }],
           ],
+          'sources': [
+            'webos/luna_services.cc',
+            'webos/luna_services.h',
+          ],
+          'dependencies': [
+            '../build/linux/system.gyp:luna-service2',
+            '../third_party/jsoncpp/jsoncpp.gyp:jsoncpp',
+          ],
         }],
         ['OS=="ios"', {
           'sources!': [
