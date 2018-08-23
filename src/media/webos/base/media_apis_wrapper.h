@@ -47,6 +47,7 @@ class MEDIA_EXPORT MediaAPIsWrapper
     RESTORE_PLAYING
   };
 
+  typedef base::Callback<void()> LoadCompletedCB;
   typedef base::Callback<void(const blink::WebRect&)> ActiveRegionCB;
 
   static MediaAPIsWrapper* Create(
@@ -100,6 +101,7 @@ class MEDIA_EXPORT MediaAPIsWrapper
   virtual void SetActiveRegionCallback(
       const ActiveRegionCB& active_region_cb) {}
   virtual void SetSizeChangeCb(const base::Closure& size_change_cb) {}
+  virtual void SetLoadCompletedCb(const LoadCompletedCB& loaded_cb) {}
 
  protected:
   class BufferQueue {

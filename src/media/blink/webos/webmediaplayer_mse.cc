@@ -73,9 +73,11 @@ WebMediaPlayerMSE::WebMediaPlayerMSE(
 
 #if defined(ENABLE_LG_SVP)
   if (params.initial_cdm()) {
-    const std::string ks = media::ToWebContentDecryptionModuleImpl(params.initial_cdm())->GetKeySystem();
+    const std::string ks =
+        media::ToWebContentDecryptionModuleImpl(params.initial_cdm())
+            ->GetKeySystem();
     DEBUG_LOG("Setting key_system to media APIs = '%s'", ks.c_str());
-    media_apis_wrapper_->setKeySystem(ks);
+    media_apis_wrapper_->SetKeySystem(ks);
   }
 #endif
 
@@ -115,7 +117,7 @@ void WebMediaPlayerMSE::play() {
   DVLOG(1) << __FUNCTION__;
   DCHECK(main_task_runner_->BelongsToCurrentThread());
 
-  if (must_suspend_) {
+  if (is_suspended_) {
     status_on_suspended_ = PlayingStatus;
     return;
   }
@@ -239,9 +241,10 @@ void WebMediaPlayerMSE::setContentDecryptionModule(
   // set the key system for the Media APIs wrapper
 #if defined(ENABLE_LG_SVP)
   if (cdm && media_apis_wrapper_.get()) {
-    const std::string ks = media::ToWebContentDecryptionModuleImpl(cdm)->GetKeySystem();
+    const std::string ks =
+        media::ToWebContentDecryptionModuleImpl(cdm)->GetKeySystem();
     DEBUG_LOG("Setting key_system to media APIs = '%s'", ks.c_str());
-    media_apis_wrapper_->setKeySystem(ks);
+    media_apis_wrapper_->SetKeySystem(ks);
   }
 #endif
 
@@ -258,9 +261,7 @@ void WebMediaPlayerMSE::suspend() {
   is_suspended_ = true;
   must_suspend_ = true;
 
-  status_on_suspended_ =
-      (pipeline_.GetPlaybackRate() == 0.0f) ? PausedStatus : PlayingStatus;
-
+  status_on_suspended_ = paused() ? PausedStatus : PlayingStatus;
   if (status_on_suspended_ == PlayingStatus) {
     pause();
   }
@@ -285,20 +286,31 @@ void WebMediaPlayerMSE::resume() {
                         : media::MediaAPIsWrapper::RESTORE_PLAYING
                         ;
 
+  bool released_media_resource = false;
   if (media_apis_wrapper_.get()) {
+    released_media_resource = media_apis_wrapper_->IsReleasedMediaResource();
     media_apis_wrapper_->Resume(paused_time_, restore_playback_mode);
+  }
+
+  if (released_media_resource) {
+    if (seeking_)
+      client_->requestSeek(paused_time_.InSecondsF());
+    else
+      seek(paused_time_.InSecondsF());
+  }
+
+  DEBUG_LOG("%s-[%p], status_on_suspended_ = %d", __FUNCTION__, this,
+            status_on_suspended_);
+  if (status_on_suspended_ == PlayingStatus) {
+    play();
 
     // to force SetVideoWindow on resume
     previous_video_rect_ = blink::WebRect(-1, -1, -1, -1);
     client_->checkBounds();
-  }
-
-  if (status_on_suspended_ == PausedStatus) {
-    pause();
-    status_on_suspended_ = UnknownStatus;
   } else {
-    play();
+    pause();
   }
+  status_on_suspended_ = UnknownStatus;
 }
 
 void WebMediaPlayerMSE::OnVideoSizeChange() {
