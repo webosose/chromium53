@@ -17,6 +17,7 @@
 #ifndef MEDIA_WEBOS_BASE_MEDIA_APIS_WRAPPER_GMP_H_
 #define MEDIA_WEBOS_BASE_MEDIA_APIS_WRAPPER_GMP_H_
 
+#include "media/webos/base/lunaservice_client.h"
 #include "media/webos/base/media_apis_wrapper.h"
 
 #include <glib.h>
@@ -106,6 +107,8 @@ class MEDIA_EXPORT MediaAPIsWrapperGmp : public MediaAPIsWrapper {
 
   base::Closure size_change_cb_;
   LoadCompletedCB load_completed_cb_;
+
+  media::LunaServiceClient ls_client_;
 
   bool play_internal_;
   bool released_media_resource_;
