@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2018 LG Electronics, Inc.
+// Copyright (c) 2018 LG Electronics, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@
 #include "media/webos/base/media_apis_wrapper.h"
 
 #include <glib.h>
+
 #include <gmp/PlayerTypes.h>
 
 namespace gmp {
@@ -34,35 +35,36 @@ class SingleThreadTaskRunner;
 
 namespace media {
 
-class MEDIA_EXPORT MediaAPIsWrapperGMP : public MediaAPIsWrapper {
-public:
-  static void CheckCodecInfo(const std::string& codec_info);
+class MEDIA_EXPORT MediaAPIsWrapperGmp : public MediaAPIsWrapper {
+ public:
+  static void Callback(const gint type,
+                       const gint64 num_value,
+                       const gchar* str_value,
+                       void* user_data);
 
-  static void Callback(const gint type, const gint64 num_value,
-                       const gchar* str_value, void* user_data);
-
-  MediaAPIsWrapperGMP(
+  MediaAPIsWrapperGmp(
       const scoped_refptr<base::SingleThreadTaskRunner>& task_runner,
       bool video,
       const std::string& app_id,
       const PipelineStatusCB& error_cb);
 
-  virtual ~MediaAPIsWrapperGMP();
+  virtual ~MediaAPIsWrapperGmp();
 
   void Initialize(const AudioDecoderConfig& audio_config,
                   const VideoDecoderConfig& video_config,
                   const PipelineStatusCB& init_cb) override;
 
+  bool Loaded() override;
   void SetDisplayWindow(const gfx::Rect& rect,
                         const gfx::Rect& in_rect,
                         bool fullscreen,
                         bool forced) override;
 
-  bool Loaded() override;
   bool Feed(const scoped_refptr<DecoderBuffer>& buffer, FeedType type) override;
   uint64_t GetCurrentTime() override;
   bool Seek(base::TimeDelta time) override;
   void SetPlaybackRate(float playback_rate) override;
+
   void Suspend() override;
   void Resume(base::TimeDelta paused_time,
               RestorePlaybackMode restore_playback_mode) override;
@@ -73,36 +75,52 @@ public:
 
   void SetPlaybackVolume(double volume) override;
   bool IsEOSReceived() override;
+
+  std::string GetMediaID() override;
+  void Unload() override;
+
   void SetSizeChangeCb(const base::Closure& size_change_cb) override;
+  void SetLoadCompletedCb(const LoadCompletedCB& loaded_cb) override;
 
  private:
-  void DispatchCallback(const gint type, const gint64 num_value,
+  void DispatchCallback(const gint type,
+                        const gint64 num_value,
                         const std::string& str_value);
 
-  bool LoadFeed(int64_t pts);
-  bool PlayFeed();
-  bool PauseFeed();
-  void ResetFeed();
-  void PushEOS();
-
-  bool HasResources();
-  bool IsSuspended();
+  void PlayInternal();
+  void PauseInternal(bool update_media = true);
   void SetVolumeInternal(double volume);
-  void NotifyLoadComplete();
 
   FeedStatus FeedInternal(const scoped_refptr<DecoderBuffer>& buffer,
                           FeedType type);
+
+  void PushEOS();
+  void ResetFeedInfo();
+
   void UpdateVideoInfo(const std::string& info_str);
 
-  bool MakeLoadData(int64_t time, MEDIA_LOAD_DATA_T* load_data);
+  void ReInitialize(base::TimeDelta start_time);
+
+  void NotifyLoadComplete();
+  bool MakeLoadData(int64_t start_time, MEDIA_LOAD_DATA_T* load_data);
 
   base::Closure size_change_cb_;
+  LoadCompletedCB load_completed_cb_;
+
+  bool play_internal_;
+  bool released_media_resource_;
+  bool is_destructed_;
+  bool is_suspended_;
+  bool load_completed_;
+  bool is_finalized_;
+
+  base::TimeDelta resume_time_;
 
   gfx::Size natural_size_;
 
   std::unique_ptr<gmp::player::MediaPlayerClient> media_player_client_;
 
-  DISALLOW_COPY_AND_ASSIGN(MediaAPIsWrapperGMP);
+  DISALLOW_COPY_AND_ASSIGN(MediaAPIsWrapperGmp);
 };
 
 }  // namespace media
