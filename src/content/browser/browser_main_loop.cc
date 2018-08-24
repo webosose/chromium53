@@ -197,6 +197,10 @@
 #include "components/mus/common/gpu_service.h"  // nogncheck
 #endif
 
+#if defined(OS_WEBOS)
+#include "base/base_switches.h"
+#include "base/memory/memory_pressure_monitor_webos.h"
+#endif
 
 // One of the linux specific headers defines this as a macro.
 #ifdef DestroyAll
@@ -1353,6 +1357,15 @@ int BrowserMainLoop::BrowserThreadsStarted() {
 
 #if defined(OS_ANDROID)
   media::SetMediaClientAndroid(GetContentClient()->GetMediaClientAndroid());
+#endif
+
+#if defined(OS_WEBOS)
+  if (parsed_command_line_.HasSwitch(switches::kWebOSAppId)) {
+    std::string webos_app_id =
+        parsed_command_line_.GetSwitchValueASCII(switches::kWebOSAppId);
+    memory_pressure_monitor_.reset(
+        new base::webos::MemoryPressureMonitor(webos_app_id));
+  }
 #endif
 
   return result_code_;

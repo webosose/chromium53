@@ -248,6 +248,8 @@
             }],
           ],
           'sources': [
+            'memory/memory_pressure_monitor_webos.cc',
+            'memory/memory_pressure_monitor_webos.h',
             'webos/luna_services.cc',
             'webos/luna_services.h',
           ],
