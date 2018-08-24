@@ -698,6 +698,7 @@ void WebMediaPlayerUMS::updateVideo(const blink::WebRect& rect,
 #if defined(PLATFORM_APOLLO)
     display_window_out_rect.y +=
         delegate_ ? delegate_->GetRenderViewBounds().y() : 0;
+    display_window_out_rect_ = display_window_out_rect;
 #endif
 
     umedia_client_->setDisplayWindow(display_window_out_rect,
@@ -995,6 +996,10 @@ void WebMediaPlayerUMS::suspend() {
     Repaint();
   }
   umedia_client_->suspend();
+#if defined(PLATFORM_APOLLO)
+  // force unload media resource on suspend
+  umedia_client_->unloadMediaResource();
+#endif
 }
 
 void WebMediaPlayerUMS::resume() {

@@ -175,6 +175,7 @@ class UMediaClientImpl
   void SetActiveRegionCB(const ActiveRegionCB& active_region_cb) {
     active_region_cb_ = active_region_cb;
   }
+  void unloadMediaResource();
 
  private:
   struct Media3DInfo {
@@ -211,6 +212,7 @@ class UMediaClientImpl
 
   bool CheckAudioOutput(float playback_rate);
   void LoadInternal();
+  void ReloadMediaResource();
 
   PlaybackStateCB playback_state_cb_;
   base::Closure ended_cb_;
@@ -231,6 +233,8 @@ class UMediaClientImpl
   bool loaded_;
   bool preloaded_;
   bool load_started_;
+  bool pending_unload_;
+  bool is_reloading_;
   bool has_video_;
   bool has_audio_;
   int num_audio_tracks_;

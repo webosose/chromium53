@@ -43,6 +43,8 @@ UMediaClientImpl::UMediaClientImpl(
       loaded_(false),
       preloaded_(false),
       load_started_(false),
+      pending_unload_(false),
+      is_reloading_(false),
       num_audio_tracks_(0),
       is_local_source_(false),
       is_usb_file_(false),
@@ -249,8 +251,20 @@ void UMediaClientImpl::dispatchLoadCompleted() {
     return;
   }
 
+  if (pending_unload_) {
+    uMediaServer::uMediaClient::unload();
+    pending_unload_ = false;
+    return;
+  }
+
   DEBUG_LOG("%s", __FUNCTION__);
   loaded_ = true;
+
+  // to force for the client to call setDisplayWindow api
+  if (is_reloading_ && !video_display_window_change_cb_.is_null()) {
+    video_display_window_change_cb_.Run();
+    is_reloading_ = false;
+  }
 
   if (!update_ums_info_cb_.is_null())
     update_ums_info_cb_.Run(mediaInfoToJson(NotifyLoadCompleted));
@@ -1468,10 +1482,44 @@ void UMediaClientImpl::resume() {
   DEBUG_LOG("%s - %s", __FUNCTION__, mediaId().c_str());
   is_suspended_ = false;
 
+  if (load_started_ && !loaded_) {
+    ReloadMediaResource();
+    return;
+  }
+
   if (use_pipeline_preload_ && !loaded_)
     return;
 
   uMediaServer::uMediaClient::notifyForeground();
+}
+
+void UMediaClientImpl::unloadMediaResource() {
+  LOG(INFO) << "[" << this << "] " << __func__
+            << " media_id=" << mediaId().c_str()
+            << " is_suspended=" << is_suspended_ << " loaded_=" << loaded_;
+  if (!loaded_) {
+    pending_unload_ = true;
+    return;
+  }
+  uMediaServer::uMediaClient::unload();
+  loaded_ = false;
+}
+
+void UMediaClientImpl::ReloadMediaResource() {
+  LOG(INFO) << "[" << this << "] " << __func__
+            << " media_id was =" << mediaId().c_str() << " loaded_=" << loaded_;
+  if (!load_started_ || loaded_ || pending_unload_) {
+    pending_unload_ = false;
+    return;
+  }
+  media_id = "";
+  updated_payload_ = updateMediaOption(updated_payload_, current_time_);
+  uMediaServer::uMediaClient::loadAsync(url_.c_str(), kMedia,
+                                        updated_payload_.c_str());
+  is_reloading_ = true;
+
+  // if start time doesn't work, we need extra seek call
+  uMediaServer::uMediaClient::seek(current_time_ * 1000);
 }
 
 }  // namespace media
