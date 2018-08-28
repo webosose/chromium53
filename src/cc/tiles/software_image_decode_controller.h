@@ -15,6 +15,7 @@
 #include "base/containers/mru_cache.h"
 #include "base/hash.h"
 #include "base/memory/discardable_memory_allocator.h"
+#include "base/memory/memory_pressure_listener.h"
 #include "base/memory/ref_counted.h"
 #include "base/numerics/safe_math.h"
 #include "base/threading/thread_checker.h"
@@ -251,6 +252,9 @@ class CC_EXPORT SoftwareImageDecodeController
                                const char* cache_name,
                                base::trace_event::ProcessMemoryDump* pmd) const;
 
+  void OnMemoryPressure(
+      base::MemoryPressureListener::MemoryPressureLevel level);
+
   std::unordered_map<ImageKey, scoped_refptr<TileTask>, ImageKeyHash>
       pending_image_tasks_;
 
@@ -273,6 +277,8 @@ class CC_EXPORT SoftwareImageDecodeController
 
   // Used to uniquely identify DecodedImages for memory traces.
   base::AtomicSequenceNumber next_tracing_id_;
+
+  std::unique_ptr<base::MemoryPressureListener> memory_pressure_listener_;
 };
 
 }  // namespace cc

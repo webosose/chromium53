@@ -1399,6 +1399,10 @@ void RenderThreadImpl::IdleHandler() {
     if (idle_notifications_to_skip_ > 0) {
       --idle_notifications_to_skip_;
     } else {
+      if (base::CommandLine::ForCurrentProcess()->HasSwitch(
+              switches::kEnableAggressiveForegroundGC))
+        v8::Isolate::GetCurrent()->LowMemoryNotification();
+
       ReleaseFreeMemory();
     }
     ScheduleIdleHandler(kLongIdleHandlerDelayMs);

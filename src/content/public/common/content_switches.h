@@ -360,6 +360,7 @@ CONTENT_EXPORT extern const char kUserAgentSuffix[];
 CONTENT_EXPORT extern const char kSkiaImageCacheSizeMb[];
 CONTENT_EXPORT extern const char kSkiaFontCacheSizeMb[];
 CONTENT_EXPORT extern const char kSkiaBackgroundFontCacheSizeKb[];
+CONTENT_EXPORT extern const char kEnableAggressiveForegroundGC[];
 
 CONTENT_EXPORT extern const char kEnableWebOSNativeScroll[];
 CONTENT_EXPORT extern const char

@@ -1585,6 +1585,7 @@ void RenderProcessHostImpl::PropagateBrowserCommandLineToRenderer(
     switches::kSkiaImageCacheSizeMb,
     switches::kSkiaFontCacheSizeMb,
     switches::kSkiaBackgroundFontCacheSizeKb,
+    switches::kEnableAggressiveForegroundGC,
     switches::kNoZygote,
     switches::kDynamicRefetch,
   };

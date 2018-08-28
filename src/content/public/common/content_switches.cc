@@ -1178,6 +1178,9 @@ const char kSkiaImageCacheSizeMb[]        = "skia-image-cache-size-mb";
 const char kSkiaFontCacheSizeMb[]         = "skia-font-cache-size-mb";
 const char kSkiaBackgroundFontCacheSizeKb[] = "skia-background-font-cache-size-kb";
 
+// aggressive GC on foreground tabs
+const char kEnableAggressiveForegroundGC[] = "enable-aggressive-foreground-gc";
+
 const char kEnableWebOSNativeScroll[] = "enable-webos-native-scroll";
 // Sets custom mouse wheel gesture scroll delta value. Unit is pixel.
 // From this value, we can allow web apps to change scroll distance

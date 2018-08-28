@@ -10,14 +10,17 @@
 #include <algorithm>
 #include <functional>
 
+#include "base/base_switches.h"
 #include "base/format_macros.h"
 #include "base/macros.h"
 #include "base/memory/discardable_memory.h"
+#include "base/memory/memory_pressure_monitor.h"
 #include "base/memory/ptr_util.h"
 #include "base/metrics/histogram_macros.h"
 #include "base/strings/stringprintf.h"
 #include "base/threading/thread_task_runner_handle.h"
 #include "base/trace_event/memory_dump_manager.h"
+#include "base/sys_info.h"
 #include "cc/debug/devtools_instrumentation.h"
 #include "cc/raster/tile_task.h"
 #include "cc/resources/resource_format_utils.h"
@@ -37,6 +40,8 @@ const size_t kMaxHighQualityImageSizeBytes = 64 * 1024 * 1024;
 // The number of entries to keep around in the cache. This limit can be breached
 // if more items are locked. That is, locked items ignore this limit.
 const size_t kMaxItemsInCache = 1000;
+// Provide a specific limit for low end devices
+const size_t kLowEndMaxItemsInCache = 300;
 
 class AutoRemoveKeyFromTaskMap {
  public:
@@ -154,6 +159,10 @@ SoftwareImageDecodeController::SoftwareImageDecodeController(
         this, "cc::SoftwareImageDecodeController",
         base::ThreadTaskRunnerHandle::Get());
   }
+
+  memory_pressure_listener_.reset(new base::MemoryPressureListener(
+      base::Bind(&SoftwareImageDecodeController::OnMemoryPressure,
+                 base::Unretained(this))));
 }
 
 SoftwareImageDecodeController::~SoftwareImageDecodeController() {
@@ -667,9 +676,22 @@ void SoftwareImageDecodeController::UnrefAtRasterImage(const ImageKey& key) {
 void SoftwareImageDecodeController::ReduceCacheUsage() {
   TRACE_EVENT0("cc", "SoftwareImageDecodeController::ReduceCacheUsage");
   base::AutoLock lock(lock_);
-  size_t num_to_remove = (decoded_images_.size() > kMaxItemsInCache)
-                             ? (decoded_images_.size() - kMaxItemsInCache)
+
+  size_t items_limit;
+  base::MemoryPressureMonitor* monitor = base::MemoryPressureMonitor::Get();
+  if (monitor &&
+      monitor->GetCurrentPressureLevel() !=
+          base::MemoryPressureListener::MEMORY_PRESSURE_LEVEL_NONE) {
+    items_limit = 0;
+  } else {
+    items_limit = base::SysInfo::IsLowEndDevice() ? kLowEndMaxItemsInCache
+                                                  : kMaxItemsInCache;
+  }
+
+  size_t num_to_remove = (decoded_images_.size() > items_limit)
+                             ? (decoded_images_.size() - items_limit)
                              : 0;
+
   for (auto it = decoded_images_.rbegin();
        num_to_remove != 0 && it != decoded_images_.rend();) {
     if (it->second->is_locked()) {
@@ -975,6 +997,22 @@ void SoftwareImageDecodeController::MemoryBudget::ResetUsage() {
 size_t SoftwareImageDecodeController::MemoryBudget::GetCurrentUsageSafe()
     const {
   return current_usage_bytes_.ValueOrDie();
+}
+
+void SoftwareImageDecodeController::OnMemoryPressure(
+    base::MemoryPressureListener::MemoryPressureLevel level) {
+  switch (level) {
+    case base::MemoryPressureListener::MEMORY_PRESSURE_LEVEL_NONE:
+      break;
+    case base::MemoryPressureListener::MEMORY_PRESSURE_LEVEL_MODERATE:
+    case base::MemoryPressureListener::MEMORY_PRESSURE_LEVEL_CRITICAL: {
+      ReduceCacheUsage();
+      break;
+    }
+    default:
+      // NOT_REACHED
+      break;
+  }
 }
 
 }  // namespace cc
