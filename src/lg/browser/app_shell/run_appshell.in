@@ -103,6 +103,7 @@ CHROME_FLAGS=" \
   --always-authorize-plugins\
   --disable-component-update\
   --disable-gpu-watchdog\
+  --disable-gpu-rasterization\
   --disable-infobars\
   --disable-new-video-renderer\
   --disable-translate\
@@ -122,7 +123,51 @@ CHROME_FLAGS=" \
   --v8-snapshot-blob-path=${APP_FOLDER_PATH}/snapshot_blob.bin\
 "
 
-CHROME_FLAGS="${CHROME_COMPOSITING_FLAGS} ${CHROME_FLAGS}"
+# setup 10 Mb maximum for ApplicationCache per domain
+export APPSHELL_APPCACHE_DOMAINLIMIT=10485760
+# setup 50 Mb maximum for ApplicationCache
+export APPSHELL_APPCACHE_MAXSIZE=52428800
+# setup 50 Mb maximum for DiskCache
+export APPSHELL_DISKCACHE_MAXSIZE=52428800
+# setup 256 Kb maximum for resource buffer allocation
+export APPSHELL_RESOURCE_BUFFER_MAX_ALLOC_SIZE=262144
+# setup 1 Mb for resource buffer
+export APPSHELL_RESOURCE_BUFFER_SIZE=1048576
+# setup 2 Mb maximum for the program GPU cache
+export GPU_PROGRAM_CACHE_SIZE=2048
+# setup SKIA caches maximum size
+export SKIA_FONT_CACHE_SIZE=1
+export SKIA_IMAGE_CACHE_SIZE=40
+export SKIA_BACKGROUND_FONT_CACHE_SIZE=0
+
+JS_FLAGS=" \
+--heap_growing_percent=1\
+ --configure_heap_details\
+ --minimum_allocation_limit_growing_step_size=2\
+ --high_fragmentation_slack=0\
+ --external_allocation_hard_limit=64\
+ --external_allocation_soft_limit=16\
+"
+
+TUNING_FLAGS=" \
+    --enable-aggressive-foreground-gc \
+    --enable-aggressive-release-policy \
+    --application-cache-domain-limit=${APPSHELL_APPCACHE_DOMAINLIMIT} \
+    --application-cache-size=${APPSHELL_APPCACHE_MAXSIZE} \
+    --disable-low-res-tiling \
+    --disk-cache-size=${APPSHELL_DISKCACHE_MAXSIZE} \
+    --max-unused-resource-memory-usage-percentage=0 \
+    --resource-buffer-max-allocation-size=${APPSHELL_RESOURCE_BUFFER_MAX_ALLOC_SIZE} \
+    --resource-buffer-size=${APPSHELL_RESOURCE_BUFFER_SIZE} \
+    --ui-disable-opaque-shader-program \
+    --gpu-program-cache-size-kb=${GPU_PROGRAM_CACHE_SIZE} \
+    --skia-font-cache-size-mb=${SKIA_FONT_CACHE_SIZE} \
+    --skia-image-cache-size-mb=${SKIA_IMAGE_CACHE_SIZE} \
+    --skia-background-font-cache-size-kb=${SKIA_BACKGROUND_FONT_CACHE_SIZE} \
+    --enable-low-end-device-mode \
+"
+
+CHROME_FLAGS="${CHROME_COMPOSITING_FLAGS} ${CHROME_FLAGS} ${TUNING_FLAGS}"
 
 if [ "${ENABLE_INSPECTOR}" = "1" ] ; then
   CHROME_FLAGS="${CHROME_FLAGS} --remote-debugging-port=9999"
@@ -155,4 +200,4 @@ echo "                       Launching Web Browser                          "
 echo "----------------------------------------------------------------------"
 echo ""
 
-exec ${DEPLOY_DIR}/app_shell ${CHROME_FLAGS}
+exec ${DEPLOY_DIR}/app_shell ${CHROME_FLAGS} --js-flags="${JS_FLAGS}"
