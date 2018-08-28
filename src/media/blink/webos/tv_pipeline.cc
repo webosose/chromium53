@@ -26,14 +26,15 @@ namespace media {
    media::BindToCurrentLoop(base::Bind(function, this)))
 
 TvPipeline::TvPipeline(
-    const scoped_refptr<base::SingleThreadTaskRunner>& task_runner)
+    const scoped_refptr<base::SingleThreadTaskRunner>& task_runner,
+    const std::string& app_id)
     : loaded_(false),
       need_change_channel_(true),
       is_first_use_(false),
       is_suspended_(false),
       playback_rate_(0),
       media_task_runner_(task_runner),
-      luna_service_client_(media::LunaServiceClient::PrivateBus),
+      luna_service_client_(app_id),
       acb_client_(new Acb()),
       acb_load_task_id_(0),
       acb_suspend_task_id_(0),

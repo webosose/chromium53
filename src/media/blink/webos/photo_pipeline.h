@@ -36,7 +36,8 @@ namespace media {
 class PhotoPipeline : public CustomPipeline,
                       public base::RefCountedThreadSafe<PhotoPipeline> {
  public:
-  PhotoPipeline(const scoped_refptr<base::SingleThreadTaskRunner>& task_runner);
+  PhotoPipeline(const scoped_refptr<base::SingleThreadTaskRunner>& task_runner,
+                const std::string& app_id);
   void Load(bool is_video,
             const std::string& app_id,
             const GURL& url,

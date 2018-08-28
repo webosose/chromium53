@@ -122,7 +122,7 @@ WebMediaPlayerUMS::WebMediaPlayerUMS(
       ? params.audio_renderer_sink()
       : new media::NullAudioSink(media_task_runner_));
 
-  umedia_client_ = new UMediaClientImpl(media_task_runner_);
+  umedia_client_ = new UMediaClientImpl(media_task_runner_, app_id_);
 
   display_resolution_.SetSize(
       GetClient()->displayResolution().width * additional_contents_scale_.x,

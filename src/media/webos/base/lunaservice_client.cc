@@ -26,25 +26,33 @@ static const char* const luna_service_uris[] = {
     "luna://com.webos.service.photorenderer",      // PHOTORENDERER
 };
 
-struct AutoLSError : LSError {
-  AutoLSError() { LSErrorInit(this); }
-  ~AutoLSError() { LSErrorFree(this); }
-};
-
 // LunaServiceClient implematation
-LunaServiceClient::LunaServiceClient(BusType type)
-    : handle(NULL), context(NULL) {
+LunaServiceClient::LunaServiceClient(const std::string& identifier)
+    : handle_(NULL), context_(NULL) {
   AutoLSError error;
-  if (LSRegisterPubPriv(NULL, &handle, type, &error)) {
-    context = g_main_context_ref(g_main_context_default());
-    LSGmainContextAttach(handle, context, &error);
+  std::string service_name = identifier + '-' + std::to_string(getpid());
+  bool retval = LSRegisterApplicationService(
+      service_name.c_str(), identifier.c_str(), &handle_, &error);
+
+  if (!retval) {
+    LogError("Fail to register to LS2", error);
+    return;
+  }
+
+  context_ = g_main_context_ref(g_main_context_default());
+  retval = LSGmainContextAttach(handle_, context_, &error);
+  if (!retval) {
+    LogError("Fail to attach a service to a mainloop", error);
+    return;
   }
 }
 
 LunaServiceClient::~LunaServiceClient() {
   AutoLSError error;
-  LSUnregister(handle, &error);
-  g_main_context_unref(context);
+  if (handle_) {
+    LSUnregister(handle_, &error);
+    g_main_context_unref(context_);
+  }
 }
 
 bool handleAsync(LSHandle* sh, LSMessage* reply, void* ctx) {
@@ -97,15 +105,19 @@ bool LunaServiceClient::callASync(const std::string& uri,
   if (!wrapper)
     return false;
 
+  if (!handle_)
+    return false;
+
   DEBUG_LOG("[REQ] - %s %s", uri.c_str(), param.c_str());
-  if (!LSCallOneReply(handle, uri.c_str(), param.c_str(), handleAsync, wrapper,
-                      NULL, &error)) {
+  bool retval = LSCallOneReply(handle_, uri.c_str(), param.c_str(), handleAsync,
+                               wrapper, NULL, &error);
+  if (!retval) {
     base::ResetAndReturn(&wrapper->callback).Run("");
     delete wrapper;
-    return false;
+    return retval;
   }
 
-  return true;
+  return retval;
 }
 
 bool LunaServiceClient::subscribe(const std::string& uri,
@@ -121,34 +133,42 @@ bool LunaServiceClient::subscribe(const std::string& uri,
   if (!wrapper)
     return false;
 
-  if (!LSCall(handle, uri.c_str(), param.c_str(), handleSubscribe, wrapper,
-              subscribeKey, &error)) {
+  if (!handle_)
+    return false;
+
+  bool retval = LSCall(handle_, uri.c_str(), param.c_str(), handleSubscribe,
+                       wrapper, subscribeKey, &error);
+  if (!retval) {
     DEBUG_LOG("[SUB] %s:[%s] fail[%s]", uri.c_str(), param.c_str(),
               error.message);
     delete wrapper;
-    return false;
+    return retval;
   }
 
-  handlers[*subscribeKey] = std::unique_ptr<ResponseHandlerWrapper>(wrapper);
+  handlers_[*subscribeKey] = std::unique_ptr<ResponseHandlerWrapper>(wrapper);
 
-  return true;
+  return retval;
 }
 
 bool LunaServiceClient::unsubscribe(LSMessageToken subscribeKey) {
   AutoLSError error;
 
-  if (!LSCallCancel(handle, subscribeKey, &error)) {
-    DEBUG_LOG("[UNSUB] %u fail[%s]", subscribeKey, error.message);
-    handlers.erase(subscribeKey);
+  if (!handle_)
     return false;
+
+  bool retval = LSCallCancel(handle_, subscribeKey, &error);
+  if (!retval) {
+    DEBUG_LOG("[UNSUB] %u fail[%s]", subscribeKey, error.message);
+    handlers_.erase(subscribeKey);
+    return retval;
   }
 
-  if (handlers[subscribeKey])
-    handlers[subscribeKey]->callback.Reset();
+  if (handlers_[subscribeKey])
+    handlers_[subscribeKey]->callback.Reset();
 
-  handlers.erase(subscribeKey);
+  handlers_.erase(subscribeKey);
 
-  return true;
+  return retval;
 }
 
 std::string LunaServiceClient::GetServiceURI(URIType type,
@@ -160,6 +180,13 @@ std::string LunaServiceClient::GetServiceURI(URIType type,
   uri.append("/");
   uri.append(action);
   return uri;
+}
+
+void LunaServiceClient::LogError(const std::string& message,
+                                 AutoLSError& lserror) {
+  LOG(ERROR) << message.c_str() << " " << lserror.error_code << " : "
+             << lserror.message << "(" << lserror.func << " @ " << lserror.file
+             << ":" << lserror.line << ")";
 }
 
 }  // namespace media

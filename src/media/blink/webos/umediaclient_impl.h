@@ -66,7 +66,8 @@ class UMediaClientImpl
   typedef base::Callback<void(const blink::WebRect&)> ActiveRegionCB;
 
   UMediaClientImpl(
-      const scoped_refptr<base::SingleThreadTaskRunner>& task_runner);
+      const scoped_refptr<base::SingleThreadTaskRunner>& task_runner,
+      std::string app_id);
   ~UMediaClientImpl();
 
   void load(bool video,
@@ -255,7 +256,6 @@ class UMediaClientImpl
   float playback_rate_on_paused_;
   double volume_;
   const scoped_refptr<base::SingleThreadTaskRunner> media_task_runner_;
-  LunaServiceClient ls_client_;
   std::string app_id_;
   std::string url_;
   std::string mime_type_;

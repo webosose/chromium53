@@ -109,16 +109,16 @@ WebMediaPlayerCustom::WebMediaPlayerCustom(
 
   if (client->contentMIMEType() == WebString("service/webos-broadcast") ||
       client->contentMIMEType() == WebString("service/webos-broadcast-cable"))
-    custom_pipeline_ = new TvPipeline(media_task_runner_);
+    custom_pipeline_ = new TvPipeline(media_task_runner_, app_id_);
   else if (client->contentMIMEType() == WebString("service/webos-camera"))
-    custom_pipeline_ = new CameraPipeline(media_task_runner_);
+    custom_pipeline_ = new CameraPipeline(media_task_runner_, app_id_);
   else if (client->contentMIMEType() == WebString("service/webos-external"))
-    custom_pipeline_ = new ExtInputPipeline(media_task_runner_);
+    custom_pipeline_ = new ExtInputPipeline(media_task_runner_, app_id_);
   else if (client->contentMIMEType() == WebString("service/webos-dvr"))
-    custom_pipeline_ = new DvrPipeline(media_task_runner_);
+    custom_pipeline_ = new DvrPipeline(media_task_runner_, app_id_);
   else if (client->contentMIMEType() == WebString("service/webos-photo") ||
            client->contentMIMEType() == WebString("service/webos-photo-camera"))
-    custom_pipeline_ = new PhotoPipeline(media_task_runner_);
+    custom_pipeline_ = new PhotoPipeline(media_task_runner_, app_id_);
   else
     DCHECK(false) << "Unexpected mimetype";
 }

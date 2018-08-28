@@ -26,11 +26,12 @@ namespace media {
    media::BindToCurrentLoop(base::Bind(function, this)))
 
 CameraPipeline::CameraPipeline(
-    const scoped_refptr<base::SingleThreadTaskRunner>& task_runner)
+    const scoped_refptr<base::SingleThreadTaskRunner>& task_runner,
+    const std::string& app_id)
     : loaded_(false),
       playback_rate_(0),
       media_task_runner_(task_runner),
-      luna_service_client_(media::LunaServiceClient::PrivateBus) {}
+      luna_service_client_(app_id) {}
 
 CameraPipeline::~CameraPipeline() {
   DEBUG_LOG("destroy Camera pipeline");

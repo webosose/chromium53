@@ -26,13 +26,14 @@ namespace media {
    media::BindToCurrentLoop(base::Bind(function, this)))
 
 PhotoPipeline::PhotoPipeline(
-    const scoped_refptr<base::SingleThreadTaskRunner>& task_runner)
+    const scoped_refptr<base::SingleThreadTaskRunner>& task_runner,
+    const std::string& app_id)
     : is_loaded_(false),
       is_suspended_(false),
       playback_rate_(0),
       pipeline_state_(Close),
       media_task_runner_(task_runner),
-      luna_service_client_(media::LunaServiceClient::PrivateBus),
+      luna_service_client_(app_id),
       subscribe_key_(0),
       osd_size_(0, 0, 1920, 1080) {}
 

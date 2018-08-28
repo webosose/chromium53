@@ -39,7 +39,8 @@ namespace media {
 class TvPipeline : public CustomPipeline,
                    public base::RefCountedThreadSafe<TvPipeline> {
  public:
-  TvPipeline(const scoped_refptr<base::SingleThreadTaskRunner>& task_runner);
+  TvPipeline(const scoped_refptr<base::SingleThreadTaskRunner>& task_runner,
+             const std::string& app_id);
   void Load(bool is_video,
             const std::string& app_id,
             const GURL& url,

@@ -34,7 +34,8 @@ namespace media {
   media::BindToCurrentLoop(base::Bind(function, AsWeakPtr())))
 
 UMediaClientImpl::UMediaClientImpl(
-    const scoped_refptr<base::SingleThreadTaskRunner>& task_runner)
+    const scoped_refptr<base::SingleThreadTaskRunner>& task_runner,
+    std::string app_id)
     : duration_(0.),
       current_time_(0.),
       buffer_end_(0),
@@ -61,9 +62,7 @@ UMediaClientImpl::UMediaClientImpl(
       playback_rate_on_paused_(0),
       volume_(1.0),
       media_task_runner_(task_runner),
-      ls_client_(media::LunaServiceClient::PrivateBus),
-      preload_(PreloadNone) {
-}
+      preload_(PreloadNone) {}
 
 UMediaClientImpl::~UMediaClientImpl() {
   if (!mediaId().empty() && loaded_) {

@@ -114,7 +114,7 @@ MediaAPIsWrapperGmp::MediaAPIsWrapperGmp(
     const std::string& app_id,
     const PipelineStatusCB& error_cb)
     : MediaAPIsWrapper(task_runner, video, app_id, error_cb),
-      ls_client_(media::LunaServiceClient::PrivateBus),
+      ls_client_(app_id),
       play_internal_(false),
       released_media_resource_(false),
       is_destructed_(false),

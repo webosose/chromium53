@@ -31,10 +31,11 @@ namespace media {
    media::BindToCurrentLoop(base::Bind(function, this)))
 
 DvrPipeline::DvrPipeline(
-    const scoped_refptr<base::SingleThreadTaskRunner>& task_runner)
+    const scoped_refptr<base::SingleThreadTaskRunner>& task_runner,
+    const std::string& app_id)
     : playback_rate_(0),
       media_task_runner_(task_runner),
-      luna_service_client_(media::LunaServiceClient::PrivateBus),
+      luna_service_client_(app_id),
       acb_client_(new Acb()),
       subscribe_key_(0),
       iscontentplaying_key_(0),

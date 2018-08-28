@@ -43,8 +43,8 @@ class CameraPipeline : public CustomPipeline,
     ImageDecodeError = 500,
     ImageDisplayError = 501,
   };
-  CameraPipeline(
-      const scoped_refptr<base::SingleThreadTaskRunner>& task_runner);
+  CameraPipeline(const scoped_refptr<base::SingleThreadTaskRunner>& task_runner,
+                 const std::string& app_id);
   void Load(bool is_video,
             const std::string& app_id,
             const GURL& url,
