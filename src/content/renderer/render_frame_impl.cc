@@ -3774,6 +3774,10 @@ void RenderFrameImpl::didFailLoad(blink::WebLocalFrame* frame,
                                              error.reason,
                                              error_description,
                                              error.wasIgnoredByHandler));
+  if (base::CommandLine::ForCurrentProcess()->HasSwitch(
+          switches::kEnableAggressiveForegroundGC) &&
+      IsMainFrame())
+    v8::Isolate::GetCurrent()->LowMemoryNotification();
 }
 
 void RenderFrameImpl::didFinishLoad(blink::WebLocalFrame* frame) {
@@ -3796,6 +3800,11 @@ void RenderFrameImpl::didFinishLoad(blink::WebLocalFrame* frame) {
 
   Send(new FrameHostMsg_DidFinishLoad(routing_id_,
                                       ds->request().url()));
+
+  if (base::CommandLine::ForCurrentProcess()->HasSwitch(
+          switches::kEnableAggressiveForegroundGC) &&
+      IsMainFrame())
+    v8::Isolate::GetCurrent()->LowMemoryNotification();
 }
 
 void RenderFrameImpl::didNavigateWithinPage(
@@ -4931,6 +4940,11 @@ void RenderFrameImpl::didStopLoading() {
                "id", routing_id_);
   render_view_->FrameDidStopLoading(frame_);
   Send(new FrameHostMsg_DidStopLoading(routing_id_));
+
+  if (base::CommandLine::ForCurrentProcess()->HasSwitch(
+          switches::kEnableAggressiveForegroundGC) &&
+      IsMainFrame())
+    v8::Isolate::GetCurrent()->LowMemoryNotification();
 }
 
 void RenderFrameImpl::didChangeLoadProgress(double load_progress) {
