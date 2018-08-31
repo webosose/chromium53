@@ -28,7 +28,7 @@
         'use_pulseaudio%': 0,
       }],
       # low memory buffer is used in non-Android based chromecast build due to hardware limitation.
-      ['chromecast==1 and OS!="android"', {
+      ['(chromecast==1 and OS!="android") or (webos!=0 and use_umediaserver==1 and platform_apollo==1)', {
         'use_low_memory_buffer%': 1,
       }, {
         'use_low_memory_buffer%': 0,
