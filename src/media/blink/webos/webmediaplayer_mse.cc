@@ -151,8 +151,10 @@ void WebMediaPlayerMSE::setRate(double rate) {
 void WebMediaPlayerMSE::setVolume(double volume) {
   DEBUG_LOG("[%p] %s : volume ( %f )", this, __FUNCTION__, volume);
 
-  // call base-class implementation
-  media::WebMediaPlayerImpl::setVolume(volume);
+  if (media_apis_wrapper_.get())
+    media_apis_wrapper_->SetPlaybackVolume(volume);
+  else
+    media::WebMediaPlayerImpl::setVolume(volume);
 }
 
 void WebMediaPlayerMSE::updateVideo(
