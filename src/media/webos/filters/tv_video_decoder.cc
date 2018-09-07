@@ -155,6 +155,8 @@ TvVideoDecoder::~TvVideoDecoder() {
 }
 
 bool TvVideoDecoder::ConfigureDecoder(bool low_delay) {
+  if (state_ != kUninitialized)
+    media_apis_wrapper_->UpdateVideoConfig(config_);
   return true;
 }
 

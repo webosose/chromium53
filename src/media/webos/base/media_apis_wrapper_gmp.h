@@ -80,6 +80,7 @@ class MEDIA_EXPORT MediaAPIsWrapperGmp : public MediaAPIsWrapper {
   std::string GetMediaID() override;
   void Unload() override;
 
+  void UpdateVideoConfig(const VideoDecoderConfig& video_config) override;
   void SetSizeChangeCb(const base::Closure& size_change_cb) override;
   void SetLoadCompletedCb(const LoadCompletedCB& loaded_cb) override;
 

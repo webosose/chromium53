@@ -89,6 +89,14 @@ class MEDIA_BLINK_EXPORT WebMediaPlayerMSE : public WebMediaPlayerImpl {
   // Notifies blink of the video size change.
   void OnVideoSizeChange();
 
+  // helpers
+  blink::WebRect ScaleWebRect(const blink::WebRect& rect,
+                              blink::WebFloatPoint scale);
+
+  void StartPaintTimer();
+  void StopPaintTimer();
+  void PaintTimerFired(void);
+
   const blink::WebFloatPoint additional_contents_scale_;
   std::string app_id_;
   bool is_video_offscreen_;
@@ -103,14 +111,9 @@ class MEDIA_BLINK_EXPORT WebMediaPlayerMSE : public WebMediaPlayerImpl {
 
   scoped_refptr<media::MediaAPIsWrapper> media_apis_wrapper_;
   blink::WebRect previous_video_rect_;
-  base::RepeatingTimer paintTimer_;
+  base::RepeatingTimer paint_timer_;
 
   gfx::Size display_resolution_;
-
-  // helpers
-  blink::WebRect scaleWebRect(
-      const blink::WebRect& rect, blink::WebFloatPoint scale);
-  void paintTimerFired(void);
 
   DISALLOW_COPY_AND_ASSIGN(WebMediaPlayerMSE);
 };

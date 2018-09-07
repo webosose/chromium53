@@ -100,8 +100,7 @@ WebMediaPlayerMSE::~WebMediaPlayerMSE() {
 
   DCHECK(main_task_runner_->BelongsToCurrentThread());
 
-  if (paintTimer_.IsRunning())
-      paintTimer_.Stop();
+  StopPaintTimer();
 
   if (media_apis_wrapper_.get())
     media_apis_wrapper_->Finalize();
@@ -115,14 +114,7 @@ void WebMediaPlayerMSE::load(LoadType load_type,
   // call base-class implementation
   media::WebMediaPlayerImpl::load(load_type, source, cors_mode);
 
-  // For updating video position infomation
-  if (!paintTimer_.IsRunning()) {
-    uint64_t paint_interval_time = kPaintTimerInterval;
-    paintTimer_.Start(FROM_HERE,
-        base::TimeDelta::FromMilliseconds(paint_interval_time),
-        base::Bind(&WebMediaPlayerMSE::paintTimerFired,
-                   base::Unretained(this)));
-  }
+  StartPaintTimer();
 }
 
 void WebMediaPlayerMSE::play() {
@@ -177,7 +169,8 @@ void WebMediaPlayerMSE::updateVideo(
 // TODO: once SetVisibility api is ready, below workaround will be removed
 #if defined(PLATFORM_APOLLO)
         media_apis_wrapper_->SetDisplayWindow(gfx::Rect(0, 0, 1, 1),
-                                              gfx::Rect(0, 0, 1, 1), 0, 1);
+                                              gfx::Rect(0, 0, 1, 1),
+                                              false, true);
 #endif
         media_apis_wrapper_->SetVisibility(false);
         is_video_offscreen_ = true;
@@ -192,7 +185,7 @@ void WebMediaPlayerMSE::updateVideo(
     }
   }
 
-  blink::WebRect scaled_rect = scaleWebRect(rect, additional_contents_scale_);
+  blink::WebRect scaled_rect = ScaleWebRect(rect, additional_contents_scale_);
 #if defined(PLATFORM_APOLLO)
   blink::WebRect render_view_bounds = delegate_->GetRenderViewBounds();
   if (pending_size_change_ || previous_video_rect_ != scaled_rect ||
@@ -311,6 +304,9 @@ void WebMediaPlayerMSE::suspend() {
 
   is_suspended_ = true;
 
+  // Stop running the video position timer
+  StopPaintTimer();
+
   status_on_suspended_ = paused() ? PausedStatus : PlayingStatus;
   if (status_on_suspended_ == PlayingStatus)
     pause();
@@ -351,14 +347,13 @@ void WebMediaPlayerMSE::resume() {
             status_on_suspended_);
   if (status_on_suspended_ == PlayingStatus) {
     play();
-
-    // to force SetVideoWindow on resume
-    previous_video_rect_ = blink::WebRect(-1, -1, -1, -1);
-    client_->checkBounds();
   } else {
     pause();
   }
   status_on_suspended_ = UnknownStatus;
+
+  // Resume running the video position timer
+  StartPaintTimer();
 }
 
 void WebMediaPlayerMSE::OnVideoSizeChange() {
@@ -366,8 +361,8 @@ void WebMediaPlayerMSE::OnVideoSizeChange() {
 }
 
 // helpers
-blink::WebRect WebMediaPlayerMSE::scaleWebRect(
-    const blink::WebRect& rect, blink::WebFloatPoint scale) {
+blink::WebRect WebMediaPlayerMSE::ScaleWebRect(const blink::WebRect& rect,
+                                               blink::WebFloatPoint scale) {
   blink::WebRect scaledRect;
 
   scaledRect.x = rect.x * scale.x;
@@ -378,7 +373,30 @@ blink::WebRect WebMediaPlayerMSE::scaleWebRect(
   return scaledRect;
 }
 
-void WebMediaPlayerMSE::paintTimerFired() {
+void WebMediaPlayerMSE::StartPaintTimer() {
+  DEBUG_LOG("[%p] %s", this, __FUNCTION__);
+
+  // For updating video position information
+  if (!paint_timer_.IsRunning()) {
+    uint64_t paint_interval_time = kPaintTimerInterval;
+    paint_timer_.Start(FROM_HERE,
+        base::TimeDelta::FromMilliseconds(paint_interval_time),
+        base::Bind(&WebMediaPlayerMSE::PaintTimerFired,
+                   base::Unretained(this)));
+  }
+
+  // to force SetVideoWindow on resume
+  previous_video_rect_ = blink::WebRect(-1, -1, -1, -1);
+  client_->checkBounds();
+}
+
+void WebMediaPlayerMSE::StopPaintTimer() {
+  DEBUG_LOG("[%p] %s", this, __FUNCTION__);
+
+  paint_timer_.Stop();
+}
+
+void WebMediaPlayerMSE::PaintTimerFired() {
   if (pending_size_change_) {
     client_->repaint();
     client_->sizeChanged();

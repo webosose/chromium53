@@ -337,8 +337,19 @@ void MediaAPIsWrapperGmp::Suspend() {
     return;
 
   is_suspended_ = true;
-  if (load_completed_ && is_finalized_)
+  if (!load_completed_)
+    return;
+
+  if (is_finalized_) {
     media_player_client_->NotifyBackground();
+    return;
+  }
+
+  Unload();
+
+  window_rect_.SetRect(0, 0, 0, 0);
+  window_in_rect_.SetRect(0, 0 , 0, 0);
+  natural_size_.SetSize(0, 0);
 }
 
 void MediaAPIsWrapperGmp::Resume(base::TimeDelta paused_time,
@@ -454,6 +465,12 @@ void MediaAPIsWrapperGmp::Unload() {
       media_player_client_.reset(NULL);
     }
   }
+}
+
+void MediaAPIsWrapperGmp::UpdateVideoConfig(
+    const VideoDecoderConfig& video_config) {
+  DEBUG_LOG("[%p] %s", this, __FUNCTION__);
+  video_config_ = video_config;
 }
 
 void MediaAPIsWrapperGmp::SetSizeChangeCb(const base::Closure& size_change_cb) {

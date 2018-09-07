@@ -95,6 +95,7 @@ class MEDIA_EXPORT MediaAPIsWrapper
   virtual void SetNaturalSize(const gfx::Size& size) {}
   virtual void Unload() {}
   virtual void SetKeySystem(const std::string& key_system) {}
+  virtual void UpdateVideoConfig(const VideoDecoderConfig& video_config) {}
 
   virtual void SwitchToAutoLayout() {}
   virtual void SetPlayerLoadedCallback(const base::Closure& player_loaded_cb) {}
