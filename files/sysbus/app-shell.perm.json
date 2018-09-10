@@ -1,0 +1,11 @@
+{
+    "com.webos.app.enactbrowser*": [
+        "media"
+    ],
+    "com.webos.media.client.*": [
+        "media"
+    ],
+    "com.webos.rm.client.*": [
+        "media"
+    ]
+}

@@ -69,6 +69,8 @@ class MEDIA_EXPORT LunaServiceClient {
 
  private:
   void LogError(const std::string& message, AutoLSError& lserror);
+  bool RegisterService(const std::string& identifier);
+  bool UnregisterService();
 
   LSHandle* handle_;
   GMainContext* context_;

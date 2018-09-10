@@ -7,7 +7,12 @@
 #include <glib.h>
 
 #include "base/callback_helpers.h"
+#include "base/command_line.h"
 #include "base/logging.h"
+
+#if defined(OS_WEBOS)
+#include "base/base_switches.h"
+#endif
 
 #define DEBUG_LOG(format, ...) \
   RAW_PMLOG_DEBUG("LunaServiceClient " format, ##__VA_ARGS__)
@@ -29,30 +34,13 @@ static const char* const luna_service_uris[] = {
 // LunaServiceClient implematation
 LunaServiceClient::LunaServiceClient(const std::string& identifier)
     : handle_(NULL), context_(NULL) {
-  AutoLSError error;
-  std::string service_name = identifier + '-' + std::to_string(getpid());
-  bool retval = LSRegisterApplicationService(
-      service_name.c_str(), identifier.c_str(), &handle_, &error);
-
-  if (!retval) {
-    LogError("Fail to register to LS2", error);
-    return;
-  }
-
-  context_ = g_main_context_ref(g_main_context_default());
-  retval = LSGmainContextAttach(handle_, context_, &error);
-  if (!retval) {
-    LogError("Fail to attach a service to a mainloop", error);
-    return;
+  if (!RegisterService(identifier)) {
+    DEBUG_LOG("Failed to register service (%s)", identifier.c_str());
   }
 }
 
 LunaServiceClient::~LunaServiceClient() {
-  AutoLSError error;
-  if (handle_) {
-    LSUnregister(handle_, &error);
-    g_main_context_unref(context_);
-  }
+  UnregisterService();
 }
 
 bool handleAsync(LSHandle* sh, LSMessage* reply, void* ctx) {
@@ -90,6 +78,7 @@ bool handleSubscribe(LSHandle* sh, LSMessage* reply, void* ctx) {
 bool LunaServiceClient::callASync(const std::string& uri,
                                   const std::string& param) {
   ResponseCB nullcb;
+
   return callASync(uri, param, nullcb);
 }
 
@@ -180,6 +169,60 @@ std::string LunaServiceClient::GetServiceURI(URIType type,
   uri.append("/");
   uri.append(action);
   return uri;
+}
+
+bool LunaServiceClient::RegisterService(const std::string& identifier) {
+  bool retval;
+#if defined(OS_WEBOS)
+  AutoLSError error;
+  std::string service_name = identifier + '-' + std::to_string(getpid());
+
+  const base::CommandLine& command_line =
+      *base::CommandLine::ForCurrentProcess();
+
+  // register a service for browser application
+  if (command_line.HasSwitch(switches::kWebOSAppShell)) {
+    retval = LSRegister(service_name.c_str(), &handle_, &error);
+    if (!retval) {
+      LogError("Fail to register a browser to LS2", error);
+      return retval;
+    }
+  } else if (command_line.HasSwitch(switches::kWebOSWAM)) {
+    // register a service for web application based on wam
+    retval = LSRegisterApplicationService(service_name.c_str(),
+                                          identifier.c_str(), &handle_, &error);
+    if (!retval) {
+      LogError("Fail to register a web application to LS2", error);
+      return retval;
+    }
+  }
+
+  context_ = g_main_context_ref(g_main_context_default());
+  retval = LSGmainContextAttach(handle_, context_, &error);
+  if (!retval) {
+    UnregisterService();
+    LogError("Fail to attach a service to a mainloop", error);
+    return retval;
+  }
+#endif  // OS_WEBOS
+
+  return retval;
+}
+
+bool LunaServiceClient::UnregisterService() {
+  bool retval;
+  AutoLSError error;
+
+  if (!handle_)
+    return false;
+
+  retval = LSUnregister(handle_, &error);
+  if (!retval) {
+    LogError("Fail to unregister service", error);
+    return retval;
+  }
+  g_main_context_unref(context_);
+  return retval;
 }
 
 void LunaServiceClient::LogError(const std::string& message,

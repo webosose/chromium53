@@ -121,6 +121,7 @@ CHROME_FLAGS=" \
   --no-zygote\
   --load-apps=${APP_FOLDER_PATH}\
   --v8-snapshot-blob-path=${APP_FOLDER_PATH}/snapshot_blob.bin\
+  --webos-appshell\
 "
 
 # setup 10 Mb maximum for ApplicationCache per domain

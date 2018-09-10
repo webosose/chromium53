@@ -106,6 +106,7 @@ const char kV8SnapshotBlobPath[] = "v8-snapshot-blob-path";
 
 #if defined(OS_WEBOS)
 // Enable or disable some features only for WAM.
+const char kWebOSAppShell[] = "webos-appshell";
 const char kWebOSWAM[] = "webos-wam";
 // appId property
 extern const char kWebOSAppId[] = "webos-appid";
