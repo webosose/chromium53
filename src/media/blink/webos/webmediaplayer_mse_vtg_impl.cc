@@ -91,7 +91,7 @@ void WebMediaPlayerMSEVTGImpl::updateVideo(const blink::WebRect& rect,
   if (!is_suspended_)
     video_frame_provider_vtg_->UpdateVideoFrame();
 
-  scaled_rect_ = scaleWebRect(rect, additional_contents_scale_);
+  scaled_rect_ = ScaleWebRect(rect, additional_contents_scale_);
   if (previous_video_rect_ != scaled_rect_) {
     if (pipeline_metadata_.natural_size == gfx::Size())
       return;
