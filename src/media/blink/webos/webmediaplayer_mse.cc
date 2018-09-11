@@ -54,7 +54,7 @@ WebMediaPlayerMSE::WebMediaPlayerMSE(
                                 params),
       additional_contents_scale_(additional_contents_scale),
       app_id_(app_id.utf8().data()),
-      is_video_offscreen_(false),
+      is_videolayer_in_composited_frame_(true),
       status_on_suspended_(UnknownStatus),
       is_suspended_(false),
 #if defined(PLATFORM_APOLLO)
@@ -161,31 +161,8 @@ void WebMediaPlayerMSE::updateVideo(
     const blink::WebRect& rect, bool fullScreen) {
   DCHECK(main_task_runner_->BelongsToCurrentThread());
 
-  if (!base::CommandLine::ForCurrentProcess()->HasSwitch(
-          switches::kDisableMediaVisibilityCheck)) {
-    if (video_weblayer_.get() && video_weblayer_->layer() &&
-        video_weblayer_->layer()->transform_tree_index() == -1) {
-      if (!is_video_offscreen_) {
-        LOG(INFO) << "[" << this << "] " << __func__
-                  << " videoLayer isn't visible";
-// TODO: once SetVisibility api is ready, below workaround will be removed
-#if defined(PLATFORM_APOLLO)
-        media_apis_wrapper_->SetDisplayWindow(gfx::Rect(0, 0, 1, 1),
-                                              gfx::Rect(0, 0, 1, 1),
-                                              false, true);
-#endif
-        media_apis_wrapper_->SetVisibility(false);
-        is_video_offscreen_ = true;
-        previous_video_rect_ = blink::WebRect();
-      }
-      return;
-    }
-
-    if (is_video_offscreen_) {
-      media_apis_wrapper_->SetVisibility(true);
-      is_video_offscreen_ = false;
-    }
-  }
+  if (!is_videolayer_in_composited_frame_)
+    return;
 
   blink::WebRect scaled_rect = ScaleWebRect(rect, additional_contents_scale_);
 #if defined(PLATFORM_APOLLO)
@@ -403,8 +380,33 @@ void WebMediaPlayerMSE::PaintTimerFired() {
     client_->repaint();
     client_->sizeChanged();
   }
-
   client_->checkBounds();
+}
+
+void WebMediaPlayerMSE::OnDidCommitCompositorFrame() {
+  if (!base::CommandLine::ForCurrentProcess()->HasSwitch(
+          switches::kDisableMediaVisibilityCheck)) {
+    bool new_value = true;
+    if (video_weblayer_.get() && video_weblayer_->layer() &&
+        video_weblayer_->layer()->transform_tree_index() == -1)
+      new_value = false;
+    if (is_videolayer_in_composited_frame_ == new_value)
+      return;
+    is_videolayer_in_composited_frame_ = new_value;
+    if (is_videolayer_in_composited_frame_ == true) {
+      previous_video_rect_ = blink::WebRect();
+      media_apis_wrapper_->SetVisibility(true);
+    } else {
+      LOG(INFO) << "[" << this << "]" << __func__
+                << " is_videolayer_in_composited_frame_="
+                << is_videolayer_in_composited_frame_;
+#if defined(PLATFORM_APOLLO)
+      media_apis_wrapper_->SetDisplayWindow(gfx::Rect(0, 0, 1, 1),
+                                            gfx::Rect(0, 0, 1, 1), 0, 1);
+#endif
+      media_apis_wrapper_->SetVisibility(false);
+    }
+  }
 }
 
 }  // namespace media

@@ -75,6 +75,7 @@ class MEDIA_BLINK_EXPORT WebMediaPlayerMSE : public WebMediaPlayerImpl {
   void OnPlay() override {}
   void OnPause() override {}
   void OnVolumeMultiplierUpdate(double multiplier) override {}
+  void OnDidCommitCompositorFrame() override;
 
   void suspend() override;
   void resume() override;
@@ -99,7 +100,7 @@ class MEDIA_BLINK_EXPORT WebMediaPlayerMSE : public WebMediaPlayerImpl {
 
   const blink::WebFloatPoint additional_contents_scale_;
   std::string app_id_;
-  bool is_video_offscreen_;
+  bool is_videolayer_in_composited_frame_;
   StatusOnSuspended status_on_suspended_;
   bool is_suspended_;
   bool suspended_by_policy_;

@@ -223,4 +223,11 @@ void RendererWebMediaPlayerDelegate::OnDestruct() {
   delete this;
 }
 
+#if defined(OS_WEBOS) && defined(USE_UMEDIASERVER)
+void RendererWebMediaPlayerDelegate::DidCommitCompositorFrame() {
+  for (IDMap<Observer>::iterator it(&id_map_); !it.IsAtEnd(); it.Advance())
+    it.GetCurrentValue()->OnDidCommitCompositorFrame();
+}
+#endif
+
 }  // namespace media

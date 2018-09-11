@@ -44,6 +44,10 @@ class WebMediaPlayerDelegate {
 
     virtual void OnScreenOrientationUpdate(
         ScreenOrientationType screen_orientation) {}
+
+#if defined(OS_WEBOS) && defined(USE_UMEDIASERVER)
+    virtual void OnDidCommitCompositorFrame() {}
+#endif
   };
 
   WebMediaPlayerDelegate() {}

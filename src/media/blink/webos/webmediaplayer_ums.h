@@ -173,6 +173,7 @@ class WebMediaPlayerUMS : public blink::WebMediaPlayer,
   virtual void OnPlay() override {}
   virtual void OnPause() override {}
   virtual void OnVolumeMultiplierUpdate(double multiplier) override {}
+  void OnDidCommitCompositorFrame() override;
 
 #if defined(USE_WEBOS_MEDIA_FOCUS_EXTENSION)
   void focusChanged();
@@ -312,6 +313,7 @@ class WebMediaPlayerUMS : public blink::WebMediaPlayer,
   blink::WebRect display_window_in_rect_;
   blink::WebRect previous_video_rect_;
   bool is_video_offscreen_;
+  bool is_videolayer_in_composited_frame_;
   const blink::WebFloatPoint additional_contents_scale_;
   blink::WebRect ScaleWebRect(
       const blink::WebRect& rect, blink::WebFloatPoint scale);
