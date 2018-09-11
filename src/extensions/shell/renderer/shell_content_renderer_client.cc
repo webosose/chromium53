@@ -76,6 +76,9 @@ void ShellContentRendererClient::RenderFrameCreated(
 #if !defined(DISABLE_NACL)
   new nacl::NaClHelper(render_frame);
 #endif
+
+  // Create net error helper
+  new webos::WebOsNetErrorHelper(render_frame);
 }
 
 void ShellContentRendererClient::RenderViewCreated(
