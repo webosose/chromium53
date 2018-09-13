@@ -90,6 +90,7 @@ class WEBOS_EXPORT WebViewProfile {
 
   void AppendExtraWebSocketHeader(const std::string& key,
                                   const std::string& value);
+  void SetProxyRules(const std::string& proxy_rules);
 
   void RemoveBrowsingData(int remove_browsing_data_mask);
 

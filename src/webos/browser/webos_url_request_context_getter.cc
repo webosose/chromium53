@@ -168,10 +168,12 @@ WebOSRequestContextGetter::WebOSRequestContextGetter(
     WebOSBrowserContext* browser_context,
     content::ProtocolHandlerMap* protocol_handlers,
     content::URLRequestInterceptorScopedVector request_interceptors,
-    std::map<std::string, std::string> extra_websocket_headers)
+    std::map<std::string, std::string> extra_websocket_headers,
+    std::string proxy_rules)
     : browser_context_(browser_context),
       request_interceptors_(std::move(request_interceptors)),
-      extra_websocket_headers_(std::move(extra_websocket_headers)) {
+      extra_websocket_headers_(std::move(extra_websocket_headers)),
+      proxy_rules_(proxy_rules) {
   std::swap(protocol_handlers_, *protocol_handlers);
 }
 
@@ -221,11 +223,15 @@ void WebOSRequestContextGetter::InitializeSystemContextDependencies() {
 
   http_server_properties_.reset(new net::HttpServerPropertiesImpl);
 
-  proxy_service_ = net::ProxyService::CreateUsingSystemProxyResolver(
-      net::ProxyService::CreateSystemProxyConfigService(
-          BrowserThread::GetMessageLoopProxyForThread(BrowserThread::IO),
-          BrowserThread::GetMessageLoopProxyForThread(BrowserThread::FILE)),
-      0, NULL);
+  proxy_service_ = proxy_rules_.empty()
+                       ? net::ProxyService::CreateUsingSystemProxyResolver(
+                             net::ProxyService::CreateSystemProxyConfigService(
+                                 BrowserThread::GetMessageLoopProxyForThread(
+                                     BrowserThread::IO),
+                                 BrowserThread::GetMessageLoopProxyForThread(
+                                     BrowserThread::FILE)),
+                             0, NULL)
+                       : net::ProxyService::CreateFixed(proxy_rules_);
 
   http_user_agent_settings_.reset(new WebOSHttpUserAgentSettings());
 }
