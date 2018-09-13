@@ -31,6 +31,10 @@ void WebViewProfile::AppendExtraWebSocketHeader(const std::string& key,
   browser_context_adapter_->AppendExtraWebSocketHeader(key, value);
 }
 
+void WebViewProfile::SetProxyRules(const std::string& proxy_rules) {
+  browser_context_adapter_->SetProxyRules(proxy_rules);
+}
+
 void WebViewProfile::FlushCookieStore() {
   browser_context_adapter_->FlushCookieStore();
 }

@@ -73,6 +73,7 @@ class WebOSBrowserContext : public content::BrowserContext {
 
   void AppendExtraWebSocketHeader(const std::string& key,
                                   const std::string& value);
+  void SetProxyRules(const std::string& proxy_rules);
 
   void FlushCookieStore();
 
@@ -89,6 +90,7 @@ class WebOSBrowserContext : public content::BrowserContext {
   scoped_refptr<WebOSRequestContextGetter> url_request_getter_;
 
   std::map<std::string, std::string> extra_websocket_headers_;
+  std::string proxy_rules_;
 
   DISALLOW_COPY_AND_ASSIGN(WebOSBrowserContext);
 };

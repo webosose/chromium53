@@ -52,7 +52,8 @@ class WebOSRequestContextGetter : public net::URLRequestContextGetter {
       WebOSBrowserContext* browser_context,
       content::ProtocolHandlerMap* protocol_handlers,
       content::URLRequestInterceptorScopedVector request_interceptors,
-      std::map<std::string, std::string> extra_websocket_headers);
+      std::map<std::string, std::string> extra_websocket_headers,
+      std::string proxy_rules);
 
   net::URLRequestContext* GetURLRequestContext() override;
   scoped_refptr<base::SingleThreadTaskRunner> GetNetworkTaskRunner()
@@ -81,6 +82,7 @@ class WebOSRequestContextGetter : public net::URLRequestContextGetter {
   content::ProtocolHandlerMap protocol_handlers_;
   content::URLRequestInterceptorScopedVector request_interceptors_;
   std::map<std::string, std::string> extra_websocket_headers_;
+  std::string proxy_rules_;
   std::unique_ptr<net::URLRequestContext> request_context_;
   std::unique_ptr<WebOSNetworkDelegate> network_delegate_;
 

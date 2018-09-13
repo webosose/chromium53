@@ -38,6 +38,10 @@ void WebOSBrowserContextAdapter::AppendExtraWebSocketHeader(
   browser_context_->AppendExtraWebSocketHeader(key, value);
 }
 
+void WebOSBrowserContextAdapter::SetProxyRules(const std::string& proxy_rules) {
+  browser_context_->SetProxyRules(proxy_rules);
+}
+
 void WebOSBrowserContextAdapter::FlushCookieStore() {
   browser_context_->FlushCookieStore();
 }

@@ -88,7 +88,7 @@ net::URLRequestContextGetter* WebOSBrowserContext::CreateRequestContext(
   if (!url_request_getter_)
     url_request_getter_ = new WebOSRequestContextGetter(
         this, protocol_handlers, std::move(request_interceptors),
-        std::move(extra_websocket_headers_));
+        std::move(extra_websocket_headers_), proxy_rules_);
   return url_request_getter_.get();
 }
 
@@ -115,6 +115,10 @@ net::URLRequestContextGetter*
         const base::FilePath& partition_path,
         bool in_memory) {
   return nullptr;
+}
+
+void WebOSBrowserContext::SetProxyRules(const std::string& proxy_rules) {
+  proxy_rules_ = proxy_rules;
 }
 
 void WebOSBrowserContext::AppendExtraWebSocketHeader(const std::string& key,
