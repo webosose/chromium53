@@ -127,6 +127,10 @@ int WebOSBrowserMainParts::PreCreateThreads() {
 
   for (size_t i = 0; i < webos_extra_parts_.size(); ++i)
     webos_extra_parts_[i]->PreCreateThreads();
+
+  // It should return the error code (or 0 if no error).
+  // See 'content::BrowserMainParts'.
+  return 0;
 }
 
 void WebOSBrowserMainParts::PostDestroyThreads() {
