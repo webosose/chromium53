@@ -15,6 +15,7 @@
         'variables': {
           'openh264_cflags_add': [
             '-Wno-format',
+            '-Wno-format-security',
             '-Wno-unused-value',
           ],
           'openh264_cflags_remove': [
