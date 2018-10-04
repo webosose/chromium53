@@ -369,9 +369,6 @@ CONTENT_EXPORT extern const char
 CONTENT_EXPORT extern const char kHideSelectionHandles[];
 
 #if defined(BROWSER_COMMON)
-// Suppress the Zygote process and fork main process to create render process
-CONTENT_EXPORT extern const char kInProcessZygote[];
-
 // Activate renderer swapping when memory usage crosses a defined limit.
 CONTENT_EXPORT extern const char kRenderMemoryThreshold[];
 #endif
