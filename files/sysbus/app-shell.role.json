@@ -2,18 +2,13 @@
     "exeName":"/usr/bin/app-shell/app_shell",
     "type": "privileged",
     "allowedNames": [
-        "com.webos.app.enactbrowser*",
-        "com.webos.media.client.*",
+        "com.webos.app.enactbrowser",
         "com.webos.rm.client.*"
     ],
     "permissions": [
         {
-            "service":"com.webos.app.enactbrowser*",
-            "outbound":["com.webos.service.audio"]
-        },
-        {
-            "service":"com.webos.media.client.*",
-            "outbound":["com.webos.media"]
+            "service":"com.webos.app.enactbrowser",
+            "outbound":["com.palm.bus"]
         },
         {
             "service":"com.webos.rm.client.*",

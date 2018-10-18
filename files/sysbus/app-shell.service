@@ -1,4 +1,5 @@
 [D-BUS Service]
 Name=app-shell
 Exec=/usr/bin/app-shell/app_shell
-Type=static
+Type=dynamic
+

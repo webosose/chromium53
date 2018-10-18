@@ -1,9 +1,6 @@
 {
-    "com.webos.app.enactbrowser*": [
-        "media"
-    ],
-    "com.webos.media.client.*": [
-        "media"
+    "com.webos.app.enactbrowser": [
+        "signals.all"
     ],
     "com.webos.rm.client.*": [
         "media"

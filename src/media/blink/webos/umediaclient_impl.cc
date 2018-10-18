@@ -36,7 +36,8 @@ namespace media {
 UMediaClientImpl::UMediaClientImpl(
     const scoped_refptr<base::SingleThreadTaskRunner>& task_runner,
     std::string app_id)
-    : duration_(0.),
+    : uMediaClient(app_id),
+      duration_(0.),
       current_time_(0.),
       buffer_end_(0),
       buffer_end_at_last_didLoadingProgress_(0),

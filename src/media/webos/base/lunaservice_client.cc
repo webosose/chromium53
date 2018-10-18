@@ -7,7 +7,6 @@
 #include <glib.h>
 
 #include "base/callback_helpers.h"
-#include "base/command_line.h"
 #include "base/logging.h"
 
 #if defined(OS_WEBOS)
@@ -177,24 +176,11 @@ bool LunaServiceClient::RegisterService(const std::string& identifier) {
   AutoLSError error;
   std::string service_name = identifier + '-' + std::to_string(getpid());
 
-  const base::CommandLine& command_line =
-      *base::CommandLine::ForCurrentProcess();
-
-  // register a service for browser application
-  if (command_line.HasSwitch(switches::kWebOSAppShell)) {
-    retval = LSRegister(service_name.c_str(), &handle_, &error);
-    if (!retval) {
-      LogError("Fail to register a browser to LS2", error);
-      return retval;
-    }
-  } else if (command_line.HasSwitch(switches::kWebOSWAM)) {
-    // register a service for web application based on wam
-    retval = LSRegisterApplicationService(service_name.c_str(),
-                                          identifier.c_str(), &handle_, &error);
-    if (!retval) {
-      LogError("Fail to register a web application to LS2", error);
-      return retval;
-    }
+  retval = LSRegisterApplicationService(service_name.c_str(),
+                                        identifier.c_str(), &handle_, &error);
+  if (!retval) {
+    LogError("Fail to register a web application to LS2", error);
+    return retval;
   }
 
   context_ = g_main_context_ref(g_main_context_default());

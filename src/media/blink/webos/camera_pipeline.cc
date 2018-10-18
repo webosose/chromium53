@@ -28,7 +28,8 @@ namespace media {
 CameraPipeline::CameraPipeline(
     const scoped_refptr<base::SingleThreadTaskRunner>& task_runner,
     const std::string& app_id)
-    : loaded_(false),
+    : uMediaClient(app_id),
+      loaded_(false),
       playback_rate_(0),
       media_task_runner_(task_runner),
       luna_service_client_(app_id) {}
