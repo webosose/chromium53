@@ -31,6 +31,11 @@ void IVIShellSurface::InitializeShellSurface(WaylandWindow* window,
   DCHECK(display);
   WaylandShell* shell = WaylandDisplay::GetInstance()->GetShell();
   DCHECK(shell && shell->GetIVIShell());
+
+  // The window_manager on AGL handles surface_id 0 as an invalid id.
+  if (surface_id == 0)
+    surface_id = static_cast<int>(getpid());
+
   ivi_surface_ = ivi_application_surface_create(shell->GetIVIShell(),
                                                 surface_id, GetWLSurface());
 
