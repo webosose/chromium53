@@ -320,8 +320,8 @@ void WebOSContentBrowserClient::SetApplicationLocale(
 void WebOSContentBrowserClient::OverrideWebkitPrefs(
     content::RenderViewHost* render_view_host,
     content::WebPreferences* prefs) {
-  const base::CommandLine& command_line =
-      *base::CommandLine::ForCurrentProcess();
+  prefs->touch_enabled = true;
+  prefs->device_supports_touch = true;
 }
 
 }  // namespace webos

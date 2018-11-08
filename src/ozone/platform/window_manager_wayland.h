@@ -110,7 +110,8 @@ class WindowManagerWayland
   void VirtualKeyNotify(EventType type,
                         uint32_t key,
                         int device_id);
-  void TouchNotify(EventType type,
+  void TouchNotify(unsigned handle,
+                   EventType type,
                    float x,
                    float y,
                    int32_t touch_id,
@@ -161,7 +162,8 @@ class WindowManagerWayland
   void NotifyPointerLeave(unsigned handle,
                           float x,
                           float y);
-  void NotifyTouchEvent(EventType type,
+  void NotifyTouchEvent(unsigned handle,
+                        EventType type,
                         float x,
                         float y,
                         int32_t touch_id,

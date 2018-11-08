@@ -176,7 +176,8 @@ class WaylandDisplay : public ui::SurfaceFactoryOzone,
 #endif
                  int device_id);
   void VirtualKeyNotify(ui::EventType type, uint32_t key, int device_id);
-  void TouchNotify(ui::EventType type,
+  void TouchNotify(unsigned handle,
+                   ui::EventType type,
                    float x,
                    float y,
                    int32_t touch_id,

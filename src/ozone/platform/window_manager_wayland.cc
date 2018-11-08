@@ -409,15 +409,16 @@ void WindowManagerWayland::VirtualKeyNotify(EventType type,
                         EventTimeForNow(), device_id);
 }
 
-void WindowManagerWayland::TouchNotify(EventType type,
+void WindowManagerWayland::TouchNotify(unsigned handle,
+                                       EventType type,
                                        float x,
                                        float y,
                                        int32_t touch_id,
                                        uint32_t time_stamp) {
   base::ThreadTaskRunnerHandle::Get()->PostTask(
-      FROM_HERE,
-      base::Bind(&WindowManagerWayland::NotifyTouchEvent,
-          weak_ptr_factory_.GetWeakPtr(), type, x, y, touch_id, time_stamp));
+      FROM_HERE, base::Bind(&WindowManagerWayland::NotifyTouchEvent,
+                            weak_ptr_factory_.GetWeakPtr(), handle, type, x, y,
+                            touch_id, time_stamp));
 }
 
 void WindowManagerWayland::CloseWidget(unsigned handle) {
@@ -641,11 +642,15 @@ void WindowManagerWayland::NotifyPointerLeave(unsigned handle,
   DispatchEvent(&mouseev);
 }
 
-void WindowManagerWayland::NotifyTouchEvent(EventType type,
+void WindowManagerWayland::NotifyTouchEvent(unsigned handle,
+                                            EventType type,
                                             float x,
                                             float y,
                                             int32_t touch_id,
                                             uint32_t time_stamp) {
+  if (type == ET_TOUCH_PRESSED)
+    OnWindowEnter(handle);
+
   gfx::Point position(x, y);
   base::TimeTicks timestamp = ui::EventTimeForNow() + base::TimeDelta::FromMilliseconds(time_stamp);
   TouchEvent touchev(type, position, touch_id, timestamp);

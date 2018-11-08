@@ -455,7 +455,17 @@ void OzoneWaylandWindow::ToggleFullscreenWithSize(const gfx::Size& size) {
 // WindowTreeHostDelegateWayland, ui::PlatformEventDispatcher implementation:
 bool OzoneWaylandWindow::CanDispatchEvent(
     const ui::PlatformEvent& ne) {
-  return window_manager_->event_grabber() == handle_;
+  gfx::AcceleratedWidget grabber = window_manager_->event_grabber();
+  if (grabber != gfx::kNullAcceleratedWidget)
+    return grabber == handle_;
+
+  // TODO(jani) this is just quick and dirty hack to support touch event
+  // dispatching
+  if (static_cast<Event*>(ne)->IsLocatedEvent()) {
+    const LocatedEvent* event =
+        static_cast<const LocatedEvent*>(ne);
+    return GetBounds().Contains(event->root_location());
+  }
 }
 
 uint32_t OzoneWaylandWindow::DispatchEvent(
