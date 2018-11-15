@@ -32,6 +32,11 @@ class IVIShellSurface : public WaylandShellSurface {
   void Unminimize() override;
   bool IsMinimized() const override;
 
+  static void HandleConfigure(void* data,
+                              struct ivi_surface* shell_surface,
+                              int32_t width,
+                              int32_t height);
+
  private:
   ivi_surface* ivi_surface_;
   DISALLOW_COPY_AND_ASSIGN(IVIShellSurface);
