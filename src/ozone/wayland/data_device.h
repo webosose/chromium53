@@ -7,6 +7,7 @@
 
 #include <wayland-client.h>
 
+#include <memory>
 #include <string>
 
 #include "ozone/wayland/window.h"
