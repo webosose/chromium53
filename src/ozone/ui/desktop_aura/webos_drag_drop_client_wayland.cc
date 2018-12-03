@@ -97,17 +97,17 @@ class DragDropTrackerDelegate : public aura::WindowDelegate {
 ////////////////////////////////////////////////////////////////////////////////
 // WebosDragDropClientWayland, public:
 
-WebosDragDropClientWayland::WebosDragDropClientWayland(
-    aura::Window* window)
- : drag_data_(NULL),
-   drag_operation_(0),
-   root_window_(window),
-   drag_window_(NULL),
-   drag_source_window_(NULL),
-   should_block_during_drag_drop_(true),
-   drag_drop_window_delegate_(new DragDropTrackerDelegate(this)),
-   current_drag_event_source_(ui::DragDropTypes::DRAG_EVENT_SOURCE_MOUSE),
-   weak_factory_(this) {
+WebosDragDropClientWayland::WebosDragDropClientWayland(aura::Window* window,
+                                                       ui::PlatformWindow*)
+    : drag_data_(NULL),
+      drag_operation_(0),
+      root_window_(window),
+      drag_window_(NULL),
+      drag_source_window_(NULL),
+      should_block_during_drag_drop_(true),
+      drag_drop_window_delegate_(new DragDropTrackerDelegate(this)),
+      current_drag_event_source_(ui::DragDropTypes::DRAG_EVENT_SOURCE_MOUSE),
+      weak_factory_(this) {
   if (root_window_)
     root_window_->AddPreTargetHandler(this);
 }

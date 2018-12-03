@@ -9,7 +9,11 @@
 #include <string>
 
 #include "base/bind.h"
+#if !defined(OS_WEBOS)
+#include "ozone/ui/desktop_aura/webos_drag_drop_client_wayland.h"
+#else
 #include "ozone/ui/desktop_aura/desktop_drag_drop_client_wayland.h"
+#endif
 #include "ozone/ui/desktop_aura/desktop_screen_wayland.h"
 #include "ui/aura/client/focus_client.h"
 #include "ui/aura/window_property.h"
@@ -194,8 +198,18 @@ DesktopWindowTreeHostOzone::CreateTooltip() {
 std::unique_ptr<aura::client::DragDropClient>
 DesktopWindowTreeHostOzone::CreateDragDropClient(
     DesktopNativeCursorManager* cursor_manager) {
+/* It looks misleading but it is not. WebOS DnD implementation is working,
+ * and desktop implementation is empty. In webOS regular products DnD is
+ * disabled, so we need to enable webOS implementation only if OS_WEBOS is
+ * not true.
+ */
+#if defined(OS_WEBOS)
   drag_drop_client_ = new DesktopDragDropClientWayland(window(),
                                                        platform_window_.get());
+#else
+  drag_drop_client_ =
+      new WebosDragDropClientWayland(window(), platform_window_.get());
+#endif
   return std::unique_ptr<aura::client::DragDropClient>(drag_drop_client_);
 }
 

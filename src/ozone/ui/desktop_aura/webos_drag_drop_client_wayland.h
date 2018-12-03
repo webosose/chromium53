@@ -37,6 +37,7 @@ class Point;
 
 namespace ui {
 class OSExchangeData;
+class PlatformWindow;
 }
 
 namespace views {
@@ -49,7 +50,8 @@ class VIEWS_EXPORT WebosDragDropClientWayland
       public gfx::AnimationDelegate,
       public aura::WindowObserver {
  public:
-  WebosDragDropClientWayland(aura::Window* window);
+  WebosDragDropClientWayland(aura::Window* window,
+                             ui::PlatformWindow* platform_window);
   virtual ~WebosDragDropClientWayland();
 
   // Overridden from aura::client::DragDropClient:

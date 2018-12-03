@@ -68,7 +68,9 @@ void WebOSNativeWidgetAura::InitNativeWidget(
   aura::Window* root_window = GetNativeWindow()->GetRootWindow();
   aura::client::SetVisibilityClient(root_window, visibility_controller_.get());
   wm::SetChildWindowVisibilityChangesAnimated(root_window);
+#if defined(OS_WEBOS)
   aura::client::SetDragDropClient(host()->window(), NULL);
+#endif
   tooltip_disabler_.reset(new aura::client::ScopedTooltipDisabler(root_window));
 }
 
