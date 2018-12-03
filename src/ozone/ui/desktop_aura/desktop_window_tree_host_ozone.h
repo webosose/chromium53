@@ -42,6 +42,10 @@ class WindowGroupConfiguration;
 
 namespace views {
 
+#if !defined(OS_WEBOS)
+class WebosDragDropClientWayland;
+#endif
+
 namespace corewm {
 class Tooltip;
 }
@@ -270,7 +274,11 @@ class VIEWS_EXPORT DesktopWindowTreeHostOzone
 #endif
 
   // Owned by DesktopNativeWidgetAura.
+#if defined(OS_WEBOS)
   DesktopDragDropClientWayland* drag_drop_client_;
+#else
+  WebosDragDropClientWayland* drag_drop_client_;
+#endif
   views::internal::NativeWidgetDelegate* native_widget_delegate_;
   aura::Window* content_window_;
 

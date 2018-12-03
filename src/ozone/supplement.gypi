@@ -35,6 +35,18 @@
           'wayland'
         ],
         'ozone_platform%': 'wayland',
+	'conditions': [
+          ['webos==0', {
+            'external_ozone_views_files': [
+              '<(DEPTH)/ozone/ui/desktop_aura/drag_drop_tracker.cc',
+              '<(DEPTH)/ozone/ui/desktop_aura/drag_drop_tracker.h',
+              '<(DEPTH)/ozone/ui/desktop_aura/drag_image_view.cc',
+              '<(DEPTH)/ozone/ui/desktop_aura/drag_image_view.h',
+              '<(DEPTH)/ozone/ui/desktop_aura/webos_drag_drop_client_wayland.cc',
+              '<(DEPTH)/ozone/ui/desktop_aura/webos_drag_drop_client_wayland.h',
+            ]
+          }]
+	],
       },
       'target_defaults': {
         'target_conditions': [
