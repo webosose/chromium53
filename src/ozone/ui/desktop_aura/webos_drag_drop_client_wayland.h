@@ -13,6 +13,8 @@
 // limitations under the License.
 //
 // SPDX-License-Identifier: Apache-2.0
+//
+// This file is taken from "ash/drag_drop/drag_drop_controller.h"
 
 #ifndef OZONE_UI_DESKTOP_AURA_WEBOS_DRAG_DROP_CLIENT_WAYLAND_H_
 #define OZONE_UI_DESKTOP_AURA_WEBOS_DRAG_DROP_CLIENT_WAYLAND_H_
@@ -55,13 +57,12 @@ class VIEWS_EXPORT WebosDragDropClientWayland
   virtual ~WebosDragDropClientWayland();
 
   // Overridden from aura::client::DragDropClient:
-  int StartDragAndDrop(
-      const ui::OSExchangeData& data,
-      aura::Window* root_window,
-      aura::Window* source_window,
-      const gfx::Point& root_location,
-      int operation,
-      ui::DragDropTypes::DragEventSource source) override;
+  int StartDragAndDrop(const ui::OSExchangeData& data,
+                       aura::Window* root_window,
+                       aura::Window* source_window,
+                       const gfx::Point& screen_location,
+                       int operation,
+                       ui::DragDropTypes::DragEventSource source) override;
   void DragUpdate(aura::Window* target,
                   const ui::LocatedEvent& event) override;
   void Drop(aura::Window* target, const ui::LocatedEvent& event) override;
@@ -71,8 +72,8 @@ class VIEWS_EXPORT WebosDragDropClientWayland
   // Overridden from ui::EventHandler:
   void OnKeyEvent(ui::KeyEvent* event) override;
   void OnMouseEvent(ui::MouseEvent* event) override;
-  void OnTouchEvent(ui::TouchEvent* event) override { }
-  void OnGestureEvent(ui::GestureEvent* event) override { }
+  void OnTouchEvent(ui::TouchEvent* event) override;
+  void OnGestureEvent(ui::GestureEvent* event) override;
 
   // Overridden from aura::WindowObserver.
   void OnWindowDestroyed(aura::Window* window) override;
@@ -107,6 +108,9 @@ class VIEWS_EXPORT WebosDragDropClientWayland
   // Helper method to start drag widget flying back animation.
   void StartCanceledAnimation(int animation_duration_ms);
 
+  // Helper method to forward |pending_log_tap_| event to |drag_source_window_|.
+  void ForwardPendingLongTap();
+
   void Cleanup();
 
   std::unique_ptr<DragImageView> drag_image_;
@@ -135,13 +139,17 @@ class VIEWS_EXPORT WebosDragDropClientWayland
   // Only be used for tests.
   bool should_block_during_drag_drop_;
 
+  // Closure for quitting nested message loop.
+  base::Closure quit_closure_;
+
   std::unique_ptr<views::DragDropTracker> drag_drop_tracker_;
   std::unique_ptr<DragDropTrackerDelegate> drag_drop_window_delegate_;
 
   ui::DragDropTypes::DragEventSource current_drag_event_source_;
 
-  // Closure for quitting nested message loop.
-  base::Closure quit_closure_;
+  // Holds a synthetic long tap event to be sent to the |drag_source_window_|.
+  // See comment in OnGestureEvent() on why we need this.
+  std::unique_ptr<ui::GestureEvent> pending_long_tap_;
 
   base::WeakPtrFactory<WebosDragDropClientWayland> weak_factory_;
 
