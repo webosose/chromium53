@@ -131,6 +131,7 @@ WebosDragDropClientWayland::WebosDragDropClientWayland(aura::Window* window,
       should_block_during_drag_drop_(true),
       drag_drop_window_delegate_(new DragDropTrackerDelegate(this)),
       current_drag_event_source_(ui::DragDropTypes::DRAG_EVENT_SOURCE_MOUSE),
+      scroll_gesture_drag_in_progress_(false),
       weak_factory_(this) {
   if (root_window_)
     root_window_->AddPreTargetHandler(this);
@@ -406,6 +407,16 @@ void WebosDragDropClientWayland::OnTouchEvent(ui::TouchEvent* event) {
 
   if (event->type() == ui::ET_TOUCH_CANCELLED)
     DragCancel();
+
+  // In some cases StartDragAndDrop gets called but scroll gesture is never
+  // detected before touch is already released. This creates situation where
+  // drag is started but never finished because ET_GESTURE_SCROLL_END is never
+  // generated. This happens when long press is detected and thus drag is
+  // started but touch move/release immediately after that is too quick/fast to
+  // detect scroll gesture.
+  if (event->type() == ui::ET_TOUCH_RELEASED &&
+      !scroll_gesture_drag_in_progress_)
+    DragCancel();
 }
 
 void WebosDragDropClientWayland::OnGestureEvent(ui::GestureEvent* event) {
@@ -445,6 +456,9 @@ void WebosDragDropClientWayland::OnGestureEvent(ui::GestureEvent* event) {
       drag_drop_tracker_->ConvertEvent(translated_target, touch_offset_event));
 
   switch (event->type()) {
+    case ui::ET_GESTURE_SCROLL_BEGIN:
+      scroll_gesture_drag_in_progress_ = true;
+      break;
     case ui::ET_GESTURE_SCROLL_UPDATE:
       DragUpdate(translated_target, *translated_event.get());
       break;
@@ -599,6 +613,7 @@ void WebosDragDropClientWayland::Cleanup()  {
     drag_window_->RemoveObserver(this);
   drag_window_ = NULL;
   drag_data_ = NULL;
+  scroll_gesture_drag_in_progress_ = false;
   // Cleanup can be called again while deleting DragDropTracker, so delete
   // the pointer with a local variable to avoid double free.
   std::unique_ptr<views::DragDropTracker> holder = std::move(drag_drop_tracker_);

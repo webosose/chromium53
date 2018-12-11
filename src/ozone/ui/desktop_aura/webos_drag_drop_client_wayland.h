@@ -151,6 +151,8 @@ class VIEWS_EXPORT WebosDragDropClientWayland
   // See comment in OnGestureEvent() on why we need this.
   std::unique_ptr<ui::GestureEvent> pending_long_tap_;
 
+  bool scroll_gesture_drag_in_progress_;
+
   base::WeakPtrFactory<WebosDragDropClientWayland> weak_factory_;
 
   DISALLOW_COPY_AND_ASSIGN(WebosDragDropClientWayland);
