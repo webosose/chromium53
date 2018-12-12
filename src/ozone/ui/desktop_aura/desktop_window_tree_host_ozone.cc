@@ -1037,19 +1037,6 @@ DesktopWindowTreeHostOzone::open_windows() {
 
 gfx::Size DesktopWindowTreeHostOzone::AdjustSize(
     const gfx::Size& requested_size_in_pixels) {
-#if !defined(OS_WEBOS)
-  std::vector<display::Display> displays =
-      display::Screen::GetScreen()->GetAllDisplays();
-  // Compare against all monitor sizes. The window manager can move the window
-  // to whichever monitor it wants.
-  for (size_t i = 0; i < displays.size(); ++i) {
-    if (requested_size_in_pixels == displays[i].GetSizeInPixel()) {
-      return gfx::Size(requested_size_in_pixels.width() - 1,
-                       requested_size_in_pixels.height() - 1);
-    }
-  }
-#endif
-
   // Do not request a 0x0 window size.
   gfx::Size size_in_pixels = requested_size_in_pixels;
   size_in_pixels.SetToMax(gfx::Size(1, 1));
