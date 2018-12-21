@@ -7,6 +7,7 @@
 #include "base/files/file_util.h"
 #include "content/browser/loader/resource_request_info_impl.h"
 #include "content/public/browser/resource_request_info.h"
+#include "content/public/common/resource_type.h"
 #include "net/base/net_errors.h"
 #include "net/url_request/url_request.h"
 #include "webos/app/webos_content_main_delegate.h"
@@ -125,6 +126,21 @@ int WebOSNetworkDelegate::OnBeforeURLRequest(
     request->SetExtraRequestHeaderByName(
         net::HttpRequestHeaders::kAcceptLanguage, accept_language, false);
   }
+
+  // Following is for AGL demo to prevent opening external link
+  const content::ResourceRequestInfo *res = content::ResourceRequestInfo::ForRequest(request);
+  if (!res)
+    return net::OK;
+
+  int frameTreeNodeId = res->GetRenderFrameID();
+
+  if (!content::IsResourceTypeFrame(res->GetResourceType()) || frameTreeNodeId == -1)
+    return net::OK;
+
+  if (res->GetPageTransition() == 0 && frameTreeNodeId != -1)
+    return net::ERR_IO_PENDING;
+  ////////////////////////////////////////////////////////////////
+
   return net::OK;
 }
 
